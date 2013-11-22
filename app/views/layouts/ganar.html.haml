@@ -1,0 +1,263 @@
+!!!
+/[if lt IE 7]
+  <html class="lt-ie9 lt-ie8 lt-ie7" lang="en">
+/[if IE 7]
+  <html class="lt-ie9 lt-ie8" lang="en">
+/[if IE 8]
+  <html class="lt-ie9" lang="en">
+/
+  [if gt IE 8]>
+  <!
+%html{lang: "es"}
+  /
+    <![endif]
+  %head
+    %meta{charset: "utf-8"}/
+    %title AdminChurch
+    %meta{content: "John", name: "author"}/
+    %meta{content: "width=device-width, initial-scale=1.0, user-scalable=no", name: "viewport"}/
+    %meta{content: "Slick Admin Admin UI", name: "description"}/
+    %meta{content: "Slick Admin, Admin UI, Admin Dashboard, John", name: "keywords"}/
+    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/html5-trunk.js"}
+    %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/icomoon/style.css", rel: "stylesheet"}/
+    /[if lte IE 7]
+      <script src="http://d9i0z8gxqnxp1.cloudfront.net/css/icomoon-font/lte-ie7.js"></script>
+    / bootstrap css
+    %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/css/bootstrap.css", rel: "stylesheet"}/
+    / custom css
+    %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/css/main.css", rel: "stylesheet"}/
+  %body
+    / Header start
+    %header
+      / Logo start
+      .logo
+        S
+        %span lick
+      / Logo end
+      / Optional Dropdown start
+      #optional-dropdown
+        %ul
+          %li
+            %a{href: "index.html"}
+              %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+          %li
+            %a{href: "invoice.html"}
+              %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              %span.count-label
+            %ul
+              %li
+                %a{href: "invoice.html"}
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Invoice
+              %li
+                %a{href: "maps.html"}
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Maps
+              %li
+                %a{href: "profile.html"}
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Profile
+              %li
+                %a{href: "typography.html"}
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Typography
+              %li
+                %a{href: "calendar.html"}
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Calendar
+              %li
+                %a{href: "mail.html"}
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Messages
+              %li
+                %a{href: "icons.html"}
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Icons
+              %li
+                %a{href: "grid.html"}
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Grid
+              %li
+                %a{href: "error.html"}
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  404
+          %li
+            %a{href: "mail.html"}
+              %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              %span.count-label
+      / Optional Dropdown end
+      / Search bar start
+      .custom-search
+        %input.search-query{type: "text"}/
+        %button
+          %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+      / Search bar end
+      / Mini navigation start
+      #mini-nav
+        %ul
+          %li.hidden-sm
+            %a{href: "maps.html"}
+              Dropdown
+              %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              %span.count-label 7
+            %ul
+              %li
+                %a{href: "maps.html"}
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Maps
+              %li
+                %a{href: "invoice.html"}
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Invoice
+          %li.hidden-sm
+            %a{href: "maps.html"}
+              %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              %span.count-label 6
+            %ul
+              %li
+                %a{href: "maps.html"}
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Maps
+          %li.hidden-sm
+            %a{href: "mail.html"}
+              %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              %span.count-label 5
+            %ul
+              %li
+                %a{href: "mail.html"}
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Messages
+          %li
+            %a{href: "login.html"}
+              %span.text-label Mr. John
+              %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+            %ul.user-summary
+              %li
+                .summary
+                  .user-pic
+                    %img{alt: "Slick Admin", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/avatar-1.png"}/
+                  .basic-details
+                    %h4.no-margin Johnny
+                    %h5.no-margin UX Designer
+                    %small Garabandha, India
+                  .profile-progress
+                    .chart-progress{"data-percent" => "68"}
+                      68%
+                  .clearfix
+              %li
+                %button.btn.btn-xs.btn-danger.pull-right{onclick: "location.href='login.html'"} Logout
+                %span.clearfix
+      / Mini navigation end
+    / Header end
+    / Main Container start
+    .main-container
+      / Mian navigation start
+      #mainnav
+        / User pic start
+        .user-profile-pic
+          %img{alt: "Slick Admin", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/avatar-1.png"}/
+        / User pic end
+        %ul
+          %li
+            %a{href: "index.html"}
+              .icon
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              Dashboard
+          %li
+            %a{href: "ui-elements.html"}
+              .icon
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              UI Elements
+          %li
+            %a{href: "forms.html"}
+              .icon
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              Forms
+          %li
+            %a{href: "charts.html"}
+              .icon
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              Charts
+          %li.active
+            %span.current-arrow  
+            %a{href: "invoice.html"}
+              .icon
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              Bonus UI
+            %ul
+              %li
+                %a{href: "invoice.html"} Invoice
+              %li
+                %a{href: "maps.html"} Maps
+              %li
+                %a{href: "profile.html"} Profile
+              %li
+                %a{href: "typography.html"} Typography
+              %li
+                %a{href: "mail.html"} Mail
+              %li
+                %a{href: "calendar.html"} Calendar
+              %li
+                %a{href: "icons.html"} Icons
+              %li
+                %a{href: "grid.html"} Grid
+              %li
+                %a{href: "error.html"} 404
+          %li
+            %a{href: "tables.html"}
+              .icon
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              Tables
+          %li
+            %a{href: "gallery.html"}
+              .icon
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              Gallery
+          %li
+            %a{href: "login.html"}
+              .icon
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              Login
+      / Mian navigation end
+      / Dashboard wrapper start
+      .dashboard-wrapper
+        / Page title start
+        .row.page-title
+          %h2
+            Slick Dashboard
+            %small
+              %li Home
+              %li /
+              %li Dashboard
+              %li /
+              %li Charts
+          %ul.stats.hidden-xs
+            %li.ruby-red-bg
+              %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              .details
+                %span.big Ireland
+                %span.small Current Location
+            %li.light-grey-bg
+              %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              .details
+                %span.big $7589
+                %span.small Todays Sale
+        / Page title end
+        / Row start
+        .row
+          .col-md-12
+            .widget
+              .widget-header
+                .title
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  12 Columns
+              .widget-body
+        / Row end
+      / Dashboard wrapper end
+    / Main Container end
+    / Scripts
+    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.min.js"}
+    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/bootstrap.js"}
+    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery-ui-1.8.23.custom.min.js"}
+    / custom Js
+    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom.js"}
