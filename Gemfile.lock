@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     RedCloth (4.2.9)
+    RedCloth (4.2.9-x86-mingw32)
     actionmailer (4.0.0)
       actionpack (= 4.0.0)
       mail (~> 2.5.3)
@@ -29,6 +30,7 @@ GEM
     arel (4.0.1)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
+    bcrypt-ruby (3.1.2-x86-mingw32)
     builder (3.1.4)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -69,8 +71,9 @@ GEM
     mime-types (1.25)
     minitest (4.7.5)
     multi_json (1.8.2)
-    mysql2 (0.3.14)
     orm_adapter (0.4.0)
+    pg (0.17.0)
+    pg (0.17.0-x86-mingw32)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -126,6 +129,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   RedCloth
@@ -136,7 +140,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 1.2)
   jquery-rails
-  mysql2
+  pg
   rails (= 4.0.0)
   sass-rails (~> 4.0.0)
   sdoc
