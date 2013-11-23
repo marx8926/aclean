@@ -1,10 +1,10 @@
 !!!
 /[if lt IE 7]
-  <html class="lt-ie9 lt-ie8 lt-ie7" lang="en">
+  <html class="lt-ie9 lt-ie8 lt-ie7" lang="es">
 /[if IE 7]
-  <html class="lt-ie9 lt-ie8" lang="en">
+  <html class="lt-ie9 lt-ie8" lang="es">
 /[if IE 8]
-  <html class="lt-ie9" lang="en">
+  <html class="lt-ie9" lang="es">
 /
   [if gt IE 8]>
   <!
@@ -158,32 +158,32 @@
           %img{alt: "Slick Admin", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/avatar-1.png"}/
         / User pic end
         %ul
-          %li
+          %li.active
             %a{href: "index.html"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              Dashboard
+              Ganar
           %li
             %a{href: "ui-elements.html"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              UI Elements
+              Informes
           %li
             %a{href: "forms.html"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              Forms
+              Eventos
           %li
             %a{href: "charts.html"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              Charts
-          %li.active
+              Economia
+          %li
             %span.current-arrow  
             %a{href: "invoice.html"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              Bonus UI
+              Visita
             %ul
               %li
                 %a{href: "invoice.html"} Invoice
@@ -207,26 +207,18 @@
             %a{href: "tables.html"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              Tables
-          %li
-            %a{href: "gallery.html"}
-              .icon
-                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              Gallery
-          %li
-            %a{href: "login.html"}
-              .icon
-                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              Login
+              Configuración
+         
+         
       / Mian navigation end
       / Dashboard wrapper start
       .dashboard-wrapper
         / Page title start
         .row.page-title
           %h2
-            Slick Dashboard
+            Ganar
             %small
-              %li Home
+              %li Inicio
               %li /
               %li Dashboard
               %li /
@@ -246,12 +238,8 @@
         / Row start
         .row
           .col-md-12
-            .widget
-              .widget-header
-                .title
-                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-                  12 Columns
-              .widget-body
+            = yield
+            
         / Row end
       / Dashboard wrapper end
     / Main Container end
