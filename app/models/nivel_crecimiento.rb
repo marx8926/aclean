@@ -1,3 +1,3 @@
 class NivelCrecimiento < ActiveRecord::Base
-	belong_to: persona
+	belong_to :persona
 end
