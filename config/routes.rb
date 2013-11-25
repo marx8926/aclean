@@ -5,7 +5,10 @@ Lean::Application.routes.draw do
   get "persona/index" => "ganar#index"
   get "diezmos" => "diezmos#index"
   get "ofrendas" => "ofrendas#index"
+  
   get "configuracion/servicios" => "configuracion#servicios"
+  post "configuracion/guardar_servicio" => "configuracion#guardar_servicio"
+
   
 
   # The priority is based upon order of creation: first created -> highest priority.

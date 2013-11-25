@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131123155655) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "asistencia", primary_key: "int_asistencia_id", force: true do |t|
     t.string   "var_asistencia_asistio", limit: 1
     t.datetime "created_at"
