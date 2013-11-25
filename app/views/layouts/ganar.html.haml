@@ -160,36 +160,29 @@
         %ul
           %li
             %span.current-arrow
-            %a{href: "invoice.html"}
+            %a{href: persona_path}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Persona
-            %ul
-              %li
-                %a{href: "invoice.html"} Nuevo
-              %li
-                %a{href: "maps.html"} Miembro
-              %li
-                %a{href: "maps.html"} Visitante
           %li
-            %a{href: "ui-elements.html"}
+            %a{href: diezmos_path}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Diezmos
           %li
-            %a{href: "forms.html"}
+            %a{href: ofrendas_path}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Ofrendas
           %li
             %a{href: "charts.html"}
               .icon
-                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Asistencia
           %li
             %a{href: "charts.html"}
               .icon
-                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Información
           %li
             %a{href: "invoice.html"}
@@ -200,7 +193,7 @@
               %li
                 %a{href: "invoice.html"} Datos Generales
               %li
-                %a{href: "maps.html"} Servicios
+                %a{href: configuracion_servicios_path} Servicios
       / Mian navigation end
       = yield
       / Dashboard wrapper end
@@ -209,5 +202,19 @@
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.min.js"}
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/bootstrap.js"}
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery-ui-1.8.23.custom.min.js"}
+    / Easy pie charts 
+    %script{src:"http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.easy-pie-chart.js"}
+    / Sparkline JS
+    %script{src:"http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.sparkline.js"}
+    / Data tables
+    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.dataTables.js"}
+    / Custom Js
+    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom-tables.js"}
+    / Editable Inputs 
+    %script{src:"http://d9i0z8gxqnxp1.cloudfront.net/js/wysiwyg/bootstrap-wysihtml5.js"}
+    / Custom Js 
+    %script{src:"http://d9i0z8gxqnxp1.cloudfront.net/js/wizard/bwizard.js"}
     / custom Js
+    %script{src:"http://d9i0z8gxqnxp1.cloudfront.net/js/custom-forms.js"}
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom.js"}
+    = javascript_include_tag :ganar
