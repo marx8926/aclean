@@ -4,7 +4,9 @@ Lean::Application.routes.draw do
 
   get "persona" => "ganar#index"
   get "diezmos" => "diezmos#index"
+
   get "ofrendas" => "ofrendas#index"
+  post "ofrendas_guardar" => "ofrendas#guardar"
   
   get "configuracion/servicios" => "configuracion#servicios"
   post "configuracion/guardar_servicio" => "configuracion#guardar_servicio"

@@ -1,3 +1,3 @@
 class Asistencia < ActiveRecord::Base
-	belong_to :persona
+	belongs_to :persona
 end

@@ -2,7 +2,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: lean_development
+  database: aclean_development
   pool: 5
   username: postgres
   password: '260489'

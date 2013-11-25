@@ -18,15 +18,16 @@
             Agregar Ofrenda
         #collapseOne.panel-collapse.collapse
           .widget-body
-            %form.form-horizontal{role: "form"}
+            = form_tag(ofrendas_guardar_path , {:method=>'post',:class=>'form-horizontal'}) do
               .form-group
                 %label.col-lg-2.control-label{for: "servicio"} Servicio
-                .col-lg-10
-                  %select#servicio.form-control{name: "servicio"}
+                .col-lg-10                  
+                  = servicios_select()
+
               .form-group
                 %label.col-lg-2.control-label{for: "fecha"} Fecha
                 .col-lg-10
-                  %input#fecha.form-control.datepicker{name: "fecha", type: "text"}/
+                  %input#fecha.form-control{name: "fecha", type: "date"}/
               .form-group
                 %label.col-lg-2.control-label{for: "monto"} Monto
                 .col-lg-10

@@ -1,7 +1,7 @@
 class Persona < ActiveRecord::Base
-	belong_to :iglesia
+	belongs_to :iglesia
 	has_many :telefonos
-	belong_to :persona
+	belongs_to :persona
 	has_many :nivel_crecimientos
 	has_many :diezmos
 	has_many :asistencias

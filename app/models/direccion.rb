@@ -1,4 +1,4 @@
 class Direccion < ActiveRecord::Base
-	belong_to :ubigeo
-	belong_to :persona
+	belongs_to :ubigeo
+	belongs_to :persona
 end
