@@ -2,7 +2,8 @@ Lean::Application.routes.draw do
   #devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
   devise_for :users
 
-  get "ganar/index" => "ganar#index"
+  get "persona/index" => "ganar#index"
+  get "diezmos/" => "diezmos#index"
   
 
   # The priority is based upon order of creation: first created -> highest priority.

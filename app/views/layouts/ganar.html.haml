@@ -13,11 +13,11 @@
     <![endif]
   %head
     %meta{charset: "utf-8"}/
-    %title AdminChurch
-    %meta{content: "John", name: "author"}/
+    %title Persona - AdminChurch
+    %meta{content: "CLM Developers", name: "author"}/
     %meta{content: "width=device-width, initial-scale=1.0, user-scalable=no", name: "viewport"}/
-    %meta{content: "Slick Admin Admin UI", name: "description"}/
-    %meta{content: "Slick Admin, Admin UI, Admin Dashboard, John", name: "keywords"}/
+    %meta{content: "Admin Church", name: "description"}/
+    %meta{content: "Admin Chuch, CLM Developers, Administración Eclesiástica, Iglesia", name: "keywords"}/
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/html5-trunk.js"}
     %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/icomoon/style.css", rel: "stylesheet"}/
     /[if lte IE 7]
@@ -31,8 +31,8 @@
     %header
       / Logo start
       .logo
-        S
-        %span lick
+        A
+        %span C
       / Logo end
       / Optional Dropdown start
       #optional-dropdown
@@ -158,89 +158,51 @@
           %img{alt: "Slick Admin", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/avatar-1.png"}/
         / User pic end
         %ul
-          %li.active
-            %a{href: "index.html"}
+          %li
+            %span.current-arrow
+            %a{href: "invoice.html"}
               .icon
-                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              Ganar
+                %span.fs1{"aria-hidden" => "true", "data-icon" => "&#xe071;"}
+              Persona
+            %ul
+              %li
+                %a{href: "invoice.html"} Nuevo
+              %li
+                %a{href: "maps.html"} Miembro
+              %li
+                %a{href: "maps.html"} Visitante
           %li
             %a{href: "ui-elements.html"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              Informes
+              Diezmos
           %li
             %a{href: "forms.html"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              Eventos
+              Ofrendas
           %li
             %a{href: "charts.html"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              Economia
+              Asistencia
           %li
-            %span.current-arrow  
+            %a{href: "charts.html"}
+              .icon
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+              Información
+          %li
             %a{href: "invoice.html"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              Visita
+              Configuración
             %ul
               %li
-                %a{href: "invoice.html"} Invoice
+                %a{href: "invoice.html"} Datos Generales
               %li
-                %a{href: "maps.html"} Maps
-              %li
-                %a{href: "profile.html"} Profile
-              %li
-                %a{href: "typography.html"} Typography
-              %li
-                %a{href: "mail.html"} Mail
-              %li
-                %a{href: "calendar.html"} Calendar
-              %li
-                %a{href: "icons.html"} Icons
-              %li
-                %a{href: "grid.html"} Grid
-              %li
-                %a{href: "error.html"} 404
-          %li
-            %a{href: "tables.html"}
-              .icon
-                %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              Configuración
-         
-         
+                %a{href: "maps.html"} Servicios
       / Mian navigation end
-      / Dashboard wrapper start
-      .dashboard-wrapper
-        / Page title start
-        .row.page-title
-          %h2
-            Ganar
-            %small
-              %li Inicio
-              %li /
-              %li Dashboard
-              %li /
-              %li Charts
-          %ul.stats.hidden-xs
-            %li.ruby-red-bg
-              %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              .details
-                %span.big Ireland
-                %span.small Current Location
-            %li.light-grey-bg
-              %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-              .details
-                %span.big $7589
-                %span.small Todays Sale
-        / Page title end
-        / Row start
-        .row
-          .col-md-12
-            = yield
-            
-        / Row end
+      = yield
       / Dashboard wrapper end
     / Main Container end
     / Scripts

@@ -1,0 +1,2 @@
+class ConfiguracionController < ApplicationController
+end

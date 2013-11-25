@@ -1,17 +1,34 @@
-.widget
-	.widget-header
-		%h3 Buscar
-		%a.btn{"data-toggle" => "modal", href: "#ModalRegistrar", style: "float: right; margin: 6px;"}
-			%i.icon-plus{style: "margin:0; "}
-	.widget-body
-		%br/
-		= form_tag( "",{:method=>'post',:class=>'form-horizontal'}) do
-			%fieldset
-				.form-group
-					%span.label Filtro
-					.form-input
-						%input#filtro{style: "margin-right:20px;", type: "text"}
-						%select#tipofiltro{style: "margin-right:20px;"}
-							%option{value:"1"} Nombre
-							%option{value: "2"} Apellido
-						%button.btn.btn-primary{type: "submit"} Buscar
+/ Dashboard wrapper start
+.dashboard-wrapper
+  / Page title start
+  .row.page-title
+    %h2
+      Persona
+      %small
+        %li Inicio
+        %li /
+        %li Persona
+        %li /
+        %li Charts
+  / Page title end
+  / Row start
+  .row
+    .col-md-12
+      .widget
+        .widget-header
+          %h3 Buscar
+          %a.btn{"data-toggle" => "modal", href: "#ModalRegistrar", style: "float: right; margin: 6px;"}
+          %i.icon-plus{style: "margin:0; "}
+        .widget-body
+          %br/
+          = form_tag( "",{:method=>'post',:class=>'form-horizontal'}) do
+            %fieldset
+              .form-group
+                %span.label Filtro
+                .form-input
+                  %input#filtro{style: "margin-right:20px;", type: "text"}
+                  %select#tipofiltro{style: "margin-right:20px;"}
+                    %option{value:"1"} Nombre
+                    %option{value: "2"} Apellido
+                  %button.btn.btn-primary{type: "submit"} Buscar
+  / Row end

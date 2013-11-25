@@ -1,0 +1,2 @@
+class OfrendasController < ApplicationController
+end
