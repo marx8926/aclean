@@ -8,6 +8,9 @@ class CreateDireccions < ActiveRecord::Migration
       t.float :dou_direccion_longitud
       t.float :dou_direccion_latitud
       t.string :var_direccion_estado, limit: 1
+
+      t.references :ubigeo, index: true
+      t.references :persona, index: true
       t.timestamps
     end
   end

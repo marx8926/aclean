@@ -5,6 +5,9 @@ class CreateAsistencia < ActiveRecord::Migration
       t.string :var_asistencia_asistio, limit: 1
       t.timestamps :dat_asistencia_fecRegistro
       t.timestamps :dat_asistencia_fecAsistencia
+
+      t.references :persona, index: true
+      t.references :servicio, index: true
       t.timestamps
     end
   end

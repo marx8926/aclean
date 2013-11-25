@@ -5,6 +5,8 @@ class CreateTelefonos < ActiveRecord::Migration
       t.integer :int_telefono_tipo
       t.string :var_telefono_codigo, limit: 5
       t.string :var_telefono, limit: 18
+
+      t.references :persona, index: true
       t.timestamps
     end
   end

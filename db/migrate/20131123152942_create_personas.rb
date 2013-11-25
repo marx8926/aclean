@@ -17,6 +17,9 @@ class CreatePersonas < ActiveRecord::Migration
       t.time :dat_persona_horaVisita
       t.string :var_persona_email
 
+      t.references :iglesia, index: true
+      t.references :lugar, index: true
+
       t.timestamps
     end
   end
