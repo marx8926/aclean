@@ -1,0 +1,144 @@
+/ Dashboard wrapper start
+.dashboard-wrapper
+  / Page title start
+  .row.page-title
+    %h2
+      Diezmos
+      %small
+        %li Home
+        %li /
+        %li Diezmos
+  / Page title end
+  / Row start
+  .row
+    #accordion.col-md-12
+      .widget
+        .widget-header
+          %a.btn.btn-primary.btn-block{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseOne"}
+            Agregar Diezmo
+        #collapseOne.panel-collapse.collapse
+          .widget-body
+            %form.form-horizontal{role: "form"}
+              .form-group
+                %label.col-lg-2.control-label{for: "persona"} Persona
+                .col-lg-10
+                  %input#persona.form-control{name: "persona", type: "text"}/
+              .form-group
+                %label.col-lg-2.control-label{for: "fecha"} Fecha
+                .col-lg-10
+                  %input#fecha.form-control.datepicker{name: "fecha", type: "text"}/
+              .form-group
+                %label.col-lg-2.control-label{for: "monto"} Monto
+                .col-lg-10
+                  %input#monto.form-control{name: "monto", type: "text"}/
+              .form-group
+                %label.col-lg-2.control-label{for: "peticion"} Petición
+                .col-lg-10
+                  %textarea#peticion.form-control{name: "peticion"}
+              .form-group
+                .col-lg-offset-2.col-lg-10
+                  %button.btn.btn-default{type: "button"} Cancelar
+                  %button.btn.btn-success{type: "submit"} Guardar
+  / Row end
+  / Row start
+  .row
+    .col-md-12
+      .widget
+        .widget-header
+          .title
+            %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+            Lista de Ofrendas
+        .widget-body
+          #dt_example.example_alt_pagination
+            %table#data-table.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
+              %thead
+                %tr
+                  %th{style: "width:25%"} Persona
+                  %th{style: "width:35%"} Fecha
+                  %th.hidden-phone{style: "width:15%"} Monto
+                  %th.hidden-phone{style: "width:15%"} Petición
+              %tbody
+                %tr.gradeX
+                  %td John
+                  %td Tacoma, WA(Washington)
+                  %td.hidden-phone 0099009900
+                  %td.hidden-phone $22590
+                %tr.gradeA
+                  %td Ruchita
+                  %td Fresno, CA 93711-1005
+                  %td.hidden-phone 0006008800
+                  %td.hidden-phone $98450
+                %tr.gradeU
+                  %td Barote babu
+                  %td Baripoda, 35-Africa
+                  %td.hidden-phone 2059990099
+                  %td.hidden-phone $99876
+                %tr.gradeC
+                  %td Arjun Aurs
+                  %td 395 - Yumi Street, London
+                  %td.hidden-phone 0088770099
+                  %td.hidden-phone $44550
+                %tr.gradeA
+                  %td Tom Maskerre
+                  %td Brigade road - Africa
+                  %td.hidden-phone 1002001000
+                  %td.hidden-phone $9992
+                %tr.gradeX
+                  %td Maitai Mui
+                  %td 24- Chingcgang - China
+                  %td.hidden-phone 0011001100
+                  %td.hidden-phone $44560
+                %tr.gradeU
+                  %td Himresh Mayi
+                  %td Anniston, AL 36207-1211
+                  %td.hidden-phone 0000002200
+                  %td.hidden-phone $88790
+                %tr.gradeU
+                  %td Gajju Marnison
+                  %td Downingtown, PA 1133-1209
+                  %td.hidden-phone 1234321678
+                  %td.hidden-phone $9908
+                %tr.gradeA
+                  %td Powell Pack
+                  %td South Orange, NJ
+                  %td.hidden-phone 1123889911
+                  %td.hidden-phone $77651
+                %tr.gradeU
+                  %td Kinsin Mane
+                  %td Dublin, OH 13019-8579
+                  %td.hidden-phone 1919189191
+                  %td.hidden-phone $22189
+                %tr.gradeU
+                  %td Barote babu
+                  %td Baripoda, 35-Africa
+                  %td.hidden-phone 2059990099
+                  %td.hidden-phone $99876
+                %tr.gradeA
+                  %td Tom Maskerre
+                  %td Brigade road - Africa
+                  %td.hidden-phone 1002001000
+                  %td.hidden-phone $9992
+                %tr.gradeX
+                  %td Maitai Mui
+                  %td 24- Chingcgang - China
+                  %td.hidden-phone 0011001100
+                  %td.hidden-phone $44560
+                %tr.gradeU
+                  %td Himresh Mayi
+                  %td Anniston, AL 36207-1211
+                  %td.hidden-phone 0000002200
+                  %td.hidden-phone $88790
+                %tr.gradeU
+                  %td Gajju Marnison
+                  %td Downingtown, PA 1133-1209
+                  %td.hidden-phone 1234321678
+                  %td.hidden-phone $9908
+                %tr.gradeA
+                  %td Powell Pack
+                  %td South Orange, NJ
+                  %td.hidden-phone 1123889911
+                  %td.hidden-phone $77651
+            .clearfix
+  / Row end
+/ Dashboard wrapper end
+/ Main Container end

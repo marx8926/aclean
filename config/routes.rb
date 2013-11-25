@@ -3,7 +3,9 @@ Lean::Application.routes.draw do
   devise_for :users
 
   get "persona/index" => "ganar#index"
-  get "diezmos/" => "diezmos#index"
+  get "diezmos" => "diezmos#index"
+  get "ofrendas" => "ofrendas#index"
+  get "configuracion/servicios" => "configuracion#servicios"
   
 
   # The priority is based upon order of creation: first created -> highest priority.
