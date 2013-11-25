@@ -11,6 +11,7 @@ class CreateIglesia < ActiveRecord::Migration
       t.string :var_iglesia_referencia, limit: 150
       t.float :dou_iglesia_longitud
       t.float :dou_iglesia_latitud
+      t.references :ubigeo, index: true
       t.timestamps
     end
   end
