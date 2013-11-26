@@ -217,4 +217,15 @@
     / custom Js
     %script{src:"http://d9i0z8gxqnxp1.cloudfront.net/js/custom-forms.js"}
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom.js"}
+    = javascript_include_tag "util/functiongen.js"
+
     = javascript_include_tag :ganar
+
+    :javascript
+      $(document).ready(function(){
+        ubigeos = getAjaxObject("https://s3.amazonaws.com/adminchurchs3/json/ubi.json");   
+    
+        cargarUbigeo(ubigeos, 'distrito','provincia','departamento');
+        console.log(ubigeos);
+
+      });

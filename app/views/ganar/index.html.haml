@@ -20,7 +20,7 @@
           %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
           Registrar Miembro
       .widget-body
-        %form.form-horizontal{role: "form"}
+        = form_tag(persona_guardar_path , {:method=>'post',:class=>'form-horizontal'}) do
           .wizard
             %ol
               %li Datos Personales
@@ -38,19 +38,25 @@
                       %input#apellido.form-control{name: "apellido", type: "text"}
                     %label.col-lg-2.col-sm-2.control-label Edad
                     .col-lg-2.col-sm-2
-                      %input#edad.form-control{name: "edad", type: "text"}
+                      %input#edad.form-control{name: "edad", type: "number", min: "0" , max: "60", value: "0"}
               .form-group
                 %label.col-lg-2.control-label{for: "fecha"} Estado Civil
                 .col-lg-10
                   .row
                     .col-lg-2.col-sm-2
                       %select#estado_civil.form-control{name: "estado_civil"}
+                        %option{value: "0"} Solter@
+                        %option{value: "1"} Casad@
+                        %option{value: "2"} Viud@
+                        %option{value: "3"} Divorciad@
                     %label.col-lg-2.col-sm-2.control-label Sexo
                     .col-lg-2.col-sm-2
                       %select#sexo.form-control{name: "sexo"}
+                        %option{value: "M"} Masculino
+                        %option{value: "F"} Femenino
                     %label.col-lg-2.col-sm-2.control-label Fecha de Nacimiento
                     .col-lg-2.col-sm-2
-                      %input#fec_nac.form-control{name: "fec_nac", type: "text"}
+                      %input#fec_nac.form-control{name: "fec_nac", type: "date"}
               .form-group
                 %label.col-lg-2.control-label{for: "monto"} DNI
                 .col-lg-10
@@ -73,6 +79,8 @@
                     %label.col-lg-2.col-sm-2.control-label Tipo
                     .col-lg-2.col-sm-2
                       %select#tipo_tel.form-control{name: "tipo_tel"}
+                        %option{value: "0"} Fijo
+                        %option{value: "1"} Celular
                     %label.col-lg-2.col-sm-2.control-label 
                     .col-lg-2.col-sm-2
                       %button.btn.btn-default{"data-original-title" => "", type: "button"} +
@@ -125,12 +133,9 @@
                   %input#referencia.form-control{name: "referencia", type: "text"}
             %div
               .form-group
-                %label.col-lg-2.control-label{for: "red"} Red
+                %label.col-lg-2.control-label{for: "lugar"} Lugar
                 .col-lg-10
-                  .row
-                    .col-lg-2.col-sm-2
-                      %select#red.form-control{name: "red"}
-                    %label.col-lg-2.col-sm-2.control-label Lugar
+                  .row                    
                     .col-lg-2.col-sm-2
                       %select#lugar.form-control{name: "lugar"}
                     %label.col-lg-2.col-sm-2.control-label Fecha de Conversión
@@ -414,3 +419,10 @@
                       %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
             .clearfix
   / Row end
+
+:javascript
+  $(document).ready(function(){
+    ubigeos = getAjaxObject("https://s3.amazonaws.com/adminchurchs3/json/ubi.json");   
+    
+    cargarUbigeo(ubigeos, 'distrito','provincia','departamento');
+  });

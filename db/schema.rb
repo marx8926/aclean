@@ -104,18 +104,21 @@ ActiveRecord::Schema.define(version: 20131123155655) do
   add_index "ofrendas", ["servicio_id"], name: "index_ofrendas_on_servicio_id", using: :btree
 
   create_table "personas", primary_key: "int_persona_id", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "dat_persona_fecRegistro"
     t.string   "var_persona_nombres",       limit: 45
     t.string   "var_persona_apellidos",     limit: 45
     t.integer  "int_persona_edad"
     t.date     "dat_persona_fecNacimiento"
+    t.string   "var_persona_profesion",     limit: 45
+    t.string   "var_persona_ocupacion",     limit: 45
     t.string   "var_persona_sexo",          limit: 1
     t.string   "var_persona_dni",           limit: 10
     t.string   "var_persona_estado",        limit: 1
     t.string   "var_persona_email"
     t.integer  "iglesia_id"
     t.integer  "lugar_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "personas", ["iglesia_id"], name: "index_personas_on_iglesia_id", using: :btree
