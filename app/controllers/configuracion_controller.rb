@@ -16,19 +16,25 @@ class ConfiguracionController < ApplicationController
 
 	def guardar_servicio
 
-		@servicio = Servicio.new({:var_servicio_nombre => params[:nombre], :int_servicio_tipo => params[:tipo]})
+		ActiveRecord::Base.transaction do
+			begin
 
-		if @servicio.save
+				@servicio = Servicio.new({:var_servicio_nombre => params[:nombre], :int_servicio_tipo => params[:tipo]})
 
-		else
-			
-		end
-
-		render :json => @servicio , :status => "ok"
+				if @servicio.save
+					render :json => @servicio , :status => :ok
+				else
+					raise ActiveRecord::Rollback
+					render :json => nil , :status => :internal_server_error
+				end
+			rescue
+				raise ActiveRecord::Rollback
+			end
+		end				
 	end
 
 	def test
-		render :js => "alert('error saving comment');"
+		render :json => Servicio.all
 	end
 
 end

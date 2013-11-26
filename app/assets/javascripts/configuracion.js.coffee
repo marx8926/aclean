@@ -30,7 +30,7 @@ jQuery ->
       type: "POST"
       data: $("#formServicio").serialize()
       success: (msj) ->
-        console.log msj
+        
 
   
     #act on result.
