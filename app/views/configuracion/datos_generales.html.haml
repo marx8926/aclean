@@ -1,0 +1,97 @@
+/ Dashboard wrapper start
+.dashboard-wrapper
+  / Page title start
+  .row.page-title
+    %h2
+      Datos Generales
+      %small
+        %li Home
+        %li /
+        %li Datos Generales
+    %ul.stats.hidden-xs
+      %li.ruby-red-bg
+        %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+        .details
+          %span.big Ireland
+          %span.small Current Location
+      %li.light-grey-bg
+        %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+        .details
+          %span.big $7589
+          %span.small Todays Sale
+  / Page title end
+  / Row start
+  .row
+    .col-md-12
+      .widget.no-margin
+        .widget-header
+          .title
+            %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+            Perfil de la Iglesia
+        .widget-body
+          .row
+            .col-md-2.col-sm-3
+              .thumbnail
+                %img{alt: "300x200", src: "http://bit.ly/1dqW8yO"}/
+            .col-md-10.col-sm-9
+              %form.form-horizontal
+                %h3.heading-a General
+                .form-group
+                  %label.col-sm-2.control-label{for: "fec_creacion"} Fecha de Creación
+                  .col-sm-10
+                    .row
+                      .col-sm-5
+                        %input#fec_creacion.form-control{type: "text", name:"fec_creacion"}
+                      %label.col-sm-1.control-label{for: "telefono"} Teléfono
+                      .col-sm-5
+                        %input#telefono.form-control{type: "text", name: "telefono"}
+                .form-group
+                  %label.col-sm-2.control-label{for: "nombre"} Nombre
+                  .col-sm-10
+                    .row
+                      .col-sm-5
+                        %input#nombre.form-control{type: "text", name:"nombre"}
+                      %label.col-sm-1.control-label{for: "sigla"} Sigla
+                      .col-sm-5
+                        %input#sigla.form-control{type: "text", name: "sigla"}
+                %h3.heading-a Pastores Principales
+                .form-group
+                  %label.col-sm-2.control-label{for: "psn1"} Ps. 1
+                  .col-sm-10
+                    %input#psn1.form-control{type: "text", name: "psn1"}/
+                .form-group
+                  %label.col-sm-2.control-label{for: "psn2"} Ps. 2
+                  .col-sm-10
+                    %input#psn2.form-control{type: "text", name: "psn2"}/
+                %h3.heading-a Ubicación
+                .form-group
+                  %label.col-lg-2.control-label{for: "departamento"} Departamento
+                  .col-lg-10
+                    .row
+                      .col-lg-3.col-sm-3
+                        %select#departamento.form-control{name: "departamento"}
+                      %label.col-lg-1.col-sm-1.control-label Provincia
+                      .col-lg-3.col-sm-3
+                        %select#provincia.form-control{name: "provincia"}
+                      %label.col-lg-1.col-sm-1.control-label Distrito
+                      .col-lg-3.col-sm-3
+                        %select#distrito.form-control{name: "distrito"}
+                .form-group
+                  %label.col-sm-2.control-label{for: "direccion"} Dirección
+                  .col-sm-10
+                    %input#direccion.form-control{type: "text", name: "direccion"}/
+                .form-group
+                  %label.col-sm-2.control-label{for: "referencia"} Referencia
+                  .col-sm-10
+                    %textarea#referencia.form-control{cols: "30", name: "referencia", rows: "4"}
+                .form-group
+                  %label.col-sm-2.control-label{for: "referencia"} Mapa
+                  .col-sm-10
+                    %textarea#referencia.form-control{cols: "30", name: "referencia", rows: "4"}
+                      AQUI VA EL MAPA!!!!!
+                .form_submit.clearfix{style: ""}
+                  .row
+                    .col-sm-10.col-sm-offset-2
+                      %button.btn.btn-primary.btn-lg Guardar
+  / Row end
+/ Dashboard wrapper end
