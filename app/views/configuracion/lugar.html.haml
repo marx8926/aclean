@@ -62,49 +62,13 @@
                     %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
                     Registrar Lugar
                 .panel-body
-                  
-  / Row end
-  / Row start
-  .row
-    #accordion.col-md-12
-      .widget
-        .widget-header
-          %a.btn.btn-primary.btn-block.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#servicio"}
-            Agregar Servicio
-        #servicio.panel-collapse.collapse
-          .widget-body
-            = form_tag(configuracion_guardar_servicio_path , {:method=>'post',:class=>'form-horizontal'}) do
-              .form-group
-                %label.col-lg-2.control-label{for: "tipo"} Tipo
-                .col-lg-10
-                  %select#tipo.form-control{name: "tipo"}
-                    %option{value: "1"} Culto General
-                    %option{value: "2"} Culto Jovenes
-
-              .form-group
-                %label.col-lg-2.control-label{for: "nombre"} Nombre
-                .col-lg-10
-                  %input#nombre.form-control{name: "nombre", type: "text"}/
-              .form-group
-                %label.col-lg-2.control-label{for: "dia"} Día
-                .col-lg-10
-                  %input#dia.form-control.datepicker{type: "text", placeholder: "Lunes" }/
-              .form-group
-                %label.col-lg-2.control-label{for: "hora"} Hora
-                .col-lg-10
-                  %input#hora.form-control{type: "text", placeholder: "12:00:00" }/
-              .form-group
-                .col-lg-offset-2.col-lg-10
-                  = submit_tag 'Guardar', :class=>'btn btn-primary'
-  / Row end
-  / Row start
-  .row
-    .col-md-12
-      .widget
-        .widget-header
-          .title
-            %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-            Lista de Servicios
-        .widget-body
-          
+                  %form.form-horizontal{role: "form"}
+                    .form-group
+                      %label.col-lg-2.control-label{for: "descripcion"} Descripción
+                      .col-lg-10
+                        %input#descripcion.form-control{name: "descripcion", type: "text"}
+                    .form-group
+                      .col-lg-offset-2.col-lg-10
+                        %button.btn.btn-default{type: "button"} Cancelar
+                        %button.btn.btn-success{type: "submit"} Guardar
   / Row end
