@@ -26,6 +26,7 @@
   / Row end
   / Row start
   .row
+  = render 'layouts/mensaje'
   .col-md-12
     .widget
       .widget-header
@@ -150,10 +151,14 @@
                 .col-lg-10
                   .row                    
                     .col-lg-2.col-sm-2
-                      %select#lugar.form-control{name: "lugar"}
+                      = lugar_select()
                     %label.col-lg-2.col-sm-2.control-label Fecha de Conversión
                     .col-lg-2.col-sm-2
-                      %input#fec_conversion.form-control{name: "fec_conversion", type: "text"}
+                      %input#fec_conversion.form-control{name: "fec_conversion", type: "date"}
+                    %label.col-lg-2.col-sm-2.control-label Email
+                    .col-lg-2.col-sm-2
+                      %input#email.form-control{name: "email", type: "text"}
+
               .form-group
                 %label.col-lg-2.control-label{for: "monto"} Invitado por
                 .col-lg-5
@@ -165,7 +170,7 @@
               .form-group
                 .col-lg-offset-2.col-lg-10
                   %button.btn.btn-default{type: "button"} Cancelar
-                  %button.btn.btn-success{type: "submit"} Guardar
+                  %input.btn.btn-success{type: "submit", value: "Guardar"}
   / Row end
   / Row start
   .row

@@ -14,6 +14,7 @@ class CreatePersonas < ActiveRecord::Migration
       t.string :var_persona_dni, limit: 10
       t.string :var_persona_estado, limit:1
       t.string :var_persona_email
+      t.string :var_persona_invitado, limit: 100
       
       t.references :iglesia, index: true
       t.references :lugar, index: true
