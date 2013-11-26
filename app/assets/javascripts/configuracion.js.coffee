@@ -28,9 +28,12 @@ jQuery ->
     $.ajax
       url: "/configuracion/guardar_servicio"
       type: "POST"
-      data: $("#formServicio").serialize()
+      dataType: "JSON"
+      data: 
+        formulario: $("#formServicio").serialize()
+        otro: 23
       success: (msj) ->
-        
+        console.log msj
 
   
     #act on result.
