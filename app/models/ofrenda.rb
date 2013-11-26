@@ -1,3 +1,3 @@
 class Ofrenda < ActiveRecord::Base
-	belong_to :servicio
+	belongs_to :servicio
 end

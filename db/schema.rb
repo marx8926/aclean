@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131123155655) do
+ActiveRecord::Schema.define(version: 20131126124839) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "asistencia", primary_key: "int_asistencia_id", force: true do |t|
     t.string   "var_asistencia_asistio", limit: 1
@@ -91,7 +94,9 @@ ActiveRecord::Schema.define(version: 20131123155655) do
   add_index "nivel_crecimientos", ["persona_id"], name: "index_nivel_crecimientos_on_persona_id", using: :btree
 
   create_table "ofrendas", primary_key: "int_ofrenda_id", force: true do |t|
-    t.decimal  "dec_ofrenda_monto", precision: 18, scale: 2
+    t.decimal  "dec_ofrenda_monto",         precision: 18, scale: 2
+    t.datetime "dec_ofrenda_fechaRegistro"
+    t.integer  "servicio_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "servicio_id"
@@ -100,8 +105,7 @@ ActiveRecord::Schema.define(version: 20131123155655) do
   add_index "ofrendas", ["servicio_id"], name: "index_ofrendas_on_servicio_id", using: :btree
 
   create_table "personas", primary_key: "int_persona_id", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "dat_persona_fecRegistro"
     t.string   "var_persona_nombres",       limit: 45
     t.string   "var_persona_apellidos",     limit: 45
     t.integer  "int_persona_edad"
@@ -110,13 +114,34 @@ ActiveRecord::Schema.define(version: 20131123155655) do
     t.string   "var_persona_dni",           limit: 10
     t.string   "var_persona_estado",        limit: 1
     t.string   "var_persona_email"
+<<<<<<< HEAD
     t.integer  "iglesia_id"
     t.integer  "lugar_id"
+=======
+    t.string   "var_persona_invitado",      limit: 100
+    t.integer  "iglesia_id"
+    t.integer  "lugar_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+>>>>>>> 338193dc2cfa915ce6082016de57b1cd03179b2e
   end
 
   add_index "personas", ["iglesia_id"], name: "index_personas_on_iglesia_id", using: :btree
   add_index "personas", ["lugar_id"], name: "index_personas_on_lugar_id", using: :btree
 
+<<<<<<< HEAD
+=======
+  create_table "peticions", primary_key: "int_peticion_id", force: true do |t|
+    t.string   "var_peticion_motivoOracion", limit: 300
+    t.integer  "persona_id"
+    t.date     "dat_peticion_fecha"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "peticions", ["persona_id"], name: "index_peticions_on_persona_id", using: :btree
+
+>>>>>>> 338193dc2cfa915ce6082016de57b1cd03179b2e
   create_table "servicios", primary_key: "int_servicio_id", force: true do |t|
     t.string   "var_servicio_nombre", limit: 150
     t.integer  "int_servicio_tipo"
