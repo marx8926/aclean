@@ -17,7 +17,12 @@ ActiveRecord::Schema.define(version: 20131123155655) do
     t.string   "var_asistencia_asistio", limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "persona_id"
+    t.integer  "servicio_id"
   end
+
+  add_index "asistencia", ["persona_id"], name: "index_asistencia_on_persona_id", using: :btree
+  add_index "asistencia", ["servicio_id"], name: "index_asistencia_on_servicio_id", using: :btree
 
   create_table "constantes", primary_key: "int_constante_id", force: true do |t|
     t.string   "var_constante_descripcion", limit: 50
@@ -33,7 +38,10 @@ ActiveRecord::Schema.define(version: 20131123155655) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "var_diezmo_peticion", limit: 200
+    t.integer  "persona_id"
   end
+
+  add_index "diezmos", ["persona_id"], name: "index_diezmos_on_persona_id", using: :btree
 
   create_table "direccions", primary_key: "int_direccion_id", force: true do |t|
     t.string   "var_direccion_descripcion", limit: 100
@@ -41,9 +49,14 @@ ActiveRecord::Schema.define(version: 20131123155655) do
     t.float    "dou_direccion_longitud"
     t.float    "dou_direccion_latitud"
     t.string   "var_direccion_estado",      limit: 1
+    t.integer  "ubigeo_id"
+    t.integer  "persona_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "direccions", ["persona_id"], name: "index_direccions_on_persona_id", using: :btree
+  add_index "direccions", ["ubigeo_id"], name: "index_direccions_on_ubigeo_id", using: :btree
 
   create_table "iglesia", primary_key: "int_iglesia_id", force: true do |t|
     t.datetime "created_at"
@@ -55,7 +68,10 @@ ActiveRecord::Schema.define(version: 20131123155655) do
     t.string   "var_iglesia_referencia",  limit: 150
     t.float    "dou_iglesia_longitud"
     t.float    "dou_iglesia_latitud"
+    t.integer  "ubigeo_id"
   end
+
+  add_index "iglesia", ["ubigeo_id"], name: "index_iglesia_on_ubigeo_id", using: :btree
 
   create_table "lugars", primary_key: "int_lugar_id", force: true do |t|
     t.string   "var_lugar_descripcion", limit: 100
@@ -67,15 +83,21 @@ ActiveRecord::Schema.define(version: 20131123155655) do
   create_table "nivel_crecimientos", primary_key: "int_nivelcrecimiento_id", force: true do |t|
     t.integer  "int_nivelcrecimiento_escala"
     t.integer  "int_nivelcrecimiento_estadoActual"
+    t.integer  "persona_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "nivel_crecimientos", ["persona_id"], name: "index_nivel_crecimientos_on_persona_id", using: :btree
 
   create_table "ofrendas", primary_key: "int_ofrenda_id", force: true do |t|
     t.decimal  "dec_ofrenda_monto", precision: 18, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "servicio_id"
   end
+
+  add_index "ofrendas", ["servicio_id"], name: "index_ofrendas_on_servicio_id", using: :btree
 
   create_table "personas", primary_key: "int_persona_id", force: true do |t|
     t.datetime "created_at"
@@ -84,15 +106,16 @@ ActiveRecord::Schema.define(version: 20131123155655) do
     t.string   "var_persona_apellidos",     limit: 45
     t.integer  "int_persona_edad"
     t.date     "dat_persona_fecNacimiento"
-    t.string   "var_persona_profesion",     limit: 45
-    t.string   "var_persona_ocupacion",     limit: 45
     t.string   "var_persona_sexo",          limit: 1
     t.string   "var_persona_dni",           limit: 10
     t.string   "var_persona_estado",        limit: 1
-    t.integer  "int_persona_diaVisita"
-    t.time     "dat_persona_horaVisita"
     t.string   "var_persona_email"
+    t.integer  "iglesia_id"
+    t.integer  "lugar_id"
   end
+
+  add_index "personas", ["iglesia_id"], name: "index_personas_on_iglesia_id", using: :btree
+  add_index "personas", ["lugar_id"], name: "index_personas_on_lugar_id", using: :btree
 
   create_table "servicios", primary_key: "int_servicio_id", force: true do |t|
     t.string   "var_servicio_nombre", limit: 150
@@ -112,9 +135,12 @@ ActiveRecord::Schema.define(version: 20131123155655) do
     t.integer  "int_telefono_tipo"
     t.string   "var_telefono_codigo", limit: 5
     t.string   "var_telefono",        limit: 18
+    t.integer  "persona_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "telefonos", ["persona_id"], name: "index_telefonos_on_persona_id", using: :btree
 
   create_table "turnos", primary_key: "int_turno_id", force: true do |t|
     t.string   "var_turno_horaInicio", limit: 10
