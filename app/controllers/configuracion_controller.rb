@@ -10,6 +10,10 @@ class ConfiguracionController < ApplicationController
 		
 	end
 
+	def lugar
+		
+	end
+
 	def guardar_servicio
 
 		@servicio = Servicio.new({:var_servicio_nombre => params[:nombre], :int_servicio_tipo => params[:tipo]})

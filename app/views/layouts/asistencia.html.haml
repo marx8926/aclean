@@ -13,7 +13,7 @@
     <![endif]
   %head
     %meta{charset: "utf-8"}/
-    %title Diezmos - Admin Church
+    %title Asitencia - Admin Church
     %meta{content: "CLM Developers", name: "author"}/
     %meta{content: "width=device-width, initial-scale=1.0, user-scalable=no", name: "viewport"}/
     %meta{content: "Admin Church", name: "description"}/
@@ -164,7 +164,6 @@
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Persona
           %li
-            %span.current-arrow
             %a{href: diezmos_path}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
@@ -175,6 +174,7 @@
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Ofrendas
           %li
+            %span.current-arrow
             %a{href: asistencia_path}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
@@ -210,4 +210,4 @@
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom-tables.js"}
     / custom Js
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom.js"}
-    = javascript_include_tag :diezmos
+    = javascript_include_tag :asistencia
