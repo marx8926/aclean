@@ -99,7 +99,6 @@ ActiveRecord::Schema.define(version: 20131126124839) do
     t.integer  "servicio_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "servicio_id"
   end
 
   add_index "ofrendas", ["servicio_id"], name: "index_ofrendas_on_servicio_id", using: :btree
@@ -110,36 +109,22 @@ ActiveRecord::Schema.define(version: 20131126124839) do
     t.string   "var_persona_apellidos",     limit: 45
     t.integer  "int_persona_edad"
     t.date     "dat_persona_fecNacimiento"
+    t.string   "var_persona_profesion",     limit: 45
+    t.string   "var_persona_ocupacion",     limit: 45
     t.string   "var_persona_sexo",          limit: 1
     t.string   "var_persona_dni",           limit: 10
     t.string   "var_persona_estado",        limit: 1
     t.string   "var_persona_email"
-<<<<<<< HEAD
-<<<<<<< HEAD
-    t.integer  "iglesia_id"
-    t.integer  "lugar_id"
-=======
-=======
->>>>>>> 338193dc2cfa915ce6082016de57b1cd03179b2e
     t.string   "var_persona_invitado",      limit: 100
     t.integer  "iglesia_id"
     t.integer  "lugar_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< HEAD
->>>>>>> 338193dc2cfa915ce6082016de57b1cd03179b2e
-=======
->>>>>>> 338193dc2cfa915ce6082016de57b1cd03179b2e
   end
 
   add_index "personas", ["iglesia_id"], name: "index_personas_on_iglesia_id", using: :btree
   add_index "personas", ["lugar_id"], name: "index_personas_on_lugar_id", using: :btree
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 338193dc2cfa915ce6082016de57b1cd03179b2e
   create_table "peticions", primary_key: "int_peticion_id", force: true do |t|
     t.string   "var_peticion_motivoOracion", limit: 300
     t.integer  "persona_id"
@@ -150,10 +135,6 @@ ActiveRecord::Schema.define(version: 20131126124839) do
 
   add_index "peticions", ["persona_id"], name: "index_peticions_on_persona_id", using: :btree
 
-<<<<<<< HEAD
->>>>>>> 338193dc2cfa915ce6082016de57b1cd03179b2e
-=======
->>>>>>> 338193dc2cfa915ce6082016de57b1cd03179b2e
   create_table "servicios", primary_key: "int_servicio_id", force: true do |t|
     t.string   "var_servicio_nombre", limit: 150
     t.integer  "int_servicio_tipo"
