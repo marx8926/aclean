@@ -23,34 +23,37 @@
               .form-group
                 %label.col-lg-2.control-label{for: "tipo"} Tipo
                 .col-lg-10
-                  %select#tipo.form-control{name: "tipo"}
-                    %option{value: "1"} Culto General
-                    %option{value: "2"} Culto Jovenes
-
-              .form-group
-                %label.col-lg-2.control-label{for: "nombre"} Nombre
-                .col-lg-10
-                  %input#nombre.form-control{name: "nombre", type: "text"}/
+                  .row
+                    .col-lg-2
+                      %select#tipo.form-control{name: "tipo"}
+                        %option{value: "1"} Culto General
+                        %option{value: "2"} Culto Jovenes
+                    %label.col-lg-2.control-label{for: "nombre"} Nombre
+                    .col-lg-3
+                      %input#nombre.form-control{name: "nombre", type: "text"}/
               .form-group
                 %label.col-lg-2.control-label{for: "dia"} Día
                 .col-lg-10
-                  %input#dia.form-control.datepicker{type: "text", placeholder: "Lunes" }/
-              .form-group
-                %label.col-lg-2.control-label{for: "hora"} Hora
-                .col-lg-10
-                  %input#hora.form-control{type: "text", placeholder: "12:00:00" }/
-
-              %button#addhorario.btn.btn-default{type: "button"} Add
-              %table#horario.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
-                %thead
-                  %tr
-                    %th{style: "width:50%"} Dia
-                    %th{style: "width:50%"} Hora
-                    %th{style: "width:50%"} 
-                %tbody
+                  .row
+                    .col-lg-2
+                      %input#dia.form-control.datepicker{type: "text", placeholder: "Lunes" }
+                    %label.col-lg-2.control-label{for: "hora"} Hora
+                    .col-lg-1
+                      %input#hora.form-control{type: "text"}
+                    .col-lg-2
+                      %button#addhorario.btn.btn-default{type: "button"} +
+              #dt_example.example_alt_pagination.col-lg-7.col-lg-offset-2
+                %table#horario.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
+                  %thead
+                    %tr
+                      %th{style: "width:33%"} Dia
+                      %th{style: "width:33%"} Hora
+                      %th{style: "width:33%"} Acciones
+                  %tbody
               .form-group
                 .col-lg-offset-2.col-lg-10
-                  = submit_tag 'Guardar', :class=>'btn btn-primary'
+                  %button.btn.btn-default{type: "button"} Cancelar
+                  = submit_tag 'Guardar', :class=>'btn btn-success'
   / Row end
   / Row start
   .row
