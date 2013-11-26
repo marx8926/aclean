@@ -3,13 +3,11 @@
   / Page title start
   .row.page-title
     %h2
-      Miembro
+      Persona
       %small
         %li Inicio
         %li /
         %li Persona
-        %li /
-        %li Miembro
   / Page title end
   / Row start
   .row
@@ -421,10 +419,3 @@
                       %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
             .clearfix
   / Row end
-
-:javascript
-  $(document).ready(function(){
-    ubigeos = getAjaxObject("https://s3.amazonaws.com/adminchurchs3/json/ubi.json");   
-    
-    cargarUbigeo(ubigeos, 'distrito','provincia','departamento');
-  });
