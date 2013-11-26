@@ -12,12 +12,12 @@
   / Row start
   .row
     = render 'layouts/mensaje'
-    #accordion.col-md-12
+    .col-md-12
       .widget
         .widget-header
-          %a.btn.btn-primary.btn-block.collapsed{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#servicio"}
+          %a.btn.btn-primary.btn-block
             Agregar Servicio
-        #servicio.panel-collapse.collapse
+        #servicio
           .widget-body
             = form_tag(configuracion_guardar_servicio_path , {:method=>'post',:class=>'form-horizontal'}) do
               .form-group
