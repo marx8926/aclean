@@ -19,7 +19,7 @@
             Agregar Servicio
         #servicio
           .widget-body
-            = form_tag(configuracion_guardar_servicio_path , {:method=>'post',:class=>'form-horizontal'}) do
+            = form_tag("", {:method=>'post',:class=>'form-horizontal' , :id => "formServicio" , :name=> "formServicio"}) do
               .form-group
                 %label.col-lg-2.control-label{for: "tipo"} Tipo
                 .col-lg-10
@@ -53,7 +53,8 @@
               .form-group
                 .col-lg-offset-2.col-lg-10
                   %button.btn.btn-default{type: "button"} Cancelar
-                  = submit_tag 'Guardar', :class=>'btn btn-success'
+                  %button.btn.btn-default{type: "button", id: "btnGuardar_Servicio" , name: "btnGuardar_Servicio" } Guardar
+                  
   / Row end
   / Row start
   .row
@@ -236,3 +237,5 @@
                       %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
             .clearfix
   / Row end
+
+  

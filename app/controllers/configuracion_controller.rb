@@ -19,12 +19,16 @@ class ConfiguracionController < ApplicationController
 		@servicio = Servicio.new({:var_servicio_nombre => params[:nombre], :int_servicio_tipo => params[:tipo]})
 
 		if @servicio.save
-			flash[:success] = 'Registro con exito'
+
 		else
-			flash[:error] = 'Error en registro'
+			
 		end
 
-		redirect_to configuracion_servicios_path
+		render :json => @servicio , :status => "ok"
+	end
+
+	def test
+		render :js => "alert('error saving comment');"
 	end
 
 end

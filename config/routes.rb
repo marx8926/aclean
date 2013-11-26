@@ -7,6 +7,7 @@ Lean::Application.routes.draw do
   post "visita_guardar" => "ganar#guardar_visita"
   
   get "diezmos" => "diezmos#index"
+  post "diezmos_guardar" => "diezmos#guardar"
 
   get "ofrendas" => "ofrendas#index"
   post "ofrendas_guardar" => "ofrendas#guardar"
@@ -14,9 +15,10 @@ Lean::Application.routes.draw do
   get "configuracion/servicios" => "configuracion#servicios"
   post "configuracion/guardar_servicio" => "configuracion#guardar_servicio"
   get "configuracion/lugar" => "configuracion#lugar"
+  get "test" => "configuracion#test"
 
   get "asistencia" => "asistencia#index"
-
+  post "asistencia_guardar" => "asistencia#guardar"
   
 
   # The priority is based upon order of creation: first created -> highest priority.

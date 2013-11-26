@@ -22,3 +22,18 @@ jQuery ->
 
   $('#registrar').click ->
     $("#servicio").toggle()
+
+
+  $("#btnGuardar_Servicio").click (e) ->
+    $.ajax
+      url: "/configuracion/guardar_servicio"
+      type: "POST"
+      data: $("#formServicio").serialize()
+      success: (msj) ->
+        console.log msj
+
+  
+    #act on result.
+    false # prevents normal behaviour
+
+        
