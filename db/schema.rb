@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20131126124839) do
     t.decimal  "dec_ofrenda_monto", precision: 18, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "servicio_id"
   end
 
   create_table "personas", primary_key: "int_persona_id", force: true do |t|
@@ -84,8 +85,6 @@ ActiveRecord::Schema.define(version: 20131126124839) do
     t.string   "var_persona_apellidos",     limit: 45
     t.integer  "int_persona_edad"
     t.date     "dat_persona_fecNacimiento"
-    t.string   "var_persona_profesion",     limit: 45
-    t.string   "var_persona_ocupacion",     limit: 45
     t.string   "var_persona_sexo",          limit: 1
     t.string   "var_persona_dni",           limit: 10
     t.string   "var_persona_estado",        limit: 1
@@ -93,6 +92,18 @@ ActiveRecord::Schema.define(version: 20131126124839) do
     t.time     "dat_persona_horaVisita"
     t.string   "var_persona_email"
   end
+
+    t.integer  "iglesia_id"
+    t.integer  "lugar_id"
+    t.string   "var_persona_invitado",      limit: 100
+    t.integer  "iglesia_id"
+    t.integer  "lugar_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "personas", ["iglesia_id"], name: "index_personas_on_iglesia_id", using: :btree
+  add_index "personas", ["lugar_id"], name: "index_personas_on_lugar_id", using: :btree
 
   create_table "peticions", primary_key: "int_peticion_id", force: true do |t|
     t.string   "var_peticion_motivoOracion", limit: 300

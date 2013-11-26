@@ -39,6 +39,15 @@
                 %label.col-lg-2.control-label{for: "hora"} Hora
                 .col-lg-10
                   %input#hora.form-control{type: "text", placeholder: "12:00:00" }/
+
+              %button#addhorario.btn.btn-default{type: "button"} Add
+              %table#horario.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
+                %thead
+                  %tr
+                    %th{style: "width:50%"} Dia
+                    %th{style: "width:50%"} Hora
+                    %th{style: "width:50%"} 
+                %tbody
               .form-group
                 .col-lg-offset-2.col-lg-10
                   = submit_tag 'Guardar', :class=>'btn btn-primary'
