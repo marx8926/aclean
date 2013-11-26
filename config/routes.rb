@@ -3,7 +3,9 @@ Lean::Application.routes.draw do
   devise_for :users
 
   get "persona" => "ganar#index"
-  post "persona_guardar" => "ganar#guardar"
+  post "persona_guardar" => "ganar#guardar_miembro"
+  post "visita_guardar" => "ganar#guardar_visita"
+  
   get "diezmos" => "diezmos#index"
 
   get "ofrendas" => "ofrendas#index"
