@@ -3,21 +3,34 @@
   / Page title start
   .row.page-title
     %h2
-      Miembro
+      Persona
       %small
         %li Inicio
         %li /
         %li Persona
-        %li /
-        %li Miembro
   / Page title end
+  / Row start
+  .row
+    .col-md-8.col-md-offset-2
+      .widget
+        .widget-body{style:"border:none;"}
+          .row
+            .col-md-6.col-sm-6
+              %button.btn.btn-primary.btn-block{type: "button"}
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""} 
+                Registrar Miembro
+            .col-md-6.col-sm-6
+              %button.btn.btn-danger.btn-block{type: "button"} 
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""} 
+                Registrar Visitante
+  / Row end
   / Row start
   .row
   .col-md-12
     .widget
       .widget-header
         .title
-          %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+          %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
           Registrar Miembro
       .widget-body
         = form_tag(persona_guardar_path , {:method=>'post',:class=>'form-horizontal'}) do
@@ -85,7 +98,7 @@
                     .col-lg-2.col-sm-2
                       %button.btn.btn-default{"data-original-title" => "", type: "button"} +
               #dt_example.example_alt_pagination.col-lg-8.col-lg-offset-2
-                %table#data-table.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
+                %table#table_telefonos_miembro.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
                   %thead
                     %tr
                       %th{style: "width:33%"} Teléfono
@@ -160,7 +173,7 @@
     .widget
       .widget-header
         .title
-          %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+          %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
           Registrar Visitante
       .widget-body
         %form.form-horizontal{role: "form"}
@@ -196,7 +209,7 @@
                     .col-lg-2.col-sm-2
                       %button.btn.btn-default{"data-original-title" => "", type: "button"} +
               #dt_example.example_alt_pagination.col-lg-8.col-lg-offset-2
-                %table#data-table.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
+                %table#table_telefonos_visitante.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
                   %thead
                     %tr
                       %th{style: "width:33%"} Teléfono
@@ -243,10 +256,10 @@
         .widget-header
           .title
             %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
-            Miembros
+            Registrados
         .widget-body
           #dt_example.example_alt_pagination
-            %table#data-table.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
+            %table#table_registrados.data-table.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
               %thead
                 %tr
                   %th{style: "width:25%"} Nombre y Apellido
@@ -419,10 +432,3 @@
                       %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
             .clearfix
   / Row end
-
-:javascript
-  $(document).ready(function(){
-    ubigeos = getAjaxObject("https://s3.amazonaws.com/adminchurchs3/json/ubi.json");   
-    
-    cargarUbigeo(ubigeos, 'distrito','provincia','departamento');
-  });
