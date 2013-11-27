@@ -56,6 +56,8 @@ jQuery ->
   # Los datos de respuesta se reciben en data
   SuccessFunction = ( data ) ->
     ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
+    $("#formServicio").reset()
+    HorarioTable.fnClearTable()
     console.log(data)
 
 # 2. Enviar Datos

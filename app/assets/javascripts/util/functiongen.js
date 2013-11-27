@@ -29,6 +29,11 @@ jQuery.fn.serializeObject = function()
 };
 
 
+jQuery.fn.reset = function () {
+	  $(this).each (function() { this.reset(); });
+	};
+
+
 /*Fin extensiones de jQuery*/
 
 
@@ -278,9 +283,6 @@ function SelectListPost(list, valor)
 {
     $('#'+list).val(valor);
 }
-jQuery.fn.reset = function () {
-	  $(this).each (function() { this.reset(); });
-	};
 	
 function reloadTable(oTable){
 	var returnfunction = function(data){
