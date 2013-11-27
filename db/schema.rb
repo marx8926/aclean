@@ -13,18 +13,12 @@
 
 ActiveRecord::Schema.define(version: 20131126124839) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "asistencia", primary_key: "int_asistencia_id", force: true do |t|
-    t.string   "var_asistencia_asistio",       limit: 1
-    t.datetime "dat_asistencia_fecRegistro"
-    t.datetime "dat_asistencia_fecAsistencia"
-    t.integer  "int_asistencia_categoria"
-    t.integer  "persona_id"
-    t.integer  "servicio_id"
+    t.string   "var_asistencia_asistio", limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "persona_id"
+    t.integer  "servicio_id"
   end
 
   add_index "asistencia", ["persona_id"], name: "index_asistencia_on_persona_id", using: :btree
@@ -97,32 +91,27 @@ ActiveRecord::Schema.define(version: 20131126124839) do
   add_index "nivel_crecimientos", ["persona_id"], name: "index_nivel_crecimientos_on_persona_id", using: :btree
 
   create_table "ofrendas", primary_key: "int_ofrenda_id", force: true do |t|
-    t.decimal  "dec_ofrenda_monto",         precision: 18, scale: 2
-    t.datetime "dec_ofrenda_fechaRegistro"
-    t.integer  "servicio_id"
+    t.decimal  "dec_ofrenda_monto", precision: 18, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "servicio_id"
   end
 
   add_index "ofrendas", ["servicio_id"], name: "index_ofrendas_on_servicio_id", using: :btree
 
   create_table "personas", primary_key: "int_persona_id", force: true do |t|
-    t.datetime "dat_persona_fecRegistro"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "var_persona_nombres",       limit: 45
     t.string   "var_persona_apellidos",     limit: 45
     t.integer  "int_persona_edad"
     t.date     "dat_persona_fecNacimiento"
-    t.string   "var_persona_profesion",     limit: 45
-    t.string   "var_persona_ocupacion",     limit: 45
     t.string   "var_persona_sexo",          limit: 1
     t.string   "var_persona_dni",           limit: 10
     t.string   "var_persona_estado",        limit: 1
     t.string   "var_persona_email"
-    t.string   "var_persona_invitado",      limit: 100
     t.integer  "iglesia_id"
     t.integer  "lugar_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   add_index "personas", ["iglesia_id"], name: "index_personas_on_iglesia_id", using: :btree

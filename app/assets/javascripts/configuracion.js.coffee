@@ -12,6 +12,21 @@ jQuery ->
         index = $(HorarioTable.fnGetData()).getIndexObj aData, 'id'
         HorarioTable.fnDeleteRow index
 
+  FormatoServiciosTable = [   { "sWidth": "25%","mDataProp": "int_servicio_id"},
+                              { "sWidth": "35%","mDataProp": "var_servicio_nombre"},
+                              { "sWidth": "15%","mDataProp": "int_servicio_tipo"},
+                              { "sWidth": "15%","mDataProp": "int_servicio_tipo"},
+                              { "sWidth": "10%","mDataProp": "int_servicio_tipo"}
+                              ]
+
+  ServiciosTable = $('#tablaservicios').dataTable
+    "bProcessing": true,
+    "bServerSide": false,
+    "bDestroy": true,
+    "sAjaxSource": "/configuracion/recuperar_servicio",    
+    "aoColumns": FormatoServiciosTable,               
+    "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>"
+
   $('#addhorario').click ->
     btn_elim = '<a class="delete-row" data-original-title="Delete" href="#"><img alt="trash" src="http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"></a>'
     horario = { "dia":$("#dia").val(), "hora" :$("#hora").val(), "btn_elim":btn_elim, "id":count}
@@ -29,11 +44,12 @@ jQuery ->
       url: "/configuracion/guardar_servicio"
       type: "POST"
       dataType: "JSON"
-      data: 
+      data:
         formulario: $("#formServicio").serialize()
-        otro: 23
+        otherdata: HorarioTable.fnGetData()
       success: (msj) ->
         console.log msj
+        ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
 
   
     #act on result.

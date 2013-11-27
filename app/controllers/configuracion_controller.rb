@@ -15,23 +15,26 @@ class ConfiguracionController < ApplicationController
 	end
 
 	def guardar_servicio
-
-		#ActiveRecord::Base.transaction do
-		#	begin
-
-				#@servicio = Servicio.new({:var_servicio_nombre => params[:nombre], :int_servicio_tipo => params[:tipo]})
-
-				
-		#	rescue
-		#		render :json => nil , :status => :internal_server_error
-		#		raise ActiveRecord::Rollback
-		#	end
-		#end	
-		render :json => params[:otro] , :status => :ok			
+		form = params[:formulario]
+		otherdata = params[:otherdata]
+		ActiveRecord::Base.transaction do
+			begin
+				@servicio = Servicio.new({:var_servicio_nombre => "hola", :int_servicio_tipo => 1})	
+				@servicio.save!
+			rescue
+        render :json => nil , :status => :internal_server_error
+				raise ActiveRecord::Rollback
+			end
+		end
+    render :json => {:data => otherdata.first, :formulario => form.nombre}, :status => :ok			
 	end
 
 	def test
 		render :json => Servicio.all
+	end
+
+	def recuperar_servicio
+		render :json => { :aaData => Servicio.all }, :status => :ok
 	end
 
 end
