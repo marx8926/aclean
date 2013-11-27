@@ -42,11 +42,11 @@ jQuery ->
   $('#registrar').click ->
     $("#servicio").toggle()
 
-# Proceso para enviar Formulario
+# Proceso para enviar metodo Post
 
 # 1. Preparar Datos
 
-  # Datos para enviar
+  # Datos para enviar en formato JSON
   PrepararDatos = ->
     root.DatosEnviar =
       "formulario" : $("#formServicio").serializeObject()
@@ -55,14 +55,20 @@ jQuery ->
   # Funcion de respuesta CORRECTA
   # Los datos de respuesta se reciben en data
   SuccessFunction = ( data ) ->
+    #recargar datos de tabla Servicios
     ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
+    #resetear formulario
     $("#formServicio").reset()
+    #reniciar tabla
     HorarioTable.fnClearTable()
+    #mostrar datos de respuesta
     console.log(data)
 
 # 2. Enviar Datos
   $("#btnGuardar_Servicio").click (e) ->
+    #Llamada a preparar Datps
     PrepararDatos()
+    #Llamada a envio Post
     enviar "/configuracion/guardar_servicio", root.DatosEnviar, SuccessFunction, null
 
 # Fin Proceso enviar Formulario
