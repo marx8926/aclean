@@ -16,18 +16,18 @@
         .widget-body{style:"border:none;"}
           .row
             .col-md-6.col-sm-6
-              %button.btn.btn-primary.btn-block{type: "button"} 
+              %button#registrar_miembro.btn.btn-primary.btn-block{type: "button"} 
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""} 
                 Registrar Miembro
             .col-md-6.col-sm-6
-              %button.btn.btn-danger.btn-block{type: "button"} 
+              %button#registrar_visitante.btn.btn-danger.btn-block{type: "button"} 
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""} 
                 Registrar Visitante
   / Row end
   / Row start
   .row
   = render 'layouts/mensaje'
-  .col-md-12
+  .col-md-12#miembro
     .widget
       .widget-header
         .title
@@ -99,7 +99,7 @@
                         %option{value: "1"} Celular
                     %label.col-lg-2.col-sm-2.control-label 
                     .col-lg-2.col-sm-2
-                      %button.btn.btn-default{"data-original-title" => "", type: "button"} +
+                      %button.btn.btn-default#add_numero{"data-original-title" => "", type: "button"} +
               #dt_example.example_alt_pagination.col-lg-8.col-lg-offset-2
                 %table#table_telefonos_miembro.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
                   %thead
@@ -108,18 +108,7 @@
                       %th.hidden-phone{style: "width:33%"} Tipo
                       %th.hidden-phone{style: "width:33%"} Acciones
                   %tbody
-                    %tr.gradeX
-                      %td 044-238627
-                      %td.hidden-phone Fijo
-                      %td.hidden-phone
-                        %a.delete-row{"data-original-title" => "Eliminar", href: "#"}
-                          %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
-                    %tr.gradeA
-                      %td 968138990
-                      %td.hidden-phone Celular
-                      %td.hidden-phone
-                        %a.delete-row{"data-original-title" => "Eliminar", href: "#"}
-                          %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
+                   
                     
               .clearfix
               .form-group
@@ -171,7 +160,7 @@
   / Row end
   / Row start
   .row
-  .col-md-12
+  .col-md-12#visitante
     .widget
       .widget-header
         .title
@@ -402,35 +391,6 @@
                       %img.icons{alt: "edit", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/edit-icon.png"}/
                     %a.delete-row{"data-original-title" => "Delete", href: "#"}
                       %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
-                %tr.gradeU
-                  %td Himresh Mayi
-                  %td Anniston, AL 36207-1211
-                  %td.hidden-phone 0000002200
-                  %td.hidden-phone $88790
-                  %td.hidden-phone
-                    %a.actions-icons{href: "#"}
-                      %img.icons{alt: "edit", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/edit-icon.png"}/
-                    %a.delete-row{"data-original-title" => "Delete", href: "#"}
-                      %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
-                %tr.gradeU
-                  %td Gajju Marnison
-                  %td Downingtown, PA 1133-1209
-                  %td.hidden-phone 1234321678
-                  %td.hidden-phone $9908
-                  %td.hidden-phone
-                    %a.actions-icons{href: "#"}
-                      %img.icons{alt: "edit", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/edit-icon.png"}/
-                    %a.delete-row{"data-original-title" => "Delete", href: "#"}
-                      %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
-                %tr.gradeA
-                  %td Powell Pack
-                  %td South Orange, NJ
-                  %td.hidden-phone 1123889911
-                  %td.hidden-phone $77651
-                  %td.hidden-phone
-                    %a.actions-icons{href: "#"}
-                      %img.icons{alt: "edit", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/edit-icon.png"}/
-                    %a.delete-row{"data-original-title" => "Delete", href: "#"}
-                      %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
+                
             .clearfix
   / Row end

@@ -31,7 +31,7 @@ class ConfiguracionController < ApplicationController
 	end
 
 	def test
-		render :json => Servicio.all
+		render :json => { :se => Servicio.all , :mas => "dkjdfkfdj"}
 	end
 
 end
