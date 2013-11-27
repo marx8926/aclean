@@ -1,3 +1,37 @@
+
+/*Extensiones de jQuery*/
+
+jQuery.fn.getIndexObj = function (obj,attr){
+	var objindex = null;
+	this.each(function( index ) {
+		  if(this[attr] == obj[attr]){
+			  objindex = index;
+		  }
+	});
+	return objindex;
+};
+
+jQuery.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+
+
+/*Fin extensiones de jQuery*/
+
+
 /*
  * logdata : muestra la data que se devuelve como response al enviar un formulario
  * con la funcion enviar
@@ -181,16 +215,6 @@ function createDataTable(idTable,UrlaDTable,FormatoDTable, CallBackFunction, Row
 		});
 	return oTable;
 }
-
-jQuery.fn.getIndexObj = function (obj,attr){
-	var objindex = null;
-	this.each(function( index ) {
-		  if(this[attr] == obj[attr]){
-			  objindex = index;
-		  }
-	});
-	return objindex;
-};
 
 function CopyArray(Array1,Array2,all,attrs){
 	while(Array1.length > 0)

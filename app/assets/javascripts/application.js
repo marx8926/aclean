@@ -26,3 +26,5 @@
 //= require rating/jquery.raty
 //= require custom-index
 //= require custom.js
+//= require util/functiongen.js
+//= require util/datatable_plugins.js

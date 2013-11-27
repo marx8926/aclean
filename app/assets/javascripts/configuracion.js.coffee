@@ -45,7 +45,7 @@ jQuery ->
       type: "POST"
       dataType: "JSON"
       data:
-        formulario: $("#formServicio").serialize()
+        formulario: $("#formServicio").serializeObject()
         otherdata: HorarioTable.fnGetData()
       success: (msj) ->
         console.log msj
