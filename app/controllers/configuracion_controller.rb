@@ -42,27 +42,25 @@ class ConfiguracionController < ApplicationController
 	def recuperar_servicio
 
 		servicio = Servicio.all
-		serv = {}
+		arrayserv = []
 		servicio.each{ |x|
+			serv = {}
 			serv['int_servicio_id'] = x.int_servicio_id
 			serv['var_servicio_nombre'] = x.var_servicio_nombre
-			serv['int_servicio_tipo'] = x.int_servicio_tipo
-
-
-			
+			serv['int_servicio_tipo'] = x.int_servicio_tipo			
 
 			if x != nil
 				t = {}
 				turno = Turno.find_by servicio: x
 				t['int_turno_id'] = turno[:int_turno_id]
 				t['var_turno_horainicio'] = turno[:var_turno_horainicio]
-				t['int_turno_dia'] = turno[:int_turno_dia]
-				
+				t['int_turno_dia'] = turno[:int_turno_dia]				
 			end
 
 			serv['turnos'] = t
+			arrayserv.push serv
 		}
-		render :json => { :aaData => serv }, :status => :ok
+		render :json => { :aaData => arrayserv }, :status => :ok
 	end
 
 end
