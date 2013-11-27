@@ -36,7 +36,15 @@
                 .col-lg-10
                   .row
                     .col-lg-2
-                      %input#dia.form-control.datepicker{type: "text", placeholder: "Lunes" }
+                      %select#dia.form-control{name: "dia"}
+                        %option{value: "0"} Domingo
+                        %option{value: "1"} Lunes
+                        %option{value: "2"} Martes
+                        %option{value: "3"} Miercoles
+                        %option{value: "4"} Jueves
+                        %option{value: "5"} Viernes
+                        %option{value: "6"} Sabado
+                        
                     %label.col-lg-2.control-label{for: "hora"} Hora
                     .col-lg-1
                       %input#hora.form-control{type: "text"}

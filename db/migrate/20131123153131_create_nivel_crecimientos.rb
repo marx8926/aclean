@@ -4,7 +4,7 @@ class CreateNivelCrecimientos < ActiveRecord::Migration
 
       t.primary_key :int_nivelcrecimiento_id
       t.integer :int_nivelcrecimiento_escala
-      t.integer :int_nivelcrecimiento_estadoActual
+      t.integer :int_nivelcrecimiento_estadoactual
 
       t.references :persona, index: true
       

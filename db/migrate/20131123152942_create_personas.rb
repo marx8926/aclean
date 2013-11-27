@@ -3,7 +3,7 @@ class CreatePersonas < ActiveRecord::Migration
     create_table( :personas , :id=>false) do |t|
 
       t.primary_key :int_persona_id
-      t.datetime :dat_persona_fecRegistro
+      t.datetime :dat_persona_fecregistro
       t.string :var_persona_nombres, limit: 45
       t.string :var_persona_apellidos, limit: 45
       t.integer :int_persona_edad
