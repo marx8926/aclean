@@ -47,17 +47,26 @@ class ConfiguracionController < ApplicationController
 			serv = {}
 			serv['int_servicio_id'] = x.int_servicio_id
 			serv['var_servicio_nombre'] = x.var_servicio_nombre
-			serv['int_servicio_tipo'] = x.int_servicio_tipo			
-
-			if x != nil
-				t = {}
-				turno = Turno.find_by servicio: x
-				t['int_turno_id'] = turno[:int_turno_id]
-				t['var_turno_horainicio'] = turno[:var_turno_horainicio]
-				t['int_turno_dia'] = turno[:int_turno_dia]				
+			serv['int_servicio_tipo'] = x.int_servicio_tipo
+			if x.int_servicio_tipo == 1
+				serv['int_servicio_tipo_desc'] = "Culto General"
+			else
+				serv['int_servicio_tipo_desc'] = "Culto Jovenes"
 			end
 
-			serv['turnos'] = t
+			if x != nil
+				arrayservt = []
+				turno = Turno.joins(:servicio).where("servicio_id" => x.int_servicio_id)
+				turno.each{ |y|
+					t = {}
+					t['int_turno_id'] = y[:int_turno_id]
+					t['var_turno_horainicio'] = y[:var_turno_horainicio]
+					t['int_turno_dia'] = y[:int_turno_dia]
+					arrayservt.push y
+				}			
+			end
+
+			serv['turnos'] = arrayservt
 			arrayserv.push serv
 		}
 		render :json => { :aaData => arrayserv }, :status => :ok
