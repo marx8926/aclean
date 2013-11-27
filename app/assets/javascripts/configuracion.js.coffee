@@ -1,8 +1,12 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
+root = exports ? this
+
 jQuery ->
   count = 0;
+
   HorarioTable = $('#horario').dataTable
     "aoColumns": [{"mDataProp": "dia"},{"mDataProp": "hora"},{"mDataProp": "btn_elim"}]
     "bPaginate": false
@@ -38,20 +42,29 @@ jQuery ->
   $('#registrar').click ->
     $("#servicio").toggle()
 
+# Proceso para enviar Formulario
 
+# 1. Preparar Datos
+
+  # Datos para enviar
+  PrepararDatos = ->
+    root.DatosEnviar =
+      "formulario" : $("#formServicio").serializeObject()
+      "otherdata" : HorarioTable.fnGetData()
+
+  # Funcion de respuesta CORRECTA
+  # Los datos de respuesta se reciben en data
+  SuccessFunction = ( data ) ->
+    ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
+    console.log(data)
+
+# 2. Enviar Datos
   $("#btnGuardar_Servicio").click (e) ->
-    $.ajax
-      url: "/configuracion/guardar_servicio"
-      type: "POST"
-      dataType: "JSON"
-      data:
-        formulario: $("#formServicio").serializeObject()
-        otherdata: HorarioTable.fnGetData()
-      success: (msj) ->
-        console.log msj
-        ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
+    PrepararDatos()
+    enviar "/configuracion/guardar_servicio", root.DatosEnviar, SuccessFunction, null
 
-  
+# Fin Proceso enviar Formulario
+      
     #act on result.
     false # prevents normal behaviour
 

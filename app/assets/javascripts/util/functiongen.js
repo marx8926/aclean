@@ -145,36 +145,24 @@ function getSimpleSelectRowCallBack(DSelected, tableid){
  * responsefunction : es la funcion que se ejecuta cuando responde el controlador
  * otherdata: son datos adicionales que se pueden enviar al controlador
  */
-function enviar(IdForm,successfunction,otherdata, errorfunction){
-	if(typeof(otherdata)=== 'undefined' || otherdata == null)
-		otherdata = null;
-	$("#"+IdForm).submit(function(event){
-		event.preventDefault();
-        var url=$("#"+IdForm).attr("action"); 
-        var Consulta = $.ajax({
-	      	  type: "POST",
-	      	  url: url,
-	      	  data: { formulario:$("#"+IdForm).serialize(),otherdata:otherdata }
-	      	});
-        
-        Consulta.done(function( data ) {
-      	  if(data.responseCode==200 ){
-				if(typeof(successfunction)=== 'undefined' || successfunction == null)
-					console.log("no function");
-				else 
-					successfunction(data);
-      	  }else if(data.responseCode==400)
-      		  alert('Error bad request');
-      	  else alert("An unexpeded error occured.");
-        });
-        
-        Consulta.fail(function() { 
-        	if(typeof(errorfunction)=== 'undefined' || errorfunction == null)
-				console.log("no function");
-			else 
-				errorfunction(); 
-        });
-	});
+function enviar(url, datos, successfunction, errorfunction){
+	var Consulta = $.ajax({
+		type: "POST",		
+      	dataType: "JSON",
+		url: url,
+		data: datos
+  	});
+
+    if(typeof(successfunction)!= 'undefined' && successfunction != null)
+    	Consulta.done(function(data){
+    		successfunction(data);
+    	});
+
+    if(typeof(errorfunction)!= 'undefined' && errorfunction != null)
+    	Consulta.fail(function(data){
+    		errorfunction(data);
+    	});
+
 		
 }
 

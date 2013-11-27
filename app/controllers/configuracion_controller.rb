@@ -26,9 +26,9 @@ class ConfiguracionController < ApplicationController
 				raise ActiveRecord::Rollback
 			end
 		end
-    render :json => {:data => otherdata.first, :formulario => form[:nombre]}, :status => :ok			
+    render :json => {:data => otherdata, :formulario => form[:nombre]}, :status => :ok			
 	end
-  
+
 	def test
 		render :json => { :se => Servicio.all , :mas => "dkjdfkfdj"}
 	end
