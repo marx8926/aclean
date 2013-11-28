@@ -77,7 +77,6 @@
             %table#tablaservicios.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
               %thead
                 %tr
-                  %th{style: "width:25%"} ID
                   %th{style: "width:35%"} Servicio
                   %th.hidden-phone{style: "width:15%"} Tipo
                   %th.hidden-phone{style: "width:15%"} Hora
@@ -86,3 +85,5 @@
 
             .clearfix
   / Row end
+- content_for :bloquejavascript do
+  = javascript_include_tag :servicios

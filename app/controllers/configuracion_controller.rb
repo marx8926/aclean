@@ -73,6 +73,7 @@ class ConfiguracionController < ApplicationController
 			serv['int_servicio_id'] = x.int_servicio_id
 			serv['var_servicio_nombre'] = x.var_servicio_nombre
 			serv['int_servicio_tipo'] = x.int_servicio_tipo
+			serv['var_servicio_acciones'] = ""
 			if x.int_servicio_tipo == 1
 				serv['int_servicio_tipo_desc'] = "Culto General"
 			else
@@ -80,21 +81,39 @@ class ConfiguracionController < ApplicationController
 			end
 
 			if x != nil
-				arrayservt = []
+				t= ""
 				turno = Turno.joins(:servicio).where("servicio_id" => x.int_servicio_id)
 				turno.each{ |y|
-					t = {}
-					t['int_turno_id'] = y[:int_turno_id]
-					t['var_turno_horainicio'] = y[:var_turno_horainicio]
-					t['int_turno_dia'] = y[:int_turno_dia]
-					arrayservt.push y
+					case y[:int_turno_dia]
+						when 0
+							dia = "Domingo"
+						when 1
+							dia = "Lunes"
+						when 2
+							dia = "Martes"
+						when 3
+							dia = "Miercoles"
+						when 4
+							dia = "Jueves"
+						when 5
+							dia = "Viernes"
+						else
+							dia = "Sabado"
+					end
+					t = t + "<p>"+dia+" - "+y[:var_turno_horainicio]+":00</p>"
 				}			
 			end
 
-			serv['turnos'] = arrayservt
+			serv['turnos'] = t
 			arrayserv.push serv
 		}
 		render :json => { :aaData => arrayserv }, :status => :ok
+	end
+
+	def drop_servicio
+		servicio = Servicio.find(params[:idservicio])
+		servicio.destroy
+		render :json => { :datos => "Servicio: "+params[:idservicio]+" Eliminado" }, :status => :ok
 	end
 
 end
