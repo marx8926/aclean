@@ -5,6 +5,8 @@
 root = exports ? this
 
 jQuery ->
+  $(".wizard").bwizard()
+  
   count = 0;
 
 

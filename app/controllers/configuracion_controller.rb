@@ -14,6 +14,10 @@ class ConfiguracionController < ApplicationController
 		
 	end
 
+	def usuario
+		
+	end
+
 	def guardar_lugar
 
 		ActiveRecord::Base.transaction do
