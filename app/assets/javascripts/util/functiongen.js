@@ -66,10 +66,10 @@ function getDiaSemana(num){
       dia = "Jueves";
       break;
     case 5:
-      dia = "Sabado";
+      dia = "Viernes";
       break;
     case 6:
-      dia = "Domingo";
+      dia = "Sabado";
       break;
   }
   return dia;
