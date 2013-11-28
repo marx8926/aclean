@@ -4,7 +4,6 @@
 jQuery ->
   $(".wizard").bwizard()
   
-  count = 0;
   ubigeos = getAjaxObject "https://s3.amazonaws.com/adminchurchs3/json/ubi.json"
   cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
 

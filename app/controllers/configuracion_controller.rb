@@ -48,7 +48,7 @@ class ConfiguracionController < ApplicationController
 
 				otherdata.each{ |x|
 					data = x.last
-					turno = Turno.new({:var_turno_horainicio => data[:hora], :int_turno_dia => data[:dia], :servicio => servicio})
+					turno = Turno.new({:var_turno_horainicio => data[:var_turno_horainicio], :int_turno_dia => data[:int_turno_dia], :servicio => servicio})
 					turno.save!
 				}
 			rescue
@@ -81,9 +81,10 @@ class ConfiguracionController < ApplicationController
 			end
 
 			if x != nil
-				t= ""
-				turno = Turno.joins(:servicio).where("servicio_id" => x.int_servicio_id)
-				turno.each{ |y|
+				tshow= ""
+				arrayturn = []
+				turnos = Turno.joins(:servicio).where("servicio_id" => x.int_servicio_id)
+				turnos.each{ |y|
 					case y[:int_turno_dia]
 						when 0
 							dia = "Domingo"
@@ -100,11 +101,12 @@ class ConfiguracionController < ApplicationController
 						else
 							dia = "Sabado"
 					end
-					t = t + "<p>"+dia+" - "+y[:var_turno_horainicio]+":00</p>"
+					tshow = tshow + "<p>"+dia+" - "+y[:var_turno_horainicio]+":00</p>"
+					arrayturn.push y
 				}			
 			end
-
-			serv['turnos'] = t
+			serv['turnos'] = arrayturn
+			serv['turnoshow'] = tshow
 			arrayserv.push serv
 		}
 		render :json => { :aaData => arrayserv }, :status => :ok
@@ -112,8 +114,22 @@ class ConfiguracionController < ApplicationController
 
 	def drop_servicio
 		servicio = Servicio.find(params[:idservicio])
+		Turno.destroy_all(servicio_id: params[:idservicio])
 		servicio.destroy
-		render :json => { :datos => "Servicio: "+params[:idservicio]+" Eliminado" }, :status => :ok
+		render :json => { :datos => params[:idservicio]}, :status => :ok
 	end
 
+	def editar_servicio
+		form = params[:formulario]
+		otherdata = params[:otherdata]
+		servicio = Servicio.find(form[:idservicio])
+		servicio.update(:var_servicio_nombre => form[:nombre], :int_servicio_tipo => form[:tipo])
+		Turno.destroy_all(servicio_id: form[:idservicio])
+		otherdata.each{ |x|
+					data = x.last
+					turno = Turno.new({:var_turno_horainicio => data[:var_turno_horainicio], :int_turno_dia => data[:int_turno_dia], :servicio => servicio})
+					turno.save!
+		}
+		render :json => { :datos => params}, :status => :ok
+	end
 end
