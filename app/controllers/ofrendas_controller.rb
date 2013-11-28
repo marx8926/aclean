@@ -11,28 +11,29 @@ class OfrendasController < ApplicationController
 
 	def guardar
 
-		fecha = params[:fecha]
-		monto = params[:monto]
-		servicio = params[:servicio]
+		ActiveRecord::Base.transaction do
+			begin
+
+				fecha = params[:fecha]
+				monto = params[:monto]
+				servicio = params[:servicio]
 
 
-		@ofrenda = Ofrenda.new
-		@ofrenda.dec_ofrenda_monto = monto
-		@ofrenda.dec_ofrenda_fechaRegistro = fecha
+				@ofrenda = Ofrenda.new
+				@ofrenda.dec_ofrenda_monto = monto
+				@ofrenda.dec_ofrenda_fecharegistro = fecha
 
-		@serv = Servicio.find(servicio)
+				@serv = Servicio.find(servicio)
 
-		@ofrenda.servicio = @serv
+				@ofrenda.servicio = @serv
+				@ofrenda.save
 
-		if @serv!= nil && @ofrenda.save
-			
-			flash[:success] = 'Registro con exito'
-
-		else
-			flash[:error] = 'Error en registro'
+			rescue
+				raise ActiveRecord::Rollback
+			end
 		end
 
-		redirect_to ofrendas_path
+		render :json => "ok" , :status => :ok
 
 	end
 

@@ -62,7 +62,7 @@
                     %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
                     Registrar Lugar
                 .panel-body
-                  %form.form-horizontal{role: "form"}
+                  %form#form_lugar.form-horizontal{role: "form"}
                     .form-group
                       %label.col-lg-2.control-label{for: "descripcion"} Descripción
                       .col-lg-10
@@ -70,5 +70,5 @@
                     .form-group
                       .col-lg-offset-2.col-lg-10
                         %button.btn.btn-default{type: "button"} Cancelar
-                        %button.btn.btn-success{type: "submit"} Guardar
+                        %button#btnGuardar_Lugar.btn.btn-success{type: "button"} Guardar
   / Row end

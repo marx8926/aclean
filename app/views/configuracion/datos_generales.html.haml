@@ -87,8 +87,11 @@
                 .form-group
                   %label.col-sm-2.control-label{for: "referencia"} Mapa
                   .col-sm-10
-                    %textarea#referencia.form-control{cols: "30", name: "referencia", rows: "4"}
-                      AQUI VA EL MAPA!!!!!
+                    %fieldset.gllpLatlonPicker
+                      %div{:class=>'gllpMap'} Google Maps
+                      = hidden_field_tag :latitud , '-8.112489' , :class=>'gllpLatitude'
+                      = hidden_field_tag :longitud , '-79.0288469' , :class=>'gllpLongitude'
+                      %input{:class=>'gllpZoom',:type => "hidden", :value=>'15'}
                 .form_submit.clearfix{style: ""}
                   .row
                     .col-sm-10.col-sm-offset-2

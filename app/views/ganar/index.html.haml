@@ -167,7 +167,7 @@
           %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
           Registrar Visitante
       .widget-body
-        = form_tag("" , {:method=>'post',:class=>'form-horizontal'}) do
+        = form_tag("" , {:method=>'post',:class=>'form-horizontal',  :id=>"form_visita" , :name=> "form_visita"}) do
           .wizard
             %ol
               %li Datos Personales

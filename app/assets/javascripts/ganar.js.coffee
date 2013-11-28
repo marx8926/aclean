@@ -2,6 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+root = exports ? this
+
 jQuery ->
 
   $(".wizard").bwizard()
@@ -49,16 +51,39 @@ jQuery ->
       $("#tipo_tel").val("")
 
 
+  # 1. Preparar Datos
+
+  # Datos para enviar en formato JSON
+  PrepararDatos = ->
+    root.DatosEnviar =
+      "formulario" : $("#form_miembro").serializeObject()
+      "tabla" : TelefonoTable.fnGetData()
+
+  # Funcion de respuesta CORRECTA
+  # Los datos de respuesta se reciben en data
+  SuccessFunction = ( data ) ->
+    #recargar datos de tabla Servicios
+    # ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
+    #resetear formulario
+    #$("#form_miembro").reset()
+    cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
+    #reniciar tabla
+    TelefonoTable.fnClearTable()
+    #mostrar datos de respuesta
+    console.log(data)
+
+  # 2. Enviar Datos
   $("#btnGuardar_Miembro").click (e) ->
-    $.ajax
-      url: "/persona_guardar"
-      type: "POST"
-      dataType: "JSON"
-      data:
-      	formulario: $('#form_miembro').serializeObject()
-      	tabla: TelefonoTable.fnGetData()
-      success: (msj) ->
-        console.log msj
+    #Llamada a preparar Datps
+    PrepararDatos()
+    #Llamada a envio Post
+    enviar "/persona_guardar", root.DatosEnviar, SuccessFunction, null
+
+    # Fin Proceso enviar Formulario
+      
+    #act on result.
+    false # prevents normal behaviour
+
   
 
   
@@ -90,3 +115,36 @@ jQuery ->
       TelefonoVTable.fnAddData numero
       count++
 
+
+   # 1. Preparar Datos
+
+  # Datos para enviar en formato JSON
+  PrepararDatosV = ->
+    root.DatosEnviarV =
+      "formulario" : $("#form_visita").serializeObject()
+      "tabla" : TelefonoVTable.fnGetData()
+
+  # Funcion de respuesta CORRECTA
+  # Los datos de respuesta se reciben en data
+  SuccessFunction = ( data ) ->
+    #recargar datos de tabla Servicios
+    # ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
+    #resetear formulario
+    #$("#form_visita").reset()
+    cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
+    #reniciar tabla
+    TelefonoVTable.fnClearTable()
+    #mostrar datos de respuesta
+    console.log(data)
+
+  # 2. Enviar Datos
+  $("#btnguardarv").click (e) ->
+    #Llamada a preparar Datps
+    PrepararDatosV()
+    #Llamada a envio Post
+    enviar "/visita_guardar", root.DatosEnviarV, SuccessFunction, null
+
+    # Fin Proceso enviar Formulario
+      
+    #act on result.
+    false # prevents normal behaviour

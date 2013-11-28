@@ -18,7 +18,7 @@
             Agregar Ofrenda
         #collapseOne.panel-collapse.collapse
           .widget-body
-            = form_tag(ofrendas_guardar_path , {:method=>'post',:class=>'form-horizontal'}) do
+            = form_tag(ofrendas_guardar_path , {:method=>'post',:class=>'form-horizontal' , :id => "form_ofrenda" , :name=> "form_ofrenda"}) do
               .form-group
                 %label.col-lg-2.control-label{for: "servicio"} Servicio
                 .col-lg-10                  
@@ -35,7 +35,7 @@
               .form-group
                 .col-lg-offset-2.col-lg-10
                   %button.btn.btn-default{type: "button"} Cancelar
-                  %button.btn.btn-success{type: "submit"} Guardar
+                  %button#btnGuardar_Ofrenda.btn.btn-success{type: "button"} Guardar
   / Row end
   / Row start
   .row

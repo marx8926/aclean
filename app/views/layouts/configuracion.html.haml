@@ -26,6 +26,7 @@
     %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/css/bootstrap.css", rel: "stylesheet"}/
     / custom css
     %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/css/main.css", rel: "stylesheet"}/
+    = stylesheet_link_tag "mapa/jquery-gmaps-lation-picker"
   %body
     / Header start
     %header
@@ -219,3 +220,5 @@
     = javascript_include_tag "util/functiongen.js"
     = javascript_include_tag "util/datatable_plugins.js"
     = javascript_include_tag :configuracion
+    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=true"
+    = javascript_include_tag "mapa/jquery-gmaps-lation-picker"

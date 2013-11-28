@@ -14,6 +14,26 @@ class ConfiguracionController < ApplicationController
 		
 	end
 
+	def guardar_lugar
+
+		ActiveRecord::Base.transaction do
+			begin
+				lugar = Lugar.new({
+					:var_lugar_descripcion => params[:descripcion] ,
+					:var_lugar_estado => '1'
+					})
+
+				lugar.save!
+
+			rescue
+				raise ActiveRecord::Rollback
+			end
+		end
+
+		render :json => "ok" , :status => :ok
+
+	end
+
 	def guardar_servicio
 		form = params[:formulario]
 		otherdata = params[:otherdata]
@@ -28,11 +48,12 @@ class ConfiguracionController < ApplicationController
 					turno.save!
 				}
 			rescue
-        render :json => nil , :status => :internal_server_error
+        		render :json => nil , :status => :internal_server_error
 				raise ActiveRecord::Rollback
 			end
 		end
-    render :json => {:data => otherdata, :formulario => form[:nombre]}, :status => :ok			
+    	
+    	render :json => {:data => otherdata, :formulario => form[:nombre]}, :status => :ok			
 	end
 
 	def test
