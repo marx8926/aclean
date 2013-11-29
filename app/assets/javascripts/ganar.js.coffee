@@ -40,7 +40,7 @@ jQuery ->
         index = $(TelefonoTable.fnGetData()).getIndexObj aData, 'id'
         TelefonoTable.fnDeleteRow index
 
-  FormatoPersonaTable = [   { "sWidth": "35%","mDataProp": "nombres"},
+  FormatoPersonaTable = [   { "sWidth": "35%","mDataProp": "nombrecompleto"},
                             { "sWidth": "15%","mDataProp": "telefono"},
                             { "sWidth": "10%","mDataProp": "registro"},
                             { "sWidth": "10%","mDataProp": "convertido"},
@@ -52,6 +52,10 @@ jQuery ->
     index = $(PersonaTable.fnGetData()).getIndexObj aData, 'int_servicio_id'
     acciones = getActionButtons "111"
     PersonaTable.fnUpdate( acciones, index, 5 );
+    $(nRow).find('.edit_row').click (event) ->
+      event.preventDefault()
+      $("#nombre").val aData.var_persona_nombres
+      $("#apellido").val aData.var_persona_apellidos
 
   PersonaTable = createDataTable "table_registrados", root.SourceTServicio, FormatoPersonaTable, null, PersonaRowCB
 

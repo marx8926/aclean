@@ -132,8 +132,7 @@ class GanarController < ApplicationController
 
 			t = {}
 			persona.each{ |x|
-				t['persona'] = x[:int_persona_id]
-				t['nombres'] = x[:var_persona_nombres]+" "+ x[:var_persona_apellidos]
+				t['nombrecompleto'] = x[:var_persona_nombres]+" "+x[:var_persona_apellidos]
 				t['registro'] = x[:created_at].strftime("%d/%m/%Y")
 				t['persona_data'] = x
 
