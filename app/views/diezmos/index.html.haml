@@ -18,7 +18,7 @@
             Agregar Diezmo
         #collapseOne.panel-collapse.collapse
           .widget-body
-            = form_tag(ofrendas_guardar_path , {:method=>'post',:class=>'form-horizontal'}) do
+            = form_tag("", {:method=>'post',:class=>'form-horizontal', :id => "form_diezmo" , :name => "form_diezmo"}) do
             
               .form-group
                 %label.col-lg-2.control-label{for: "persona"} Persona
