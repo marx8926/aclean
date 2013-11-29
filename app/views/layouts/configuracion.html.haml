@@ -28,6 +28,8 @@
     %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/css/main.css", rel: "stylesheet"}/
     = stylesheet_link_tag "mapa/jquery-gmaps-lation-picker"
     = stylesheet_link_tag "smooth/jquery-ui-1.8.16.custom"
+    = stylesheet_link_tag "loader"
+    = stylesheet_link_tag "successblock"
   %body
     / Header start
     %header
@@ -219,6 +221,7 @@
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom-tables.js"}
     / custom Js
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom.js"}
+    %script{src: "http://malsup.github.io/jquery.blockUI.js"}
     = javascript_include_tag "util/functiongen.js"
     = javascript_include_tag "util/datatable_plugins.js"
     = javascript_include_tag :configuracion

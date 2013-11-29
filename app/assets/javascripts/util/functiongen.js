@@ -75,6 +75,31 @@ function getDiaSemana(num){
   return dia;
 }
 
+function DisplayBlockUI(idMensaje){
+  $.blockUI({
+    message: $('#'+idMensaje),
+    css: {
+      border: 'none',
+      padding: '15px',
+      backgroundColor: '#000',
+      '-webkit-border-radius': '10px', 
+      '-moz-border-radius': '10px',
+      opacity: .5,
+      color: '#fff'
+      }
+    });
+}
+
+function DisplayBlockUISingle(idMensaje){
+   $.blockUI({
+    message: $('#'+idMensaje),
+    css: {
+      border: 'none'
+    }
+  });
+}
+
+
 /*
  * logdata : muestra la data que se devuelve como response al enviar un formulario
  * con la funcion enviar

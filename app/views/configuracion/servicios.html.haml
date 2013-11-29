@@ -17,7 +17,7 @@
         .widget-header
           %a#registrar.btn.btn-primary.btn-block
             Agregar Servicio
-        #servicio
+        #servicio{style: "display:none"}
           .widget-body
             = form_tag("", {:method=>'post',:class=>'form-horizontal' , :id => "formServicio" , :name=> "formServicio"}) do
               .form-group
@@ -86,6 +86,26 @@
               %tbody
 
             .clearfix
+  #loader{style: "display:none"}
+    = render "layouts/loader"
+  #confirmmodal.panel.panel-info{style: "display:none"}
+    .panel-heading
+      %h3.panel-title
+        Confirmar
+    .panel-body
+      %p
+        ¿Desea Guardar permanentemente los cambios?
+      %button.btnNo.btn.btn-default{type: "button"} No
+      %button#btnSiGuardar.btn.btn-default{type: "button"} Si
+  #dangermodal.panel.panel-danger{style: "display:none"}
+    .panel-heading
+      %h3.panel-title
+        Alerta!
+    .panel-body
+      %p
+        ¿Desea eliminar permanentemente el servicio?
+      %button.btnNo.btn.btn-default{type: "button"} No
+      %button#btnSiEliminar.btn.btn-default{type: "button"} Si
   / Row end
 - content_for :bloquejavascript do
   = javascript_include_tag :servicios

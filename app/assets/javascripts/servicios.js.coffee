@@ -1,5 +1,6 @@
 root = exports ? this
 root.SourceTServicio = "/configuracion/recuperar_servicio"
+root.SelectToDrop = null
 jQuery ->
   count = 0;
   $("#servicio").hide()
@@ -30,9 +31,8 @@ jQuery ->
     ServiciosTable.fnUpdate( acciones, index, 3 ); 
     $(nRow).find('.delete-row').click (event) ->
       event.preventDefault()
-      r=confirm("Desea eliminar el servicio")
-      if(r==true)
-        enviar "/configuracion/drop_servicio", {"idservicio":aData.int_servicio_id}, SuccessFunctionDropServicio, null
+      root.SelectToDrop = aData.int_servicio_id
+      DisplayBlockUISingle "dangermodal"
     $(nRow).find('.edit_row').click (event) ->
       event.preventDefault()
       $("#nombre").val aData.var_servicio_nombre
@@ -68,6 +68,22 @@ jQuery ->
     HorarioTable.fnAddData horario
     count++
 
+  $("#btnSiEliminar").click (event) ->
+    event.preventDefault()
+    DisplayBlockUI "loader"
+    enviar "/configuracion/drop_servicio", {"idservicio":root.SelectToDrop}, SuccessFunctionDropServicio, null
+
+  $("#btnSiGuardar").click (event) ->
+    event.preventDefault()    
+    #Llamada a preparar Datps
+    PrepararDatos()
+    DisplayBlockUI "loader"
+    enviar "/configuracion/editar_servicio", root.DatosEnviar, SuccessFunctionServicio, null
+
+  $(".btnNo").click (event) ->
+    event.preventDefault()
+    $.unblockUI()
+
   $("#cancelarGuardar").click (event) ->
     event.preventDefault()
     $("#formServicio").reset()
@@ -95,6 +111,7 @@ jQuery ->
   # Funcion de respuesta CORRECTA
   # Los datos de respuesta se reciben en data
   SuccessFunctionServicio = ( data ) ->
+    MessageSucces()
     #recargar datos de tabla Servicios
     ServiciosTable.fnReloadAjax root.SourceTServicio
     #resetear formulario
@@ -106,16 +123,10 @@ jQuery ->
     $("#btnRegistrarServicio").show()
     $("#registrar").text("Agregar Servicio")
     $("#servicio").hide()
-    alert "Servicio Guardado"
 
   $("#btnGuardarServicio").click (event) ->
     event.preventDefault()
-    r=confirm("Esta a punto de guardar cambios de froma PERMANENTE")
-    if(r==true)
-      #Llamada a preparar Datps
-      PrepararDatos()
-      #Llamada a envio Post
-      enviar "/configuracion/editar_servicio", root.DatosEnviar, SuccessFunctionServicio, null
+    DisplayBlockUISingle "confirmmodal"
 
 # 2. Enviar Datos
   $("#btnRegistrarServicio").click (event) ->
@@ -129,8 +140,15 @@ jQuery ->
 
   #Refrescar tabla al elimnar servicio
   SuccessFunctionDropServicio = (data) ->
-    ServiciosTable.fnReloadAjax root.SourceTServicio    
-    alert "Servicio Eliminado"
+    MessageSucces()
+    ServiciosTable.fnReloadAjax root.SourceTServicio
 
     #act on result.
     false # prevents normal behaviour
+  
+  MessageSucces = ->
+    setTimeout (->
+      $.unblockUI onUnblock: ->
+        $.growlUI "Operacion Exitosa"
+
+    ), 1000
