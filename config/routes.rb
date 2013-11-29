@@ -5,7 +5,7 @@ Lean::Application.routes.draw do
   get "persona" => "ganar#index"
   post "persona_guardar" => "ganar#guardar_miembro"
   post "visita_guardar" => "ganar#guardar_visita"
-  get "recuperar_personas_init" => "ganar#recuperar_personas_init"
+  get "recuperar_personas_inicio" => "ganar#recuperar_personas_inicio"
   
   get "diezmos" => "diezmos#index"
   post "diezmos_guardar" => "diezmos#guardar"

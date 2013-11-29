@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 root = exports ? this
+root.SourceTServicio = "/recuperar_personas_inicio"
 
 jQuery ->
 
@@ -33,6 +34,11 @@ jQuery ->
         index = $(TelefonoTable.fnGetData()).getIndexObj aData, 'id'
         TelefonoTable.fnDeleteRow index
 
+
+
+
+  
+
   $('#add_numero').click ->
     btn_elim = '<a class="delete-row" data-original-title="Delete" href="#"><img alt="trash" src="http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"></a>'
 
@@ -48,7 +54,7 @@ jQuery ->
       count++
 
       $("#codigo_tel").val("")
-      $("#tipo_tel").val("")
+      $("#telefono").val("")
 
 
   # 1. Preparar Datos

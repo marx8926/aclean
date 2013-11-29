@@ -122,32 +122,66 @@ class GanarController < ApplicationController
 
 	end
 
-	def recuperar_personas_init
+	def recuperar_personas_inicio
 
 		persona = Persona.all.limit 300
 
 		todo = []
 
-		persona.each{ |x|
+		if persona.length > 0
 
 			t = {}
-			t['persona'] = x.int_persona_id
+			persona.each{ |x|
+				t['persona'] = x[:int_persona_id]
+				t['nombres'] = x[:var_persona_nombres]+" "+ x[:var_persona_apellidos]
+				t['registro'] = x[:created_at].strftime("%d/%m/%Y")
+				t['persona_data'] = x
 
-			
-			telefono = Telefono.joins(:persona).where("persona_id" => x.int_persona_id)
-			nivel = NivelCrecimiento.joins(:persona).where("persona_id" => x.int_persona_id)
+				if x[:dat_persona_fecregistro].nil? == false
+					t['convertido'] = x[:dat_persona_fecregistro].strftime("%d/%m/%Y")
+				else
+					t['convertido'] = nil
+				end
 
-			t['telefono'] = telefono
-			t['nivel'] = nivel
-			todo.push(t)
+				telefono = Telefono.joins(:persona).where("persona_id" => x[:int_persona_id])
+				nivel = NivelCrecimiento.joins(:persona).where({"persona_id" => x[:int_persona_id], "int_nivelcrecimiento_estadoactual" => 1 })
 
-		}
-		
-		return :json => { "aData" => todo} , :status => :ok
+				tel = ""
+
+				telefono.each{ |i|
+					
+					temp = i[:var_telefono_codigo]+" "+ i[:var_telefono]
+					tel = tel + "<p>" + temp + "</p>"
+				}
+
+				level = nil
+
+				nivel.each{ |i|
+
+					case i[:int_nivelcrecimiento_escala]
+					when 0
+						level = "Visitante"
+					when 1
+						level = "Miembro"
+					when 2
+						level = "Pastor Principal"
+					else
+						level = "Administrador"
+					end
+				}
 
 
+				t['telefono'] = tel
+				t['telefono_data'] = telefono
+
+				t['nivel'] = level
+
+				todo.push(t)
+			}
 
 
+		end
+
+		render :json => { 'aData' => todo }, :status => :ok
 	end
-
 end
