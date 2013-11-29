@@ -58,8 +58,13 @@ jQuery ->
       
   $('#addhorario').click (event)->
     event.preventDefault()
-    dia_desc = getDiaSemana parseInt $("#dia").val()
-    horario = { "var_turno_dia_des": dia_desc ,"int_turno_dia":$("#dia").val(), "var_turno_horainicio" :$("#hora").val(), "btn_elim":getActionButtons "001", "id":count}
+    dia_desc = getDiaSemana $("#dia").val()
+    horario = 
+      "id":count
+      "var_turno_dia_des": dia_desc
+      "int_turno_dia":$("#dia").val()
+      "var_turno_horainicio" :$("#hora").val()
+      "btn_elim":getActionButtons "001"
     HorarioTable.fnAddData horario
     count++
 
@@ -101,7 +106,7 @@ jQuery ->
     $("#btnRegistrarServicio").show()
     $("#registrar").text("Agregar Servicio")
     $("#servicio").hide()
-    console.log(data)
+    alert "Servicio Guardado"
 
   $("#btnGuardarServicio").click (event) ->
     event.preventDefault()
@@ -125,7 +130,7 @@ jQuery ->
   #Refrescar tabla al elimnar servicio
   SuccessFunctionDropServicio = (data) ->
     ServiciosTable.fnReloadAjax root.SourceTServicio    
-    console.log(data)
+    alert "Servicio Eliminado"
 
     #act on result.
     false # prevents normal behaviour

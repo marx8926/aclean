@@ -49,7 +49,7 @@ function getActionButtons(conf){
 
 function getDiaSemana(num){
   var dia;
-  switch (num){
+  switch (parseInt(num)){
     case 0:
       dia = "Domingo";
       break;

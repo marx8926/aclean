@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20131129005738) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "asistencia", primary_key: "int_asistencia_id", force: true do |t|
     t.datetime "dat_asistencia_fecregistro"
     t.datetime "dat_asistencia_fecasistencia"
@@ -66,7 +63,6 @@ ActiveRecord::Schema.define(version: 20131129005738) do
     t.date     "dat_iglesia_feccreacion"
     t.string   "var_iglesia_telefono",    limit: 18
     t.string   "var_iglesia_siglas",      limit: 20
-    t.string   "var_iglesia_nombre",      limit: 150
     t.string   "var_iglesia_direccion",   limit: 150
     t.string   "var_iglesia_referencia",  limit: 150
     t.float    "dou_iglesia_longitud"
@@ -195,19 +191,16 @@ ActiveRecord::Schema.define(version: 20131129005738) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                             default: "", null: false
-    t.string   "encrypted_password",                default: "", null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                     default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "var_usuario_nombre",     limit: 50
-    t.string   "var_usuario_apellido",   limit: 50
-    t.string   "var_usuario_documento",  limit: 18
     t.datetime "created_at"
     t.datetime "updated_at"
   end
