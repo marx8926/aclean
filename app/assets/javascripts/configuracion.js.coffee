@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-  $(".wizard").bwizard()
+  
   
   ubigeos = getAjaxObject "https://s3.amazonaws.com/adminchurchs3/json/ubi.json"
   cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
