@@ -148,12 +148,14 @@ class GanarController < ApplicationController
 
 				tel = ""
 
-				telefono.each{ |i|
-					
-					temp = i[:var_telefono_codigo]+" "+ i[:var_telefono]
-					tel = tel + "<p>" + temp + "</p>"
-				}
+				if telefono.length > 0
+					telefono.each{ |i|
 
+						temp = i[:var_telefono_codigo]+" "+ i[:var_telefono]
+						tel = tel + "<p>" + temp + "</p>"
+					}
+				end
+				
 				level = nil
 
 				nivel.each{ |i|
