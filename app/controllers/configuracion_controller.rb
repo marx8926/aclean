@@ -64,7 +64,7 @@ class ConfiguracionController < ApplicationController
 	end
 
 	def test
-		render :json => { :se => Servicio.all , :mas => "dkjdfkfdj"}
+		render :json => { :se => current_user , :mas => "dkjdfkfdj"}
 	end
 
 	def recuperar_servicio
