@@ -172,7 +172,7 @@ class GanarController < ApplicationController
 					end
 				}
 
-
+				t['var_persona_acciones']= ""
 				t['telefono'] = tel
 				t['telefono_data'] = telefono
 
@@ -184,6 +184,6 @@ class GanarController < ApplicationController
 
 		end
 
-		render :json => { 'aData' => todo }, :status => :ok
+		render :json => { 'aaData' => todo }, :status => :ok
 	end
 end

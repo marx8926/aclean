@@ -4,6 +4,7 @@
 
 root = exports ? this
 root.SourceTServicio = "/recuperar_personas_inicio"
+root.DatosEnviar = null
 
 jQuery ->
 
@@ -13,15 +14,20 @@ jQuery ->
   ubigeos = getAjaxObject("https://s3.amazonaws.com/adminchurchs3/json/ubi.json")
   cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
 
+  $('#registrar_miembro').click (event) ->
+    event.preventDefault()
+    $("#miembro").show()
+    $("#visitante").hide()
 
-  $('#miembro').hide()
-  $('#visitante').hide()
+  $('#registrar_visitante').click (event) ->
+    event.preventDefault()
+    $("#visitante").show()
+    $("#miembro").hide()
 
-  $('#registrar_miembro').click ->
-    $("#miembro").toggle()
-
-  $('#registrar_visitante').click ->
-    $("#visitante").toggle()
+  $(".btncancelarform").click (event) ->
+    event.preventDefault()
+    $("#miembro").hide()
+    $("#visitante").hide()
 
   #inizializar telefonotable
 
@@ -34,10 +40,20 @@ jQuery ->
         index = $(TelefonoTable.fnGetData()).getIndexObj aData, 'id'
         TelefonoTable.fnDeleteRow index
 
+  FormatoPersonaTable = [   { "sWidth": "35%","mDataProp": "nombres"},
+                            { "sWidth": "15%","mDataProp": "telefono"},
+                            { "sWidth": "10%","mDataProp": "registro"},
+                            { "sWidth": "10%","mDataProp": "convertido"},
+                            { "sWidth": "10%","mDataProp": "nivel"},
+                            { "sWidth": "20%","mDataProp": "var_persona_acciones"}
+                            ]
 
+  PersonaRowCB = (  nRow, aData, iDisplayIndex ) ->
+    index = $(PersonaTable.fnGetData()).getIndexObj aData, 'int_servicio_id'
+    acciones = getActionButtons "111"
+    PersonaTable.fnUpdate( acciones, index, 5 );
 
-
-  
+  PersonaTable = createDataTable "table_registrados", root.SourceTServicio, FormatoPersonaTable, null, PersonaRowCB
 
   $('#add_numero').click ->
     btn_elim = '<a class="delete-row" data-original-title="Delete" href="#"><img alt="trash" src="http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"></a>'
@@ -52,7 +68,6 @@ jQuery ->
       numero = { "numero": num, "tipo" : $("#tipo_tel option:selected").text(), "btn_elim":btn_elim, "id":count , "tipo_val": $("#tipo_tel").val(), "codigo": $("#codigo_tel").val(), "tel": $("#telefono").val() }
       TelefonoTable.fnAddData numero
       count++
-
       $("#codigo_tel").val("")
       $("#telefono").val("")
 
@@ -60,14 +75,14 @@ jQuery ->
   # 1. Preparar Datos
 
   # Datos para enviar en formato JSON
-  PrepararDatos = ->
+  PrepararDatosRegistrar = ->
     root.DatosEnviar =
       "formulario" : $("#form_miembro").serializeObject()
       "tabla" : TelefonoTable.fnGetData()
 
   # Funcion de respuesta CORRECTA
   # Los datos de respuesta se reciben en data
-  SuccessFunction = ( data ) ->
+  SuccessFunctionRegistrar = ( data ) ->
     #recargar datos de tabla Servicios
     # ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
     #resetear formulario
@@ -79,20 +94,14 @@ jQuery ->
     console.log(data)
 
   # 2. Enviar Datos
-  $("#btnGuardar_Miembro").click (e) ->
+  $("#btnGuardar_Miembro").click (event) ->
+    event.preventDefault()
     #Llamada a preparar Datps
-    PrepararDatos()
+    PrepararDatosRegistrar()
     #Llamada a envio Post
-    enviar "/persona_guardar", root.DatosEnviar, SuccessFunction, null
+    enviar "/persona_guardar", root.DatosEnviar, SuccessFunctionRegistrar, null
 
-    # Fin Proceso enviar Formulario
-      
-    #act on result.
-    false # prevents normal behaviour
-
-  
-
-  
+    # Fin Proceso enviar Formulario 
 
   #inizializar telefonotableV
 
@@ -132,7 +141,7 @@ jQuery ->
 
   # Funcion de respuesta CORRECTA
   # Los datos de respuesta se reciben en data
-  SuccessFunction = ( data ) ->
+  SuccessFunctionVisitante = ( data ) ->
     #recargar datos de tabla Servicios
     # ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
     #resetear formulario
@@ -148,7 +157,7 @@ jQuery ->
     #Llamada a preparar Datps
     PrepararDatosV()
     #Llamada a envio Post
-    enviar "/visita_guardar", root.DatosEnviarV, SuccessFunction, null
+    enviar "/visita_guardar", root.DatosEnviarV, SuccessFunctionVisitante, null
 
     # Fin Proceso enviar Formulario
       
