@@ -21,6 +21,7 @@
           .widget-body
             = form_tag("", {:method=>'post',:class=>'form-horizontal' , :id => "formServicio" , :name=> "formServicio"}) do
               .form-group
+                %input#idservicio{name: "idservicio", type: "hidden"}/
                 %label.col-lg-2.control-label{for: "tipo"} Tipo
                 .col-lg-10
                   .row
@@ -60,8 +61,9 @@
                   %tbody
               .form-group
                 .col-lg-offset-2.col-lg-10
-                  %button.btn.btn-default{type: "button"} Cancelar
-                  %button.btn.btn-default{type: "button", id: "btnGuardar_Servicio" , name: "btnGuardar_Servicio" } Guardar
+                  %button#cancelarGuardar.btn.btn-default{type: "button"} Cancelar
+                  %button#btnRegistrarServicio.btn.btn-default{type: "button", name: "btnRegistrarServicio" } Registrar
+                  %button#btnGuardarServicio.btn.btn-default{type: "button", name: "btnGuardarServicio" } Guardar
                   
   / Row end
   / Row start
@@ -77,7 +79,6 @@
             %table#tablaservicios.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
               %thead
                 %tr
-                  %th{style: "width:25%"} ID
                   %th{style: "width:35%"} Servicio
                   %th.hidden-phone{style: "width:15%"} Tipo
                   %th.hidden-phone{style: "width:15%"} Hora
@@ -86,3 +87,5 @@
 
             .clearfix
   / Row end
+- content_for :bloquejavascript do
+  = javascript_include_tag :servicios

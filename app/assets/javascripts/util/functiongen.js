@@ -35,7 +35,45 @@ jQuery.fn.reset = function () {
 
 
 /*Fin extensiones de jQuery*/
+function getActionButtons(conf){
+  actions = "<p>"
+  if(conf.substring(0,1)==1)
+    actions += '<a class="edit_row actions-icons" data-original-title="Editar" href="#"><img alt="edit" class="icons" src="http://d9i0z8gxqnxp1.cloudfront.net/img/edit-icon.png"></a>';
+  if(conf.substring(1,2)==1)
+    actions += '<a class="edit_row actions-icons" data-original-title="Editar" href="#"><img alt="edit" class="icons" src="http://d9i0z8gxqnxp1.cloudfront.net/img/edit-icon.png"></a>';
+  if(conf.substring(2,3)==1)
+    actions += '<a class="delete-row" data-original-title="Eliminar" href="#"><img alt="trash" src="http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"></a>';
+  actions += '</p>'
+  return actions;
+}
 
+function getDiaSemana(num){
+  var dia;
+  switch (num){
+    case 0:
+      dia = "Domingo";
+      break;
+    case 1:
+      dia = "Lunes";
+      break;
+    case 2:
+      dia = "Martes";
+      break;
+    case 3:
+      dia = "Miercoles";
+      break;
+    case 4:
+      dia = "Jueves";
+      break;
+    case 5:
+      dia = "Viernes";
+      break;
+    case 6:
+      dia = "Sabado";
+      break;
+  }
+  return dia;
+}
 
 /*
  * logdata : muestra la data que se devuelve como response al enviar un formulario
@@ -174,38 +212,28 @@ function enviar(url, datos, successfunction, errorfunction){
 /*
  * Crea un datatable y lo devuelve como variable
  */
-function createDataTable(idTable,UrlaDTable,FormatoDTable, CallBackFunction, RowCallBackFunction){
+function createDataTable(idTable,UrlaDTable,FormatoDTable, DrawCallBackFunction, RowCallBackFunction){
 	
-	oTable = $('#'+idTable).dataTable({
+	var oTable = $('#'+idTable).dataTable({
 		"bProcessing": true,
 		"bServerSide": false,
 		"bDestroy": true,
 		"sAjaxSource": UrlaDTable,	  
 		"aoColumns": FormatoDTable,				             
-	 	"aaSorting": [ [0, 'asc'], [1, 'asc'] ],
+	 	"aaSorting": [ [0, 'asc'], [1, 'asc'] ], 
+    "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",
 	 	"fnCreatedRow": function( nRow, aData, iDisplayIndex ) {
 	 		if(typeof(RowCallBackFunction)!= 'undefined' && RowCallBackFunction != null)
 	 			RowCallBackFunction(nRow,aData,iDisplayIndex);
 		},
 	 	"fnDrawCallback": function(oSettings ){
-		 	if(typeof(CallBackFunction)!= 'undefined' && CallBackFunction != null){
+		 	if(typeof(DrawCallBackFunction)!= 'undefined' && DrawCallBackFunction != null){
 		 		setTimeout(function() {
-			 		CallBackFunction();
-			 		});
-		 		}
-		 	},
-		 	
-	 	"aoColumnDefs": [
-	                  {"sType": 'string-case', "aTargets": [2]}],
-	 	
-	 	
-		 	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",
-		 	"sPaginationType": "bootstrap",
-		 	"oLanguage": {
-			"sLengthMenu": "_MENU_ registros por página"
-				} 		            
-	
-		});
+			 		DrawCallBackFunction();
+		 		});
+	 		}
+    }
+	});
 	return oTable;
 }
 
