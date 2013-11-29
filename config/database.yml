@@ -2,12 +2,12 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: lean_development
+  database: lean_development3
   pool: 5
   username: postgres
-  password: '123456'
+  password: '260489'
   host: localhost
-  port: 5433
+  port: 5432
 
 
 test:
@@ -16,9 +16,9 @@ test:
   database: lean_test
   pool: 5
   username: postgres
-  password: '123456'
+  password: '260489'
   host: localhost
-  port: 5433
+  port: 5432
 
 production:
   adapter: postgresql
@@ -26,6 +26,6 @@ production:
   database: lean_production
   pool: 5
   username: postgres
-  password: '123456'
+  password: '260489'
   host: localhost
-  port: 5433
+  port: 5432

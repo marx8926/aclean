@@ -9,6 +9,7 @@ Lean::Application.routes.draw do
   
   get "diezmos" => "diezmos#index"
   post "diezmos_guardar" => "diezmos#guardar"
+  get "recuperar_diezmos_inicio" => "diezmos#recuperar_inicio"
 
   get "ofrendas" => "ofrendas#index"
   post "ofrendas_guardar" => "ofrendas#guardar"

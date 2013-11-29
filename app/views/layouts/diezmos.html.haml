@@ -26,6 +26,7 @@
     %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/css/bootstrap.css", rel: "stylesheet"}/
     / custom css
     %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/css/main.css", rel: "stylesheet"}/
+    = stylesheet_link_tag "smooth/jquery-ui-1.8.16.custom"
   %body
     / Header start
     %header
@@ -212,4 +213,10 @@
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom-tables.js"}
     / custom Js
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom.js"}
+    = javascript_include_tag "jquery/jquery.ui.autocomplete.min"
+    = javascript_include_tag "jquery/jquery.ui.core.min"
+    = javascript_include_tag "jquery/jquery.ui.position.min"
+    = javascript_include_tag "jquery/jquery.ui.widget.min"
+    = javascript_include_tag "util/functiongen.js"
+    = javascript_include_tag "util/datatable_plugins.js"
     = javascript_include_tag :diezmos

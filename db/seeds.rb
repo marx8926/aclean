@@ -21,6 +21,11 @@ CSV.foreach('db/ubi.csv') do |row|
       :float_ubigeo_longitud => row[7])
 end
 
+User.create(
+      :email => "contacto@clmdevelopers.com",
+      :password => "12345678"
+      )
+
 Lugar.create(
 	:var_lugar_descripcion => 'Culto',
 	:var_lugar_estado => '1'

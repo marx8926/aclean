@@ -3,7 +3,7 @@ class CreateDiezmos < ActiveRecord::Migration
     create_table( :diezmos, :id=>false ) do |t|
       t.integer :int_diezmo_id
       t.decimal :dec_diezmo_monto, precision: 18, scale: 2
-      t.timestamps :dat_diezmo_fecharegistro
+      t.datetime :dat_diezmo_fecharegistro
       t.string :var_diezmo_peticion, limit: 200
 
       t.references :persona, index: true
