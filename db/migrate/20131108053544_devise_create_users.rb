@@ -30,6 +30,10 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
 
+      t.string :var_usuario_nombre, limit: 50
+      t.string :var_usuario_apellido, limit: 50
+      t.string :var_usuario_documento, limit: 18
+
 
       t.timestamps
     end
