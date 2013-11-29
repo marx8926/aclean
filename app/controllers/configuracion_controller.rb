@@ -21,6 +21,65 @@ class ConfiguracionController < ApplicationController
 		
 	end
 
+	def guardar_usuario
+
+		ActiveRecord::Base.transaction do
+			begin
+
+				user = User.create!(
+					:email => params[:usuario],
+					:password => params[:password] ,
+					:var_usuario_nombre => params[:nombre],
+					:var_usuario_apellido => params[:apellido],
+					:var_usuario_documento => params[:num_doc]
+				)
+
+				if params[:persona].nil? == false
+
+					persona = UsuarioMenu.create!(
+						:user => user,
+						:menu => Menu.find_by(var_menu_nombre: "persona")
+						)
+
+				elsif params[:diezmos].nil? == false
+					diezmo = UsuarioMenu.create!(
+						:user => user,
+						:menu => Menu.find_by(var_menu_nombre: "diezmo")
+						)
+
+				elsif params[:ofrendas].nil? == false 
+					ofrenda = UsuarioMenu.create!(
+						:user => user,
+						:menu => Menu.find_by(var_menu_nombre: "ofrenda")
+						)
+
+				elsif params[:asistencia].nil? == false 
+					asistencia = UsuarioMenu.create!(
+						:user => user,
+						:menu => Menu.find_by(var_menu_nombre: "asistencia")
+						)
+
+				elsif params[:informacion].nil? == false
+					informacion = UsuarioMenu.create!(
+						:user => user,
+						:menu => Menu.find_by(var_menu_nombre: "informacion")
+						)
+
+				elsif params[:configuracion].nil? == false
+					configuracion = UsuarioMenu.create!(
+						:user => user,
+						:menu => Menu.find_by(var_menu_nombre: "configuracion")
+						)
+				end
+					
+			rescue
+				raise ActiveRecord::Rollback
+			end
+		end
+
+		render :json => params , :status => :ok
+	end
+
 	def guardar_lugar
 
 		ActiveRecord::Base.transaction do

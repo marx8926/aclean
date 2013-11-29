@@ -28,7 +28,7 @@
           %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
           Registrar Usuario
       .widget-body
-        = form_tag(persona_guardar_path , {:method=>'post',:class=>'form-horizontal', :id => "form_miembro" , :name => "form_miembro"}) do
+        = form_tag("" , {:method=>'post',:class=>'form-horizontal', :id => "form_usuario" , :name => "form_usuario"}) do
           .wizard
             %ol
               %li Registrar
@@ -61,31 +61,31 @@
                 .col-lg-10
                   .row
                     %label.col-lg-2.col-sm-2.checkbox-inline
-                      %input#persona{type: "checkbox", value: "persona"}/
+                      %input#persona{type: "checkbox", name: "persona"}/
                       Persona
                     %label.col-lg-2.col-sm-2.checkbox-inline
-                      %input#diezmos{type: "checkbox", value: "diezmos"}/
+                      %input#diezmos{type: "checkbox", name: "diezmos"}/
                       Diezmos
                     %label.col-lg-2.col-sm-2.checkbox-inline
-                      %input#ofrendas{type: "checkbox", value: "ofrendas"}/
+                      %input#ofrendas{type: "checkbox", name: "ofrendas"}/
                       Ofrendas
               .form-group
                 %label.col-lg-2.control-label Administrativas
                 .col-lg-10
                   .row
                     %label.col-lg-2.col-sm-2.checkbox-inline
-                      %input#asistencia{type: "checkbox", value: "asistencia"}/
+                      %input#asistencia{type: "checkbox", name: "asistencia"}/
                       Asistencia
                     %label.col-lg-2.col-sm-2.checkbox-inline
-                      %input#informacion{type: "checkbox", value: "informacion"}/
+                      %input#informacion{type: "checkbox", name: "informacion"}/
                       Información
                     %label.col-lg-2.col-sm-2.checkbox-inline
-                      %input#configuracion{type: "checkbox", value: "configuracion"}/
+                      %input#configuracion{type: "checkbox", name: "configuracion"}/
                       Configuración
               .form-group
                 .col-lg-offset-2.col-lg-10
                   %button.btn.btn-default{type: "button"} Cancelar
-                  %input#btnGuardar_Miembro.btn.btn-success{type: "button", value: "Guardar"}
+                  %input#btnGuardar_Usuario.btn.btn-success{type: "button", value: "Guardar"}
   / Row end
   / Row start
   .row
@@ -128,3 +128,6 @@
 
             .clearfix
   / Row end
+
+- content_for :bloquejavascript do
+  = javascript_include_tag :usuario

@@ -1,3 +1,4 @@
+root = exports ? this
 jQuery ->
 
 
