@@ -34,34 +34,36 @@
               .thumbnail
                 %img{alt: "300x200", src: "http://bit.ly/1dqW8yO"}/
             .col-md-10.col-sm-9
-              %form.form-horizontal
+              %form.form-horizontal#form_iglesia{method: "post"}
                 %h3.heading-a General
                 .form-group
                   %label.col-sm-2.control-label{for: "fec_creacion"} Fecha de Creación
                   .col-sm-10
                     .row
                       .col-sm-5
-                        %input#fec_creacion.form-control{type: "text", name:"fec_creacion"}
+                        %input#fec_creacion.form-control{type: "date", name:"fec_creacion", value: ( @igle.nil? ? nil :  @igle.dat_iglesia_feccreacion )}
                       %label.col-sm-1.control-label{for: "telefono"} Teléfono
                       .col-sm-5
-                        %input#telefono.form-control{type: "text", name: "telefono"}
+                        %input#telefono.form-control{type: "text", name: "telefono", value: ( @igle.nil? ? nil :  @igle.var_iglesia_telefono ) }
                 .form-group
                   %label.col-sm-2.control-label{for: "nombre"} Nombre
                   .col-sm-10
                     .row
                       .col-sm-5
-                        %input#nombre.form-control{type: "text", name:"nombre"}
+                        %input#nombre.form-control{type: "text", name:"nombre", value: ( @igle.nil? ? nil :  @igle.var_iglesia_nombre )}
                       %label.col-sm-1.control-label{for: "sigla"} Sigla
                       .col-sm-5
-                        %input#sigla.form-control{type: "text", name: "sigla"}
+                        %input#sigla.form-control{type: "text", name: "sigla", value: ( @igle.nil? ? nil :  @igle.var_iglesia_siglas )}
                 %h3.heading-a Pastores Principales
                 .form-group
                   %label.col-sm-2.control-label{for: "psn1"} Ps. 1
                   .col-sm-10
+                    =hidden_field_tag :psn_val1
                     %input#psn1.form-control{type: "text", name: "psn1"}/
                 .form-group
                   %label.col-sm-2.control-label{for: "psn2"} Ps. 2
                   .col-sm-10
+                    = hidden_field_tag :psn_val2
                     %input#psn2.form-control{type: "text", name: "psn2"}/
                 %h3.heading-a Ubicación
                 .form-group
@@ -79,22 +81,38 @@
                 .form-group
                   %label.col-sm-2.control-label{for: "direccion"} Dirección
                   .col-sm-10
-                    %input#direccion.form-control{type: "text", name: "direccion"}/
+                    %input#direccion.form-control{type: "text", name: "direccion" , value: ( @igle.nil? ? nil :  @igle.var_iglesia_direccion )}/
                 .form-group
                   %label.col-sm-2.control-label{for: "referencia"} Referencia
                   .col-sm-10
-                    %textarea#referencia.form-control{cols: "30", name: "referencia", rows: "4"}
+                    %textarea#referencia.form-control{cols: "30", name: "referencia", rows: "4", value: ( @igle.nil? ? nil :  @igle.var_iglesia_referencia )}
                 .form-group
                   %label.col-sm-2.control-label{for: "referencia"} Mapa
                   .col-sm-10
                     %fieldset.gllpLatlonPicker
                       %div{:class=>'gllpMap'} Google Maps
-                      = hidden_field_tag :latitud , '-8.112489' , :class=>'gllpLatitude'
-                      = hidden_field_tag :longitud , '-79.0288469' , :class=>'gllpLongitude'
+                      = hidden_field_tag :latitud , ( @igle.nil? ? '-8.112489' :  @igle.dou_iglesia_latitud )  , :class=>'gllpLatitude'
+                      = hidden_field_tag :longitud , ( @igle.nil? ? '-79.0288469' :  @igle.dou_iglesia_longitud ) , :class=>'gllpLongitude'
                       %input{:class=>'gllpZoom',:type => "hidden", :value=>'15'}
+
+                - if @igle.nil?
+
+                  = hidden_field_tag :ubi, nil
+                - else
+                  = hidden_field_tag :ubi, @igle.ubigeo.int_ubigeo_id
+                  - @prov = Ubigeo.where(int_ubigeo_id: @igle.ubigeo.int_ubigeo_dependencia).take
+                  - @dep = Ubigeo.find(@prov.int_ubigeo_dependencia)
+
+                  = hidden_field_tag :dist, @igle.ubigeo.int_ubigeo_id
+                  = hidden_field_tag :prov, @prov.int_ubigeo_id
+                  = hidden_field_tag :dep, @dep.int_ubigeo_id
+                  
                 .form_submit.clearfix{style: ""}
                   .row
                     .col-sm-10.col-sm-offset-2
-                      %button.btn.btn-primary.btn-lg Guardar
+                      %button.btn.btn-primary.btn-lg#btnGuardar_iglesia Guardar
   / Row end
 / Dashboard wrapper end
+
+- content_for :bloquejavascript do
+  = javascript_include_tag :iglesia

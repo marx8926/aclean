@@ -93,7 +93,7 @@ jQuery ->
       
   # Funcion de respuesta CORRECTA
   # Los datos de respuesta se reciben en data
-  SuccessFunction = ( data ) ->
+  SuccessFunctionL = ( data ) ->
     #recargar datos de tabla Servicios
     #ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
     #resetear formulario
@@ -108,10 +108,11 @@ jQuery ->
     #Llamada a preparar Datps
     PrepararDatosL()
     #Llamada a envio Post
-    enviar "/configuracion/guardar_lugar", root.DatosEnviar, SuccessFunction, null
+    enviar "/configuracion/guardar_lugar", root.DatosEnviar, SuccessFunctionL, null
 
 # Fin Proceso enviar Formulario
       
     #act on result.
     false # prevents normal behaviour
         
+

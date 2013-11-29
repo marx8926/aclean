@@ -22,6 +22,8 @@ Lean::Application.routes.draw do
   post "configuracion/guardar_lugar" => "configuracion#guardar_lugar"
 
   get "configuracion/datos_generales" => "configuracion#datos_generales"
+  post "configuracion/guardar_datos_generales" => "configuracion#guardar_datos_generales"
+  get "persona_servicio_complete" => "configuracion#personas_autocomplete"
 
 
   get "test" => "configuracion#test"

@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131126124839) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "asistencia", primary_key: "int_asistencia_id", force: true do |t|
     t.datetime "dat_asistencia_fecregistro"
     t.datetime "dat_asistencia_fecasistencia"
@@ -63,6 +66,7 @@ ActiveRecord::Schema.define(version: 20131126124839) do
     t.date     "dat_iglesia_feccreacion"
     t.string   "var_iglesia_telefono",    limit: 18
     t.string   "var_iglesia_siglas",      limit: 20
+    t.string   "var_iglesia_nombre",      limit: 150
     t.string   "var_iglesia_direccion",   limit: 150
     t.string   "var_iglesia_referencia",  limit: 150
     t.float    "dou_iglesia_longitud"

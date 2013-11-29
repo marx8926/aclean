@@ -7,6 +7,7 @@ class CreateIglesia < ActiveRecord::Migration
       t.date :dat_iglesia_feccreacion
       t.string :var_iglesia_telefono, limit: 18
       t.string :var_iglesia_siglas, limit: 20
+      t.string :var_iglesia_nombre, limit: 150
       t.string :var_iglesia_direccion, limit: 150
       t.string :var_iglesia_referencia, limit: 150
       t.float :dou_iglesia_longitud
