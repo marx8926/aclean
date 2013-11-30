@@ -10,6 +10,13 @@ jQuery ->
 
 # Proceso para enviar metodo Post
 
+# 1. Preparar Datos
+
+  # Datos para enviar en formato JSON
+  PrepararDatos = ->
+    root.DatosEnviar = $("#form_ofrenda").serialize()
+# Proceso para enviar metodo Post
+
 
   # Funcion de respuesta CORRECTA
   # Los datos de respuesta se reciben en data
@@ -17,7 +24,9 @@ jQuery ->
     #recargar datos de tabla Servicios
     #ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
     #resetear formulario
-    $("#form_ofrenda").reset()
+    $("#fecha").reset()
+    $("#monto").reset()
+
     #reniciar tabla
     #HorarioTable.fnClearTable()
     #mostrar datos de respuesta
@@ -25,12 +34,18 @@ jQuery ->
 
 # 2. Enviar Datos
   $("#btnGuardar_Ofrenda").click (e) ->
+    console.log "ofrenda"
     #Llamada a preparar Datps
-    #PrepararDatos()
+    PrepararDatos()
     #Llamada a envio Post
-    enviar "/configuracion/guardar_servicio", $("#form_ofrenda").serialize() , SuccessFunction, null
+    enviar "/ofrendas_guardar",  root.DatosEnviar , SuccessFunction, null
 
 # Fin Proceso enviar Formulario
       
     #act on result.
     false # prevents normal behaviour
+
+$('#ofrenda_div').hide()
+
+$('#registrar_ofrenda').click ->
+  $("#ofrenda_div").toggle()

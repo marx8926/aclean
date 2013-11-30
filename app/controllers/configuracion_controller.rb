@@ -110,7 +110,11 @@ class ConfiguracionController < ApplicationController
 
 				otherdata.each{ |x|
 					data = x.last
-					turno = Turno.new({:var_turno_horainicio => data[:var_turno_horainicio], :int_turno_dia => data[:int_turno_dia], :servicio => servicio})
+					
+					turno = Turno.new({:var_turno_horainicio => data[:var_turno_horainicio],
+						:var_turno_horafin => data[:var_turno_horafin],
+					 	:int_turno_dia => data[:int_turno_dia], :servicio => servicio})
+
 					turno.save!
 				}
 			rescue
@@ -163,7 +167,7 @@ class ConfiguracionController < ApplicationController
 						else
 							dia = "Sabado"
 					end
-					tshow = tshow + "<p>"+dia+" - "+y[:var_turno_horainicio]+":00</p>"
+					tshow = tshow + "<p>"+dia+" : "+y[:var_turno_horainicio]+":00 - "+ y[:var_turno_horafin]+":00 </p>"
 					arrayturn.push y
 				}			
 			end

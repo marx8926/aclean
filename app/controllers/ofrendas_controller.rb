@@ -26,15 +26,44 @@ class OfrendasController < ApplicationController
 				@serv = Servicio.find(servicio)
 
 				@ofrenda.servicio = @serv
-				@ofrenda.save
+				@ofrenda.save!
 
-			rescue
+			rescue 
 				raise ActiveRecord::Rollback
 			end
 		end
 
 		render :json => "ok" , :status => :ok
 
+	end
+
+	def recuperar_init
+
+		todo = []
+
+		ofrendas = Ofrenda.last(300)
+
+		if ofrendas.length > 0
+
+			ofrendas.each{ |x|
+
+				temp = {}
+				temp["monto"] = x[:dec_ofrenda_monto]
+				temp["registro"] = x[:dec_ofrenda_fecharegistro]
+				serv = x.servicio
+
+				turn = Turno.where("servicio_id" => serv.int_servicio_id)
+
+				#temporal para almacenar turnos de servicio
+
+				#if 
+				#temp["servicio"] = serv_s
+
+			}
+
+		end
+
+		return :json => todo, :status => :ok
 	end
 
 

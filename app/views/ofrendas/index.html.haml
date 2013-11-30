@@ -11,18 +11,23 @@
   / Page title end
   / Row start
   .row
-    #accordion.col-md-12
+    .col-md-12
       .widget
         .widget-header
-          %a.btn.btn-primary.btn-block{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseOne"}
+          %a.btn#registrar_ofrenda.btn-primary.btn-block{ href: "#collapseOne"}
             Agregar Ofrenda
-        #collapseOne.panel-collapse.collapse
+        %div#ofrenda_div
           .widget-body
             = form_tag(ofrendas_guardar_path , {:method=>'post',:class=>'form-horizontal' , :id => "form_ofrenda" , :name=> "form_ofrenda"}) do
               .form-group
                 %label.col-lg-2.control-label{for: "servicio"} Servicio
                 .col-lg-10                  
                   = servicios_select()
+
+              .form-group
+                %label.col-lg-2.control-label{for: "turno"} Turno
+                .col-lg-10                  
+                  = turnos_select(1)
 
               .form-group
                 %label.col-lg-2.control-label{for: "fecha"} Fecha

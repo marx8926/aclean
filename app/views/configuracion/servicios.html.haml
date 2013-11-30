@@ -46,9 +46,12 @@
                         %option{value: "5"} Viernes
                         %option{value: "6"} Sabado
                         
-                    %label.col-lg-2.control-label{for: "hora"} Hora
+                    %label.col-lg-2.control-label{for: "hora"} Hora Inicio
                     .col-lg-1
                       %input#hora.form-control{type: "text"}
+                    %label.col-lg-2.control-label{for: "hora"} Hora Fin
+                    .col-lg-1
+                      %input#hora_fin.form-control{type: "text"}
                     .col-lg-2
                       %button#addhorario.btn.btn-default{type: "button"} +
               #dt_example.example_alt_pagination.col-lg-7.col-lg-offset-2
@@ -56,7 +59,8 @@
                   %thead
                     %tr
                       %th{style: "width:33%"} Dia
-                      %th{style: "width:33%"} Hora
+                      %th{style: "width:17%"} Inicio
+                      %th{style: "width:17%"} Fin
                       %th{style: "width:33%"} Acciones
                   %tbody
               .form-group

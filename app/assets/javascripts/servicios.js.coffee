@@ -4,12 +4,14 @@ root.SelectToDrop = null
 jQuery ->
   count = 0;
   $("#servicio").hide()
+
   $("#btnGuardarServicio").hide()
 
   HorarioTable = $('#horario').dataTable
     "aoColumns": [
       {"mDataProp": "var_turno_dia_des"},
       {"mDataProp": "var_turno_horainicio"},
+      {"mDataProp": "var_turno_horafin"},
       {"mDataProp": "btn_elim"}]
     "bPaginate": false
     "sDom": "<r>t<'row-fluid'>"
@@ -64,6 +66,7 @@ jQuery ->
       "var_turno_dia_des": dia_desc
       "int_turno_dia":$("#dia").val()
       "var_turno_horainicio" :$("#hora").val()
+      "var_turno_horafin" :$("#hora_fin").val()
       "btn_elim":getActionButtons "001"
     HorarioTable.fnAddData horario
     count++
