@@ -212,7 +212,7 @@ img.media-object {
   -moz-box-shadow: 0 18px 6px -8px #1a1a1a, 0 0 2px #0d0d0d;
   box-shadow: 0 18px 6px -8px #1a1a1a, 0 0 2px #0d0d0d; }
   .login-wrapper .header {
-    padding: 30px 20px 10px 20px;
+    padding: 20px 20px 0 20px; /*30px 20px 10px 20px;*/
     margin: 0; }
     .login-wrapper .header h3 {
       line-height: 40px;
@@ -230,7 +230,7 @@ img.media-object {
       max-width: 80px;
       float: right; }
   .login-wrapper .content {
-    padding: 10px 20px; }
+    padding: 0 20px; /*10px 20px;*/ }
     .login-wrapper .content .input {
       height: 30px;
       font-weight: normal;
