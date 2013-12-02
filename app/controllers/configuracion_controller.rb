@@ -95,7 +95,6 @@ class ConfiguracionController < ApplicationController
 				raise ActiveRecord::Rollback
 			end
 		end
-
 		render :json => "ok" , :status => :ok
 
 	end

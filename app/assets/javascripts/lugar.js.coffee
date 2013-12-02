@@ -28,13 +28,11 @@ jQuery ->
 	  
 	# Funcion de respuesta CORRECTA
 	# Los datos de respuesta se reciben en data
-	SuccessFunctionL = ( data ) ->
-    #recargar datos de tabla
-  	TablaLugar.fnReloadAjax "/configuracion/recuperar_lugar"
-  	#resetear formulario
-  	$("#form_lugar").reset()
-  	#mostrar datos de respuesta
-  	console.log(data)
+	SuccessFunctionLugar = ( data ) ->
+    console.log "hola"
+    TablaLugar.fnReloadAjax "/configuracion/recuperar_lugar"
+    $("#form_lugar").reset()
+    console.log(data)
 
 	# 2. Enviar Datos
 	$("#btnGuardar_Lugar").click (event) ->
@@ -42,9 +40,6 @@ jQuery ->
     #Llamada a preparar Datps
     PrepararDatosL()
   	#Llamada a envio Post
-    enviar "/configuracion/guardar_lugar", root.DatosEnviar, SuccessFunctionL, null
+    enviar "/configuracion/guardar_lugar", root.DatosEnviar, SuccessFunctionLugar, null
 
 	# Fin Proceso enviar Formulario
-	  
-	#act on result.
-	false # prevents normal behaviour
