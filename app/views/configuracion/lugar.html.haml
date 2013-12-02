@@ -23,7 +23,7 @@
                     Lista de Lugares
                 .panel-body
                   #dt_example.example_alt_pagination
-                    %table#data-table.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
+                    %table#lugartable.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
                       %thead
                         %tr
                           %th{style: "width:20%"} ID
@@ -72,3 +72,5 @@
                         %button.btn.btn-default{type: "button"} Cancelar
                         %button#btnGuardar_Lugar.btn.btn-success{type: "button"} Guardar
   / Row end
+  - content_for :bloquejavascript do
+    = javascript_include_tag :servicios

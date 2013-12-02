@@ -132,9 +132,9 @@ class GanarController < ApplicationController
 
 		if persona.length > 0
 
-			
+			t = {}
 			persona.each{ |x|
-				t = {}
+        t = {}
 				t['nombrecompleto'] = x[:var_persona_nombres]+" "+x[:var_persona_apellidos]
 				t['registro'] = x[:created_at].strftime("%d/%m/%Y")
 				t['persona_data'] = x
@@ -187,13 +187,6 @@ class GanarController < ApplicationController
 
 				t['nivel'] = level
 
-				#peticion
-
-				peticion = Peticion.joins(:persona).where("persona_id" => x[:int_persona_id])
-
-
-				t['peticion'] = peticion
-				
 				todo.push(t)
 			}
 
