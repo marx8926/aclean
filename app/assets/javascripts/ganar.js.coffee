@@ -8,7 +8,7 @@ root.DatosEnviar = null
 
 jQuery ->
   
-  $(".wizard").bwizard()
+  $(".wizard").bwizard({nextBtnText: "Siguiente &rarr;", backBtnText: "&larr; Anterior"})
 	
   count = 200;
   ubigeos = getAjaxObject("https://s3.amazonaws.com/adminchurchs3/json/ubi.json")
