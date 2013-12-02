@@ -1,4 +1,5 @@
 require "date"
+require "json"
 
 class AsistenciaController < ApplicationController
 	def index

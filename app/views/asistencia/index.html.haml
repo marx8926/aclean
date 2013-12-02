@@ -18,7 +18,7 @@
             Agregar Asistencia
         #collapseOne.panel-collapse.collapse
           .widget-body
-            = form_tag(asistencia_guardar_path , {:method=>'post',:class=>'form-horizontal'}) do
+            = form_tag(asistencia_guardar_path , {:method=>'post',:class=>'form-horizontal', :id => "form_asistencia", :name=> "form_asistencia"}) do
               .form-group
                 %label.col-lg-2.control-label{for: "fecha"} Fecha
                 .col-lg-2
@@ -41,27 +41,17 @@
                     .col-lg-1.col-sm-1
                       %input#asistentes.form-control{name: "asistentes", type: "number", min:"0", value:"0"}/
                     .col-lg-1.col-sm-1
-                      %button#agregar.btn.btn-default{"data-original-title" => "", type: "button"} +
+                      %button#agregar_asistentes.btn.btn-default{"data-original-title" => "", type: "button"} +
               #dt_example.example_alt_pagination.col-lg-7.col-lg-offset-2
                 %table#table_categoria_asistencia.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
                   %thead
                     %tr
-                      %th{style: "width:33%"} Categoría
-                      %th.hidden-phone{style: "width:33%"} Cant. Asistentes
-                      %th.hidden-phone{style: "width:33%"} Acciones
+                      %th{style: "width:25%"} Servicio
+                      %th{style: "width:25%"} Categoría
+                      %th.hidden-phone{style: "width:25%"} Asistentes
+                      %th.hidden-phone{style: "width:25%"} Acciones
                   %tbody
-                    %tr.gradeX
-                      %td John
-                      %td.hidden-phone $22590
-                      %td.hidden-phone
-                        %a.delete-row{"data-original-title" => "Eliminar", href: "#"}
-                          %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
-                    %tr.gradeA
-                      %td Ruchita
-                      %td.hidden-phone $98450
-                      %td.hidden-phone
-                        %a.delete-row{"data-original-title" => "Eliminar", href: "#"}
-                          %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
+
               .clearfix
               .form-group
                 .col-lg-offset-2.col-lg-10
