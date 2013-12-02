@@ -100,6 +100,21 @@ class ConfiguracionController < ApplicationController
 
 	end
 
+	def recuperar_lugar
+		lugar = Lugar.all
+		lugares =[]
+		lugar.each{ |x|
+			l={}
+			l["int_lugar_id"] = x[:int_lugar_id]
+			l["var_lugar_descripcion"] = x[:var_lugar_descripcion]
+			l["var_lugar_estado"] = x[:var_lugar_estado]
+			l["acciones"] = ""
+			lugares.push l
+		}
+		render :json => {:aaData => lugares} , :status => :ok
+
+	end
+
 	def guardar_servicio
 		form = params[:formulario]
 		otherdata = params[:otherdata]

@@ -30,30 +30,6 @@
                           %th{style: "width:60%"} Descripción
                           %th.hidden-phone{style: "width:20%"} Acciones
                       %tbody
-                        %tr.gradeX
-                          %td John
-                          %td.hidden-phone $22590
-                          %td.hidden-phone
-                            %a.actions-icons{href: "#"}
-                              %img.icons{alt: "edit", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/edit-icon.png"}/
-                            %a.delete-row{"data-original-title" => "Delete", href: "#"}
-                              %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
-                        %tr.gradeA
-                          %td Ruchita
-                          %td.hidden-phone $98450
-                          %td.hidden-phone
-                            %a.actions-icons{href: "#"}
-                              %img.icons{alt: "edit", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/edit-icon.png"}/
-                            %a.delete-row{"data-original-title" => "Delete", href: "#"}
-                              %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
-                        %tr.gradeU
-                          %td Barote babu
-                          %td.hidden-phone $99876
-                          %td.hidden-phone
-                            %a.actions-icons{href: "#"}
-                              %img.icons{alt: "edit", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/edit-icon.png"}/
-                            %a.delete-row{"data-original-title" => "Delete", href: "#"}
-                              %img{alt: "trash", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"}/
                     .clearfix
             .col-md-6.col-sm-6
               .panel.panel-primary.no-margin
@@ -73,4 +49,4 @@
                         %button#btnGuardar_Lugar.btn.btn-success{type: "button"} Guardar
   / Row end
   - content_for :bloquejavascript do
-    = javascript_include_tag :servicios
+    = javascript_include_tag :lugar
