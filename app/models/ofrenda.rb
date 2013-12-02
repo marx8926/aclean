@@ -1,3 +1,3 @@
 class Ofrenda < ActiveRecord::Base
-	belongs_to :servicio
+	belongs_to :turno
 end

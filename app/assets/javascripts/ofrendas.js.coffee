@@ -51,6 +51,10 @@ $('#registrar_ofrenda').click ->
   $("#ofrenda_div").toggle()
 
 
-ubigeos = getAjaxObject("/recuperar_turno_inicio/1")
-$("#servicio").change ->
+cargar_turno = ->
+  turnos = getAjaxObject "/recuperar_turno_inicio/"+$("#_servicio").val()
+  cargarSelect turnos, "turno", "turno", "inicio"
+
+$("#_servicio").change ->
+  cargar_turno()
   

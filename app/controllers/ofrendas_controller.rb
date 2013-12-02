@@ -16,20 +16,23 @@ class OfrendasController < ApplicationController
 			begin
 
 				fecha = params[:fecha]
+
 				monto = params[:monto]
-				servicio = params[:servicio]
+				#servicio = params[:servicio]
+				turno = params[:turno]
 
 
 				@ofrenda = Ofrenda.new
 				@ofrenda.dec_ofrenda_monto = monto
 				@ofrenda.dec_ofrenda_fecharegistro = fecha
 
-				@serv = Servicio.find(servicio)
 
-				@ofrenda.servicio = @serv
+				@turn = Turno.find(turno)
+
+				@ofrenda.turno = @turn
 				@ofrenda.save!
 
-			rescue 
+			rescue
 				raise ActiveRecord::Rollback
 			end
 		end
