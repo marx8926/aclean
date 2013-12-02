@@ -25,15 +25,14 @@
     / bootstrap css
     %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/css/bootstrap.css", rel: "stylesheet"}/
     / custom css
-    %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/css/main.css", rel: "stylesheet"}/
+    = stylesheet_link_tag "main"
     = stylesheet_link_tag "smooth/jquery-ui-1.8.16.custom"
   %body
     / Header start
     %header
       / Logo start
       .logo
-        A
-        %span C
+        = image_tag('logo-ac-103.png', alt: "Admin Church", style: "border-bottom: 1px solid #383838;") 
       / Logo end
       / Optional Dropdown start
       #optional-dropdown
@@ -74,10 +73,6 @@
     .main-container
       / Mian navigation start
       #mainnav
-        / User pic start
-        .user-profile-pic
-          %img{alt: "Slick Admin", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/avatar-1.png"}/
-        / User pic end
         %ul
           %li
             %a{href: persona_path}

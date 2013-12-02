@@ -25,14 +25,13 @@
     / bootstrap css
     %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/css/bootstrap.css", rel: "stylesheet"}/
     / custom css
-    %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/css/main.css", rel: "stylesheet"}/
+    = stylesheet_link_tag "main"
   %body
     / Header start
     %header
       / Logo start
       .logo
-        A
-        %span C
+        = image_tag('logo-ac-103.png', alt: "Admin Church", style: "border-bottom: 1px solid #383838;") 
       / Logo end
       / Optional Dropdown start
       #optional-dropdown
@@ -73,10 +72,6 @@
     .main-container
       / Mian navigation start
       #mainnav
-        / User pic start
-        .user-profile-pic
-          %img{alt: "Slick Admin", src: "http://d9i0z8gxqnxp1.cloudfront.net/img/avatar-1.png"}/
-        / User pic end
         %ul
           %li
             %span.current-arrow
@@ -95,7 +90,7 @@
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Ofrendas
           %li
-            %a{href: "charts.html"}
+            %a{href: asistencia_path}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Asistencia

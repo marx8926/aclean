@@ -3,14 +3,14 @@
     .row
       .col-md-12
         %h3
-          Login
-          = image_tag("logo.png", :class => 'pull-right', :alt => 'Logo')
-        %p Fill out the form below to login.
+          Inicio de Sesión
+          = image_tag("logo-ac-64.png", :class => 'pull-right', :alt => 'Logo')
+        %p Llene el siguiente formulario para acceder.
   .content
     .row
       .col-md-12.col-sm-12
         %br/
-        = f.email_field :email, :autofocus => true, :class => 'input col-md-12 col-sm-12 email', :placeholder => 'example@mailll.com'
+        = f.email_field :email, :autofocus => true, :class => 'input col-md-12 col-sm-12 email', :placeholder => 'tucorreo@mail.com'
     .row
       .col-md-12.col-sm-12
         %br/
@@ -18,5 +18,5 @@
 
  
   .actions
-    %div= f.submit "Sign in", :class => 'btn btn-danger'
+    %div= f.submit "Acceder", :class => 'btn btn-danger'
     = render "devise/shared/links"
