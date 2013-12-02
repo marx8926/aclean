@@ -132,7 +132,6 @@ class GanarController < ApplicationController
 
 		if persona.length > 0
 
-			t = {}
 			persona.each{ |x|
         t = {}
 				t['nombrecompleto'] = x[:var_persona_nombres]+" "+x[:var_persona_apellidos]
