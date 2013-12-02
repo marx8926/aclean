@@ -246,7 +246,11 @@ function createDataTable(idTable,UrlaDTable,FormatoDTable, DrawCallBackFunction,
 		"sAjaxSource": UrlaDTable,	  
 		"aoColumns": FormatoDTable,				             
 	 	"aaSorting": [ [0, 'asc'], [1, 'asc'] ], 
-    "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",
+    	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",
+    	"sPaginationType": "full_numbers",
+    	"oLanguage": {
+    		"sUrl": urlES
+    	},  
 	 	"fnCreatedRow": function( nRow, aData, iDisplayIndex ) {
 	 		if(typeof(RowCallBackFunction)!= 'undefined' && RowCallBackFunction != null)
 	 			RowCallBackFunction(nRow,aData,iDisplayIndex);
