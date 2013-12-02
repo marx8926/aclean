@@ -7,7 +7,7 @@ root.SourceTServicio = "/recuperar_personas_inicio"
 root.DatosEnviar = null
 
 jQuery ->
-
+  
   $(".wizard").bwizard()
 	
   count = 200;
