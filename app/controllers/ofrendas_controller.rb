@@ -48,21 +48,12 @@ class OfrendasController < ApplicationController
 		ofrendas = Ofrenda.last(300)
 
 		if ofrendas.length > 0
-
 			ofrendas.each{ |x|
-
 				temp = {}
 				temp["monto"] = x[:dec_ofrenda_monto]
 				temp["registro"] = x[:dec_ofrenda_fecharegistro]
 				serv = x.servicio
-
 				turn = Turno.where("servicio_id" => serv.int_servicio_id)
-
-				#temporal para almacenar turnos de servicio
-
-				#if 
-				#temp["servicio"] = serv_s
-
 			}
 
 		end
