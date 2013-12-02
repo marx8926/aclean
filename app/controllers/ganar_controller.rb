@@ -136,7 +136,12 @@ class GanarController < ApplicationController
 				t['nombrecompleto'] = x[:var_persona_nombres]+" "+x[:var_persona_apellidos]
 				t['registro'] = x[:created_at].strftime("%d/%m/%Y")
 				t['persona_data'] = x
-				t['fecnacimiento']= x[:dat_persona_fecNacimiento].strftime("%d/%m/%Y")
+
+				if x[:dat_persona_fecNacimiento].nil? == false
+					t['fecnacimiento'] = x[:dat_persona_fecNacimiento].strftime("%d/%m/%Y")
+				else
+					t['fecnacimiento'] = nil
+				end
 
 				if x[:dat_persona_fecregistro].nil? == false
 					t['convertido'] = x[:dat_persona_fecregistro].strftime("%d/%m/%Y")
