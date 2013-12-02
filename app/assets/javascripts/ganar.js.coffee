@@ -54,30 +54,46 @@ jQuery ->
     PersonaTable.fnUpdate( acciones, index, 5 );
     $(nRow).find('.edit_row').click (event) ->
       event.preventDefault()
-      $("#nombre").val aData.persona_data.var_persona_nombres
-      $("#apellido").val aData.persona_data.var_persona_apellidos
-      $("#edad").val aData.persona_data.int_persona_edad
-      $("#estado_civil").val aData.persona_data.var_persona_estado
-      $("#sexo").val aData.persona_data.var_persona_sexo
-      $("#fec_nac").val aData.fecnacimiento
-      $("#dni").val aData.persona_data.var_persona_dni
-      $("#ocupacion").val aData.persona_data.var_persona_ocupacion
-      $("#profesion").val aData.persona_data.var_persona_profesion
-      $(aData.telefono_data).each (index) ->
+      if("Visitante" == aData.nivel)
+        console.log aData
+        $("#nombrev").val aData.persona_data.var_persona_nombres
+        $("#apellidov").val aData.persona_data.var_persona_apellidos
+        $("#edadv").val aData.persona_data.int_persona_edad
+        $(aData.telefono_data).each (index) ->
         showtipotel = ""
         if(this.int_telefono_tipo == 1)
           showtipotel = "Celular"
         else
           showtipotel = "Fijo"
         tel = { "numero": this.var_telefono_codigo + this.var_telefono, "tipo" : showtipotel, "btn_elim":getActionButtons "001", "id":this.int_telefono_id , "tipo_val": this.int_telefono_tipo, "codigo": this.var_telefono_codigo, "tel": this.var_telefono }
-        TelefonoTable.fnAddData tel
-      $("#_lugar").val aData.persona_data.lugar_id
-      $("#email").val aData.persona_data.var_persona_email
-      $("#invitado").val aData.persona_data.var_persona_invitado
+        TelefonoVTable.fnAddData tel        
+        $("#invitadov").val aData.persona_data.var_persona_invitado
+
+      else
+        $("#nombre").val aData.persona_data.var_persona_nombres
+        $("#apellido").val aData.persona_data.var_persona_apellidos
+        $("#edad").val aData.persona_data.int_persona_edad
+        $("#estado_civil").val aData.persona_data.var_persona_estado
+        $("#sexo").val aData.persona_data.var_persona_sexo
+        $("#dni").val aData.persona_data.var_persona_dni
+        $("#ocupacion").val aData.persona_data.var_persona_ocupacion
+        $("#profesion").val aData.persona_data.var_persona_profesion
+        $(aData.telefono_data).each (index) ->
+          showtipotel = ""
+          if(this.int_telefono_tipo == 1)
+            showtipotel = "Celular"
+          else
+            showtipotel = "Fijo"
+          tel = { "numero": this.var_telefono_codigo + this.var_telefono, "tipo" : showtipotel, "btn_elim":getActionButtons "001", "id":this.int_telefono_id , "tipo_val": this.int_telefono_tipo, "codigo": this.var_telefono_codigo, "tel": this.var_telefono }
+          TelefonoTable.fnAddData tel
+        $("#_lugar").val aData.persona_data.lugar_id
+        $("#email").val aData.persona_data.var_persona_email
+        $("#invitado").val aData.persona_data.var_persona_invitado
 
   PersonaTable = createDataTable "table_registrados", root.SourceTServicio, FormatoPersonaTable, null, PersonaRowCB
 
-  $('#add_numero').click ->
+  $('#add_numero').click (event) ->
+    event.preventDefault()
     btn_elim = '<a class="delete-row" data-original-title="Delete" href="#"><img alt="trash" src="http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"></a>'
 
     num = $("#codigo_tel").val()
