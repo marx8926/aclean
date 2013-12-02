@@ -1,6 +1,10 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
+root = exports ? this
+
+
 $(document).ready ->
   $(".data-table").dataTable sPaginationType: "full_numbers"
 
@@ -36,8 +40,8 @@ $('#agregar_asistentes').click ->
   # Datos para enviar en formato JSON
   PrepararDatosRegistrar = ->
     root.DatosEnviar =
-      "formulario" : $("#form_miembro").serializeObject()
-      "tabla" : TelefonoTable.fnGetData()
+      "formulario" : $("#form_asistencia").serializeObject()
+      "tabla" : AsistenciaTable.fnGetData()
 
   # Funcion de respuesta CORRECTA
   # Los datos de respuesta se reciben en data
@@ -46,18 +50,17 @@ $('#agregar_asistentes').click ->
     # ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
     #resetear formulario
     #$("#form_miembro").reset()
-    cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
     #reniciar tabla
-    TelefonoTable.fnClearTable()
+    #AsistenciaTable.fnClearTable()
     #mostrar datos de respuesta
     console.log(data)
 
   # 2. Enviar Datos
-  $("#btnGuardar_Miembro").click (event) ->
+  $("#btnGuardar_Asistencia").click (event) ->
     event.preventDefault()
     #Llamada a preparar Datps
     PrepararDatosRegistrar()
     #Llamada a envio Post
-    enviar "/persona_guardar", root.DatosEnviar, SuccessFunctionRegistrar, null
+    enviar "/asistencia_guardar", root.DatosEnviar, SuccessFunctionRegistrar, null
 
     # Fin Proceso enviar Formulario 

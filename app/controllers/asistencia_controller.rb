@@ -2,31 +2,42 @@ require "date"
 require "json"
 
 class AsistenciaController < ApplicationController
+
+	before_filter :authenticate_user!
+
 	def index
 		
 	end
 
 	def guardar
 
+		form = params[:formulario]
+		tabla = params[:tabla]
+		serv = nil
+
 		ActiveRecord::Base.transaction do
+
 			begin
-      			asist = Asistencia.new({:dat_asistencia_fecRegistro => DateTime.now(),
-      				:dat_asistencia_fecAsistencia => DateTime.now(), :servicio => Servicio.find(params[:servicio]),
-      				:int_asistencia_categoria => 0 })
-      			if asist.save!
-      				flash[:success] = 'Registro con exito'
-      			else
-      				flash[:error] = 'Error en registro'
-      				raise ActiveRecord::Rollback
-      			end
+
+				serv = Servicio.find(form[:servicio])
+
+				asist = Asistencia.new({
+					:dat_asistencia_fecregistro =>  DateTime.now(),
+					:dat_asistencia_fecasistencia => form[:fecha],
+					:int_asistencia_categoria => tabla[:categoriaid],
+					:int_asistencia_cantidad => x[:asistente],
+					:servicio => serv
+					})
+
+				asist.save!
 
 			rescue
-				flash[:error] = 'Error en registro'
-				raise ActiveRecord::Rollback
-			end
-		end
 
-		redirect_to asistencia_path
+			end
+
+		end
+		
+		render :json => 'ok' , :status => :ok
 	end
 
 end
