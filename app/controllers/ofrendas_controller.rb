@@ -1,4 +1,5 @@
 require "date"
+require "json"
 
 class OfrendasController < ApplicationController
 
@@ -67,15 +68,20 @@ class OfrendasController < ApplicationController
 	end
 
 
-	def recuperar_turno(id)
+	def recuperar_turno
 		todo = []
+
+		id = params[:id]
 		
 		result = Turno.where("servicio_id" => id )
-		result.each {|p| 
-			todo.push [ p.var_turno_horainicio, p.int_turno_id ]
+		result.each {|p|
+			t = {}
+			t['inicio'] =  p.var_turno_horainicio
+			t['turno'] = p.int_turno_id
+			todo.push t
 		}
 
-		return :json => result, :status => :ok
+		render :json => todo, :status => :ok
 	end
 
 end

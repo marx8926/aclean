@@ -13,7 +13,9 @@ Lean::Application.routes.draw do
 
   get "ofrendas" => "ofrendas#index"
   post "ofrendas_guardar" => "ofrendas#guardar"
-  
+  get "recuperar_turno_inicio/(:id)" => "ofrendas#recuperar_turno", as: :recuperar_turnos
+
+
   get "configuracion/servicios" => "configuracion#servicios"
   post "configuracion/guardar_servicio" => "configuracion#guardar_servicio"
   get "configuracion/recuperar_servicio" => "configuracion#recuperar_servicio"
@@ -37,6 +39,7 @@ Lean::Application.routes.draw do
   get "asistencia" => "asistencia#index"
   post "asistencia_guardar" => "asistencia#guardar"
   
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

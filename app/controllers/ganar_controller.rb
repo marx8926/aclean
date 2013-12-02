@@ -132,6 +132,7 @@ class GanarController < ApplicationController
 
 		if persona.length > 0
 
+			t = {}
 			persona.each{ |x|
         t = {}
 				t['nombrecompleto'] = x[:var_persona_nombres]+" "+x[:var_persona_apellidos]
@@ -179,6 +180,10 @@ class GanarController < ApplicationController
 						level = "Administrador"
 					end
 				}
+
+				#direccion
+				dir = Direccion.joins(:persona).find_by("persona_id" => x[:int_persona_id])
+				t['direccion'] = dir
 
 				t['var_persona_acciones']= ""
 				t['telefono'] = tel
