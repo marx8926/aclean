@@ -44,8 +44,6 @@ $ ->
     #ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
     #resetear formulario
     #$("#form_iglesia").reset()
-    #reniciar tabla
-    #HorarioTable.fnClearTable()
     #mostrar datos de respuesta
     console.log(data)
 
