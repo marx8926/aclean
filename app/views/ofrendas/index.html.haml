@@ -27,7 +27,7 @@
               .form-group
                 %label.col-lg-2.control-label{for: "turno"} Turno
                 .col-lg-10                  
-                  = turnos_select(1, "turno")
+                  %select#turno{name: "turno", class: "form-control"}
 
               .form-group
                 %label.col-lg-2.control-label{for: "fecha"} Fecha

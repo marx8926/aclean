@@ -67,4 +67,15 @@ class OfrendasController < ApplicationController
 	end
 
 
+	def recuperar_turno(id)
+		todo = []
+		
+		result = Turno.where("servicio_id" => id )
+		result.each {|p| 
+			todo.push [ p.var_turno_horainicio, p.int_turno_id ]
+		}
+
+		return :json => result, :status => :ok
+	end
+
 end

@@ -49,3 +49,6 @@ $('#ofrenda_div').hide()
 
 $('#registrar_ofrenda').click ->
   $("#ofrenda_div").toggle()
+
+
+

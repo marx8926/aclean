@@ -3,6 +3,8 @@ require "json"
 
 class GanarController < ApplicationController
 
+	before_filter :authenticate_user!
+
 	def index
 
 	end
@@ -103,9 +105,9 @@ class GanarController < ApplicationController
 				if tabla != nil
 					tabla.each{ |y|
 						x = y.last
-						telefono = Telefono.new({:int_telefono_tipo => x[:tipo_valv],
-						:var_telefono_codigo => x[:codigov],
-						:var_telefono => x[:telv], :persona => persona})
+						telefono = Telefono.new({:int_telefono_tipo => x[:tipo_val],
+						:var_telefono_codigo => x[:codigo],
+						:var_telefono => x[:tel], :persona => persona})
 
 						telefono.save!
 					}
