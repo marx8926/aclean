@@ -258,7 +258,6 @@ function createDataTable(idTable,UrlaDTable,FormatoDTable, DrawCallBackFunction,
 	 			RowCallBackFunction(nRow,aData,iDisplayIndex);
 		},
 	 	"fnDrawCallback": function(oSettings ){
-	 		console.log(DrawCallBackFunction);
 		 	if(typeof(DrawCallBackFunction)!= 'undefined' && DrawCallBackFunction != null){
 		 		setTimeout(function() {
 			 		DrawCallBackFunction();

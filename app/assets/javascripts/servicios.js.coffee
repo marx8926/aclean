@@ -56,11 +56,7 @@ jQuery ->
       $("#btnRegistrarServicio").hide()
       $("#registrar").text("Guardar Cambios")
 
-    CreateCB = ->
-      console.log "holas"
-      $('a').tooltip('hide');
-
-  ServiciosTable = createDataTable "tablaservicios", root.SourceTServicio, FormatoServiciosTable, CreateCB, ServiciosRowCB
+  ServiciosTable = createDataTable "tablaservicios", root.SourceTServicio, FormatoServiciosTable, null, ServiciosRowCB
       
   $('#addhorario').click (event)->
     event.preventDefault()

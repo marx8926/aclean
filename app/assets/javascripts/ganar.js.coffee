@@ -40,7 +40,6 @@ jQuery ->
     $(nRow).find('.edit_row').click (event) ->
       event.preventDefault()
       if("Visitante" == aData.nivel)
-        console.log aData
         $("#nombrev").val aData.persona_data.var_persona_nombres
         $("#apellidov").val aData.persona_data.var_persona_apellidos
         $("#edadv").val aData.persona_data.int_persona_edad
@@ -176,3 +175,5 @@ jQuery ->
   
   ubigeos = getAjaxObject("https://s3.amazonaws.com/adminchurchs3/json/ubi.json")
   cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
+
+  $("#form_miembro").validationEngine('attach',{autoHidePrompt:true});
