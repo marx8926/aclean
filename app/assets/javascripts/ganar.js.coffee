@@ -176,4 +176,4 @@ jQuery ->
   ubigeos = getAjaxObject("https://s3.amazonaws.com/adminchurchs3/json/ubi.json")
   cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
 
-  $("#form_miembro").validationEngine('attach',{autoHidePrompt:true});
+  $("#form_miembro").validationEngine('attach',{autoHidePrompt:true,autoHideDelay:3000});

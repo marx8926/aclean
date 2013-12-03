@@ -70,13 +70,13 @@
                         %option{value: "F"} Femenino
                     %label.col-lg-2.col-sm-2.control-label Fecha de Nacimiento
                     .col-lg-2.col-sm-2
-                      %input#fec_nac.form-control.datepicker{name: "fec_nac", type: "text"}
+                      %input#fec_nac.form-control.datepicker{name: "fec_nac", type: "text", class:"validate[required]"}
               .form-group
                 %label.col-lg-2.control-label{for: "monto"} DNI
                 .col-lg-10
                   .row
                     .col-lg-2.col-sm-2
-                      %input#dni.form-control{name: "dni", type: "text"}
+                      %input#dni.form-control{name: "dni", type: "text",class:"validate[required,custom[onlyNumberSp]]"}
                     %label.col-lg-2.col-sm-2.control-label Ocupación
                     .col-lg-2.col-sm-2
                       %input#ocupacion.form-control{name: "ocupacion", type: "text"}
@@ -126,7 +126,7 @@
               .form-group
                 %label.col-lg-2.control-label{for: "direccion"} Dirección
                 .col-lg-10
-                  %input#direccion.form-control{name: "direccion", type: "text"}
+                  %input#direccion.form-control{name: "direccion", type: "text",class:"validate[required]"}
               .form-group
                 %label.col-lg-2.control-label{for: "referencia"} Referencia
                 .col-lg-10
@@ -140,7 +140,7 @@
                       = lugar_select()
                     %label.col-lg-2.col-sm-2.control-label Fecha de Conversión
                     .col-lg-2.col-sm-2
-                      %input#fec_conversion.form-control.datepicker{name: "fec_conversion", type: "text"}
+                      %input#fec_conversion.form-control.datepicker{name: "fec_conversion", type: "text",class:"validate[required]"}
                     %label.col-lg-2.col-sm-2.control-label Email
                     .col-lg-2.col-sm-2
                       %input#email.form-control{name: "email", type: "text"}
@@ -152,7 +152,7 @@
               .form-group
                 %label.col-lg-2.control-label{for: "mot_oracion"} Motivo de Oración
                 .col-lg-5
-                  %input#mot_oracion.form-control{name: "mot_oracion", type: "text"}
+                  %input#mot_oracion.form-control{name: "mot_oracion", type: "text",class:"validate[required]"}
               .form-group
                 .col-lg-offset-2.col-lg-10
                   %input#btnGuardar_Miembro.btn.btn-success{type: "button", value: "Guardar"}
@@ -179,13 +179,13 @@
                 .col-lg-10
                   .row
                     .col-lg-2.col-sm-2
-                      %input#nombrev.form-control{name: "nombrev", type: "text"}
+                      %input#nombrev.form-control{name: "nombrev", type: "text", class:"validate[required,custom[onlyLetterSp]]"}
                     %label.col-lg-2.col-sm-2.control-label Apellido
                     .col-lg-2.col-sm-2
-                      %input#apellidov.form-control{name: "apellidov", type: "text"}
+                      %input#apellidov.form-control{name: "apellidov", type: "text", class:"validate[required,custom[onlyLetterSp]]"}
                     %label.col-lg-2.col-sm-2.control-label Edad
                     .col-lg-2.col-sm-2
-                      %input#edadv.form-control{name: "edadv", type: "text"}
+                      %input#edadv.form-control{name: "edadv", type: "text",class:"validate[required,custom[integer],min[0],max[150]]"}
             %div
               .form-group
                 %label.col-lg-2.control-label{for: "telefono"} Teléfono
@@ -222,7 +222,7 @@
               .form-group
                 %label.col-lg-2.control-label{for: "mot_oracionv"} Motivo de Oración
                 .col-lg-5
-                  %input#mot_oracionv.form-control{name: "mot_oracionv", type: "text"}
+                  %input#mot_oracionv.form-control{name: "mot_oracionv", type: "text",class:"validate[required]"}
               .form-group
                 .col-lg-offset-2.col-lg-10
                   %input#btnguardarv.btn.btn-success{type: "button", value: "Guardar"}
