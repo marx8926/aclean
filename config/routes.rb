@@ -6,14 +6,18 @@ Lean::Application.routes.draw do
   post "persona_guardar" => "ganar#guardar_miembro"
   post "visita_guardar" => "ganar#guardar_visita"
   get "recuperar_personas_inicio" => "ganar#recuperar_personas_inicio"
+  get "recuperar_personas_filtrado/(:inicio)/(:fin)" => "ganar#recuperar_personas_filtro" , as: :recuperar_personas_filtro
   
   get "diezmos" => "diezmos#index"
   post "diezmos_guardar" => "diezmos#guardar"
   get "recuperar_diezmos_inicio" => "diezmos#recuperar_inicio"
+  get "recuperar_diezmos_filtrado/(:inicio)/(:fin)" => "diezmos#recuperar_diezmo_filtro"
 
   get "ofrendas" => "ofrendas#index"
   post "ofrendas_guardar" => "ofrendas#guardar"
   get "recuperar_turno_inicio/(:id)" => "ofrendas#recuperar_turno", as: :recuperar_turnos
+  get "recuperar_ofrendas_init" => "ofrendas#recuperar_init"
+  get "recuperar_ofrendas_filtrado/(:inicio)/(:fin)" => "ofrendas#recuperar_ofrenda_filtro", as: :recuperar_ofrendas_filtro
 
 
   get "configuracion/servicios" => "configuracion#servicios"
@@ -39,6 +43,8 @@ Lean::Application.routes.draw do
   get "test" => "configuracion#test"
   get "asistencia" => "asistencia#index"
   post "asistencia_guardar" => "asistencia#guardar"
+  get "recuperar_asistencia" => "asistencia#recuperar_init"
+  get "recuperar_asistencia_filtrado/(:inicio)/(:fin)" => "asistencia#recuperar_filtro_asistencia"
   
 
 

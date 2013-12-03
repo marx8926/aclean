@@ -50,18 +50,66 @@ class OfrendasController < ApplicationController
 		if ofrendas.length > 0
 			ofrendas.each{ |x|
 				temp = {}
+				
+				turn = x.turno
+				servicio = nil
+				turno = nil
+				
+
+				if turn.nil? == false
+
+					turno = turn[:var_turno_horainicio]
+					servicio = turn.servicio.var_servicio_nombre
+
+				end
+				temp['turno'] = turno
+				temp['servicio'] = servicio
 				temp["monto"] = x[:dec_ofrenda_monto]
-				temp["registro"] = x[:dec_ofrenda_fecharegistro]
-				serv = x.servicio
-				turn = Turno.where("servicio_id" => serv.int_servicio_id)
+				temp["registro"] = x[:dec_ofrenda_fecharegistro].strftime("%d/%m/%Y")
+
+				todo.push temp
 			}
 
 		end
 
-		return :json => todo, :status => :ok
+		render :json => { "aaData" => todo }, :status => :ok
 	end
 
 
+
+	def recuperar_ofrenda_filtro
+
+		todo = []
+
+		ofrendas = Ofrenda.where(dec_ofrenda_fecharegistro: (params[:inicio] .. params[:fin]) )
+
+		if ofrendas.length > 0
+			ofrendas.each{ |x|
+				temp = {}
+				
+				turn = x.turno
+				servicio = nil
+				turno = nil
+				
+
+				if turn.nil? == false
+
+					turno = turn[:var_turno_horainicio]
+					servicio = turn.servicio.var_servicio_nombre
+
+				end
+				temp['turno'] = turno
+				temp['servicio'] = servicio
+				temp["monto"] = x[:dec_ofrenda_monto]
+				temp["registro"] = x[:dec_ofrenda_fecharegistro].strftime("%d/%m/%Y")
+
+				todo.push temp
+			}
+
+		end
+
+		render :json => { "aaData" => todo }, :status => :ok
+	end
 	def recuperar_turno
 		todo = []
 
