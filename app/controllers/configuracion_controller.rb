@@ -89,9 +89,7 @@ class ConfiguracionController < ApplicationController
 					:var_lugar_descripcion => form[:descripcion] ,
 					:var_lugar_estado => '1'
 					})
-
 				lugar.save!
-
 			rescue
 				raise ActiveRecord::Rollback
 			end
@@ -129,7 +127,6 @@ class ConfiguracionController < ApplicationController
 					turno = Turno.new({:var_turno_horainicio => data[:var_turno_horainicio],
 						:var_turno_horafin => data[:var_turno_horafin],
 					 	:int_turno_dia => data[:int_turno_dia], :servicio => servicio})
-
 					turno.save!
 				}
 			rescue

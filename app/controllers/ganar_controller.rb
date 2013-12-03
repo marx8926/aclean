@@ -65,7 +65,7 @@ class GanarController < ApplicationController
 
 		end
 
-		render :json => "ok" , :status => :ok
+		render :json => {:resp => "ok" } , :status => :ok
 
 	end
 
@@ -120,7 +120,7 @@ class GanarController < ApplicationController
 			end
 		end
 
-		render :json => "ok" , :status => :ok
+		render :json => {:resp => "ok" } , :status => :ok
 
 	end
 
