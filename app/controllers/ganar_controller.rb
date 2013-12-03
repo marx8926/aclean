@@ -69,6 +69,61 @@ class GanarController < ApplicationController
 
 	end
 
+	def editar_miembro
+
+		form = params[:formulario]
+		tabla = params[:tabla]
+
+		ActiveRecord::Base.transaction do
+
+			begin
+
+				idPersona = form[:idPersona]
+				
+				
+
+				if idPersona!= nil and idPersona.length > 0
+
+
+
+					Persona.transaction do
+						
+						p= Persona.lock("LOCK IN SHARE MODE").find(idPersona)
+
+						p.dat_persona_fecregistro = form[:fec_conversion]
+						p.var_persona_nombres = form[:nombre]
+						p.var_persona_apellidos = form[:apellido]
+						p.int_persona_edad = form[:edad]
+						p.dat_persona_fecNacimiento = form[:fec_nac]
+						p.var_persona_profesion = form[:profesion]
+						p.var_persona_ocupacion = form[:ocupacion]
+						p.var_persona_sexo = form[:sexo]
+						p.var_persona_dni = form[:dni]
+						p.var_persona_estado = "1"
+						p.var_persona_email = form[:email]
+						p.var_persona_invitado = form[:invitado]
+						p.iglesia = Iglesia.first
+					 	p.lugar = Lugar.find(form[:lugar])
+
+					 	p.save
+
+					end
+
+
+				end
+
+			rescue
+				raise ActiveRecord::Rollback
+			end
+
+		end
+
+		render :json => {:resp => params } , :status => :ok
+	end
+
+	def eliminar_miembro
+
+	end
 
 	def guardar_visita
 
@@ -121,6 +176,14 @@ class GanarController < ApplicationController
 		end
 
 		render :json => {:resp => "ok" } , :status => :ok
+
+	end
+
+	def editar_visita
+
+	end
+
+	def eliminar_visita
 
 	end
 
@@ -208,6 +271,10 @@ class GanarController < ApplicationController
 				t['telefono_data'] = telefono
 
 				t['nivel'] = level
+
+				#peticion
+				peticion = Peticion.joins(:persona).find_by("persona_id" => x[:int_persona_id])
+				t['peticion'] = peticion.var_peticion_motivooracion
 
 				todo.push(t)
 			}

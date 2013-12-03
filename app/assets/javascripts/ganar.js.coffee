@@ -22,6 +22,7 @@ jQuery ->
       "tabla" : TelefonoTable.fnGetData()
 
   SuccessFunction = ( data ) ->
+    console.log data
     PersonaTable.fnReloadAjax "/recuperar_personas_inicio"
     HideForms()
     MessageSucces()
@@ -289,7 +290,7 @@ jQuery ->
     if root.TipoForm == "M"
       PrepararDatosMiembro()
       SuccessFunction()
-      #enviar "/persona_guardar", root.DatosEnviar, SuccessFunction, null
+      enviar "/persona_editar_miembro", root.DatosEnviar, SuccessFunction, null
     else
       PrepararDatosVisitante()
       SuccessFunction()
@@ -319,6 +320,7 @@ jQuery ->
     if $('#form_miembro').validationEngine 'validate'
       root.TipoForm = "M"
       DisplayBlockUISingle "confirmmodal"
+
 
   $("#btneditarv").click (event) ->
     event.preventDefault()

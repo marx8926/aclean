@@ -33,7 +33,7 @@
           %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
           Registrar Miembro
       .widget-body
-        = form_tag(persona_guardar_path , {:method=>'post',:class=>'form-horizontal', :id => "form_miembro" , :name => "form_miembro"}) do
+        = form_tag("" , {:method=>'post',:class=>'form-horizontal', :id => "form_miembro" , :name => "form_miembro"}) do
           %input.idPersona{type:"hidden",name:"idpersona"}
           .wizard
             %ol

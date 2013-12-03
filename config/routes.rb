@@ -5,6 +5,10 @@ Lean::Application.routes.draw do
   get "persona" => "ganar#index"
   post "persona_guardar" => "ganar#guardar_miembro"
   post "visita_guardar" => "ganar#guardar_visita"
+  post "persona_editar_miembro" => "ganar#editar_miembro"
+  post "persona_editar_visita" => "ganar#editar_visita"
+  post "persona_eliminar_miembro/(:id)" => "ganar#eliminar_miembro"
+  post "persona_eliminar_visita/(:id)" => "ganar#eliminar_visita"
   get "recuperar_personas_inicio" => "ganar#recuperar_personas_inicio"
   get "recuperar_personas_filtrado/(:inicio)/(:fin)" => "ganar#recuperar_personas_filtro" , as: :recuperar_personas_filtro
   
