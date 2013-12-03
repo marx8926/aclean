@@ -221,9 +221,11 @@ function enviar(url, datos, successfunction, errorfunction){
 		data: datos
   	});
 
+
     if(typeof(successfunction)!= 'undefined' && successfunction != null)
     	Consulta.done(function(data){
     		successfunction(data);
+    		console.log(successfunction);
     	});
 
     if(typeof(errorfunction)!= 'undefined' && errorfunction != null)

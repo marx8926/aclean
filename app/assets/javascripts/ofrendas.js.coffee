@@ -5,6 +5,25 @@
 root = exports ? this
 
 jQuery ->
+
+  count = 0;
+
+  FormatoServiciosTable = [   { "sWidth": "30%","mDataProp": "var_servicio_nombre"},
+                              { "sWidth": "20%","mDataProp": "int_servicio_tipo_desc"},
+                              { "sWidth": "30%","mDataProp": "turnoshow"},
+                              { "sWidth": "20%","mDataProp": "var_servicio_acciones"}
+                              ]
+
+  ServiciosRowCB = (  nRow, aData, iDisplayIndex ) ->
+    index = $(ServiciosTable.fnGetData()).getIndexObj aData, 'int_servicio_id'
+    acciones = getActionButtons "111"
+    ServiciosTable.fnUpdate( acciones, index, 3 ); 
+
+
+
+  ServiciosTable = createDataTable "dataOfrendas", root.SourceTServicio, FormatoServiciosTable, null, ServiciosRowCB
+
+
 # Proceso para enviar metodo Post
 
 # 1. Preparar Datos
@@ -28,6 +47,7 @@ jQuery ->
     #HorarioTable.fnClearTable()
     #mostrar datos de respuesta
     console.log(data)
+    false
 
 # 2. Enviar Datos
   $("#btnGuardar_Ofrenda").click (e) ->
@@ -36,6 +56,7 @@ jQuery ->
     PrepararDatos()
     #Llamada a envio Post
     enviar "/ofrendas_guardar",  root.DatosEnviar , SuccessFunction, null
+    false
 
 # Fin Proceso enviar Formulario
       
@@ -51,6 +72,7 @@ $('#registrar_ofrenda').click ->
 cargar_turno = ->
   turnos = getAjaxObject "/recuperar_turno_inicio/"+$("#_servicio").val()
   cargarSelect turnos, "turno", "turno", "inicio"
+  false
 
 $("#_servicio").change ->
   cargar_turno()

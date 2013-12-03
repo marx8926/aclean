@@ -82,10 +82,11 @@ class ConfiguracionController < ApplicationController
 
 	def guardar_lugar
 
+		form = params[:formulario]
 		ActiveRecord::Base.transaction do
 			begin
 				lugar = Lugar.new({
-					:var_lugar_descripcion => params[:descripcion] ,
+					:var_lugar_descripcion => form[:descripcion] ,
 					:var_lugar_estado => '1'
 					})
 
@@ -95,7 +96,7 @@ class ConfiguracionController < ApplicationController
 				raise ActiveRecord::Rollback
 			end
 		end
-		render :json => "ok" , :status => :ok
+		render :json => {:resp => "ok" }, :status => :ok
 
 	end
 
