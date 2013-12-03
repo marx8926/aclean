@@ -76,7 +76,13 @@ jQuery ->
           showtipotel = "Celular"
         else
           showtipotel = "Fijo"
-        tel = { "numero": this.var_telefono_codigo + this.var_telefono, "tipo" : showtipotel, "btn_elim":"", "id":this.int_telefono_id , "tipo_val": this.int_telefono_tipo, "codigo": this.var_telefono_codigo, "tel": this.var_telefono }
+        tel =
+          "numero": this.var_telefono_codigo + this.var_telefono
+          "tipo" : showtipotel, "btn_elim":""
+          "id":this.int_telefono_id
+          "tipo_val": this.int_telefono_tipo
+          "codigo": this.var_telefono_codigo
+          "tel": this.var_telefono
         TelefonoVTable.fnAddData tel        
         $("#invitadov").val aData.persona_data.var_persona_invitado
 
@@ -99,7 +105,14 @@ jQuery ->
             showtipotel = "Celular"
           else
             showtipotel = "Fijo"
-          tel = { "numero": this.var_telefono_codigo + this.var_telefono, "tipo" : showtipotel, "btn_elim":"", "id":this.int_telefono_id , "tipo_val": this.int_telefono_tipo, "codigo": this.var_telefono_codigo, "tel": this.var_telefono }
+          tel =
+            "numero": this.var_telefono_codigo + this.var_telefono
+            "tipo" : showtipotel
+            "btn_elim":""
+            "id":this.int_telefono_id
+            "tipo_val": this.int_telefono_tipo
+            "codigo": this.var_telefono_codigo
+            "tel": this.var_telefono
           TelefonoTable.fnAddData tel
         $("#_lugar").val aData.persona_data.lugar_id
         $("#email").val aData.persona_data.var_persona_email
@@ -116,13 +129,20 @@ jQuery ->
         $("#apellidov").val aData.persona_data.var_persona_apellidos
         $("#edadv").val aData.persona_data.int_persona_edad
         $(aData.telefono_data).each (index) ->
-        showtipotel = ""
-        if(this.int_telefono_tipo == 1)
-          showtipotel = "Celular"
-        else
-          showtipotel = "Fijo"
-        tel = { "numero": this.var_telefono_codigo + this.var_telefono, "tipo" : showtipotel, "btn_elim":getActionButtons "001", "id":this.int_telefono_id , "tipo_val": this.int_telefono_tipo, "codigo": this.var_telefono_codigo, "tel": this.var_telefono }
-        TelefonoVTable.fnAddData tel        
+          showtipotel = ""
+          if(this.int_telefono_tipo == 1)
+            showtipotel = "Celular"
+          else
+            showtipotel = "Fijo"
+          tel =
+            "numero": this.var_telefono_codigo + this.var_telefono
+            "tipo" : showtipotel
+            "btn_elim":getActionButtons "001"
+            "id":this.int_telefono_id
+            "tipo_val": this.int_telefono_tipo
+            "codigo": this.var_telefono_codigo
+            "tel": this.var_telefono
+          TelefonoVTable.fnAddData tel        
         $("#invitadov").val aData.persona_data.var_persona_invitado
 
       else
@@ -144,7 +164,14 @@ jQuery ->
             showtipotel = "Celular"
           else
             showtipotel = "Fijo"
-          tel = { "numero": this.var_telefono_codigo + this.var_telefono, "tipo" : showtipotel, "btn_elim":getActionButtons "001", "id":this.int_telefono_id , "tipo_val": this.int_telefono_tipo, "codigo": this.var_telefono_codigo, "tel": this.var_telefono }
+          tel =
+            "numero": this.var_telefono_codigo + this.var_telefono
+            "tipo" : showtipotel
+            "btn_elim":getActionButtons "001"
+            "id":this.int_telefono_id
+            "tipo_val": this.int_telefono_tipo
+            "codigo": this.var_telefono_codigo
+            "tel": this.var_telefono
           TelefonoTable.fnAddData tel
         $("#_lugar").val aData.persona_data.lugar_id
         $("#email").val aData.persona_data.var_persona_email
@@ -266,27 +293,32 @@ jQuery ->
 
   $("#btnGuardar_Miembro").click (event) ->
     event.preventDefault()
-    DisplayBlockUI "loader"
-    PrepararDatosMiembro()
-    enviar "/persona_guardar", root.DatosEnviar, SuccessFunction, null
+    if $('#form_miembro').validationEngine 'validate'
+      DisplayBlockUI "loader"
+      PrepararDatosMiembro()
+      enviar "/persona_guardar", root.DatosEnviar, SuccessFunction, null
 
   $("#btnguardarv").click (event) ->
-    event.preventDefault()
-    DisplayBlockUI "loader"
-    PrepararDatosVisitante()
-    enviar "/visita_guardar", root.DatosEnviarV, SuccessFunction, null
+    event.preventDefault()    
+    if $('#form_visita').validationEngine 'validate'
+      DisplayBlockUI "loader"
+      PrepararDatosVisitante()
+      enviar "/visita_guardar", root.DatosEnviarV, SuccessFunction, null
 
   $("#btneditar_Miembro").click (event) ->
     event.preventDefault()
-    root.TipoForm = "M"
-    DisplayBlockUISingle "confirmmodal"
+    if $('#form_miembro').validationEngine 'validate'
+      root.TipoForm = "M"
+      DisplayBlockUISingle "confirmmodal"
 
   $("#btneditarv").click (event) ->
     event.preventDefault()
-    root.TipoForm = "V"
-    DisplayBlockUISingle "confirmmodal"
+    if $('#form_visita').validationEngine 'validate'
+      root.TipoForm = "V"
+      DisplayBlockUISingle "confirmmodal"
   
-  ubigeos = getAjaxObject("https://s3.amazonaws.com/adminchurchs3/json/ubi.json")
+  ubigeos = getAjaxObject "https://s3.amazonaws.com/adminchurchs3/json/ubi.json"
   cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
 
-  $("#form_miembro").validationEngine('attach',{autoHidePrompt:true,autoHideDelay:3000});
+  $("#form_miembro").validationEngine 'attach',{autoHidePrompt:true,autoHideDelay:3000}
+  $("#form_visita").validationEngine 'attach',{autoHidePrompt:true,autoHideDelay:3000}
