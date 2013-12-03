@@ -26,12 +26,12 @@
                 .col-lg-10
                   .row
                     .col-lg-2
-                      %select#tipo.form-control{name: "tipo",class:"validate[required,custom[onlyLetterNumber]]"}
+                      %select#tipo.form-control{name: "tipo"}
                         %option{value: "1"} Culto General
                         %option{value: "2"} Culto Jovenes
                     %label.col-lg-2.control-label{for: "nombre"} Nombre
                     .col-lg-3
-                      %input#nombre.form-control{name: "nombre", type: "text"}/
+                      %input#nombre.form-control{name: "nombre", type: "text",class:"validate[required,custom[onlyLetterNumber]]"}/
               .form-group
                 %label.col-lg-2.control-label{for: "dia"} Día
                 .col-lg-10
@@ -48,10 +48,10 @@
                         
                     %label.col-lg-2.control-label{for: "hora"} Hora Inicio
                     .col-lg-1
-                      %input#hora.form-control{type: "text"}
+                      %input#hora.form-control{type: "text" ,class:"validate[required,custom[integer],min[0],max[24]]"}
                     %label.col-lg-2.control-label{for: "hora"} Hora Fin
                     .col-lg-1
-                      %input#hora_fin.form-control{type: "text"}
+                      %input#hora_fin.form-control{type: "text",class:"validate[required,custom[integer],min[0],max[24]]"}
                     .col-lg-2
                       %button#addhorario.btn.btn-default{type: "button"} +
               #dt_example.example_alt_pagination.col-lg-7.col-lg-offset-2

@@ -129,16 +129,22 @@ jQuery ->
 
   $("#btnGuardarServicio").click (event) ->
     event.preventDefault()
-    DisplayBlockUISingle "confirmmodal"
+    if HorarioTable.fnGetData.lenght > 0
+      DisplayBlockUISingle "confirmmodal"
+    else
+      alert "Falta agregar Horario"
 
 # 2. Enviar Datos
   $("#btnRegistrarServicio").click (event) ->
     event.preventDefault()
     #Llamada a preparar Datps
-    PrepararDatos()
-    #Llamada a envio Post
-    DisplayBlockUI "loader"
-    enviar "/configuracion/guardar_servicio", root.DatosEnviar, SuccessFunctionServicio, null
+    if HorarioTable.fnGetData.lenght > 0
+      PrepararDatos()
+      #Llamada a envio Post
+      DisplayBlockUI "loader"
+      enviar "/configuracion/guardar_servicio", root.DatosEnviar, SuccessFunctionServicio, null
+    else
+      alert "Falta agregar Horario"
 
 # Fin Proceso enviar Formulario
 

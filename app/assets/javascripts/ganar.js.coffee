@@ -86,16 +86,17 @@ jQuery ->
         TelefonoVTable.fnAddData tel        
         $("#invitadov").val aData.persona_data.var_persona_invitado
 
-      else
-        cargarUbigeo ubigeos, "distrito", "provincia", "departamento",aData.distrito,aData.provincia,aData.departamento 
+      else 
         HideForms()
+        cargarUbigeo ubigeos, "distrito", "provincia", "departamento",aData.distrito,aData.provincia,aData.departamento
         $("#form_miembro").disable()
         $("#miembro").show()
         $("#nombre").val aData.persona_data.var_persona_nombres
         $("#apellido").val aData.persona_data.var_persona_apellidos
         $("#edad").val aData.persona_data.int_persona_edad
         $("#estado_civil").val aData.persona_data.var_persona_estado
-        $("#sexo").val aData.persona_data.var_persona_sexo
+        $("#sexo").val aData.persona_data.var_persona_sexo        
+        $("#fec_nac").val aData.fecnacimiento
         $("#dni").val aData.persona_data.var_persona_dni
         $("#ocupacion").val aData.persona_data.var_persona_ocupacion
         $("#profesion").val aData.persona_data.var_persona_profesion
@@ -114,12 +115,16 @@ jQuery ->
             "codigo": this.var_telefono_codigo
             "tel": this.var_telefono
           TelefonoTable.fnAddData tel
+        $("#direccion").val aData.direccion.var_direccion_descripcion
+        $("#referencia").val aData.direccion.var_direccion_referencia
         $("#_lugar").val aData.persona_data.lugar_id
+        $("#fec_conversion").val aData.convertido
         $("#email").val aData.persona_data.var_persona_email
         $("#invitado").val aData.persona_data.var_persona_invitado
 
     $(nRow).find('.edit_row').click (event) ->
       event.preventDefault()
+      console.log aData
       $(".idPersona").val aData.persona_data.int_persona_id
       if("Visitante" == aData.nivel)
         HideForms()
@@ -145,9 +150,9 @@ jQuery ->
           TelefonoVTable.fnAddData tel        
         $("#invitadov").val aData.persona_data.var_persona_invitado
 
-      else
-        cargarUbigeo ubigeos, "distrito", "provincia", "departamento",aData.distrito,aData.provincia,aData.departamento 
+      else 
         HideForms()
+        cargarUbigeo ubigeos, "distrito", "provincia", "departamento",aData.distrito,aData.provincia,aData.departamento
         $("#miembro").show()
         $("#btneditar_Miembro").show()
         $("#nombre").val aData.persona_data.var_persona_nombres
@@ -155,6 +160,7 @@ jQuery ->
         $("#edad").val aData.persona_data.int_persona_edad
         $("#estado_civil").val aData.persona_data.var_persona_estado
         $("#sexo").val aData.persona_data.var_persona_sexo
+        $("#fec_nac").val aData.fecnacimiento
         $("#dni").val aData.persona_data.var_persona_dni
         $("#ocupacion").val aData.persona_data.var_persona_ocupacion
         $("#profesion").val aData.persona_data.var_persona_profesion
@@ -173,7 +179,10 @@ jQuery ->
             "codigo": this.var_telefono_codigo
             "tel": this.var_telefono
           TelefonoTable.fnAddData tel
+        $("#direccion").val aData.direccion.var_direccion_descripcion
+        $("#referencia").val aData.direccion.var_direccion_referencia
         $("#_lugar").val aData.persona_data.lugar_id
+        $("#fec_conversion").val aData.convertido
         $("#email").val aData.persona_data.var_persona_email
         $("#invitado").val aData.persona_data.var_persona_invitado
 
