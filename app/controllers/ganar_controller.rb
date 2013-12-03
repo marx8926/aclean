@@ -134,7 +134,7 @@ class GanarController < ApplicationController
 
 			t = {}
 			persona.each{ |x|
-        t = {}
+        		t = {}
 				t['nombrecompleto'] = x[:var_persona_nombres]+" "+x[:var_persona_apellidos]
 				t['registro'] = x[:created_at].strftime("%d/%m/%Y")
 				t['persona_data'] = x
@@ -185,6 +185,24 @@ class GanarController < ApplicationController
 				dir = Direccion.joins(:persona).find_by("persona_id" => x[:int_persona_id])
 				t['direccion'] = dir
 
+				distrito = nil
+				provincia = nil
+				departamento = nil
+
+				if dir.nil? == false
+				  distrito = dir.ubigeo.int_ubigeo_id
+				  prov = Ubigeo.where(int_ubigeo_id: dir.ubigeo.int_ubigeo_dependencia).take
+
+				  provincia = prov[:int_ubigeo_id]
+
+                  dep = Ubigeo.find(prov.int_ubigeo_dependencia)
+                  departamento = dep[:int_ubigeo_id]
+
+				end
+				t['distrito'] = distrito
+				t['provincia'] = provincia
+				t['departamento'] = departamento
+
 				t['var_persona_acciones']= ""
 				t['telefono'] = tel
 				t['telefono_data'] = telefono
@@ -199,4 +217,6 @@ class GanarController < ApplicationController
 
 		render :json => { 'aaData' => todo }, :status => :ok
 	end
+
+
 end
