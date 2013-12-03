@@ -8,7 +8,30 @@ root.DatosEnviar = null
 root.count = 0
 
 jQuery ->
-  
+
+  PrepararDatosVisitante = ->
+    root.DatosEnviarV =
+      "formulario" : $("#form_visita").serializeObject()
+      "tabla" : TelefonoVTable.fnGetData()
+
+  PrepararDatosMiembro = ->
+    root.DatosEnviar =
+      "formulario" : $("#form_miembro").serializeObject()
+      "tabla" : TelefonoTable.fnGetData()
+
+  SuccessFunction = ( data ) ->
+    PersonaTable.fnReloadAjax "/recuperar_personas_inicio"
+    HideForms()
+
+  HideForms = ->    
+    $("#visitante").hide()
+    $("#miembro").hide()    
+    $("form").reset()
+    cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
+    TelefonoTable.fnClearTable()    
+    TelefonoVTable.fnClearTable()
+    $(".wizard").bwizard 'show', '0'
+
   PersonaRowCB = (  nRow, aData, iDisplayIndex ) ->
     index = $(PersonaTable.fnGetData()).getIndexObj aData, 'int_servicio_id'
     acciones = getActionButtons "111"
@@ -79,29 +102,6 @@ jQuery ->
       $(nRow).find('.delete-row').click (e) ->
         index = $(TelefonoVTable.fnGetData()).getIndexObj aData, 'id'
         TelefonoVTable.fnDeleteRow index
-
-
-  PrepararDatosVisitante = ->
-    root.DatosEnviarV =
-      "formulario" : $("#form_visita").serializeObject()
-      "tabla" : TelefonoVTable.fnGetData()
-
-  PrepararDatosMiembro = ->
-    root.DatosEnviar =
-      "formulario" : $("#form_miembro").serializeObject()
-      "tabla" : TelefonoTable.fnGetData()
-
-  SuccessFunction = ( data ) ->
-    PersonaTable.fnReloadAjax "/recuperar_personas_inicio"
-    HideForms()
-
-  HideForms = ->    
-    $("#visitante").hide()
-    $("#miembro").hide()    
-    $("form").reset()
-    cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
-    TelefonoTable.fnClearTable()    
-    TelefonoVTable.fnClearTable()
 
   $(".wizard").bwizard({nextBtnText: "Siguiente &rarr;", backBtnText: "&larr; Anterior"})
 
