@@ -16,12 +16,12 @@
         .widget-body
           .row
             .col-md-6.col-sm-6
-              .panel.panel-primary.no-margin
-                .panel-heading
-                  %h3.panel-title 
+              .widget
+                .widget-header
+                  .title 
                     %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
                     Lista de Lugares
-                .panel-body
+                .widget-body
                   #dt_example.example_alt_pagination
                     %table#lugartable.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
                       %thead
@@ -32,12 +32,12 @@
                       %tbody
                     .clearfix
             .col-md-6.col-sm-6
-              .panel.panel-primary.no-margin
-                .panel-heading
-                  %h3.panel-title 
+              .widget
+                .widget-header
+                  .title 
                     %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
                     Registrar Lugar
-                .panel-body
+                .widget-body
                   %form#form_lugar.form-horizontal{role: "form"}
                     .form-group
                       %label.col-lg-2.control-label{for: "descripcion"} Descripción
