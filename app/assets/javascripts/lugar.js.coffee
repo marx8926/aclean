@@ -23,23 +23,22 @@ jQuery ->
 	# 1. Preparar Datos
 
 	# Datos para enviar en formato JSON
-	PrepararDatosL = ->
-    root.DatosEnviar = $("#form_lugar").serialize()
+PrepararDatosL = ->
+  root.DatosEnviar = $("#form_lugar").serialize()
 	  
 	# Funcion de respuesta CORRECTA
 	# Los datos de respuesta se reciben en data
-	SuccessFunctionLugar = ( data ) ->
-    console.log "hola"
-    TablaLugar.fnReloadAjax "/configuracion/recuperar_lugar"
-    $("#form_lugar").reset()
-    console.log(data)
+SuccessFunctionLugar = ( data ) ->
+  TablaLugar.fnReloadAjax "/configuracion/recuperar_lugar"
+  $("#form_lugar").reset()
+  console.log(data)
 
-	# 2. Enviar Datos
-	$("#btnGuardar_Lugar").click (event) ->
-    event.preventDefault()
-    #Llamada a preparar Datps
-    PrepararDatosL()
-  	#Llamada a envio Post
-    enviar "/configuracion/guardar_lugar", root.DatosEnviar, SuccessFunctionLugar, null
+# 2. Enviar Datos
+$("#btnGuardar_Lugar").click (event) ->
+  event.preventDefault()
+  #Llamada a preparar Datps
+  PrepararDatosL()
+	#Llamada a envio Post
+  enviar "/configuracion/guardar_lugar", root.DatosEnviar, SuccessFunctionLugar, null
 
-	# Fin Proceso enviar Formulario
+# Fin Proceso enviar Formulario

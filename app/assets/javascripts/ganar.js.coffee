@@ -125,11 +125,11 @@ jQuery ->
     # ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
     #resetear formulario
     #$("#form_miembro").reset()
-    cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
+    #cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
     #reniciar tabla
     TelefonoTable.fnClearTable()
     #mostrar datos de respuesta
-    console.log(data)
+    console.log data
 
   # 2. Enviar Datos
   $("#btnGuardar_Miembro").click (event) ->
