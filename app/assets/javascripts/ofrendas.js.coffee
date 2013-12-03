@@ -5,21 +5,6 @@
 root = exports ? this
 
 jQuery ->
-  count = 0;
-
- FormatoServiciosTable = [   { "sWidth": "30%","mDataProp": "var_servicio_nombre"},
-                              { "sWidth": "20%","mDataProp": "int_servicio_tipo_desc"},
-                              { "sWidth": "30%","mDataProp": "turnoshow"},
-                              { "sWidth": "20%","mDataProp": "var_servicio_acciones"}
-                              ]
-
-  ServiciosRowCB = (  nRow, aData, iDisplayIndex ) ->
-    index = $(ServiciosTable.fnGetData()).getIndexObj aData, 'int_servicio_id'
-    acciones = getActionButtons "111"
-    ServiciosTable.fnUpdate( acciones, index, 3 ); 
-
-ServiciosTable = createDataTable "dataOfremdas", root.SourceTServicio, FormatoServiciosTable, null, ServiciosRowCB
-
 # Proceso para enviar metodo Post
 
 # 1. Preparar Datos
