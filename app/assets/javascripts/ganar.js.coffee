@@ -36,6 +36,7 @@ jQuery ->
     index = $(PersonaTable.fnGetData()).getIndexObj aData, 'int_servicio_id'
     acciones = getActionButtons "111"
     PersonaTable.fnUpdate( acciones, index, 5 );
+    $(nRow).find('a').tooltip('hide');
     $(nRow).find('.edit_row').click (event) ->
       event.preventDefault()
       if("Visitante" == aData.nivel)
@@ -90,6 +91,7 @@ jQuery ->
     "bPaginate": false
     "sDom": "<r>t<'row-fluid'>"
     "fnCreatedRow": (  nRow, aData, iDisplayIndex ) ->
+      $(nRow).find('a').tooltip('hide');
       $(nRow).find('.delete-row').click (e) ->
         index = $(TelefonoTable.fnGetData()).getIndexObj aData, 'id'
         TelefonoTable.fnDeleteRow index
@@ -99,6 +101,7 @@ jQuery ->
     "bPaginate": false
     "sDom": "<r>t<'row-fluid'>"
     "fnCreatedRow": (  nRow, aData, iDisplayIndex ) ->
+      $(nRow).find('a').tooltip('hide');
       $(nRow).find('.delete-row').click (e) ->
         index = $(TelefonoVTable.fnGetData()).getIndexObj aData, 'id'
         TelefonoVTable.fnDeleteRow index
