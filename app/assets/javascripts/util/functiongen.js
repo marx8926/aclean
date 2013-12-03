@@ -33,6 +33,15 @@ jQuery.fn.reset = function () {
 	  $(this).each (function() { this.reset(); });
 	};
 
+jQuery.fn.disable = function () {
+	  $(this).find("input,select,textarea,checkbox").attr("disabled",true);
+	};
+
+jQuery.fn.enable = function () {
+	  $(this).find("input,select,textarea,checkbox").attr("disabled",false);
+	};
+
+
 
 /*Fin extensiones de jQuery*/
 function getActionButtons(conf){
@@ -225,7 +234,6 @@ function enviar(url, datos, successfunction, errorfunction){
     if(typeof(successfunction)!= 'undefined' && successfunction != null)
     	Consulta.done(function(data){
     		successfunction(data);
-    		console.log(successfunction);
     	});
 
     if(typeof(errorfunction)!= 'undefined' && errorfunction != null)

@@ -27,7 +27,9 @@
     / custom css
     = stylesheet_link_tag "main"
     = stylesheet_link_tag "datepicker/css/datepicker.css"
-    = stylesheet_link_tag "jqueryvalidation/css/validationEngine.jquery.css"
+    = stylesheet_link_tag "jqueryvalidation/css/validationEngine.jquery.css"    
+    = stylesheet_link_tag "loader"
+    = stylesheet_link_tag "successblock"
   %body
     / Header start
     %header
@@ -136,6 +138,7 @@
     / custom Js
     %script{src:"http://d9i0z8gxqnxp1.cloudfront.net/js/custom-forms.js"}
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom.js"}
+    %script{src: "http://malsup.github.io/jquery.blockUI.js"}
 
     :javascript
       urlES = "/dt_ES.txt"

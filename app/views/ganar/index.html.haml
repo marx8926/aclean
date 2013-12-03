@@ -34,6 +34,7 @@
           Registrar Miembro
       .widget-body
         = form_tag(persona_guardar_path , {:method=>'post',:class=>'form-horizontal', :id => "form_miembro" , :name => "form_miembro"}) do
+          %input.idPersona{type:"hidden",name:"idpersona"}
           .wizard
             %ol
               %li Datos Personales
@@ -144,7 +145,6 @@
                     %label.col-lg-2.col-sm-2.control-label Email
                     .col-lg-2.col-sm-2
                       %input#email.form-control{name: "email", type: "text"}
-
               .form-group
                 %label.col-lg-2.control-label{for: "monto"} Invitado por
                 .col-lg-5
@@ -156,6 +156,7 @@
               .form-group
                 .col-lg-offset-2.col-lg-10
                   %input#btnGuardar_Miembro.btn.btn-success{type: "button", value: "Guardar"}
+                  %input#btneditar_Miembro.btn.btn-success{type: "button", value: "Editar"}
   / Row end
   / Row start
   .row
@@ -167,6 +168,7 @@
           Registrar Visitante
       .widget-body
         %form#form_visita.form-horizontal{  :method=>'post', :name=> "form_visita"}
+          %input.idPersona{type:"hidden",name:"idpersona"}
           .wizard
             %ol
               %li Datos Personales
@@ -226,6 +228,7 @@
               .form-group
                 .col-lg-offset-2.col-lg-10
                   %input#btnguardarv.btn.btn-success{type: "button", value: "Guardar"}
+                  %input#btneditarv.btn.btn-success{type: "button", value: "Editar"}
   / Row end
   / Row start
   .row
@@ -247,7 +250,25 @@
                   %th{style: "width:10%"} Nivel
                   %th{style: "width:20%"} Acciones
               %tbody
-                
-
             .clearfix
+  #loader{style: "display:none"}
+    = render "layouts/loader"
+  #confirmmodal.panel.panel-info{style: "display:none"}
+    .panel-heading
+      %h3.panel-title
+        Confirmar
+    .panel-body
+      %p
+        ¿Desea Guardar permanentemente los cambios?
+      %button.btnNo.btn.btn-default{type: "button"} No
+      %button#btnSiGuardar.btn.btn-default{type: "button"} Si
+  #dangermodal.panel.panel-danger{style: "display:none"}
+    .panel-heading
+      %h3.panel-title
+        Alerta!
+    .panel-body
+      %p
+        ¿Desea eliminar permanentemente el registro?
+      %button.btnNo.btn.btn-default{type: "button"} No
+      %button#btnSiEliminar.btn.btn-default{type: "button"} Si
   / Row end

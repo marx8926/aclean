@@ -137,6 +137,7 @@ jQuery ->
     #Llamada a preparar Datps
     PrepararDatos()
     #Llamada a envio Post
+    DisplayBlockUI "loader"
     enviar "/configuracion/guardar_servicio", root.DatosEnviar, SuccessFunctionServicio, null
 
 # Fin Proceso enviar Formulario
@@ -145,9 +146,6 @@ jQuery ->
   SuccessFunctionDropServicio = (data) ->
     MessageSucces()
     ServiciosTable.fnReloadAjax root.SourceTServicio
-
-    #act on result.
-    false # prevents normal behaviour
   
   MessageSucces = ->
     setTimeout (->

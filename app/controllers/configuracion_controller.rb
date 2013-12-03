@@ -120,7 +120,6 @@ class ConfiguracionController < ApplicationController
 			begin
 				servicio = Servicio.new({:var_servicio_nombre => form[:nombre], :int_servicio_tipo => form[:tipo]})	
 				servicio.save!
-
 				otherdata.each{ |x|
 					data = x.last
 					
@@ -130,11 +129,10 @@ class ConfiguracionController < ApplicationController
 					turno.save!
 				}
 			rescue
-        		render :json => nil , :status => :internal_server_error
+        render :json => nil , :status => :internal_server_error
 				raise ActiveRecord::Rollback
 			end
-		end
-    	
+		end    	
     	render :json => {:data => otherdata, :formulario => form[:nombre]}, :status => :ok			
 	end
 
@@ -178,9 +176,9 @@ class ConfiguracionController < ApplicationController
 							dia = "Viernes"
 						else
 							dia = "Sabado"
-					end
+          end
 					tshow = tshow + "<p>"+dia+" : "+y[:var_turno_horainicio]+":00 - "+ y[:var_turno_horafin]+":00 </p>"
-					arrayturn.push y
+          arrayturn.push y
 				}			
 			end
 			serv['turnos'] = arrayturn
