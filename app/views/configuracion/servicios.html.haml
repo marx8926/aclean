@@ -26,7 +26,7 @@
                 .col-lg-10
                   .row
                     .col-lg-2
-                      %select#tipo.form-control{name: "tipo"}
+                      %select#tipo.form-control{name: "tipo",class:"validate[required,custom[onlyLetterNumber]]"}
                         %option{value: "1"} Culto General
                         %option{value: "2"} Culto Jovenes
                     %label.col-lg-2.control-label{for: "nombre"} Nombre

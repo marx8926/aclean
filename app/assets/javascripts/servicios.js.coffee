@@ -153,3 +153,5 @@ jQuery ->
         $.growlUI "Operacion Exitosa"
 
     ), 1000
+
+  $("#formServicio").validationEngine 'attach',{autoHidePrompt:true,autoHideDelay:3000}
