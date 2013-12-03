@@ -79,7 +79,8 @@ jQuery ->
           showtipotel = "Fijo"
         tel =
           "numero": this.var_telefono_codigo + this.var_telefono
-          "tipo" : showtipotel, "btn_elim":""
+          "tipo" : showtipotel
+          "btn_elim":""
           "id":this.int_telefono_id
           "tipo_val": this.int_telefono_tipo
           "codigo": this.var_telefono_codigo
