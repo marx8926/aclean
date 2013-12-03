@@ -5,6 +5,7 @@
 root = exports ? this
 
 jQuery ->
+
   count = 0;
 
   FormatoServiciosTable = [   { "sWidth": "30%","mDataProp": "var_servicio_nombre"},
@@ -21,6 +22,7 @@ jQuery ->
 
 
   ServiciosTable = createDataTable "dataOfrendas", root.SourceTServicio, FormatoServiciosTable, null, ServiciosRowCB
+
 
 # Proceso para enviar metodo Post
 
