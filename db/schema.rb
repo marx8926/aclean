@@ -13,10 +13,14 @@
 
 ActiveRecord::Schema.define(version: 20131129005738) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "asistencia", primary_key: "int_asistencia_id", force: true do |t|
     t.datetime "dat_asistencia_fecregistro"
     t.datetime "dat_asistencia_fecasistencia"
     t.integer  "int_asistencia_categoria"
+    t.integer  "int_asistencia_cantidad"
     t.integer  "servicio_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -32,13 +36,13 @@ ActiveRecord::Schema.define(version: 20131129005738) do
     t.datetime "updated_at"
   end
 
-  create_table "diezmos", id: false, force: true do |t|
-    t.integer  "int_diezmo_id"
-    t.decimal  "dec_diezmo_monto",                precision: 18, scale: 2
+  create_table "diezmos", primary_key: "int_diezmo_id", force: true do |t|
+    t.decimal  "dec_diezmo_monto",                     precision: 18, scale: 2
+    t.datetime "dat_diezmo_fecharegistro"
+    t.string   "var_diezmo_peticion",      limit: 200
+    t.integer  "persona_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "var_diezmo_peticion", limit: 200
-    t.integer  "persona_id"
   end
 
   add_index "diezmos", ["persona_id"], name: "index_diezmos_on_persona_id", using: :btree
@@ -63,6 +67,7 @@ ActiveRecord::Schema.define(version: 20131129005738) do
     t.date     "dat_iglesia_feccreacion"
     t.string   "var_iglesia_telefono",    limit: 18
     t.string   "var_iglesia_siglas",      limit: 20
+    t.string   "var_iglesia_nombre",      limit: 150
     t.string   "var_iglesia_direccion",   limit: 150
     t.string   "var_iglesia_referencia",  limit: 150
     t.float    "dou_iglesia_longitud"
@@ -103,12 +108,12 @@ ActiveRecord::Schema.define(version: 20131129005738) do
   create_table "ofrendas", primary_key: "int_ofrenda_id", force: true do |t|
     t.decimal  "dec_ofrenda_monto",         precision: 18, scale: 2
     t.datetime "dec_ofrenda_fecharegistro"
-    t.integer  "servicio_id"
+    t.integer  "turno_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "ofrendas", ["servicio_id"], name: "index_ofrendas_on_servicio_id", using: :btree
+  add_index "ofrendas", ["turno_id"], name: "index_ofrendas_on_turno_id", using: :btree
 
   create_table "personas", primary_key: "int_persona_id", force: true do |t|
     t.datetime "dat_persona_fecregistro"
@@ -191,16 +196,19 @@ ActiveRecord::Schema.define(version: 20131129005738) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                             default: "", null: false
+    t.string   "encrypted_password",                default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                     default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "var_usuario_nombre",     limit: 50
+    t.string   "var_usuario_apellido",   limit: 50
+    t.string   "var_usuario_documento",  limit: 18
     t.datetime "created_at"
     t.datetime "updated_at"
   end

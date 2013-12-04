@@ -24,10 +24,10 @@ jQuery ->
   PrepararDatos = ->
     root.DatosEnviar = $("#form_diezmo").serialize()
 
-  FormatoPersonaTable = [   { "sWidth": "40%","mDataProp": "nombrecompleto"},
-                            { "sWidth": "15%","mDataProp": "telefono"},
-                            { "sWidth": "15%","mDataProp": "registro"},
-                            { "sWidth": "30%","mDataProp": "convertido"}
+  FormatoPersonaTable = [   { "sWidth": "40%","mDataProp": "persona"},
+                            { "sWidth": "15%","mDataProp": "fecha"},
+                            { "sWidth": "15%","mDataProp": "monto"},
+                            { "sWidth": "30%","mDataProp": "peticion"}
                             ]
 
   DiezmoTable = createDataTable "table_diezmos", root.SourceTServicio, FormatoPersonaTable, null, null
