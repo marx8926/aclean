@@ -3,52 +3,48 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 root = exports ? this
+root.SourceTServicio = "/recuperar_diezmos_inicio"
+root.DatosEnviar = null
 
 jQuery ->
-	
-  $('#diezmo_div').hide()
+  personas = getAjaxObject "/persona_servicio_complete"
 
-  $('#registrar_diezmo').click ->
-    $("#diezmo_div").toggle()
-    
+  SuccessFunction = ( data ) ->
+    DiezmoTable.fnReloadAjax root.SourceTServicio    
+    $(".form").reset()
+    MessageSucces()
 
-$(document).ready ->
-  $(".data-table").dataTable sPaginationType: "full_numbers"
+  MessageSucces = ->
+    setTimeout (->
+      $.unblockUI onUnblock: ->
+        $.growlUI "Operacion Exitosa"
 
+    ), 1000
 
-personas = getAjaxObject("/persona_servicio_complete")
+  PrepararDatos = ->
+    root.DatosEnviar = $("#form_diezmo").serialize()
 
-$ ->
-  $("#persona").autocomplete(
+  FormatoPersonaTable = [   { "sWidth": "40%","mDataProp": "nombrecompleto"},
+                            { "sWidth": "15%","mDataProp": "telefono"},
+                            { "sWidth": "15%","mDataProp": "registro"},
+                            { "sWidth": "30%","mDataProp": "convertido"}
+                            ]
+
+  DiezmoTable = createDataTable "table_diezmos", root.SourceTServicio, FormatoPersonaTable, null, null
+
+  $('#registrar_diezmo').click (event) ->
+    event.preventDefault()
+    $("#diezmo_div").show()
+
+  $("#persona").autocomplete
     source: personas
     select: (event, ui) ->
       $("#persona_hidden").val ui.item.int_persona_id
       $("#persona").val ui.item.label
       false
-  )
 
-#guardar diezmo
-
-# Proceso para enviar metodo Post
-
-# 1. Preparar Datos
-
-  # Datos para enviar en formato JSON
-  PrepararDatos = ->
-    root.DatosEnviar = $("#form_diezmo").serialize()
-      
-  # Funcion de respuesta CORRECTA
-  # Los datos de respuesta se reciben en data
-  SuccessFunction = ( data ) ->
-    #recargar datos de tabla Servicios
-    #ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
-    #resetear formulario
-    #$("#form_iglesia").reset()
-    #mostrar datos de respuesta
-    console.log(data)
-
-# 2. Enviar Datos
-  $("#btnGuardar_Diezmo").click (e) ->
+  $("#btnGuardar_Diezmo").click (event) ->
+    event.preventDefault()
     #Llamada a preparar Datps
     PrepararDatos()
     #Llamada a envio Post
