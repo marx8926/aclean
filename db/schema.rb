@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131129005738) do
+ActiveRecord::Schema.define(version: 20131204175227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,19 @@ ActiveRecord::Schema.define(version: 20131129005738) do
   end
 
   add_index "asistencia", ["servicio_id"], name: "index_asistencia_on_servicio_id", using: :btree
+
+  create_table "charts", primary_key: "int_chart_id", force: true do |t|
+    t.integer  "int_chart_anio",        default: 0
+    t.integer  "int_chart_mes",         default: 0
+    t.integer  "int_chart_miembro",     default: 0
+    t.integer  "int_chart_visita",      default: 0
+    t.integer  "int_chart_joven",       default: 0
+    t.integer  "int_chart_adulto",      default: 0
+    t.integer  "int_chart_adolescente", default: 0
+    t.integer  "int_chart_ninio",       default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "constantes", primary_key: "int_constante_id", force: true do |t|
     t.string   "var_constante_descripcion", limit: 50

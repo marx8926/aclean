@@ -26,6 +26,31 @@ class GanarController < ApplicationController
 
 				persona.save!
 
+				ch = Chart.find_by(:int_chart_anio => persona.dat_persona_fecregistro.year,
+				 :int_chart_mes => persona.dat_persona_fecregistro.month)
+
+				if ch.nil? == false
+					ch.int_chart_miembro = ch.int_chart_miembro + 1
+					ch.save!
+
+				else
+
+					anio = (1 .. 12 ).to_a
+
+					mes = persona.dat_persona_fecregistro.month
+
+					anio.each{ |i|
+
+						metrica = Chart.create!( int_chart_anio: persona.dat_persona_fecregistro.year  , int_chart_mes: i )
+
+						if i == mes
+							metrica.int_chart_miembro = metrica.int_chart_miembro + 1
+							metrica.save!
+						end
+
+					}
+				end
+
 
 				direccion = Direccion.new({ :var_direccion_descripcion => form[:direccion], 
 					:var_direccion_referencia => form[:referencia],
@@ -204,6 +229,31 @@ class GanarController < ApplicationController
 					  })
 
 				persona.save!
+
+				ch = Chart.find_by(:int_chart_anio => persona.dat_persona_fecregistro.year,
+				 :int_chart_mes => persona.dat_persona_fecregistro.month)
+
+				if ch.nil? == false
+					ch.int_chart_visita = ch.int_chart_visita + 1
+					ch.save!
+
+				else
+
+					anio = (1 .. 12 ).to_a
+
+					mes = persona.dat_persona_fecregistro.month
+
+					anio.each{ |i|
+
+						metrica = Chart.create!( int_chart_anio: persona.dat_persona_fecregistro.year  , int_chart_mes: i )
+
+						if i == mes
+							metrica.int_chart_visita = metrica.int_chart_visita + 1
+							metrica.save!
+						end
+
+					}
+				end
 
 				peticion = Peticion.new({ :var_peticion_motivooracion => form[:mot_oracionv],
 					:persona => persona , :dat_peticion_fecha => DateTime.now()
