@@ -127,7 +127,6 @@ jQuery ->
 
     $(nRow).find('.edit_row').click (event) ->
       event.preventDefault()
-      console.log aData
       $(".idPersona").val aData.persona_data.int_persona_id
       if("Visitante" == aData.nivel)
         HideForms()
