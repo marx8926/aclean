@@ -70,3 +70,147 @@ Menu.create(
       :int_menu_nivel => 1,
       :int_new_dep => 1
       )
+
+Chart.create(
+      :int_chart_anio => 2013,
+      :int_chart_mes => 1,
+      :int_chart_miembro => 100,
+      :int_chart_visita => 20,
+      :int_chart_joven => 80,
+      :int_chart_adulto => 20,
+      :int_chart_adolescente => 40,
+      :int_chart_ninio => 30,
+      )
+
+Chart.create(
+      :int_chart_anio => 2013,
+      :int_chart_mes => 2,
+      :int_chart_miembro => 90,
+      :int_chart_visita => 10,
+      :int_chart_joven => 70,
+      :int_chart_adulto => 10,
+      :int_chart_adolescente => 30,
+      :int_chart_ninio => 20,
+      )
+
+Chart.create(
+      :int_chart_anio => 2013,
+      :int_chart_mes => 3,
+      :int_chart_miembro => 80,
+      :int_chart_visita => 30,
+      :int_chart_joven => 60,
+      :int_chart_adulto => 30,
+      :int_chart_adolescente => 50,
+      :int_chart_ninio => 40,
+      )
+
+Chart.create(
+      :int_chart_anio => 2013,
+      :int_chart_mes => 4,
+      :int_chart_miembro => 100,
+      :int_chart_visita => 20,
+      :int_chart_joven => 75,
+      :int_chart_adulto => 50,
+      :int_chart_adolescente => 40,
+      :int_chart_ninio => 30,
+      )
+
+Chart.create(
+      :int_chart_anio => 2013,
+      :int_chart_mes => 5,
+      :int_chart_miembro => 50,
+      :int_chart_visita => 30,
+      :int_chart_joven => 60,
+      :int_chart_adulto => 40,
+      :int_chart_adolescente => 30,
+      :int_chart_ninio => 50,
+      )
+
+Chart.create(
+      :int_chart_anio => 2013,
+      :int_chart_mes => 6,
+      :int_chart_miembro => 120,
+      :int_chart_visita => 30,
+      :int_chart_joven => 30,
+      :int_chart_adulto => 90,
+      :int_chart_adolescente => 10,
+      :int_chart_ninio => 10,
+      )
+
+Chart.create(
+      :int_chart_anio => 2013,
+      :int_chart_mes => 7,
+      :int_chart_miembro => 130,
+      :int_chart_visita => 30,
+      :int_chart_joven => 70,
+      :int_chart_adulto => 30,
+      :int_chart_adolescente => 60,
+      :int_chart_ninio => 40,
+      )
+
+Chart.create(
+      :int_chart_anio => 2013,
+      :int_chart_mes => 8,
+      :int_chart_miembro => 120,
+      :int_chart_visita => 20,
+      :int_chart_joven => 60,
+      :int_chart_adulto => 40,
+      :int_chart_adolescente => 50,
+      :int_chart_ninio => 20,
+      )
+
+Chart.create(
+      :int_chart_anio => 2013,
+      :int_chart_mes => 9,
+      :int_chart_miembro => 10,
+      :int_chart_visita => 50,
+      :int_chart_joven => 60,
+      :int_chart_adulto => 40,
+      :int_chart_adolescente => 20,
+      :int_chart_ninio => 50,
+      )
+
+Chart.create(
+      :int_chart_anio => 2013,
+      :int_chart_mes => 9,
+      :int_chart_miembro => 30,
+      :int_chart_visita => 50,
+      :int_chart_joven => 30,
+      :int_chart_adulto => 40,
+      :int_chart_adolescente => 40,
+      :int_chart_ninio => 30,
+      )
+
+Chart.create(
+      :int_chart_anio => 2013,
+      :int_chart_mes => 10,
+      :int_chart_miembro => 180,
+      :int_chart_visita => 40,
+      :int_chart_joven => 60,
+      :int_chart_adulto => 40,
+      :int_chart_adolescente => 30,
+      :int_chart_ninio => 50,
+      )
+
+Chart.create(
+      :int_chart_anio => 2013,
+      :int_chart_mes => 11,
+      :int_chart_miembro => 200,
+      :int_chart_visita => 40,
+      :int_chart_joven => 90,
+      :int_chart_adulto => 50,
+      :int_chart_adolescente => 60,
+      :int_chart_ninio => 20,
+      )
+
+Chart.create(
+      :int_chart_anio => 2013,
+      :int_chart_mes => 12,
+      :int_chart_miembro => 100,
+      :int_chart_visita => 50,
+      :int_chart_joven => 80,
+      :int_chart_adulto => 60,
+      :int_chart_adolescente => 40,
+      :int_chart_ninio => 10,
+      )
+

@@ -51,6 +51,11 @@ Lean::Application.routes.draw do
   post "asistencia_guardar" => "asistencia#guardar"
   get "recuperar_asistencia" => "asistencia#recuperar_init"
   get "recuperar_asistencia_filtrado/(:inicio)/(:fin)" => "asistencia#recuperar_filtro_asistencia"
+
+
+  get "dashboard" => "informacion#index"
+  get "data_miembro" => "informacion#chart_miembro"
+  get "data_visitante" => "informacion#chart_visitante"
   
 
 
