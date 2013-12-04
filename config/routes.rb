@@ -9,6 +9,7 @@ Lean::Application.routes.draw do
   post "persona_editar_visita" => "ganar#editar_visita"
   post "persona_eliminar_miembro" => "ganar#eliminar_miembro"
 
+
   post "persona_eliminar_visita/(:id)" => "ganar#eliminar_visita"
   get "recuperar_personas_inicio" => "ganar#recuperar_personas_inicio"
   get "recuperar_personas_filtrado/(:inicio)/(:fin)" => "ganar#recuperar_personas_filtro" , as: :recuperar_personas_filtro

@@ -75,14 +75,12 @@ class GanarController < ApplicationController
 		tabla = params[:tabla]
 		todo = nil
 
-
 		ActiveRecord::Base.transaction do
 
 			begin
 
 
 				idPersona = form[:idpersona]
-
 				
 
 				if idPersona!= nil and idPersona.length > 0
@@ -144,15 +142,18 @@ class GanarController < ApplicationController
 
 				render :json => {:resp => "bad" } , :status => :ok
 
+
 			end
 
 		end
 
 		render :json => {:resp => "ok" } , :status => :ok
 
+
 	end
 
 	def eliminar_miembro
+
 
 		id = params[:id]
 

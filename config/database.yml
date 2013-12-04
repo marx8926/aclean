@@ -21,11 +21,11 @@ test:
   port: 5432
 
 production:
-  adapter: mysql
-  encoding: utf8
-  database: demoac
+  adapter: postgresql
+  encoding: unicode
+  database: lean_production
   pool: 5
-  username: clmtruj
-  password: 'gKh6O2U-O~R['
-  host: adminchurchbds.cmx8bf9qpm5t.us-east-1.rds.amazonaws.com
-  port: 3306
+  username: postgres
+  password: '260489'
+  host: localhost
+  port: 5432
