@@ -73,55 +73,109 @@ class GanarController < ApplicationController
 
 		form = params[:formulario]
 		tabla = params[:tabla]
+		todo = nil
 
 		ActiveRecord::Base.transaction do
 
 			begin
 
-				idPersona = form[:idPersona]
+				idPersona = form[:idpersona]
 				
 				
 
 				if idPersona!= nil and idPersona.length > 0
 
+					p= Persona.lock.find(idPersona)
 
+					p.dat_persona_fecregistro = form[:fec_conversion]
+					p.var_persona_nombres = form[:nombre]
+					p.var_persona_apellidos = form[:apellido]
+					p.int_persona_edad = form[:edad]
+					p.dat_persona_fecNacimiento = form[:fec_nac]
+					p.var_persona_profesion = form[:profesion]
+					p.var_persona_ocupacion = form[:ocupacion]
+					p.var_persona_sexo = form[:sexo]
+					p.var_persona_dni = form[:dni]
+					p.var_persona_estado = "1"
+					p.var_persona_email = form[:email]
+					p.var_persona_invitado = form[:invitado]
+					p.iglesia = Iglesia.first
+					p.lugar = Lugar.find(form[:lugar])
+					p.save!
 
-					Persona.transaction do
-						
-						p= Persona.lock("LOCK IN SHARE MODE").find(idPersona)
+					direccion =  Direccion.find_by("persona_id" => idPersona)
 
-						p.dat_persona_fecregistro = form[:fec_conversion]
-						p.var_persona_nombres = form[:nombre]
-						p.var_persona_apellidos = form[:apellido]
-						p.int_persona_edad = form[:edad]
-						p.dat_persona_fecNacimiento = form[:fec_nac]
-						p.var_persona_profesion = form[:profesion]
-						p.var_persona_ocupacion = form[:ocupacion]
-						p.var_persona_sexo = form[:sexo]
-						p.var_persona_dni = form[:dni]
-						p.var_persona_estado = "1"
-						p.var_persona_email = form[:email]
-						p.var_persona_invitado = form[:invitado]
-						p.iglesia = Iglesia.first
-					 	p.lugar = Lugar.find(form[:lugar])
+					direccion.var_direccion_descripcion = form[:direccion]
+					direccion.var_direccion_referencia = form[:referencia]
+					direccion.var_direccion_estado = "1"
+					direccion.ubigeo = Ubigeo.find(form[:distrito])
+					
+					direccion.save!
 
-					 	p.save
+					if tabla != nil
+						tabla.each{ |y|
+							x = y.last
+							telefono = Telefono.find_by({:int_telefono_tipo => x[:tipo_val],
+							:var_telefono_codigo => x[:codigo],
+							:var_telefono => x[:tel], :persona_id => idPersona})
 
+							if telefono != nil
+								telefono.update!({:int_telefono_tipo => x[:tipo_val],
+								:var_telefono_codigo => x[:codigo],
+								:var_telefono => x[:tel], :persona_id => idPersona})
+							else
+								Telefono.create!({:int_telefono_tipo => x[:tipo_val],
+								:var_telefono_codigo => x[:codigo],
+								:var_telefono => x[:tel], :persona_id => idPersona})
+							end
+
+						}
+
+					else
+						Telefono.destroy!(:persona_id => idPersona)
 					end
-
 
 				end
 
 			rescue
 				raise ActiveRecord::Rollback
+				render :json => {:resp => "bad" } , :status => :ok
 			end
 
 		end
 
-		render :json => {:resp => params } , :status => :ok
+		render :json => {:resp => "ok" } , :status => :ok
 	end
 
 	def eliminar_miembro
+
+		id = params[:id]
+
+		ActiveRecord::Base.transaction do
+
+			begin
+
+				persona = Persona.find(id).delete
+
+				dir = Direccion.find_by("persona_id" => id).delete
+
+				nivel = NivelCrecimiento.find_by("persona_id" => id).delete
+
+				peticion = Peticion.find_by("persona_id" => id).delete
+				
+
+				
+				
+				
+				
+				Telefono.where("persona_id" => id).destroy_all
+
+				
+			rescue Exception => e
+				raise ActiveRecord::Rollback
+			end
+		end
+		render :json => { :resp => id}, :status => :ok
 
 	end
 
@@ -171,7 +225,6 @@ class GanarController < ApplicationController
 				
 			rescue
 				raise ActiveRecord::Rollback
-
 			end
 		end
 

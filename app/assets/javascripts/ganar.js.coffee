@@ -35,6 +35,7 @@ jQuery ->
     ), 1000
 
   SuccessFunctionDropServicio = (data) ->
+    console.log data
     MessageSucces()
     PersonaTable.fnReloadAjax root.SourceTServicio
 
@@ -165,6 +166,7 @@ jQuery ->
         $("#dni").val aData.persona_data.var_persona_dni
         $("#ocupacion").val aData.persona_data.var_persona_ocupacion
         $("#profesion").val aData.persona_data.var_persona_profesion
+        $("#idpersona").val aData.persona_data.int_persona_id
         $(aData.telefono_data).each (index) ->
           showtipotel = ""
           if(this.int_telefono_tipo == 1)
@@ -281,7 +283,7 @@ jQuery ->
   $("#btnSiEliminar").click (event) ->
     event.preventDefault()
     DisplayBlockUI "loader"
-    enviar "/configuracion/drop_servicio", {"idpersona":root.SelectToDrop}, SuccessFunctionDropServicio, null
+    enviar "persona_eliminar_miembro", {"id":root.SelectToDrop}, SuccessFunctionDropServicio, null
 
   $("#btnSiGuardar").click (event) ->
     event.preventDefault()    
