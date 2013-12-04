@@ -24,18 +24,18 @@ jQuery ->
   ServiciosTable = createDataTable "dataOfrendas", root.SourceTServicio, FormatoServiciosTable, null, ServiciosRowCB
 
 
-# Proceso para enviar metodo Post
+  # Proceso para enviar metodo Post
 
-# 1. Preparar Datos
+  # 1. Preparar Datos
 
-  # Datos para enviar en formato JSON
+    # Datos para enviar en formato JSON
   PrepararDatos = ->
     root.DatosEnviar = $("#form_ofrenda").serialize()
-# Proceso para enviar metodo Post
+  # Proceso para enviar metodo Post
 
 
-  # Funcion de respuesta CORRECTA
-  # Los datos de respuesta se reciben en data
+    # Funcion de respuesta CORRECTA
+    # Los datos de respuesta se reciben en data
   SuccessFunction = ( data ) ->
     #recargar datos de tabla Servicios
     #ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
@@ -49,7 +49,7 @@ jQuery ->
     console.log(data)
     false
 
-# 2. Enviar Datos
+  # 2. Enviar Datos
   $("#btnGuardar_Ofrenda").click (e) ->
     console.log "ofrenda"
     #Llamada a preparar Datps
@@ -58,22 +58,11 @@ jQuery ->
     enviar "/ofrendas_guardar",  root.DatosEnviar , SuccessFunction, null
     false
 
-# Fin Proceso enviar Formulario
-      
-    #act on result.
-    false # prevents normal behaviour
+  cargar_turno = ->
+    turnos = getAjaxObject "/recuperar_turno_inicio/"+$("#_servicio").val()
+    cargarSelect turnos, "turno", "turno", "inicio"
 
-$('#ofrenda_div').hide()
-
-$('#registrar_ofrenda').click ->
-  $("#ofrenda_div").toggle()
-
-
-cargar_turno = ->
-  turnos = getAjaxObject "/recuperar_turno_inicio/"+$("#_servicio").val()
-  cargarSelect turnos, "turno", "turno", "inicio"
-  false
-
-$("#_servicio").change ->
-  cargar_turno()
+  $("#_servicio").change ->
+    console.log "holas"
+    cargar_turno()
   
