@@ -23,7 +23,7 @@ jQuery ->
 
   SuccessFunction = ( data ) ->
     console.log data
-    PersonaTable.fnReloadAjax "/recuperar_personas_inicio"
+    PersonaTable.fnReloadAjax root.SourceTServicio
     HideForms()
     MessageSucces()
 

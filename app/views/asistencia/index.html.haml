@@ -68,7 +68,7 @@
             Lista de Asistencia
         .widget-body
           #dt_example.example_alt_pagination
-            %table#table_diezmos.data-table.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
+            %table#table_asistencia.data-table.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
               %thead
                 %tr
                   %th{style: "width:25%"} Servicio
@@ -79,5 +79,7 @@
                 
             .clearfix
   / Row end
+  #loader{style: "display:none"}
+    = render "layouts/loader"
 / Dashboard wrapper end
 / Main Container end

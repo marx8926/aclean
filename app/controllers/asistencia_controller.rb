@@ -28,7 +28,7 @@ class AsistenciaController < ApplicationController
 						asist = Asistencia.new({
 							:dat_asistencia_fecregistro => DateTime.now(),
 							:dat_asistencia_fecasistencia => form[:fecha],
-							:int_asistencia_categoria => x[:categoria],
+							:int_asistencia_categoria => x[:categoriaid],
 							:int_asistencia_cantidad => x[:asistente],
 							:servicio => serv
 							})
@@ -44,7 +44,7 @@ class AsistenciaController < ApplicationController
 
 		end
 		
-		render :json => { :resp => "ok" } , :status => :ok
+		render :json => {:data => tabla,:resp => "ok" } , :status => :ok
 	end
 
 	def recuperar_init
@@ -66,20 +66,16 @@ class AsistenciaController < ApplicationController
 				temp['fecha'] = x[:dat_asistencia_fecasistencia].strftime("%d/%m/%Y")
 
 				case x[:int_asistencia_categoria]
-				when 0
-					categoria = "Mujeres Jovenes"
-				when 1
-					categoria = "Hombres Jovenes"
-				when 2
-					categoria = "Mujeres"
-				when 3
-					categoria = "Hombres"
-
+					when 0
+						categoria = "Mujeres Jovenes"
+					when 1
+						categoria = "Hombres Jovenes"
+					when 2
+						categoria = "Mujeres"
+					else
+            categoria = "Hombres"
 				end
-
 				temp['categoria'] = categoria
-
-
 				temp['asistencia'] = x[:int_asistencia_cantidad]
 
 				todo.push temp

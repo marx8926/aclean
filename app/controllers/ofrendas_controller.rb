@@ -66,7 +66,8 @@ class OfrendasController < ApplicationController
 				temp['servicio'] = servicio
 				temp["monto"] = x[:dec_ofrenda_monto]
 				temp["registro"] = x[:dec_ofrenda_fecharegistro].strftime("%d/%m/%Y")
-
+				temp["int_ofrenda_id"] = x[:int_ofrenda_id]
+				temp["acciones"]= ""
 				todo.push temp
 			}
 

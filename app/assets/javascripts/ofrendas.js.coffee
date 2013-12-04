@@ -3,25 +3,37 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 root = exports ? this
+root.SourceOfrendas = "/recuperar_ofrendas_init"
 
 jQuery ->
 
-  count = 0;
+  SuccessFunction = ( data ) ->
+    OfrendaTable.fnReloadAjax root.SourceOfrendas    
+    $("form").reset()
+    MessageSucces()
 
-  FormatoServiciosTable = [   { "sWidth": "30%","mDataProp": "var_servicio_nombre"},
-                              { "sWidth": "20%","mDataProp": "int_servicio_tipo_desc"},
-                              { "sWidth": "30%","mDataProp": "turnoshow"},
-                              { "sWidth": "20%","mDataProp": "var_servicio_acciones"}
-                              ]
+  MessageSucces = ->
+    setTimeout (->
+      $.unblockUI onUnblock: ->
+        $.growlUI "Operacion Exitosa"
 
-  ServiciosRowCB = (  nRow, aData, iDisplayIndex ) ->
-    index = $(ServiciosTable.fnGetData()).getIndexObj aData, 'int_servicio_id'
-    acciones = getActionButtons "111"
-    ServiciosTable.fnUpdate( acciones, index, 3 ); 
+    ), 1000
+
+  FormatoOfrenda = [  { "sWidth": "25%","mDataProp": "int_ofrenda_id"},
+                      { "sWidth": "35%","mDataProp": "servicio"},
+                      { "sWidth": "15%","mDataProp": "registro"},
+                      { "sWidth": "15%","mDataProp": "monto"},
+                      { "sWidth": "10%","mDataProp": "acciones"}
+                      ]
+
+  OfrendaRowCB = (  nRow, aData, iDisplayIndex ) ->
+    index = $(OfrendaTable.fnGetData()).getIndexObj aData, 'int_ofrenda_id'
+    acciones = getActionButtons "011"
+    OfrendaTable.fnUpdate( acciones, index, 4 ); 
 
 
 
-  ServiciosTable = createDataTable "dataOfrendas", root.SourceTServicio, FormatoServiciosTable, null, ServiciosRowCB
+  OfrendaTable = createDataTable "dataOfremdas", root.SourceOfrendas, FormatoOfrenda, null, OfrendaRowCB
 
 
   # Proceso para enviar metodo Post
@@ -33,30 +45,12 @@ jQuery ->
     root.DatosEnviar = $("#form_ofrenda").serialize()
   # Proceso para enviar metodo Post
 
-
-    # Funcion de respuesta CORRECTA
-    # Los datos de respuesta se reciben en data
-  SuccessFunction = ( data ) ->
-    #recargar datos de tabla Servicios
-    #ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
-    #resetear formulario
-    $("#fecha").reset()
-    $("#monto").reset()
-
-    #reniciar tabla
-    #HorarioTable.fnClearTable()
-    #mostrar datos de respuesta
-    console.log(data)
-    false
-
   # 2. Enviar Datos
-  $("#btnGuardar_Ofrenda").click (e) ->
-    console.log "ofrenda"
-    #Llamada a preparar Datps
+  $("#btnGuardar_Ofrenda").click (event) ->
+    event.preventDefault()
+    DisplayBlockUI "loader"
     PrepararDatos()
-    #Llamada a envio Post
     enviar "/ofrendas_guardar",  root.DatosEnviar , SuccessFunction, null
-    false
 
   cargar_turno = ->
     turnos = getAjaxObject "/recuperar_turno_inicio/"+$("#_servicio").val()

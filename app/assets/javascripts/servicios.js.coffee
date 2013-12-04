@@ -130,7 +130,7 @@ jQuery ->
 
   $("#btnGuardarServicio").click (event) ->
     event.preventDefault()
-    if HorarioTable.fnGetData.length > 0
+    if HorarioTable.fnSettings().fnRecordsTotal() > 0
       DisplayBlockUISingle "confirmmodal"
     else
       alert "Falta agregar Horario"
@@ -139,7 +139,7 @@ jQuery ->
   $("#btnRegistrarServicio").click (event) ->
     event.preventDefault()
     #Llamada a preparar Datps
-    if HorarioTable.fnGetData.length > 0
+    if HorarioTable.fnSettings().fnRecordsTotal() > 0
       PrepararDatos()
       #Llamada a envio Post
       DisplayBlockUI "loader"

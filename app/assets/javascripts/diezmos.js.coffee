@@ -11,7 +11,7 @@ jQuery ->
 
   SuccessFunction = ( data ) ->
     DiezmoTable.fnReloadAjax root.SourceTServicio    
-    $(".form").reset()
+    $("form").reset()
     MessageSucces()
 
   MessageSucces = ->
@@ -45,7 +45,7 @@ jQuery ->
 
   $("#btnGuardar_Diezmo").click (event) ->
     event.preventDefault()
-    #Llamada a preparar Datps
+    DisplayBlockUI "loader"
     PrepararDatos()
     #Llamada a envio Post
     enviar "/diezmos_guardar", root.DatosEnviar, SuccessFunction, null

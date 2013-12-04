@@ -120,26 +120,26 @@
       / Dashboard wrapper end
     / Main Container end
     / Scripts
-    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.min.js"}
-    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/bootstrap.js"}
-    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery-ui-1.8.23.custom.min.js"}
-    / Easy pie charts 
-    %script{src:"http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.easy-pie-chart.js"}
-    / Sparkline JS
-    %script{src:"http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.sparkline.js"}
-    / Data tables
-    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.dataTables.js"}
-    / Custom Js
-    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom-tables.js"}
+  %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.min.js"}
+  %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/bootstrap.js"}
+  %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery-ui-1.8.23.custom.min.js"}
+  / Easy pie charts 
+  %script{src:"http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.easy-pie-chart.js"}
+  / Sparkline JS
+  %script{src:"http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.sparkline.js"}
+  / Data tables
+  %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.dataTables.js"}
+  / Custom Js
+  %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom-tables.js"}
 
-    %script{src: "http://malsup.github.io/jquery.blockUI.js"}
+  %script{src: "http://malsup.github.io/jquery.blockUI.js"}
 
-    :javascript
-      urlES = "/dt_ES.txt"
-    = javascript_include_tag "util/functiongen.js"
-    = javascript_include_tag "util/datatable_plugins.js"
-    = javascript_include_tag "jqueryvalidation/languages/jquery.validationEngine-es.js"
-    = javascript_include_tag "jqueryvalidation/jquery.validationEngine.js"
-    = javascript_include_tag "datepicker/js/bootstrap-datepicker.js"
-    = javascript_include_tag "custom.js"
-    = javascript_include_tag :ofrendas
+  :javascript
+    urlES = "/dt_ES.txt"
+  = javascript_include_tag "util/functiongen.js"
+  = javascript_include_tag "util/datatable_plugins.js"
+  = javascript_include_tag "jqueryvalidation/languages/jquery.validationEngine-es.js"
+  = javascript_include_tag "jqueryvalidation/jquery.validationEngine.js"
+  = javascript_include_tag "datepicker/js/bootstrap-datepicker.js"
+  = javascript_include_tag "custom.js"
+  = javascript_include_tag :ofrendas
