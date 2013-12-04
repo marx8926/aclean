@@ -73,20 +73,20 @@ jQuery ->
         $("#apellidov").val aData.persona_data.var_persona_apellidos
         $("#edadv").val aData.persona_data.int_persona_edad
         $(aData.telefono_data).each (index) ->
-        showtipotel = ""
-        if(this.int_telefono_tipo == 1)
-          showtipotel = "Celular"
-        else
-          showtipotel = "Fijo"
-        tel =
-          "numero": this.var_telefono_codigo + this.var_telefono
-          "tipo" : showtipotel
-          "btn_elim":""
-          "id":this.int_telefono_id
-          "tipo_val": this.int_telefono_tipo
-          "codigo": this.var_telefono_codigo
-          "tel": this.var_telefono
-        TelefonoVTable.fnAddData tel        
+          showtipotel = ""
+          if(this.int_telefono_tipo == 1)
+            showtipotel = "Celular"
+          else
+            showtipotel = "Fijo"
+          tel =
+            "numero": this.var_telefono_codigo + this.var_telefono
+            "tipo" : showtipotel
+            "btn_elim":""
+            "id":this.int_telefono_id
+            "tipo_val": this.int_telefono_tipo
+            "codigo": this.var_telefono_codigo
+            "tel": this.var_telefono
+          TelefonoVTable.fnAddData tel        
         $("#invitadov").val aData.persona_data.var_persona_invitado
 
       else 
