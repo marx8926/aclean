@@ -47,6 +47,7 @@ jQuery ->
           "var_turno_dia_des": dia_desc
           "int_turno_dia": this.int_turno_dia
           "var_turno_horainicio" : this.var_turno_horainicio
+          "var_turno_horafin": this.var_turno_horafin
           "btn_elim": getActionButtons "001"
           "id": this.int_turno_id
         HorarioTable.fnAddData horario
