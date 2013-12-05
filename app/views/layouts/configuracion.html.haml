@@ -105,6 +105,15 @@
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Información
+            %ul
+              %li
+                %a{href: dashboard_asistencia_path} Asistencia
+              %li
+                %a{href: dashboard_diezmo_path} Diezmos
+              %li
+                %a{href: dashboard_ofrenda_path} Ofrendas
+              %li
+                %a{href: dashboard_membresia_path} Miembros/Visitantes
           %li
             %span.current-arrow
             %a{href: "#"}
@@ -116,6 +125,8 @@
                 %a{href: configuracion_datos_generales_path} Datos Generales
               %li
                 %a{href: configuracion_lugar_path} Lugar
+              %li
+                %a{href: configuracion_usuario_path} Usuarios
               %li
                 %a{href: configuracion_servicios_path} Servicios
       / Mian navigation end
@@ -135,6 +146,12 @@
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.dataTables.js"}
     / Custom Js
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom-tables.js"}
+<<<<<<< HEAD
+=======
+    = javascript_include_tag "wizard/bwizard.js"
+    / custom Js
+    = javascript_include_tag "custom.js"
+>>>>>>> 9136b45d685e5b40d1d7ab6742c807d438b09d94
     %script{src: "http://malsup.github.io/jquery.blockUI.js"}
     :javascript
       urlES = "/dt_ES.txt"

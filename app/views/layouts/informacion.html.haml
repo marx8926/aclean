@@ -18,12 +18,11 @@
     %meta{content: "width=device-width, initial-scale=1.0, user-scalable=no", name: "viewport"}/
     %meta{content: "Admin Church", name: "description"}/
     %meta{content: "Admin Chuch, CLM Developers, Administración Eclesiástica, Iglesia", name: "keywords"}/
-    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/html5-trunk.js"}
-    %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/icomoon/style.css", rel: "stylesheet"}/
+    = javascript_include_tag "html5-trunk.js"
+    = stylesheet_link_tag "icomoon/style.css"
     /[if lte IE 7]
-      <script src="http://d9i0z8gxqnxp1.cloudfront.net/css/icomoon-font/lte-ie7.js"></script>
     / bootstrap css
-    %link{href: "http://d9i0z8gxqnxp1.cloudfront.net/css/bootstrap.css", rel: "stylesheet"}/
+    = stylesheet_link_tag "bootstrap.css"
     / custom css
     = stylesheet_link_tag "main"
     = stylesheet_link_tag "smooth/jquery-ui-1.8.16.custom"
@@ -99,12 +98,21 @@
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Asistencia
           %li
+            %span.current-arrow
             %a{href: "charts.html"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Información
+            %ul
+              %li
+                %a{href: dashboard_asistencia_path} Asistencia
+              %li
+                %a{href: dashboard_diezmo_path} Diezmos
+              %li
+                %a{href: dashboard_ofrenda_path} Ofrendas
+              %li
+                %a{href: dashboard_membresia_path} Miembros/Visitantes
           %li
-            %span.current-arrow
             %a{href: "#"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
@@ -115,6 +123,8 @@
               %li
                 %a{href: configuracion_lugar_path} Lugar
               %li
+                %a{href: configuracion_usuario_path} Usuarios
+              %li
                 %a{href: configuracion_servicios_path} Servicios
       / Mian navigation end
       = yield
@@ -122,19 +132,20 @@
     / Main Container end
 
     / Scripts
-    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.min.js"}
-    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/bootstrap.js"}
-    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery-ui-1.8.23.custom.min.js"}
+    = javascript_include_tag "jquery.min.js"
+    = javascript_include_tag "bootstrap.js"
+    = javascript_include_tag "jquery-ui-1.8.23.custom.min.js"
     / Easy pie charts 
     %script{src:"http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.easy-pie-chart.js"}
     / Sparkline JS
     %script{src:"http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.sparkline.js"}
     / Data tables
-    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.dataTables.js"}
+    = javascript_include_tag "jquery.dataTables.js"
     / Custom Js
-    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom-tables.js"}
+    = javascript_include_tag "custom-tables.js"
     / custom Js
-    %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom.js"}
+    = javascript_include_tag "custom.js"
+
     %script{src: "http://malsup.github.io/jquery.blockUI.js"}
     :javascript
       urlES = "/dt_ES.txt"

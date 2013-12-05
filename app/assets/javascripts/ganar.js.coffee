@@ -220,8 +220,6 @@ jQuery ->
         index = $(TelefonoVTable.fnGetData()).getIndexObj aData, 'id'
         TelefonoVTable.fnDeleteRow index
 
-  $(".wizard").bwizard({nextBtnText: "Siguiente &rarr;", backBtnText: "&larr; Anterior"})
-
   $('#registrar_miembro').click (event) ->
     event.preventDefault()
     HideForms()
