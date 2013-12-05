@@ -59,6 +59,7 @@ Lean::Application.routes.draw do
   get "data_pie" => "informacion#pie_chart_init"
 
   get "dashboard_diezmo" => "informacion#diezmo"
+  get "recuperar_data_diezmo" => "informacion#recuperar_data_diezmo"
   get "dashboard_ofrenda" => "informacion#ofrenda"
   get "dashboard_membresia" => "informacion#membresia"
   get "dashboard_asistencia" => "informacion#asistencia"
