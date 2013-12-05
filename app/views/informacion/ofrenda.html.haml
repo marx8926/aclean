@@ -30,6 +30,24 @@
                       .row
                         .col-lg-2.col-sm-2
                           %select#servicio.form-control{name: "servicio"}
+                        %label.col-lg-1.col-sm-1.checkbox-inline{style:"text-align:right;"}
+                          %input#mes{type: "checkbox", name: "mes", style:"float:none;"}
+                          Mes
+                        .col-lg-2.col-sm-2
+                          %select#mes_lista.form-control{name: "mes_lista"}
+                            %option{value: "0"} Todos
+                            %option{value: "1"} Enero
+                            %option{value: "2"} Febrero
+                            %option{value: "3"} Marzo
+                            %option{value: "4"} Abril
+                            %option{value: "5"} Mayo
+                            %option{value: "6"} Junio
+                            %option{value: "7"} Julio
+                            %option{value: "8"} Agosto
+                            %option{value: "9"} Setiembre
+                            %option{value: "10"} Octubre
+                            %option{value: "11"} Noviembre
+                            %option{value: "12"} Diciembre
                         %label.col-lg-2.col-sm-2.checkbox-inline{style:"text-align:right;"}
                           %input#semana{type: "checkbox", name: "semana", style:"float:none;"}
                           Semana
