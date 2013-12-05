@@ -66,9 +66,27 @@
                           %button#btnGenerar_diezmo.btn.btn-success{type: "button", name: "btnGenerar_diezmo"} 
                             Generar
           .row
-            .col-md-12.col-sm-12
+            .col-md-6.col-sm-6
               .widget
                 .widget-body
-                  #dash_pie
+                  #dash_general_lineas
+
+            .col-md-6.col-sm-6
+              .widget
+                .widget-body
+                  #dash_general_pie
+          .row
+            .col-md-6.col-sm-6
+              .widget
+                .widget-body
+                  #dash_detalle_hombres
+
+            .col-md-6.col-sm-6
+              .widget
+                .widget-body
+                  #dash_detalle_mujeres
+
 
             
+- content_for :bloquejavascript do
+  = javascript_include_tag :dash_asistencia

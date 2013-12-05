@@ -243,7 +243,7 @@ class InformacionController < ApplicationController
                     ini = fecha.beginning_of_month
                     fin = fecha.end_of_month
 
-                    result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto).to_i
+                    result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto).to_f
 
                 }
                 categorias = meses
@@ -254,7 +254,7 @@ class InformacionController < ApplicationController
                 ini = fecha.beginning_of_month
                 fin = fecha.end_of_month
 
-                result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto).to_i
+                result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto).to_f
 
                 categorias = [ meses[num_mes-1]]
             end
@@ -267,7 +267,7 @@ class InformacionController < ApplicationController
             ini = fecha.at_beginning_of_year
             fin = fecha.at_end_of_year
 
-            result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto)
+            result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto).to_f
 
         end
             
@@ -285,11 +285,104 @@ class InformacionController < ApplicationController
 
     end
 
+    def recuperar_data_ofrenda
+
+         mes = true
+        semana = false
+        num_mes = 0
+        num_semana = 1
+        anio = 2013
+
+        meses = [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
+
+        categorias = nil
+
+        result_todo = []
+
+        if mes == true and semana == true
+
+
+
+        elsif mes == true and semana == false
+
+            if num_mes == 0
+                # para todos los meses
+                lista = (0 .. 11 ).to_a
+
+                lista.each{ |i|
+
+                    fecha = DateTime.new(anio, i + 1)
+                    ini = fecha.beginning_of_month
+                    fin = fecha.end_of_month
+
+                    result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto).to_f
+
+                }
+                categorias = meses
+
+            else
+                #para un mes en especifico
+                fecha = DateTime.new(anio, num_mes )
+                ini = fecha.beginning_of_month
+                fin = fecha.end_of_month
+
+                result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto).to_f
+
+                categorias = [ meses[num_mes-1]]
+            end
+        else
+
+            #por año
+
+            fecha = DateTime.new(anio)
+
+            ini = fecha.at_beginning_of_year
+            fin = fecha.at_end_of_year
+
+            result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto).to_f
+
+        end
+            
+        titulo = "Ofrendas"
+        subtitulo = "del mes"
+        ejey = "Soles"
+        nombre_serie = "Iglesia"
+
+        result = generar_json_column(titulo, subtitulo, ejey, nombre_serie, categorias, result_todo)
+
+        render :json => result , :status => :ok
+
+    end
+
+    def 
+
     def membresia
 
     end
 
     def asistencia
+
+    end
+
+    def recuperar_data_asistencia
+
+        serv =Servicio.first
+        mes = true
+        semana = false
+        num_mes = 0
+        num_semana = 1
+        anio = 2013
+
+        if mes == true and semana == true
+
+        elsif mes == true and semana == false
+
+        else
+
+        end
+            
+
+
 
     end
 
