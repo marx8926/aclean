@@ -3,7 +3,8 @@ root = exports ? this
 
 jQuery ->
 
-
+  
+  $(".wizard").bwizard({nextBtnText: "Siguiente &rarr;", backBtnText: "&larr; Anterior"})
 #guardar usuario
 
 # Proceso para enviar metodo Post

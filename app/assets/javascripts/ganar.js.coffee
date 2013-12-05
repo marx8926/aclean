@@ -10,6 +10,8 @@ root.SelectToDrop = null
 root.TipoForm = null
 
 jQuery ->
+  
+  $(".wizard").bwizard({nextBtnText: "Siguiente &rarr;", backBtnText: "&larr; Anterior"})
 
   PrepararDatosVisitante = ->
     root.DatosEnviarV =

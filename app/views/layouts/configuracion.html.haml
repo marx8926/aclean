@@ -146,20 +146,18 @@
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/jquery.dataTables.js"}
     / Custom Js
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom-tables.js"}
-<<<<<<< HEAD
-=======
+    %script{src: "http://malsup.github.io/jquery.blockUI.js"}
+    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=true"
+    = javascript_include_tag "jqueryvalidation/languages/jquery.validationEngine-es.js"
+    = javascript_include_tag "jqueryvalidation/jquery.validationEngine.js"    
+    = javascript_include_tag "datepicker/js/bootstrap-datepicker.js"
     = javascript_include_tag "wizard/bwizard.js"
     / custom Js
     = javascript_include_tag "custom.js"
->>>>>>> 9136b45d685e5b40d1d7ab6742c807d438b09d94
-    %script{src: "http://malsup.github.io/jquery.blockUI.js"}
     :javascript
       urlES = "/dt_ES.txt"
     = javascript_include_tag "util/datatable_plugins.js"
     = javascript_include_tag "util/functiongen.js"   
-    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=true"
-    = javascript_include_tag "jqueryvalidation/languages/jquery.validationEngine-es.js"
-    = javascript_include_tag "jqueryvalidation/jquery.validationEngine.js"
     = javascript_include_tag :configuracion
     
     =yield :bloquejavascript
