@@ -119,20 +119,47 @@ class InformacionController < ApplicationController
         render :json => result, :status => :ok
 	end
 
-	def chart_jovenes
+	def pie_chart_init
 
-	end
+        visita = Chart.sum(:int_chart_visita, :conditions => [ "int_chart_anio =?",2013])
+        miembro = Chart.sum(:int_chart_miembro, :conditions => [ "int_chart_anio =?",2013])
 
-	def chart_adultos
+        result = {
 
-	end
+            chart: {
+                plotBackgroundColor: nil,
+                plotBorderWidth: nil,
+                plotShadow: false
+            },
+            title: {
+                text: 'Nuevos Miembros vs Nuevas Visitas'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }   
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Miembros',
+                data: [
+                    ['Miembro',  miembro],
+                    ['Visita',   visita]                   
+                ]   
+            }]
+        }
 
-	def chart_adolescentes
-
-	end
-
-	def chart_ninios
-
-	end
+        render :json => result, :status => :ok
+    end
 
 end

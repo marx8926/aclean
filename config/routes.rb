@@ -56,6 +56,7 @@ Lean::Application.routes.draw do
   get "dashboard" => "informacion#index"
   get "data_miembro" => "informacion#chart_miembro"
   get "data_visitante" => "informacion#chart_visitante"
+  get "data_pie" => "informacion#pie_chart_init"
   
 
 
