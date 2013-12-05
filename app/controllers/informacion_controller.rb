@@ -167,6 +167,120 @@ class InformacionController < ApplicationController
 
     end
 
+    def generar_json_column(titulo, subtitulo, ejey, nombre_serie, categorias, result_todo)
+
+                 
+        result = {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: titulo
+            },
+            subtitle:{
+                text: subtitulo
+            },
+            xAxis: {
+                categories: categorias
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: ejey
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: nombre_serie,
+                data: result_todo
+                }]
+
+
+        }
+        return result
+    end
+
+    def recuperar_data_diezmo
+
+        mes = true
+        semana = false
+        num_mes = 0
+        num_semana = 1
+        anio = 2013
+
+        meses = [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
+
+        categorias = nil
+
+        result_todo = []
+
+        if mes == true and semana == true
+
+
+
+        elsif mes == true and semana == false
+
+            if num_mes == 0
+                # para todos los meses
+                lista = (0 .. 11 ).to_a
+
+                lista.each{ |i|
+
+                    fecha = DateTime.new(anio, i + 1)
+                    ini = fecha.beginning_of_month
+                    fin = fecha.end_of_month
+
+                    result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto).to_i
+
+                }
+                categorias = meses
+
+            else
+                #para un mes en especifico
+                fecha = DateTime.new(anio, num_mes )
+                ini = fecha.beginning_of_month
+                fin = fecha.end_of_month
+
+                result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto).to_i
+
+                categorias = [ meses[num_mes-1]]
+            end
+        else
+
+            #por año
+
+            fecha = DateTime.new(anio)
+
+            ini = fecha.at_beginning_of_year
+            fin = fecha.at_end_of_year
+
+            result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto)
+
+        end
+            
+        titulo = "Diezmos"
+        subtitulo = "del mes"
+        ejey = "Soles"
+        nombre_serie = "Iglesia"
+
+        result = generar_json_column(titulo, subtitulo, ejey, nombre_serie, categorias, result_todo)
+
+        render :json => result , :status => :ok
+    end
+
     def ofrenda
 
     end
@@ -178,5 +292,5 @@ class InformacionController < ApplicationController
     def asistencia
 
     end
-    
+
 end
