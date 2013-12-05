@@ -27,7 +27,7 @@ jQuery ->
     #reniciar tabla
     #HorarioTable.fnClearTable()
     #mostrar datos de respuesta
-    console.log(data)
+    console.log data
 
 # 2. Enviar Datos
   $("#btnGuardar_iglesia").click (e) ->

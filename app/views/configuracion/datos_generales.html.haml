@@ -47,13 +47,13 @@
                 .form-group
                   %label.col-sm-2.control-label{for: "psn1"} Ps. 1
                   .col-sm-10
-                    =hidden_field_tag :psn_val1
-                    %input#psn1.form-control{type: "text", name: "psn1"}/
+                    =hidden_field_tag :psn_val1, ( @pas.nil? ? nil : @pas.first.persona.int_persona_id )
+                    %input#psn1.form-control{type: "text", name: "psn1", value: ( @pas.nil? ? nil : @pas.first.persona.var_persona_nombres + ' ' + @pas.first.persona.var_persona_apellidos ) }/
                 .form-group
                   %label.col-sm-2.control-label{for: "psn2"} Ps. 2
                   .col-sm-10
-                    = hidden_field_tag :psn_val2
-                    %input#psn2.form-control{type: "text", name: "psn2"}/
+                    = hidden_field_tag :psn_val2, ( @pas.nil?  ? nil : ( @pas.count ==2 ?  @pas.last.persona.int_persona_id : nil ) )
+                    %input#psn2.form-control{type: "text", name: "psn2", value: ( @pas.nil?  ? nil : ( @pas.count == 2 ? @pas.last.persona.var_persona_nombres + ' ' + @pas.last.persona.var_persona_apellidos : nil ) )}/
                 %h3.heading-a Ubicación
                 .form-group
                   %label.col-lg-2.control-label{for: "departamento"} Departamento

@@ -7,6 +7,12 @@ class ConfiguracionController < ApplicationController
 	def datos_generales
 		
 		@igle = Iglesia.first
+		@pas = nil
+		if @igle.nil? == false
+			@pas = NivelCrecimiento.where("int_nivelcrecimiento_escala" => 2)
+		end
+
+		[@igle, @pas]
 	end
 	
 	def servicios
@@ -159,27 +165,31 @@ class ConfiguracionController < ApplicationController
 			if x != nil
 				tshow= ""
 				arrayturn = []
-				turnos = Turno.joins(:servicio).where("servicio_id" => x.int_servicio_id)
+				turnos = Turno.where("servicio_id" => x.int_servicio_id)
 				turnos.each{ |y|
 					case y[:int_turno_dia]
-						when 0
-							dia = "Domingo"
-						when 1
-							dia = "Lunes"
-						when 2
-							dia = "Martes"
-						when 3
-							dia = "Miercoles"
-						when 4
-							dia = "Jueves"
-						when 5
-							dia = "Viernes"
-						else
-							dia = "Sabado"
-          end
-					tshow = tshow + "<p>"+dia+" : "+y[:var_turno_horainicio]+":00 - "+ y[:var_turno_horafin]+":00 </p>"
-          arrayturn.push y
-				}			
+					when 0
+						dia = "Domingo"
+					when 1
+						dia = "Lunes"
+					when 2
+						dia = "Martes"
+					when 3
+						dia = "Miercoles"
+					when 4
+						dia = "Jueves"
+					when 5
+						dia = "Viernes"
+					else
+						dia = "Sabado"
+          			end
+
+          			tshow = tshow + "<p>"+dia+" : "+y[:var_turno_horainicio]+":00 - "+ y[:var_turno_horafin]+":00 </p>"
+          			arrayturn.push y
+					
+				}
+
+
 			end
 			serv['turnos'] = arrayturn
 			serv['turnoshow'] = tshow
@@ -190,6 +200,9 @@ class ConfiguracionController < ApplicationController
 
 
 	def guardar_datos_generales
+
+		pastor1 = nil
+		pastor2 = nil
 
 		ActiveRecord::Base.transaction do
 			begin
@@ -211,14 +224,22 @@ class ConfiguracionController < ApplicationController
 					 :dou_iglesia_latitud =>  params[:latitud] ,
 					 :ubigeo => Ubigeo.find(params[:distrito])})
 
-					pastor1 = Persona.find(params[:psn_val1])
-					pastor2 = Persona.find(params[:psn_val2])
+					psn1 = params[:psn_val1]
+					psn2 = params[:psn_val2]
+
+					if psn1.nil? == false and psn1.length > 0
+						pastor1 = Persona.find(psn1)
+					end
+
+					if psn2.nil? == false and psn2.length > 0
+						pastor2 = Persona.find(psn2)
+					end
 
 
 					# actualizacion de niveles anteriores 
 
 					if pastor1 != nil 
-						NivelCrecimiento.joins(:persona).where("persona_id"=> pastor1.int_persona_id).update_all(int_nivelcrecimiento_estadoactual: 0)
+						NivelCrecimiento.where("persona_id"=> pastor1.int_persona_id).update_all(int_nivelcrecimiento_estadoactual: 0)
 
 
 						#guardamos un nuevo nivel de crecimiento
@@ -234,7 +255,7 @@ class ConfiguracionController < ApplicationController
 
 					if pastor2 != nil
 
-						NivelCrecimiento.joins(:persona).where("persona_id"=> pastor2.int_persona_id).update_all(int_nivelcrecimiento_estadoactual: 0)
+						NivelCrecimiento.where("persona_id"=> pastor2.int_persona_id).update_all(int_nivelcrecimiento_estadoactual: 0)
 
 
 						nivel_pastor2 = NivelCrecimiento.new({ :int_nivelcrecimiento_escala => 2 ,
@@ -267,7 +288,7 @@ class ConfiguracionController < ApplicationController
 			end
 		end
 
-		render :json => params, :status => :ok
+		render :json => { :resp => params }, :status => :ok
 
 	end
 
@@ -289,7 +310,7 @@ class ConfiguracionController < ApplicationController
 	end
 
 	def drop_servicio
-		servicio = Servicio.find(params[:idservicio])
+		servicio = Servicio.lock.find(params[:idservicio])
 		Turno.destroy_all(servicio_id: params[:idservicio])
 		servicio.destroy
 		render :json => { :datos => params[:idservicio]}, :status => :ok
@@ -298,12 +319,13 @@ class ConfiguracionController < ApplicationController
 	def editar_servicio
 		form = params[:formulario]
 		otherdata = params[:otherdata]
-		servicio = Servicio.find(form[:idservicio])
+		servicio = Servicio.lock.find(form[:idservicio])
 		servicio.update(:var_servicio_nombre => form[:nombre], :int_servicio_tipo => form[:tipo])
 		Turno.destroy_all(servicio_id: form[:idservicio])
 		otherdata.each{ |x|
 					data = x.last
-					turno = Turno.new({:var_turno_horainicio => data[:var_turno_horainicio], :int_turno_dia => data[:int_turno_dia], :servicio => servicio})
+					turno = Turno.new({:var_turno_horafin => data[:var_turno_horafin],
+						:var_turno_horainicio => data[:var_turno_horainicio], :int_turno_dia => data[:int_turno_dia], :servicio => servicio})
 					turno.save!
 		}
 		render :json => { :datos => params}, :status => :ok
