@@ -36,8 +36,8 @@ jQuery ->
 
   AsistenciaFormato = [   { "sWidth": "35%","mDataProp": "servicio"},
                         { "sWidth": "15%","mDataProp": "fecha"},
-                        { "sWidth": "10%","mDataProp": "categoria"},
-                        { "sWidth": "10%","mDataProp": "asistencia"}
+                        { "sWidth": "25%","mDataProp": "categoria"},
+                        { "sWidth": "20%","mDataProp": "asistencia"}
                         ]
 
   AsistenciaTable = createDataTable "table_asistencia", root.SourceTAsistencia, AsistenciaFormato, null, null

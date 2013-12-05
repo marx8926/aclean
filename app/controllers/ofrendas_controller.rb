@@ -34,10 +34,11 @@ class OfrendasController < ApplicationController
 
 			rescue
 				raise ActiveRecord::Rollback
+				render :json => { :resp => "bad"} , :status => :ok
 			end
 		end
 
-		render :json => "ok" , :status => :ok
+		render :json => { :resp => "ok" } , :status => :ok
 
 	end
 

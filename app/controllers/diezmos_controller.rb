@@ -5,10 +5,11 @@ class DiezmosController < ApplicationController
 
 	def guardar
 
-		ActiveRecord::Base.transaction do
+		if params[:persona_hidden].length > 0
+			ActiveRecord::Base.transaction do
 			begin
 
-				persona = Persona.find(params[:persona_hidden])
+				persona = Persona.lock.find(params[:persona_hidden])
 
 				if persona.nil? == false
 					diezmo = Diezmo.new({
@@ -19,14 +20,21 @@ class DiezmosController < ApplicationController
 					})
 
 					diezmo.save!
+				else
+					render :json => {:resp => "bad" } , :status => :ok
 				end
 
 			rescue Exception => e
 				raise ActiveRecord::Rollback
+				render :json => {:resp => "bad" } , :status => :ok
 			end
+			end
+
+			render :json => {:resp => "ok" } , :status => :ok
+		else
+			render :json => {:resp => "bad" } , :status => :ok
 		end
 
-		render :json => {:resp => "ok" } , :status => :ok
 	end
 
 

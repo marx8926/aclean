@@ -19,17 +19,16 @@ jQuery ->
 
     ), 1000
 
-  FormatoOfrenda = [  { "sWidth": "25%","mDataProp": "int_ofrenda_id"},
-                      { "sWidth": "35%","mDataProp": "servicio"},
-                      { "sWidth": "15%","mDataProp": "registro"},
-                      { "sWidth": "15%","mDataProp": "monto"},
-                      { "sWidth": "10%","mDataProp": "acciones"}
+  FormatoOfrenda = [  { "sWidth": "25%","mDataProp": "servicio"},
+                      { "sWidth": "35%","mDataProp": "turno"},
+                      { "sWidth": "25%","mDataProp": "registro"},
+                      { "sWidth": "15%","mDataProp": "monto"}
                       ]
 
   OfrendaRowCB = (  nRow, aData, iDisplayIndex ) ->
     index = $(OfrendaTable.fnGetData()).getIndexObj aData, 'int_ofrenda_id'
-    acciones = getActionButtons "011"
-    OfrendaTable.fnUpdate( acciones, index, 4 ); 
+    #acciones = getActionButtons "011"
+    #OfrendaTable.fnUpdate( acciones, index, 4 ); 
 
 
 
@@ -57,6 +56,6 @@ jQuery ->
     cargarSelect turnos, "turno", "turno", "inicio"
 
   $("#_servicio").change ->
-    console.log "holas"
+
     cargar_turno()
   

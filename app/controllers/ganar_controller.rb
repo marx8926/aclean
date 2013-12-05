@@ -26,7 +26,7 @@ class GanarController < ApplicationController
 
 				persona.save!
 
-				ch = Chart.find_by(:int_chart_anio => persona.dat_persona_fecregistro.year,
+				ch = Chart.lock.find_by(:int_chart_anio => persona.dat_persona_fecregistro.year,
 				 :int_chart_mes => persona.dat_persona_fecregistro.month)
 
 				if ch.nil? == false
@@ -128,7 +128,7 @@ class GanarController < ApplicationController
 					p.lugar = Lugar.find(form[:lugar])
 					p.save!
 
-					direccion =  Direccion.find_by("persona_id" => idPersona)
+					direccion =  Direccion.lock.find_by("persona_id" => idPersona)
 
 					direccion.var_direccion_descripcion = form[:direccion]
 					direccion.var_direccion_referencia = form[:referencia]
@@ -140,7 +140,7 @@ class GanarController < ApplicationController
 					if tabla != nil
 						tabla.each{ |y|
 							x = y.last
-							telefono = Telefono.find_by({:int_telefono_tipo => x[:tipo_val],
+							telefono = Telefono.lock.find_by({:int_telefono_tipo => x[:tipo_val],
 							:var_telefono_codigo => x[:codigo],
 							:var_telefono => x[:tel], :persona_id => idPersona})
 
@@ -186,20 +186,26 @@ class GanarController < ApplicationController
 
 			begin
 
-				persona = Persona.find(id).delete
+				persona = Persona.find(id)
 
-				dir = Direccion.find_by("persona_id" => id).delete
+				dir = Direccion.find_by("persona_id" => id)
 
-				nivel = NivelCrecimiento.find_by("persona_id" => id).delete
+				nivel = NivelCrecimiento.where("persona_id" => id)
+				peticion = Peticion.where("persona_id" => id)		
+				
+				tel = Telefono.where("persona_id" => id)
 
-				peticion = Peticion.find_by("persona_id" => id).delete
-				
+				if persona != nil && dir!=nil and nivel!=nil and peticion!=nil
+					persona.destroy!
+					dir.destroy!
+					nivel.destroy!
+					peticion.destroy!
 
-				
-				
-				
-				
-				Telefono.where("persona_id" => id).destroy_all
+					if tel != nil
+						tel.destroy_all!
+					end
+				end
+
 
 				
 			rescue Exception => e
@@ -230,7 +236,7 @@ class GanarController < ApplicationController
 
 				persona.save!
 
-				ch = Chart.find_by(:int_chart_anio => persona.dat_persona_fecregistro.year,
+				ch = Chart.lock.find_by(:int_chart_anio => persona.dat_persona_fecregistro.year,
 				 :int_chart_mes => persona.dat_persona_fecregistro.month)
 
 				if ch.nil? == false
@@ -289,6 +295,65 @@ class GanarController < ApplicationController
 	end
 
 	def editar_visita
+
+		form = params[:formulario]
+		tabla = params[:tabla]
+		todo = nil
+
+		ActiveRecord::Base.transaction do
+
+			begin
+
+				idPersona = form[:idPersona]				
+
+				if idPersona!= nil and idPersona.length > 0
+
+					p= Persona.lock.find(idPersona)
+					
+					p.var_persona_nombres = form[:nombrev]
+					p.var_persona_apellidos = form[:apellidov]
+					p.int_persona_edad = form[:edadv]
+					p.var_persona_invitado = form[:invitadov]
+					p.iglesia = Iglesia.first
+					p.save!
+
+					if tabla != nil
+						tabla.each{ |y|
+							x = y.last
+							telefono = Telefono.lock.find_by({:int_telefono_tipo => x[:tipo_val],
+							:var_telefono_codigo => x[:codigo],
+							:var_telefono => x[:tel], :persona_id => idPersona})
+
+							if telefono != nil
+								telefono.update!({:int_telefono_tipo => x[:tipo_val],
+								:var_telefono_codigo => x[:codigo],
+								:var_telefono => x[:tel], :persona_id => idPersona})
+							else
+								Telefono.create!({:int_telefono_tipo => x[:tipo_val],
+								:var_telefono_codigo => x[:codigo],
+								:var_telefono => x[:tel], :persona_id => idPersona})
+							end
+
+						}
+
+					else
+						Telefono.destroy!(:persona_id => idPersona)
+					end
+
+				end
+
+			rescue
+				raise ActiveRecord::Rollback
+
+				render :json => {:resp => "bad" } , :status => :ok
+
+
+			end
+
+		end
+
+		render :json => {:resp => "ok" } , :status => :ok
+
 
 	end
 

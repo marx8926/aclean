@@ -129,7 +129,7 @@ jQuery ->
 
     $(nRow).find('.edit_row').click (event) ->
       event.preventDefault()
-      $(".idPersona").val aData.persona_data.int_persona_id
+      $("#idPersona").val aData.persona_data.int_persona_id
       if("Visitante" == aData.nivel)
         HideForms()
         $("#visitante").show()
@@ -296,7 +296,7 @@ jQuery ->
     else
       PrepararDatosVisitante()
       SuccessFunction()
-      #enviar "/visita_guardar", root.DatosEnviarV, SuccessFunction, null
+      enviar "/persona_editar_visita", root.DatosEnviarV, SuccessFunction, null
 
 
   $(".btnNo").click (event) ->
