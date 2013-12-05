@@ -162,4 +162,21 @@ class InformacionController < ApplicationController
         render :json => result, :status => :ok
     end
 
+
+    def diezmo
+
+    end
+
+    def ofrenda
+
+    end
+
+    def membresia
+
+    end
+
+    def asistencia
+
+    end
+    
 end
