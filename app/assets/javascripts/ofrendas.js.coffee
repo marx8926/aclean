@@ -34,6 +34,15 @@ jQuery ->
 
   OfrendaTable = createDataTable "dataOfremdas", root.SourceOfrendas, FormatoOfrenda, null, OfrendaRowCB
 
+  $(".btnCancelar").click (event) ->
+    event.preventDefault()
+    $("form").reset()
+    $("#ofrenda_div").hide()
+
+  $('#registrar_ofrenda').click (event) ->
+    event.preventDefault()
+    $("#ofrenda_div").toggle()
+    $("form").reset()
 
   # Proceso para enviar metodo Post
 
@@ -47,15 +56,17 @@ jQuery ->
   # 2. Enviar Datos
   $("#btnGuardar_Ofrenda").click (event) ->
     event.preventDefault()
-    DisplayBlockUI "loader"
-    PrepararDatos()
-    enviar "/ofrendas_guardar",  root.DatosEnviar , SuccessFunction, null
+    if $('form').validationEngine 'validate'
+      DisplayBlockUI "loader"
+      PrepararDatos()
+      enviar "/ofrendas_guardar",  root.DatosEnviar , SuccessFunction, null
 
   cargar_turno = ->
     turnos = getAjaxObject "/recuperar_turno_inicio/"+$("#_servicio").val()
     cargarSelect turnos, "turno", "turno", "inicio"
 
   $("#_servicio").change ->
-
     cargar_turno()
+
+  $("form").validationEngine 'attach',{autoHidePrompt:true,autoHideDelay:3000,promptPosition : "centerLeft", scroll: false}
   

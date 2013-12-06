@@ -313,7 +313,6 @@ jQuery ->
   $("#btnguardarv").click (event) ->
     event.preventDefault()    
     if $('#form_visita').validationEngine 'validate'
-      DisplayBlockUI "loader"
       PrepararDatosVisitante()
       enviar "/visita_guardar", root.DatosEnviarV, SuccessFunction, null
 

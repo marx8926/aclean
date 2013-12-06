@@ -27,10 +27,12 @@
     / custom css
     = stylesheet_link_tag "main"
     = stylesheet_link_tag "mapa/jquery-gmaps-lation-picker"
-    = stylesheet_link_tag "smooth/jquery-ui-1.8.16.custom"
+    = stylesheet_link_tag "smooth/jquery-ui-1.8.16.custom"   
+    = stylesheet_link_tag "successblock"
     = stylesheet_link_tag "loader"
     = stylesheet_link_tag "successblock"
-    = stylesheet_link_tag "jqueryvalidation/css/validationEngine.jquery.css"
+    = stylesheet_link_tag "jqueryvalidation/css/validationEngine.jquery.css" 
+    = stylesheet_link_tag "datepicker/css/datepicker.css"
   %body
     / Header start
     %header
@@ -161,15 +163,16 @@
     / Custom Js
     %script{src: "http://d9i0z8gxqnxp1.cloudfront.net/js/custom-tables.js"}
     %script{src: "http://malsup.github.io/jquery.blockUI.js"}
+    
     = javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=true"
     = javascript_include_tag "jqueryvalidation/languages/jquery.validationEngine-es.js"
     = javascript_include_tag "jqueryvalidation/jquery.validationEngine.js"    
     = javascript_include_tag "datepicker/js/bootstrap-datepicker.js"
+    = javascript_include_tag "util/datatable_plugins.js"
     / custom Js
     = javascript_include_tag "custom.js"
     :javascript
       urlES = "/dt_ES.txt"
-    = javascript_include_tag "util/datatable_plugins.js"
     = javascript_include_tag "util/functiongen.js"   
     = javascript_include_tag :configuracion
     

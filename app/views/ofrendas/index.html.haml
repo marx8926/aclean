@@ -14,9 +14,9 @@
     .col-md-12
       .widget
         .widget-header
-          %a.btn#registrar_ofrenda.btn-primary.btn-block{ href: "#collapseOne"}
+          %a.btn#registrar_ofrenda.btn-primary.btn-block
             Agregar Ofrenda
-        %div#ofrenda_div
+        %div#ofrenda_div{style: "display:none"}
           .widget-body
             = form_tag("" , {:method=>'post',:class=>'form-horizontal' , :id => "form_ofrenda" , :name=> "form_ofrenda"}) do
               .form-group
@@ -32,14 +32,14 @@
               .form-group
                 %label.col-lg-2.control-label{for: "fecha"} Fecha
                 .col-lg-10
-                  %input#fecha.form-control.datepicker{name: "fecha", type: "text"}/
+                  %input#fecha.form-control.datepicker{name: "fecha", type: "text" ,class:"validate[required,custom[date]]"}/
               .form-group
                 %label.col-lg-2.control-label{for: "monto"} Monto
                 .col-lg-10
-                  %input#monto.form-control{name: "monto", type: "text"}/
+                  %input#monto.form-control{name: "monto", type: "text",class:"validate[required,custom[number]]"}/
               .form-group
                 .col-lg-offset-2.col-lg-10
-                  %button.btn.btn-default{type: "button"} Cancelar
+                  %button.btnCancelar.btn.btn-default{type: "button"} Cancelar
                   %button#btnGuardar_Ofrenda.btn.btn-success{type: "button"} Guardar
   / Row end
   / Row start

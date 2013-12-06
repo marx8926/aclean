@@ -1,7 +1,7 @@
 root = exports ? this
+
+
 jQuery ->
-
-
   ubigeos = getAjaxObject("https://s3.amazonaws.com/adminchurchs3/json/ubi.json")
   cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
 
@@ -19,22 +19,25 @@ jQuery ->
   # Funcion de respuesta CORRECTA
   # Los datos de respuesta se reciben en data
   SuccessFunctionI = ( data ) ->
-    #recargar datos de tabla Servicios
-    #ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
-    #resetear formulario
     $("#form_iglesia").reset()
     cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
-    #reniciar tabla
-    #HorarioTable.fnClearTable()
-    #mostrar datos de respuesta
+    MessageSucces()
     console.log data
+
+  MessageSucces = ->
+    setTimeout (->
+      $.unblockUI onUnblock: ->
+        $.growlUI "Operacion Exitosa"
+    ), 1000
 
 # 2. Enviar Datos
   $("#btnGuardar_iglesia").click (e) ->
-    #Llamada a preparar Datps
-    PrepararDatosI()
-    #Llamada a envio Post
-    enviar "/configuracion/guardar_datos_generales", root.DatosEnviar, SuccessFunctionI, null
+    if $('form').validationEngine 'validate'
+      #Llamada a preparar Datps      
+      DisplayBlockUI "loader"
+      PrepararDatosI()
+      location.reload();
+      enviar "/configuracion/guardar_datos_generales", root.DatosEnviar, SuccessFunctionI, null
 
 # Fin Proceso enviar Formulario
       
@@ -44,9 +47,8 @@ jQuery ->
 
 #recuperar datos json de personas
 
-personas = getAjaxObject("/persona_servicio_complete")
+  personas = getAjaxObject("/persona_servicio_complete")
 
-$ ->
   $("#psn1").autocomplete(
     source: personas
     select: (event, ui) ->
@@ -55,7 +57,6 @@ $ ->
       false
   )
 
-$ ->
   $("#psn2").autocomplete(
     source: personas
     select: (event, ui) ->
@@ -63,3 +64,5 @@ $ ->
       $("#psn2").val ui.item.label
       false
   )
+
+  $("form").validationEngine 'attach',{autoHidePrompt:true,autoHideDelay:3000,promptPosition : "centerLeft", scroll: false}

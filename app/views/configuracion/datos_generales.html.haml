@@ -30,25 +30,25 @@
                   .col-sm-10
                     .row
                       .col-sm-5
-                        %input#fec_creacion.form-control{type: "date", name:"fec_creacion", value: ( @igle.nil? ? nil :  @igle.dat_iglesia_feccreacion )}
+                        %input#fec_creacion.form-control.datepicker{type: "text", name:"fec_creacion", value: ( @igle.nil? ? nil :  @igle.dat_iglesia_feccreacion ),class:"validate[required,custom[date]]"}
                       %label.col-sm-1.control-label{for: "telefono"} Teléfono
                       .col-sm-5
-                        %input#telefono.form-control{type: "text", name: "telefono", value: ( @igle.nil? ? nil :  @igle.var_iglesia_telefono ) }
+                        %input#telefono.form-control{type: "text", name: "telefono", value: ( @igle.nil? ? nil :  @igle.var_iglesia_telefono ) ,class:"validate[required,custom[phone]]"}
                 .form-group
                   %label.col-sm-2.control-label{for: "nombre"} Nombre
                   .col-sm-10
                     .row
                       .col-sm-5
-                        %input#nombre.form-control{type: "text", name:"nombre", value: ( @igle.nil? ? nil :  @igle.var_iglesia_nombre )}
+                        %input#nombre.form-control{type: "text", name:"nombre", value: ( @igle.nil? ? nil :  @igle.var_iglesia_nombre ),class:"validate[required]"}
                       %label.col-sm-1.control-label{for: "sigla"} Sigla
                       .col-sm-5
-                        %input#sigla.form-control{type: "text", name: "sigla", value: ( @igle.nil? ? nil :  @igle.var_iglesia_siglas )}
+                        %input#sigla.form-control{type: "text", name: "sigla", value: ( @igle.nil? ? nil :  @igle.var_iglesia_siglas ),class:"validate[required]"}
                 %h3.heading-a Pastores Principales
                 .form-group
                   %label.col-sm-2.control-label{for: "psn1"} Ps. 1
                   .col-sm-10
                     =hidden_field_tag :psn_val1, ( @pas.nil? ? nil : @pas.first.persona.int_persona_id )
-                    %input#psn1.form-control{type: "text", name: "psn1", value: ( @pas.nil? ? nil : @pas.first.persona.var_persona_nombres + ' ' + @pas.first.persona.var_persona_apellidos ) }/
+                    %input#psn1.form-control{type: "text", name: "psn1", value: ( @pas.nil? ? nil : @pas.first.persona.var_persona_nombres + ' ' + @pas.first.persona.var_persona_apellidos ) ,class:"validate[required]"}/
                 .form-group
                   %label.col-sm-2.control-label{for: "psn2"} Ps. 2
                   .col-sm-10
@@ -70,7 +70,7 @@
                 .form-group
                   %label.col-sm-2.control-label{for: "direccion"} Dirección
                   .col-sm-10
-                    %input#direccion.form-control{type: "text", name: "direccion" , value: ( @igle.nil? ? nil :  @igle.var_iglesia_direccion )}/
+                    %input#direccion.form-control{type: "text", name: "direccion" , value: ( @igle.nil? ? nil :  @igle.var_iglesia_direccion ),class:"validate[required]"}/
                 .form-group
                   %label.col-sm-2.control-label{for: "referencia"} Referencia
                   .col-sm-10
@@ -101,6 +101,8 @@
                     .col-sm-10.col-sm-offset-2
                       %button.btn.btn-primary.btn-lg#btnGuardar_iglesia Guardar
   / Row end
+  #loader{style: "display:none"}
+    = render "layouts/loader"
 / Dashboard wrapper end
 
 - content_for :bloquejavascript do
@@ -109,4 +111,5 @@
   = javascript_include_tag "jquery/jquery.ui.core.min"
   = javascript_include_tag "jquery/jquery.ui.position.min"
   = javascript_include_tag "jquery/jquery.ui.widget.min"
+  / custom Js
   = javascript_include_tag :iglesia

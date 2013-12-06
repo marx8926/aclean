@@ -153,6 +153,7 @@ jQuery ->
   SuccessFunctionDropServicio = (data) ->
     MessageSucces()
     ServiciosTable.fnReloadAjax root.SourceTServicio
+    MessageSucces()
   
   MessageSucces = ->
     setTimeout (->
