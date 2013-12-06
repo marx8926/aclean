@@ -20,8 +20,9 @@ jQuery ->
       $("#dash_mujeres_adulto").highcharts data[4]
       $("#dash_hombres_adulto").highcharts data[5]
     else 
-      console.log data
-      $("#dash_general_lineas").highcharts data
+      if data.length == 2
+        $("#dash_general_lineas").highcharts data[0]
+        $("#dash_general_pie").highcharts data[1]
 
   $("#btnGenerar_asistencia").click (event) ->
     event.preventDefault()

@@ -557,11 +557,7 @@ class InformacionController < ApplicationController
         result = ""
 
         categorias = [ "Mujeres J." , "Hombres J.", "Mujeres", "Hombres"]
-
         meses = [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
-
-
-        #form = { :mes => nil, :semana => nil, :anio => "2013" , :servicio => ""}
         anio = form[:anio]
 
         if form[:servicio].length == 0
@@ -585,6 +581,11 @@ class InformacionController < ApplicationController
             final = fecha.end_of_month
 
             semanas = [ [inicio, (inicio+6).end_of_day], [inicio+7, (inicio+13).end_of_day], [inicio+14, (inicio+20).end_of_day] ,[inicio+21, final ] ]
+            titulos = [ "Asistencia "+ categorias[0] , "Asistencia "+ categorias[1] , "Asistencia "+ categorias[2],
+                "Asistencia "+ categorias[3]]
+            subtitulos = [subtitulo, subtitulo, subtitulo, subtitulo]
+            ejeys = [ ejey , ejey, ejey, ejey]
+            
 
             if form[:semana_lista] == "0"
                 
@@ -594,33 +595,26 @@ class InformacionController < ApplicationController
                     data = recuperar_asistencia_filtro(ini, fin,servicio) 
                     resultados.push data
                 }
-
                 data = individual_to_grupal(resultados, categorias )
-                titulo = "Asistencia General "+ anio + " Mensual" 
-
-                titulos = [ "Asistencia "+ categorias[0] , "Asistencia "+ categorias[1] , "Asistencia "+ categorias[2],
-                "Asistencia "+ categorias[3]]
-
-                categorias = [ "1", "2", "3", "4"]
-
-                subtitulos = [subtitulo, subtitulo, subtitulo, subtitulo]
-
-                ejeys = [ ejey , ejey, ejey, ejey]
-
-                result_general = generar_json_column(titulo, subtitulo, ejey, categorias, data)
-
-                split = split_data_plot_lines(data, categorias, titulos, subtitulos, ejeys)
-
-                pie = data_lineal_to_pie(data)
-
-                resulto_pie = generar_json_pie(titulo, subtitulo, pie)
-
-                result = [ result_general, resulto_pie, split[0], split[1], split[2], split[3] ]
+                titulo = "Asistencia General "+ anio + " Semanal"
+                              
             else
-
+                num_semana = form[:semana_lista].to_i
+                semana = semanas[ num_semana - 1]
+                ini = semana.first
+                fin = semana.last
+                data = recuperar_asistencia_filtro(ini, fin,servicio)
+                titulo = "Asistencia General "+ anio + " Semanal" 
+                cnum = [ "1", "2", "3", "4"]  
+                cat = [ cnum[num_semana-1] ]
 
             end
 
+            result_general = generar_json_column(titulo, subtitulo, ejey, cat, data)
+            split = split_data_plot_lines(data, cat, titulos, subtitulos, ejeys)
+            pie = data_lineal_to_pie(data)
+            resulto_pie = generar_json_pie(titulo, subtitulo, pie)
+            result = [ result_general, resulto_pie, split[0], split[1], split[2], split[3] ]
 
         elsif form[:mes].nil? == false and form[:semana].nil? == true
             
@@ -670,6 +664,7 @@ class InformacionController < ApplicationController
             #solo semana
 
              #sin datos
+             result = ""
 
         else            
             # por año Y todos los servicios
@@ -678,20 +673,17 @@ class InformacionController < ApplicationController
             ini = fecha.at_beginning_of_year
             fin = fecha.at_end_of_year
 
-            if form[:servicio].length == 0
+            data = recuperar_asistencia_filtro(ini, fin, servicio)               
+            titulo = "Asistencia General "+ anio 
+            categorias = [ anio ]
 
-                data = recuperar_asistencia_filtro(ini, fin)               
-                titulo = "Asistencia General "+ anio 
-                categorias = [ anio ]
-                result = generar_json_column(titulo, subtitulo, ejey, categorias, data)
+            general = generar_json_column(titulo, subtitulo, ejey, categorias, data)
 
-            else
-                data = recuperar_asistencia_filtro(ini, fin, form[:servicio])               
-                titulo = "Asistencia General "+ anio 
-                categorias = [ anio ]
-                result = generar_json_column(titulo, subtitulo, ejey, categorias, data)
+            pie = data_lineal_to_pie(data)
+            resulto_pie = generar_json_pie(titulo, subtitulo, pie)
 
-            end
+            result = [ general, resulto_pie]
+            
         end
 
 
