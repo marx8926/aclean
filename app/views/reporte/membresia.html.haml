@@ -1,0 +1,59 @@
+/ Dashboard wrapper start
+.dashboard-wrapper
+  / Page title start
+  .row.page-title
+    %h2
+      Miembro y Visitante
+      %small
+        %li Home
+        %li /
+        %li Reportes
+        %li /
+        %li Miembro/Visitante
+  / Page title end
+  / Row start
+  .row
+    .col-md-12
+      .widget
+        .row
+          .col-md-12.col-sm-12
+            .widget
+              .widget-header
+                .title 
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                    Reporte
+              .widget-body
+                %form#form_asistencia.form-horizontal{name: "form_asistencia", method: "post"}
+                  .form-group
+                    %label.col-lg-2.col-lg-offset-2.radio-inline
+                      %input#optionsMiembro{checked: "checked", name: "optionsMiembro", type: "radio", value: "option1"}/
+                      Miembro
+                    %label.col-lg-2.radio-inline
+                      %input#optionsVisitante{name: "optionsVisitante", type: "radio", value: "option2"}>/
+                      Visitante
+                  .form-group
+                    %label.col-lg-2.control-label{for: "servicio"} Fecha
+                    .col-lg-10
+                      .row
+                        .col-lg-2.col-sm-2
+                          %input#fecha1.datepicker.form-control{name: "fecha1", type: "text"}
+                        %label.col-lg-1.col-sm-1.checkbox-inline{style:"text-align:center;"}
+                          Al
+                        .col-lg-2.col-sm-2
+                          %input#anio.datepicker.form-control{name: "anio", type: "text"}
+                        .col-lg-2.col-sm-2
+                          %button#btnGenerar_asistencia.btn.btn-success{type: "button", name: "btnGenerar_asistencia"} 
+                            Generar
+        .row
+          .col-md-12.col-sm-12
+            .widget
+              .widget-body
+                #dash_general_lineas
+        .row
+          .col-md-12.col-sm-12
+            .widget
+              .widget-body
+                %button#btnImprimir.btn.btn-success{type: "button", name: "btnImprimir"}
+                  Imprimir
+                %button#btnReporte.btn.btn-success{type: "button", name: "btnReporte"}
+                  Reporte Excel

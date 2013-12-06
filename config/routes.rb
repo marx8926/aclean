@@ -66,6 +66,11 @@ Lean::Application.routes.draw do
   get "dashboard_asistencia" => "informacion#asistencia"
   post "recuperar_data_asistencia" => "informacion#recuperar_data_asistencia"
 
+  get "reporte_diezmo" => "reporte#diezmo"
+  get "reporte_ofrenda" => "reporte#ofrenda"
+  get "reporte_membresia" => "reporte#membresia"
+  get "reporte_asistencia" => "reporte#asistencia"
+  get "reporte_servicios" => "reporte#servicios"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
