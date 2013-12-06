@@ -218,7 +218,7 @@ class InformacionController < ApplicationController
 
     end
 
-    def generar_json_column(titulo, subtitulo, ejey, categorias, result_todo)
+    def generar_json_column(titulo, subtitulo, ejey, serie="", categorias, result_todo)
 
                  
         result = {
@@ -303,11 +303,6 @@ class InformacionController < ApplicationController
 
     def recuperar_data_diezmo
 
-        mes = true
-        semana = false
-        num_mes = 0
-        num_semana = 1
-        anio = 2013
 
         meses = [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
 
@@ -315,11 +310,45 @@ class InformacionController < ApplicationController
 
         result_todo = []
 
+        form = params[:formulario]
+        anio = form[:anio].to_i
+        mes = !form[:mes].nil?
+        semana = !form[:semana].nil?
+
+
         if mes == true and semana == true
 
+            num_mes = form[:mes_lista].to_i
+            num_semana = form[:semana_lista].to_i
 
+            fecha = DateTime.new(anio, num_mes)
+            inicio = fecha.beginning_of_month
+            final = fecha.end_of_month
+
+            semanas = [ [inicio, (inicio+6).end_of_day], [inicio+7, (inicio+13).end_of_day], [inicio+14, (inicio+20).end_of_day] ,[inicio+21, final ] ]
+            
+
+
+            if num_semana == 0
+
+                semanas.each{ |s|
+
+                    ini = s.first
+                    fin = s.last            
+                    result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto).to_f
+                }
+                categorias = ["1", "2", "3", "4"]
+            else
+                semana = semanas[ num_semana -1]
+                ini = semana.first
+                fin = semana.last
+
+                categorias = [ num_semana.to_s ]
+            end
 
         elsif mes == true and semana == false
+
+            num_mes = form[:mes_lista].to_i
 
             if num_mes == 0
                 # para todos los meses
@@ -341,22 +370,18 @@ class InformacionController < ApplicationController
                 fecha = DateTime.new(anio, num_mes )
                 ini = fecha.beginning_of_month
                 fin = fecha.end_of_month
-
                 result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto).to_f
-
                 categorias = [ meses[num_mes-1]]
             end
         else
 
             #por año
-
             fecha = DateTime.new(anio)
-
             ini = fecha.at_beginning_of_year
             fin = fecha.at_end_of_year
-
+            categorias = [anio.to_s]
             result_todo.push Diezmo.where(dat_diezmo_fecharegistro:( ini .. fin)).sum(:dec_diezmo_monto).to_f
-
+            
         end
             
         titulo = "Diezmos"
@@ -364,9 +389,14 @@ class InformacionController < ApplicationController
         ejey = "Soles"
         nombre_serie = "Iglesia"
 
-        result = generar_json_column(titulo, subtitulo, ejey, nombre_serie, categorias, result_todo)
+        final = [{
+                :name => titulo,
+                :data => result_todo
+                }]
 
-        render :json => result , :status => :ok
+        result = generar_json_column(titulo, subtitulo, ejey, nombre_serie, categorias, final )
+
+        render :json => result, :status => :ok
     end
 
     def ofrenda

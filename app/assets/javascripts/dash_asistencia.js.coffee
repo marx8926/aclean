@@ -1,9 +1,5 @@
 root = exports ? this
 
-
- 
-    
-
 jQuery ->
   
 
