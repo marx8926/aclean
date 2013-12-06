@@ -167,7 +167,58 @@ class InformacionController < ApplicationController
 
     end
 
-    def generar_json_column(titulo, subtitulo, ejey, nombre_serie, categorias, result_todo)
+    def data_lineal_to_pie(data)
+
+        result = []
+
+        data.each{ |i|
+
+            result.push [ i[:name], i[:data].sum ]
+        }
+
+        return result
+
+    end
+
+    def generar_json_pie(titulo, subtitulo, datos)
+        
+        result = {
+
+            chart: {
+                plotBackgroundColor: nil,
+                plotBorderWidth: nil,
+                plotShadow: false
+            },
+            title: {
+                text: titulo
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    }   
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: subtitulo,
+                data: datos
+            }]
+        }
+
+        return result
+
+    end
+
+    def generar_json_column(titulo, subtitulo, ejey, categorias, result_todo)
 
                  
         result = {
@@ -192,7 +243,7 @@ class InformacionController < ApplicationController
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                    '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
                 useHTML: true
@@ -203,12 +254,49 @@ class InformacionController < ApplicationController
                     borderWidth: 0
                 }
             },
-            series: [{
-                name: nombre_serie,
-                data: result_todo
+            series: result_todo
+        }
+        return result
+    end
+
+    def generar_json_lineas(titulo, subtitulo, ejey, categorias, result_todo, sufix)
+
+                 
+        result = {
+            chart: {
+                type: 'line'
+            },            
+            title: {
+                text: titulo,
+                x: -20
+            },
+            subtitle:{
+                text: subtitulo,
+                x: -20
+            },
+            xAxis: {
+                categories: categorias
+            },
+            yAxis: {
+                title: {
+                    text: ejey
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
                 }]
-
-
+            },
+            tooltip: {
+                valueSuffix: sufix
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: result_todo
         }
         return result
     end
@@ -287,7 +375,7 @@ class InformacionController < ApplicationController
 
     def recuperar_data_ofrenda
 
-         mes = true
+        mes = true
         semana = false
         num_mes = 0
         num_semana = 1
@@ -348,7 +436,7 @@ class InformacionController < ApplicationController
         ejey = "Soles"
         nombre_serie = "Iglesia"
 
-        result = generar_json_column(titulo, subtitulo, ejey, nombre_serie, categorias, result_todo)
+        result = generar_json_column(titulo, subtitulo, ejey,  categorias, result_todo)
 
         render :json => result , :status => :ok
 
@@ -364,25 +452,295 @@ class InformacionController < ApplicationController
 
     end
 
-    def recuperar_data_asistencia
+    def recuperar_asistencia_filtro(ini, fin, servicio=0 )
 
-        serv =Servicio.first
-        mes = true
-        semana = false
-        num_mes = 0
-        num_semana = 1
-        anio = 2013
+        if servicio == 0 #todos los servicios
+            query = "SELECT int_asistencia_categoria, SUM(int_asistencia_cantidad) as cantidad FROM asistencia 
+                WHERE dat_asistencia_fecasistencia between '#{ini}' and '#{fin}'
+                GROUP BY int_asistencia_categoria
+                ORDER BY int_asistencia_categoria asc"
+        else 
+            query = "SELECT int_asistencia_categoria, SUM(int_asistencia_cantidad) as cantidad FROM asistencia 
+                WHERE servicio_id = '#{servicio}' and dat_asistencia_fecasistencia between '#{ini}' and '#{fin}'
+                GROUP BY int_asistencia_categoria
+                ORDER BY int_asistencia_categoria asc"
+        end
+        result = ActiveRecord::Base.connection.execute(query)
 
-        if mes == true and semana == true
+        final = []
 
-        elsif mes == true and semana == false
+        categorias = [ "Mujeres J." , "Hombres J.", "Mujeres", "Hombres"]
+        asignar = []
 
-        else
+        result.each{ |x|
+
+            item = { 
+                :name => categorias[x['int_asistencia_categoria'].to_i],
+                :data => [x['cantidad'].to_i]                
+            }
+            
+            final.push item
+            asignar.push categorias[x['int_asistencia_categoria'].to_i]
+        }
+
+        # para la categoria restante
+
+        if asignar.length != categorias.length
+
+            dif = categorias - asignar
+
+            dif.each{ |d|
+                item =  {
+                    :name => d,
+                    :data => [ 0 ]
+                }
+                final.push item
+            }
 
         end
+
+        return final
+    end
+
+    def individual_to_grupal(lista, categoria)
+
+        resultados = {}
+        categoria.each{ |y|
+            resultados[y] = []
+        }
+
+        lista.each{ |y|
+            y.each{ |x|
+
+                resultados[x[:name]].push x[:data].first
+            }
+        }
+
+        #formateando al original
+
+        final = []
+
+        categoria.each{ |z|
+            item = {
+                :name => z,
+                :data => resultados[z]
+            }
+            final.push item
+        }
+        return final
+
+    end
+
+    def split_data_plot_lines(data, categorias, titulos, subtitulos, ejeys)
+
+        plot = []
+        i = 0
+        data.each{ |x| 
+
+            result = generar_json_lineas(titulos[i], subtitulos[i], ejeys[i], categorias, [x], '#')
+            plot.push result
+            i = i+1
+        }
+
+        return plot
+
+    end
+
+    def recuperar_data_asistencia
+
+        form = params[:formulario]
+        data = nil
+        mujj = 0
+        muj = 0
+        hom = 0
+        homj = 0
+        result = ""
+
+        categorias = [ "Mujeres J." , "Hombres J.", "Mujeres", "Hombres"]
+
+        meses = [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Set", "Oct", "Nov", "Dic"]
+
+
+        #form = { :mes => nil, :semana => nil, :anio => "2013" , :servicio => ""}
+        anio = form[:anio]
+        
+
+        if form[:mes].nil? == false and form[:semana].nil? == false
+
+            #mes y semana
+
+            resultados = []
+
+            fecha = DateTime.new(anio.to_i, form[:mes_lista].to_i)
+
+            if form[:semana_lista] == "0"
+
+                inicio = fecha.beginning_of_month
+                final = fecha.end_of_month
+
+                semanas = [ [inicio, (inicio+6).end_of_day], [inicio+7, (inicio+13).end_of_day], [inicio+14, (inicio+20).end_of_day] ,[inicio+21, final ] ]
+
+                semanas.each{ |m|
+                   
+                    ini = m.first
+                    fin = m.last
+                    data = recuperar_asistencia_filtro(ini, fin) 
+                    resultados.push data
+                }
+
+                data = individual_to_grupal(resultados, categorias )
+
+                titulo = "Asistencia General "+ anio + " Mensual" 
+                subtitulo = "Todos los cultos"
+                ejey = "Asistencia"
+                nombre_serie = "Iglesia"
+                
+                titulos = [ "Asistencia "+ categorias[0] , "Asistencia "+ categorias[1] , "Asistencia "+ categorias[2],
+                "Asistencia "+ categorias[3]]
+
+                categorias = [ "1", "2", "3", "4"]
+
+                subtitulos = [subtitulo, subtitulo, subtitulo, subtitulo]
+
+                ejeys = [ ejey , ejey, ejey, ejey]
+
+                result_general = generar_json_column(titulo, subtitulo, ejey, categorias, data)
+
+                split = split_data_plot_lines(data, categorias, titulos, subtitulos, ejeys)
+
+                pie = data_lineal_to_pie(data)
+
+                resulto_pie = generar_json_pie(titulo, subtitulo, pie)
+
+                result = [ result_general, resulto_pie, split[0], split[1], split[2], split[3] ]
+            else
+
+
+            end
+
+
+        elsif form[:mes].nil? == false and form[:semana].nil? == true
+            # solo mes
+
+            num_mes = form[:mes_lista].to_i
+
+
+            if form[:mes_lista] == "0" # para todos los meses
+                
+                meses_lista = (0 .. 11).to_a
+                
+                #para todos los servicios
+
+                resultados = []
+
+                meses_lista.each{ |m|
+                    fecha = DateTime.new(anio.to_i, m+1)
+                    ini = fecha.beginning_of_month
+                    fin = fecha.end_of_month
+                    data = recuperar_asistencia_filtro(ini, fin) 
+                    resultados.push data
+                }
+
+                data = individual_to_grupal(resultados, categorias )
+
+                titulo = "Asistencia General "+ anio + " Mensual" 
+                subtitulo = "Todos los cultos"
+                ejey = "Asistencia"
+                nombre_serie = "Iglesia"
+                
+                titulos = [ "Asistencia "+ categorias[0] , "Asistencia "+ categorias[1] , "Asistencia "+ categorias[2],
+                "Asistencia "+ categorias[3]]
+
+                categorias = meses
+
+                subtitulos = [subtitulo, subtitulo, subtitulo, subtitulo]
+
+                ejeys = [ ejey , ejey, ejey, ejey]
+
+                result_general = generar_json_column(titulo, subtitulo, ejey, categorias, data)
+
+                split = split_data_plot_lines(data, categorias, titulos, subtitulos, ejeys)
+
+                pie = data_lineal_to_pie(data)
+
+                resulto_pie = generar_json_pie(titulo, subtitulo, pie)
+
+                result = [ result_general, resulto_pie, split[0], split[1], split[2], split[3] ]                
+
+            else #para un mes en especifico
+                
+                resultados = []
+
+                mes = form[:mes_lista]
+                fecha = DateTime.new(anio.to_i, mes.to_i)
+                ini = fecha.beginning_of_month
+                fin = fecha.end_of_month
+                data = recuperar_asistencia_filtro(ini, fin) 
+
+
+                titulo = "Asistencia General "+ anio + " Mensual" 
+                subtitulo = "Todos los cultos"
+                ejey = "Asistencia"
+                nombre_serie = "Iglesia"
+                
+                titulos = [ "Asistencia "+ categorias[0] , "Asistencia "+ categorias[1] , "Asistencia "+ categorias[2],
+                "Asistencia "+ categorias[3]]
+
+                categorias = meses
+
+                subtitulos = [subtitulo, subtitulo, subtitulo, subtitulo]
+
+                ejeys = [ ejey , ejey, ejey, ejey]
+
+                result_general = generar_json_column(titulo, subtitulo, ejey, categorias, data)
+
+                split = split_data_plot_lines(data, categorias, titulos, subtitulos, ejeys)
+
+                pie = data_lineal_to_pie(data)
+
+                resulto_pie = generar_json_pie(titulo, subtitulo, pie)
+
+                result = [ result_general, resulto_pie, split[0], split[1], split[2], split[3] ] 
+                
+
+            end
+
+        elsif form[:mes].nil? == true and form[:semana].nil? == false
+            #solo semana
+
+             #sin datos
+
+        else            
+            # por año Y todos los servicios
+            fecha = DateTime.new(anio.to_i)
             
+            ini = fecha.at_beginning_of_year
+            fin = fecha.at_end_of_year
+
+            if form[:servicio].length == 0
+
+                data = recuperar_asistencia_filtro(ini, fin)               
+                titulo = "Asistencia General "+ anio 
+                subtitulo = "Todos los cultos"
+                ejey = "Asistencia"
+                nombre_serie = "Iglesia"
+                categorias = [ anio ]
+                result = generar_json_column(titulo, subtitulo, ejey, categorias, data)
+
+            else
+                data = recuperar_asistencia_filtro(ini, fin, form[:servicio])               
+                titulo = "Asistencia General "+ anio 
+                subtitulo = "Todos los cultos"
+                ejey = "Asistencia"
+                nombre_serie = "Iglesia"
+                categorias = [ anio ]
+                result = generar_json_column(titulo, subtitulo, ejey, categorias, data)
+
+            end
+        end
 
 
+        render :json => result, :status => :ok
 
     end
 

@@ -64,6 +64,7 @@ Lean::Application.routes.draw do
   get "recuperar_data_ofrenda" => "informacion#recuperar_data_ofrenda"
   get "dashboard_membresia" => "informacion#membresia"
   get "dashboard_asistencia" => "informacion#asistencia"
+  post "recuperar_data_asistencia" => "informacion#recuperar_data_asistencia"
 
 
   # The priority is based upon order of creation: first created -> highest priority.
