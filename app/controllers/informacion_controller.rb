@@ -384,7 +384,7 @@ class InformacionController < ApplicationController
             
         end
             
-        titulo = "Diezmos"
+        titulo = "Ofrendas"
         subtitulo = "del mes"
         ejey = "Soles"
         nombre_serie = "Iglesia"

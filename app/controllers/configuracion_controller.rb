@@ -321,12 +321,15 @@ class ConfiguracionController < ApplicationController
 		otherdata = params[:otherdata]
 		servicio = Servicio.lock.find(form[:idservicio])
 		servicio.update(:var_servicio_nombre => form[:nombre], :int_servicio_tipo => form[:tipo])
-		Turno.destroy_all(servicio_id: form[:idservicio])
+
+
+		#Turno.where(servicio_id: form[:idservicio])
+
 		otherdata.each{ |x|
 					data = x.last
-					turno = Turno.new({:var_turno_horafin => data[:var_turno_horafin],
+					turno = Turno.find_or_create_by!({:var_turno_horafin => data[:var_turno_horafin],
 						:var_turno_horainicio => data[:var_turno_horainicio], :int_turno_dia => data[:int_turno_dia], :servicio => servicio})
-					turno.save!
+					
 		}
 		render :json => { :datos => params}, :status => :ok
 	end
