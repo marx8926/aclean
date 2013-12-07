@@ -18,25 +18,25 @@
     %meta{content: "width=device-width, initial-scale=1.0, user-scalable=no", name: "viewport"}/
     %meta{content: "Admin Church", name: "description"}/
     %meta{content: "Admin Chuch, CLM Developers, Administración Eclesiástica, Iglesia", name: "keywords"}/
-    %script{src: "http://dezmpdcyt21o2.cloudfront.net/js/html5-trunk.js"}
-    %link{href: "http://dezmpdcyt21o2.cloudfront.net/css/icomoon/style.css", rel: "stylesheet"}/
+    = javascript_include_tag "html5-trunk.js"
+    = stylesheet_link_tag "icomoon/style.css"
     /[if lte IE 7]
-      <script src="http://dezmpdcyt21o2.cloudfront.net/css/icomoon-font/lte-ie7.js"></script>
+      <script src="icomoon-font/lte-ie7.js"></script>
     / bootstrap css
-    %link{href: "http://dezmpdcyt21o2.cloudfront.net/css/bootstrap.css", rel: "stylesheet"}/
+    = stylesheet_link_tag "bootstrap.css"
     / custom css
-    = stylesheet_link_tag "http://dezmpdcyt21o2.cloudfront.net/css/main.css"
-    = stylesheet_link_tag "http://dezmpdcyt21o2.cloudfront.net/css/smooth/jquery-ui-1.8.16.custom.css"
-    = stylesheet_link_tag "http://dezmpdcyt21o2.cloudfront.net/css/datepicker/css/datepicker.css"
-    = stylesheet_link_tag "http://dezmpdcyt21o2.cloudfront.net/css/jqueryvalidation/css/validationEngine.jquery.css"    
-    = stylesheet_link_tag "http://dezmpdcyt21o2.cloudfront.net/css/loader.css.scss"
-    = stylesheet_link_tag "http://dezmpdcyt21o2.cloudfront.net/css/successblock.css.scss"
+    = stylesheet_link_tag "main.css"
+    = stylesheet_link_tag "smooth/jquery-ui-1.8.16.custom.css"
+    = stylesheet_link_tag "datepicker/css/datepicker.css"
+    = stylesheet_link_tag "jqueryvalidation/css/validationEngine.jquery.css"    
+    = stylesheet_link_tag "loader"
+    = stylesheet_link_tag "successblock"
   %body
     / Header start
     %header
       / Logo start
       .logo
-        = image_tag('http://dezmpdcyt21o2.cloudfront.net/img/logo-ac-103.png', alt: "Admin Church", style: "border-bottom: 1px solid #383838;") 
+        = image_tag('logo-ac-103.png', alt: "Admin Church", style: "border-bottom: 1px solid #383838;") 
       / Logo end
       / Optional Dropdown start
       #optional-dropdown
@@ -59,7 +59,7 @@
               %li
                 .summary
                   .user-pic
-                    %img{alt: "Slick Admin", src: "http://dezmpdcyt21o2.cloudfront.net/img/avatar-1.png"}/
+                    %img{alt: "Slick Admin", src: "avatar-1.png"}/
                   .basic-details
                     %h4.no-margin Johnny
                     %h5.no-margin UX Designer
@@ -144,30 +144,30 @@
       / Mian navigation end
       =yield
     / Scripts
-    %script{src: "http://dezmpdcyt21o2.cloudfront.net/js/jquery.min.js"}
-    %script{src: "http://dezmpdcyt21o2.cloudfront.net/js/bootstrap.js"}
-    %script{src: "http://dezmpdcyt21o2.cloudfront.net/js/jquery-ui-1.8.23.custom.min.js"}
+    = javascript_include_tag "jquery.min.js"
+    = javascript_include_tag "bootstrap.js"
+    = javascript_include_tag "jquery-ui-1.8.23.custom.min.js"
     / Easy pie charts 
-    %script{src:"http://dezmpdcyt21o2.cloudfront.net/js/jquery.easy-pie-chart.js"}
+    = javascript_include_tag "jquery.easy-pie-chart.js"
     / Sparkline JS
-    %script{src:"http://dezmpdcyt21o2.cloudfront.net/js/jquery.sparkline.js"}
+    = javascript_include_tag "jquery.sparkline.js"
     / Data tables
-    %script{src: "http://dezmpdcyt21o2.cloudfront.net/js/jquery.dataTables.js"}
+    = javascript_include_tag "jquery.dataTables.js"
     / Custom Js
-    %script{src: "http://dezmpdcyt21o2.cloudfront.net/js/custom-tables.js"}
+    = javascript_include_tag "custom-tables.js"
     / custom Js
-    %script{src: "http://malsup.github.io/jquery.blockUI.js"}
+    = javascript_include_tag "jquery.blockUI.js"
 
     :javascript
-      urlES = "http://dezmpdcyt21o2.cloudfront.net/js/dt_ES.txt"
-    = javascript_include_tag "http://dezmpdcyt21o2.cloudfront.net/js/jquery/jquery.ui.autocomplete.min.js"
-    = javascript_include_tag "http://dezmpdcyt21o2.cloudfront.net/js/jquery/jquery.ui.core.min.js"
-    = javascript_include_tag "http://dezmpdcyt21o2.cloudfront.net/js/jquery/jquery.ui.position.min.js"
-    = javascript_include_tag "http://dezmpdcyt21o2.cloudfront.net/js/jquery/jquery.ui.widget.min.js"
-    = javascript_include_tag "http://dezmpdcyt21o2.cloudfront.net/js/util/functiongen.js"
-    = javascript_include_tag "http://dezmpdcyt21o2.cloudfront.net/js/util/datatable_plugins.js"
-    = javascript_include_tag "http://dezmpdcyt21o2.cloudfront.net/js/jqueryvalidation/languages/jquery.validationEngine-es.js"
-    = javascript_include_tag "http://dezmpdcyt21o2.cloudfront.net/js/jqueryvalidation/jquery.validationEngine.js"
-    = javascript_include_tag "http://dezmpdcyt21o2.cloudfront.net/js/datepicker/js/bootstrap-datepicker.js"
-    = javascript_include_tag "http://dezmpdcyt21o2.cloudfront.net/js/custom.js"
+      urlES = "dt_ES.txt"
+    = javascript_include_tag "jquery/jquery.ui.autocomplete.min.js"
+    = javascript_include_tag "jquery/jquery.ui.core.min.js"
+    = javascript_include_tag "jquery/jquery.ui.position.min.js"
+    = javascript_include_tag "jquery/jquery.ui.widget.min.js"
+    = javascript_include_tag "util/functiongen.js"
+    = javascript_include_tag "util/datatable_plugins.js"
+    = javascript_include_tag "jqueryvalidation/languages/jquery.validationEngine-es.js"
+    = javascript_include_tag "jqueryvalidation/jquery.validationEngine.js"
+    = javascript_include_tag "datepicker/js/bootstrap-datepicker.js"
+    = javascript_include_tag "custom.js"
     = javascript_include_tag :diezmos
