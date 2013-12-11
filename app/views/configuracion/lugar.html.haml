@@ -28,7 +28,7 @@
                         %tr
                           %th{style: "width:20%"} ID
                           %th{style: "width:60%"} Descripción
-                          %th.hidden-phone{style: "width:20%"} Acciones
+                          %th{style: "width:20%"} Acciones
                       %tbody
                     .clearfix
             .col-md-6.col-sm-6
@@ -39,6 +39,7 @@
                     Registrar Lugar
                 .widget-body
                   %form#form_lugar.form-horizontal{role: "form"}
+                    %input#idlugar{name:"idlugar", type: "hidden"}
                     .form-group
                       %label.col-lg-2.control-label{for: "descripcion"} Descripción
                       .col-lg-10
@@ -46,7 +47,28 @@
                     .form-group
                       .col-lg-offset-2.col-lg-10
                         %button.btn.btn-default{type: "button"} Cancelar
-                        %button#btnGuardar_Lugar.btn.btn-success{type: "button"} Guardar
+                        %button#btnRegistrar_Lugar.btn.btn-success{type: "button"} Registrar
+                        %button#btnGuardar_Lugar.btn.btn-success{type: "button", style: "display:none"} Guardar
   / Row end
+  #loader{style: "display:none"}
+    = render "layouts/loader"
+  #confirmmodal.panel.panel-info{style: "display:none"}
+    .panel-heading
+      %h3.panel-title
+        Confirmar
+    .panel-body
+      %p
+        ¿Desea Guardar permanentemente los cambios?
+      %button.btnNo.btn.btn-default{type: "button"} No
+      %button#btnSiGuardar.btn.btn-default{type: "button"} Si
+  #dangermodal.panel.panel-danger{style: "display:none"}
+    .panel-heading
+      %h3.panel-title
+        Alerta!
+    .panel-body
+      %p
+        ¿Desea eliminar permanentemente el Lugar?
+      %button.btnNo.btn.btn-default{type: "button"} No
+      %button#btnSiEliminar.btn.btn-default{type: "button"} Si
 - content_for :bloquejavascript do
   = javascript_include_tag :lugar

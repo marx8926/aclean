@@ -83,7 +83,7 @@ class ConfiguracionController < ApplicationController
 			end
 		end
 
-		render :json => params , :status => :ok
+		render :json => {:resp => "ok" }, :status => :ok
 	end
 
 	def guardar_lugar
@@ -117,6 +117,19 @@ class ConfiguracionController < ApplicationController
 		}
 		render :json => {:aaData => lugares} , :status => :ok
 
+	end
+
+	def drop_lugar
+		lugar = Lugar.lock.find(params[:idlugar])
+		Lugar.destroy_all(int_lugar_id: params[:idlugar])
+		lugar.destroy
+		render :json => { :datos => params[:idlugar]}, :status => :ok
+	end
+
+	def editar_lugar
+		lugar = Lugar.lock.find(params[:idlugar])
+		lugar.update(:var_lugar_descripcion => form[:descripcion])
+		render :json => {:resp => "ok" }, :status => :ok
 	end
 
 	def guardar_servicio

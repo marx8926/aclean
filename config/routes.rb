@@ -40,6 +40,8 @@ Lean::Application.routes.draw do
   get "configuracion/lugar" => "configuracion#lugar"
   get "configuracion/recuperar_lugar" => "configuracion#recuperar_lugar"
   post "configuracion/guardar_lugar" => "configuracion#guardar_lugar"
+  post "configuracion/drop_lugar" => "configuracion#drop_lugar"
+  post "configuracion/editar_lugar" => "configuracion#editar_lugar"
 
   get "configuracion/datos_generales" => "configuracion#datos_generales"
   post "configuracion/guardar_datos_generales" => "configuracion#guardar_datos_generales"
