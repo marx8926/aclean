@@ -41,9 +41,8 @@ class ConfiguracionController < ApplicationController
 				)
 
 				if params[:persona].nil? == false
-
 					persona = UsuarioMenu.create!(
-						:user => user,w
+						:user => user,
 						:menu => Menu.find_by(var_menu_nombre: "persona")
 						)
 
