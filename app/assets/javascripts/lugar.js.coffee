@@ -72,7 +72,7 @@ jQuery ->
     #Llamada a preparar Datps
     PrepararDatosL()
     #Llamada a envio Post
-    enviar "configuracion/editar_lugar", root.DatosEnviar, SuccessFunctionL, null
+    enviar "/configuracion/editar_lugar", root.DatosEnviar, SuccessFunctionL, null
 
 	 # 2. Enviar Datos
   $("#btnRegistrar_Lugar").click (event) ->

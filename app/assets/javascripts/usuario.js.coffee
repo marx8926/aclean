@@ -28,6 +28,15 @@ jQuery ->
     #mostrar datos de respuesta
     console.log(data)
 
+  $(".btncancelarform").click (event) ->
+    event.preventDefault()
+    $("form").reset()
+    $("#usuario").hide()
+
+  $("#registrar_usuario").click (event) ->
+    event.preventDefault()
+    $("#usuario").show()
+
 # 2. Enviar Datos
   $("#btnGuardar_Usuario").click (e) ->
     #Llamada a preparar Datps

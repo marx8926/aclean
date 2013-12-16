@@ -43,7 +43,7 @@ class ConfiguracionController < ApplicationController
 				if params[:persona].nil? == false
 
 					persona = UsuarioMenu.create!(
-						:user => user,
+						:user => user,w
 						:menu => Menu.find_by(var_menu_nombre: "persona")
 						)
 
@@ -82,7 +82,6 @@ class ConfiguracionController < ApplicationController
 				raise ActiveRecord::Rollback
 			end
 		end
-
 		render :json => {:resp => "ok" }, :status => :ok
 	end
 
@@ -127,7 +126,8 @@ class ConfiguracionController < ApplicationController
 	end
 
 	def editar_lugar
-		lugar = Lugar.lock.find(params[:idlugar])
+		form = params[:formulario]
+		lugar = Lugar.lock.find(form[:idlugar])
 		lugar.update(:var_lugar_descripcion => form[:descripcion])
 		render :json => {:resp => "ok" }, :status => :ok
 	end
