@@ -33,6 +33,7 @@ Lean::Application.routes.draw do
   post "configuracion/drop_servicio" => "configuracion#drop_servicio"
   
   get "configuracion/usuario" => "configuracion#usuario"
+  get "configuracion/recuperar_usuario" => "configuracion#recuperar_usuario"
   post "configuracion/guardar_usuario" => "configuracion#guardar_usuario"
 
 

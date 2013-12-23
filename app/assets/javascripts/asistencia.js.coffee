@@ -73,3 +73,5 @@ jQuery ->
       enviar "/asistencia_guardar", root.DatosEnviar, SuccessFunctionRegistrar, null
     else
       alert "Nesesita agregar datos a la Tabla"
+
+  $("form").validationEngine 'attach',{autoHidePrompt:true,autoHideDelay:3000,promptPosition : "centerLeft", scroll: false}

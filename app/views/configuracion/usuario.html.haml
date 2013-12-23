@@ -36,26 +36,26 @@
             %button.btncancelarform.btn.btn-default{type: "button", style:"float: right; margin-top:-40px;"} Cancelar
             %div
               .form-group
-                %label.col-lg-2.control-label{for: "usuario"} Usuario
+                %label.col-lg-2.control-label{for: "usuario"} E-mail
                 .col-lg-10
                   .row
                     .col-lg-2.col-sm-2
-                      %input#usuario.form-control{name: "usuario", type: "text"}
+                      %input#usuario.form-control{name: "usuario", type: "text", class:"validate[required,custom[email]]"}
                     %label.col-lg-2.col-sm-2.control-label Password
                     .col-lg-2.col-sm-2
-                      %input#password.form-control{name: "password", type: "password"}
+                      %input#password.form-control{name: "password", type: "password", class:"validate[required]"}
               .form-group
                 %label.col-lg-2.control-label{for: "nombre"} Nombre
                 .col-lg-10
                   .row
                     .col-lg-2.col-sm-2
-                      %input#nombre.form-control{name: "nombre", type: "text"}
+                      %input#nombre.form-control{name: "nombre", type: "text", class:"validate[required]"}
                     %label.col-lg-2.col-sm-2.control-label Apellido
                     .col-lg-2.col-sm-2
-                      %input#apellido.form-control{name: "apellido", type: "text"}
+                      %input#apellido.form-control{name: "apellido", type: "text", class:"validate[required]"}
                     %label.col-lg-2.col-sm-2.control-label N° Documento
                     .col-lg-2.col-sm-2
-                      %input#num_doc.form-control{name: "num_doc", type: "text"}
+                      %input#num_doc.form-control{name: "num_doc", type: "text", class:"validate[required]"}
             %div
               .form-group
                 %label.col-lg-2.control-label Opciones
@@ -100,32 +100,11 @@
             %table#table_registrados.data-table.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
               %thead
                 %tr
-                  %th{style: "width:25%"} ID
-                  %th{style: "width:35%"} Usuario
-                  %th.hidden-phone{style: "width:15%"} Nombre y Apellido
+                  %th{style: "width:25%"} Email
+                  %th{style: "width:35%"} Nombre
+                  %th.hidden-phone{style: "width:15%"} Apellido
                   %th.hidden-phone{style: "width:10%"} Acciones
               %tbody
-                %tr.gradeX
-                  %td John
-                  %td Tacoma, WA(Washington)
-                  %td.hidden-phone $22590
-                  %td.hidden-phone
-                    %a.actions-icons{"data-original-title" => "Editar", href: "#"}
-                      %img.icons{alt: "edit", src: "edit-icon.png"}/
-                    %a.actions-icons{"data-original-title" => "Ver", href: "#"}
-                      %img.icons{alt: "edit", src: "#{image_path 'view.png'}"}/
-                    %a.delete-row{"data-original-title" => "Eliminar", href: "#"}
-                      %img{alt: "trash", src: "trash-icon.png"}/
-                %tr.gradeA
-                  %td Ruchita
-                  %td Fresno, CA 93711-1005
-                  %td.hidden-phone $98450
-                  %td.hidden-phone
-                    %a.actions-icons{href: "#"}
-                      %img.icons{alt: "edit", src: "edit-icon.png"}/
-                    %a.delete-row{"data-original-title" => "Delete", href: "#"}
-                      %img{alt: "trash", src: "trash-icon.png"}/
-
             .clearfix
   / Row end
 

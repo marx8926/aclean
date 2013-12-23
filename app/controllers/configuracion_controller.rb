@@ -84,6 +84,22 @@ class ConfiguracionController < ApplicationController
 		render :json => {:resp => "ok" }, :status => :ok
 	end
 
+	def recuperar_usuario
+		usuarios = User.all
+		arrayusuarios = []
+		usuarios.each{ |u|
+			user = {}
+			user["id"] = u[:id]
+			user["email"] = u[:email]
+			user["var_usuario_nombre"] = u[:var_usuario_nombre]
+			user["var_usuario_apellido"] = u[:var_usuario_apellido]
+			user["var_usuario_documento"] = u[:var_usuario_documento]
+			user["acciones"] = u[:acciones]
+			arrayusuarios.push user
+		}
+		render :json => {:aaData => arrayusuarios} , :status => :ok
+	end
+
 	def guardar_lugar
 
 		form = params[:formulario]
@@ -196,7 +212,7 @@ class ConfiguracionController < ApplicationController
 						dia = "Sabado"
           			end
 
-          			tshow = tshow + "<p>"+dia+" : "+y[:var_turno_horainicio]+":00 - "+ y[:var_turno_horafin]+":00 </p>"
+          			tshow = tshow + "<p>"+dia+" : "+y[:var_turno_horainicio]+" - "+ y[:var_turno_horafin]+" </p>"
           			arrayturn.push y
 					
 				}

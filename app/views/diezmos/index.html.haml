@@ -24,24 +24,24 @@
                 %label.col-lg-2.control-label{for: "persona"} Persona
                 %input#persona_hidden{name: "persona_hidden", required: true, type: "hidden"}
                 .col-lg-10
-                  %input#persona.form-control{name: "persona", type: "text" , required: true}/
+                  %input#persona.form-control{name: "persona", type: "text" , class:"validate[required]"}/
 
               .form-group
                 %label.col-lg-2.control-label{for: "fecha"} Fecha
                 .col-lg-10
-                  %input#fecha.form-control.datepicker{name: "fecha", type: "text"}/
+                  %input#fecha.form-control.datepicker{name: "fecha", type: "text",class:"validate[required,custom[date]]"}/
 
               .form-group
                 %label.col-lg-2.control-label{for: "monto"} Monto
                 .col-lg-10
-                  %input#monto.form-control{name: "monto", type: "text"}/
+                  %input#monto.form-control{name: "monto", type: "text", class:"validate[required,custom[number]]"}/
               .form-group
                 %label.col-lg-2.control-label{for: "peticion"} Petición
                 .col-lg-10
                   %textarea#peticion.form-control{name: "peticion"}
               .form-group
                 .col-lg-offset-2.col-lg-10
-                  %button.btn.btn-default{type: "button"} Cancelar
+                  %button.btnCancelar.btn.btn-default{type: "button"} Cancelar
                   %button#btnGuardar_Diezmo.btn.btn-success{type: "button"} Guardar
   / Row end
   / Row start

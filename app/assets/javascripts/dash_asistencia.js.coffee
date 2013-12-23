@@ -23,5 +23,5 @@ jQuery ->
   $("#btnGenerar_asistencia").click (event) ->
     event.preventDefault()
     PrepararDatos()
-    enviar "recuperar_data_asistencia", root.DatosEnviar, SuccessFunction, null
+    enviar "/recuperar_data_asistencia", root.DatosEnviar, SuccessFunction, null
     

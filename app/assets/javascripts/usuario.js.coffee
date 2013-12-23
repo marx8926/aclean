@@ -1,11 +1,23 @@
 
 root = exports ? this
+root.SourceTUsuarios = "/configuracion/recuperar_usuario"
 
 jQuery ->
-
   
   $(".wizard").bwizard({nextBtnText: "Siguiente &rarr;", backBtnText: "&larr; Anterior"})
-#guardar usuario
+
+  FormatoUsuariosTable = [   { "sWidth": "30%","mDataProp": "email"},
+                              { "sWidth": "20%","mDataProp": "var_usuario_nombre"},
+                              { "sWidth": "30%","mDataProp": "var_usuario_apellido"},
+                              { "sWidth": "20%","mDataProp": "acciones"}
+                              ]
+
+  UsuariosRowCB = (  nRow, aData, iDisplayIndex ) ->
+    index = $(UsuariosTable.fnGetData()).getIndexObj aData, 'id'
+    acciones = getActionButtons "000"
+    UsuariosTable.fnUpdate( acciones, index, 3 ); 
+
+  UsuariosTable = createDataTable "table_registrados", root.SourceTUsuarios, FormatoUsuariosTable, null, UsuariosRowCB
 
 # Proceso para enviar metodo Post
 
@@ -15,17 +27,9 @@ jQuery ->
   PrepararDatosU = ->
     root.DatosEnviar = $("#form_usuario").serialize()
       
-  # Funcion de respuesta CORRECTA
-  # Los datos de respuesta se reciben en data
   SuccessFunctionU = ( data ) ->
-    #recargar datos de tabla Servicios
-    #ServiciosTable.fnReloadAjax "/configuracion/recuperar_servicio"
-    #resetear formulario
-    #$("#form_usuario").reset()
-
-    #reniciar tabla
-    #HorarioTable.fnClearTable()
-    #mostrar datos de respuesta
+    UsuariosTable.fnReloadAjax root.SourceTUsuarios
+    $("#form_usuario").reset()
     console.log(data)
 
   $(".btncancelarform").click (event) ->
@@ -37,14 +41,10 @@ jQuery ->
     event.preventDefault()
     $("#usuario").show()
 
-# 2. Enviar Datos
-  $("#btnGuardar_Usuario").click (e) ->
-    #Llamada a preparar Datps
-    PrepararDatosU()
-    #Llamada a envio Post
-    enviar "/configuracion/guardar_usuario", root.DatosEnviar, SuccessFunctionU, null
+  $("#btnGuardar_Usuario").click (event) ->
+    event.preventDefault()  
+    if $("#form_usuario").validationEngine 'validate'
+      PrepararDatosU()
+      enviar "/configuracion/guardar_usuario", root.DatosEnviar, SuccessFunctionU, null
 
-# Fin Proceso enviar Formulario
-      
-    #act on result.
-    false # prevents normal behaviour
+  $("#form_usuario").validationEngine 'attach',{autoHidePrompt:true,autoHideDelay:3000}

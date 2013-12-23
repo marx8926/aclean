@@ -42,6 +42,10 @@ jQuery ->
       $("#persona_hidden").val ui.item.int_persona_id
       $("#persona").val ui.item.label
       false
+  $(".btnCancelar").click (event) ->
+    event.preventDefault()
+    $("form").reset()
+    $("#diezmo_div").hide()
 
   $("#btnGuardar_Diezmo").click (event) ->
     event.preventDefault()
@@ -49,8 +53,5 @@ jQuery ->
     PrepararDatos()
     #Llamada a envio Post
     enviar "/diezmos_guardar", root.DatosEnviar, SuccessFunction, null
-
-# Fin Proceso enviar Formulario
-      
-    #act on result.
-    false # prevents normal behaviour
+    
+  $("form").validationEngine 'attach',{autoHidePrompt:true,autoHideDelay:3000,promptPosition : "centerLeft", scroll: false}
