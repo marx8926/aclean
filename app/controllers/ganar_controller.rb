@@ -461,13 +461,9 @@ class GanarController < ApplicationController
 
 
 	def recuperar_personas_filtro
-
 		persona = Persona.where(dat_persona_fecregistro: (params[:inicio] .. params[:fin]) )
-
 		todo = []
-
 		if persona.length > 0
-
 			t = {}
 			persona.each{ |x|
         		t = {}
@@ -547,11 +543,12 @@ class GanarController < ApplicationController
 
 				todo.push(t)
 			}
-
-
 		end
-
 		render :json => { 'aaData' => todo }, :status => :ok
 	end
 
+	def personacsv
+    @persona = Persona.all
+		render text: @persona.to_csv
+	end
 end

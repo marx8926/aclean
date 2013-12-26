@@ -8,6 +8,7 @@ Lean::Application.routes.draw do
   post "persona_editar_miembro" => "ganar#editar_miembro"
   post "persona_editar_visita" => "ganar#editar_visita"
   post "persona_eliminar_miembro" => "ganar#eliminar_miembro"
+  get "personacsv" => "ganar#personacsv"
 
 
   post "persona_eliminar_visita/(:id)" => "ganar#eliminar_visita"
