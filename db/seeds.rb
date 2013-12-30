@@ -21,37 +21,6 @@ CSV.foreach('db/ubi.csv') do |row|
       :float_ubigeo_longitud => row[7])
 end
 
-CSV.foreach('db/p3.csv') do |pers|
-      persona = Persona.create(
-        :var_persona_dni => pers[0], 
-	      :var_persona_nombres => pers[1],
-	      :var_persona_apellidos => pers[2],
-	      :var_persona_sexo => pers[4],
-	      :var_persona_profesion => pers[7],
-	      :dat_persona_fecNacimiento => pers[9],
-	      :dat_persona_fecregistro => DateTime.now(),
-	      :var_persona_estado => "1",
-	      :var_persona_email => nil,
-	      :iglesia => Iglesia.first,
-	      :lugar => Lugar.find(1))
-
-      Direccion.create(
-        :var_direccion_descripcion => pers[5], 
-        :var_direccion_referencia => nil,
-        :dou_direccion_longitud => nil, :dou_direccion_latitud => nil , 
-        :var_direccion_estado => "1", :ubigeo => Ubigeo.find(1354),
-        :persona => persona)
-
-      NivelCrecimiento.create(
-      	:int_nivelcrecimiento_escala => 1 ,
-				:int_nivelcrecimiento_estadoactual => 1,
-				:persona => persona)
-
-      Peticion.create(
-      	:var_peticion_motivooracion => nil,
-				:persona => persona , :dat_peticion_fecha => pers[10])
-end
-
 User.create(
       :email => "contacto@clmdevelopers.com",
       :password => "12345678"
@@ -245,3 +214,33 @@ Chart.create(
       :int_chart_ninio => 10,
       )
 
+CSV.foreach('db/p3.csv') do |pers|
+      persona = Persona.create(
+        :var_persona_dni => pers[0], 
+            :var_persona_nombres => pers[1],
+            :var_persona_apellidos => pers[2],
+            :var_persona_sexo => pers[4],
+            :var_persona_profesion => pers[7],
+            :dat_persona_fecNacimiento => pers[9],
+            :dat_persona_fecregistro => DateTime.now(),
+            :var_persona_estado => "1",
+            :var_persona_email => nil,
+            :iglesia => Iglesia.first,
+            :lugar => Lugar.find(1))
+
+      Direccion.create(
+        :var_direccion_descripcion => pers[5], 
+        :var_direccion_referencia => nil,
+        :dou_direccion_longitud => nil, :dou_direccion_latitud => nil , 
+        :var_direccion_estado => "1", :ubigeo => Ubigeo.find(1354),
+        :persona => persona)
+
+      NivelCrecimiento.create(
+            :int_nivelcrecimiento_escala => 1 ,
+                        :int_nivelcrecimiento_estadoactual => 1,
+                        :persona => persona)
+
+      Peticion.create(
+            :var_peticion_motivooracion => nil,
+                        :persona => persona , :dat_peticion_fecha => pers[10])
+end
