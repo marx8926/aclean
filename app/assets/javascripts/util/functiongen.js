@@ -47,7 +47,7 @@ jQuery.fn.enable = function () {
 function getActionButtons(conf){
   actions = "<p>"
   if(conf.substring(0,1)==1)
-    actions += '<a class="ver_row actions-icons" data-original-title="Ver" href="#"><img alt="ver" class="icons" src="/assets/view.pnghttp://d9i0z8gxqnxp1.cloudfront.net/img/edit-icon.png"></a>';
+    actions += '<a class="ver_row actions-icons" data-original-title="Ver" href="#"><img alt="ver" class="icons" src="view.png"></a>';
   if(conf.substring(1,2)==1)
     actions += '<a class="edit_row actions-icons" data-original-title="Editar" href="#"><img alt="edit" class="icons" src="http://d9i0z8gxqnxp1.cloudfront.net/img/edit-icon.png"></a>';
   if(conf.substring(2,3)==1)
@@ -250,9 +250,9 @@ function enviar(url, datos, successfunction, errorfunction){
 function createDataTable(idTable,UrlaDTable,FormatoDTable, DrawCallBackFunction, RowCallBackFunction){
 	
 	var oTable = $('#'+idTable).dataTable({
-		"bProcessing": true,
-		"bServerSide": false,
-		"bDestroy": true,
+		"bProcessing": false,
+		"bDestroy": true,		
+        "bSort": false,
 		"sAjaxSource": UrlaDTable,	  
 		"aoColumns": FormatoDTable,				   
     	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'i><'span12 center'p>>",

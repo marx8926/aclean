@@ -178,21 +178,13 @@ class GanarController < ApplicationController
 	end
 
 	def eliminar_miembro
-
-
 		id = params[:id]
-
 		ActiveRecord::Base.transaction do
-
 			begin
-
 				persona = Persona.find(id)
-
 				dir = Direccion.find_by("persona_id" => id)
-
 				nivel = NivelCrecimiento.where("persona_id" => id)
-				peticion = Peticion.where("persona_id" => id)		
-				
+				peticion = Peticion.where("persona_id" => id)				
 				tel = Telefono.where("persona_id" => id)
 
 				if persona != nil && dir!=nil and nivel!=nil and peticion!=nil
@@ -205,9 +197,6 @@ class GanarController < ApplicationController
 						tel.destroy_all!
 					end
 				end
-
-
-				
 			rescue Exception => e
 				raise ActiveRecord::Rollback
 			end
@@ -363,7 +352,7 @@ class GanarController < ApplicationController
 
 	def recuperar_personas_inicio
 
-		persona = Persona.last(300)
+		persona = Persona.all
 
 		todo = []
 
@@ -440,7 +429,9 @@ class GanarController < ApplicationController
 				t['provincia'] = provincia
 				t['departamento'] = departamento
 
-				t['var_persona_acciones']= ""
+				t['var_persona_acciones']= '<a class="ver_row actions-icons" data-original-title="Ver" href="#"><img alt="ver" class="icons" src="/view.png"></a>
+				<a class="edit_row actions-icons" data-original-title="Editar" href="#"><img alt="edit" class="icons" src="http://d9i0z8gxqnxp1.cloudfront.net/img/edit-icon.png"></a>
+				<a class="delete-row actions-icons" data-original-title="Eliminar" href="#"><img alt="trash" src="http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"></a>'
 				t['telefono'] = tel
 				t['telefono_data'] = telefono
 
@@ -638,5 +629,10 @@ class GanarController < ApplicationController
     respond_to do |format|
 			format.xls
     end
+	end
+
+	def cargarbotones
+		
+		return botones
 	end
 end

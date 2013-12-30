@@ -3,11 +3,12 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 root = exports ? this
-root.SourceTServicio = "/recuperar_personas_inicio"
+root.SourceTServicio = "/recuperar_personas_inicio"#recuperar_personas_inicio
 root.DatosEnviar = null
 root.count = 0
 root.SelectToDrop = null
 root.TipoForm = null
+root.actionPersonas = null
 
 jQuery ->
   
@@ -56,10 +57,11 @@ jQuery ->
     $("#btnGuardar_Miembro").hide()
     $(".idPersona").val ""
 
+  root.actionPersonas = getActionButtons "111"
+
   PersonaRowCB = (  nRow, aData, iDisplayIndex ) ->
     index = $(PersonaTable.fnGetData()).getIndexObj aData, 'int_servicio_id'
-    acciones = getActionButtons "111"
-    PersonaTable.fnUpdate( acciones, index, 5 );
+    ##PersonaTable.fnUpdate( root.actionPersonas, index, 5 );###
     $(nRow).find('a').tooltip('hide');
     $(nRow).find('.delete-row').click (event) ->
       event.preventDefault()
@@ -201,7 +203,6 @@ jQuery ->
 
   PersonaTable = createDataTable "table_registrados", root.SourceTServicio, FormatoPersonaTable, null, PersonaRowCB
 
-
   TelefonoTable = $('#table_telefonos_miembro').dataTable
     "aoColumns": [{"mDataProp": "numero"},{"mDataProp": "tipo"},{"mDataProp": "btn_elim"}]
     "bPaginate": false
@@ -332,6 +333,13 @@ jQuery ->
   
   ubigeos = getAjaxObject "https://s3.amazonaws.com/adminchurchs3/json/ubi.json"
   cargarUbigeo ubigeos, "distrito", "provincia", "departamento"
+
+
+  $("#reload").click (event) ->
+    event.preventDefault()
+    PersonaTable.fnReloadAjax root.SourceTServicio
+    console.log "hola"
+
 
   $("#form_miembro").validationEngine 'attach',{autoHidePrompt:true,autoHideDelay:3000}
   $("#form_visita").validationEngine 'attach',{autoHidePrompt:true,autoHideDelay:3000}
