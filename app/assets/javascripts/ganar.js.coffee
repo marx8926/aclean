@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 root = exports ? this
-root.SourceTServicio = "/recuperar_personas_inicio"#recuperar_personas_inicio
+root.SourceTServicio = "https://dl.dropboxusercontent.com/u/79250909/personas.json"
 root.DatosEnviar = null
 root.count = 0
 root.SelectToDrop = null
@@ -13,6 +13,140 @@ root.actionPersonas = null
 jQuery ->
   
   $(".wizard").bwizard({nextBtnText: "Siguiente &rarr;", backBtnText: "&larr; Anterior"})
+
+  Actions = new DTActions
+    'conf' : '111',
+    'idtable': 'table_registrados',
+    'ViewFunction': (nRow, aData, iDisplayIndex) ->
+      if("Visitante" == aData.nivel)
+        HideForms()
+        $("#form_visita").disable()
+        $("#visitante").show()
+        $("#nombrev").focus();
+        $("#nombrev").val aData.persona_data.var_persona_nombres
+        $("#apellidov").val aData.persona_data.var_persona_apellidos
+        $("#edadv").val aData.persona_data.int_persona_edad
+        $(aData.telefono_data).each (index) ->
+          showtipotel = ""
+          if(this.int_telefono_tipo == 1)
+            showtipotel = "Celular"
+          else
+            showtipotel = "Fijo"
+          tel =
+            "numero": this.var_telefono_codigo + this.var_telefono
+            "tipo" : showtipotel
+            "btn_elim":""
+            "id":this.int_telefono_id
+            "tipo_val": this.int_telefono_tipo
+            "codigo": this.var_telefono_codigo
+            "tel": this.var_telefono
+          TelefonoVTable.fnAddData tel        
+        $("#invitadov").val aData.persona_data.var_persona_invitado
+
+      else 
+        HideForms()
+        cargarUbigeo ubigeos, "distrito", "provincia", "departamento",aData.distrito,aData.provincia,aData.departamento
+        $("#form_miembro").disable()
+        $("#miembro").show()
+        $("#nombre").focus();
+        $("#nombre").val aData.persona_data.var_persona_nombres
+        $("#apellido").val aData.persona_data.var_persona_apellidos
+        $("#edad").val aData.persona_data.int_persona_edad
+        $("#estado_civil").val aData.persona_data.var_persona_estado
+        $("#sexo").val aData.persona_data.var_persona_sexo        
+        $("#fec_nac").val aData.fecnacimiento
+        $("#dni").val aData.persona_data.var_persona_dni
+        $("#ocupacion").val aData.persona_data.var_persona_ocupacion
+        $("#profesion").val aData.persona_data.var_persona_profesion
+        $(aData.telefono_data).each (index) ->
+          showtipotel = ""
+          if(this.int_telefono_tipo == 1)
+            showtipotel = "Celular"
+          else
+            showtipotel = "Fijo"
+          tel =
+            "numero": this.var_telefono_codigo + this.var_telefono
+            "tipo" : showtipotel
+            "btn_elim":""
+            "id":this.int_telefono_id
+            "tipo_val": this.int_telefono_tipo
+            "codigo": this.var_telefono_codigo
+            "tel": this.var_telefono
+          TelefonoTable.fnAddData tel
+        $("#direccion").val aData.direccion.var_direccion_descripcion
+        $("#referencia").val aData.direccion.var_direccion_referencia
+        $("#_lugar").val aData.persona_data.lugar_id
+        $("#fec_conversion").val aData.convertido
+        $("#email").val aData.persona_data.var_persona_email
+        $("#invitado").val aData.persona_data.var_persona_invitado
+
+    'EditFunction': (nRow, aData, iDisplayIndex) ->
+      $("#idPersona").val aData.persona_data.int_persona_id
+      if("Visitante" == aData.nivel)
+        HideForms()
+        $("#visitante").show()
+        $("#btneditarv").show()
+        $("#nombrev").focus();
+        $("#nombrev").val aData.persona_data.var_persona_nombres
+        $("#apellidov").val aData.persona_data.var_persona_apellidos
+        $("#edadv").val aData.persona_data.int_persona_edad
+        $(aData.telefono_data).each (index) ->
+          showtipotel = ""
+          if(this.int_telefono_tipo == 1)
+            showtipotel = "Celular"
+          else
+            showtipotel = "Fijo"
+          tel =
+            "numero": this.var_telefono_codigo + this.var_telefono
+            "tipo" : showtipotel
+            "btn_elim":getActionButtons "001"
+            "id":this.int_telefono_id
+            "tipo_val": this.int_telefono_tipo
+            "codigo": this.var_telefono_codigo
+            "tel": this.var_telefono
+          TelefonoVTable.fnAddData tel        
+        $("#invitadov").val aData.persona_data.var_persona_invitado
+
+      else 
+        HideForms()
+        cargarUbigeo ubigeos, "distrito", "provincia", "departamento",aData.distrito,aData.provincia,aData.departamento
+        $("#miembro").show()
+        $("#btneditar_Miembro").show()
+        $("#nombre").focus();
+        $("#nombre").val aData.persona_data.var_persona_nombres
+        $("#apellido").val aData.persona_data.var_persona_apellidos
+        $("#edad").val aData.persona_data.int_persona_edad
+        $("#estado_civil").val aData.persona_data.var_persona_estado
+        $("#sexo").val aData.persona_data.var_persona_sexo
+        $("#fec_nac").val aData.fecnacimiento
+        $("#dni").val aData.persona_data.var_persona_dni
+        $("#ocupacion").val aData.persona_data.var_persona_ocupacion
+        $("#profesion").val aData.persona_data.var_persona_profesion
+        $("#idpersona").val aData.persona_data.int_persona_id
+        $(aData.telefono_data).each (index) ->
+          showtipotel = ""
+          if(this.int_telefono_tipo == 1)
+            showtipotel = "Celular"
+          else
+            showtipotel = "Fijo"
+          tel =
+            "numero": this.var_telefono_codigo + this.var_telefono
+            "tipo" : showtipotel
+            "btn_elim":getActionButtons "001"
+            "id":this.int_telefono_id
+            "tipo_val": this.int_telefono_tipo
+            "codigo": this.var_telefono_codigo
+            "tel": this.var_telefono
+          TelefonoTable.fnAddData tel
+        $("#direccion").val aData.direccion.var_direccion_descripcion
+        $("#referencia").val aData.direccion.var_direccion_referencia
+        $("#_lugar").val aData.persona_data.lugar_id
+        $("#fec_conversion").val aData.convertido
+        $("#email").val aData.persona_data.var_persona_email
+        $("#invitado").val aData.persona_data.var_persona_invitado
+    'DropFunction': (nRow, aData, iDisplayIndex) ->
+      root.SelectToDrop = aData.persona_data.int_persona_id
+      DisplayBlockUISingle "dangermodal"
 
   PrepararDatosVisitante = ->
     root.DatosEnviarV =
@@ -60,145 +194,13 @@ jQuery ->
   root.actionPersonas = getActionButtons "111"
 
   PersonaRowCB = (  nRow, aData, iDisplayIndex ) ->
-    index = $(PersonaTable.fnGetData()).getIndexObj aData, 'int_servicio_id'
-    ##PersonaTable.fnUpdate( root.actionPersonas, index, 5 );###
-    $(nRow).find('a').tooltip('hide');
-    $(nRow).find('.delete-row').click (event) ->
-      event.preventDefault()
-      root.SelectToDrop = aData.persona_data.int_persona_id
-      DisplayBlockUISingle "dangermodal"
-    $(nRow).find('.ver_row').click (event) ->
-      event.preventDefault()
-      if("Visitante" == aData.nivel)
-        HideForms()
-        $("#form_visita").disable()
-        $("#visitante").show()
-        $("#nombrev").val aData.persona_data.var_persona_nombres
-        $("#apellidov").val aData.persona_data.var_persona_apellidos
-        $("#edadv").val aData.persona_data.int_persona_edad
-        $(aData.telefono_data).each (index) ->
-          showtipotel = ""
-          if(this.int_telefono_tipo == 1)
-            showtipotel = "Celular"
-          else
-            showtipotel = "Fijo"
-          tel =
-            "numero": this.var_telefono_codigo + this.var_telefono
-            "tipo" : showtipotel
-            "btn_elim":""
-            "id":this.int_telefono_id
-            "tipo_val": this.int_telefono_tipo
-            "codigo": this.var_telefono_codigo
-            "tel": this.var_telefono
-          TelefonoVTable.fnAddData tel        
-        $("#invitadov").val aData.persona_data.var_persona_invitado
-
-      else 
-        HideForms()
-        cargarUbigeo ubigeos, "distrito", "provincia", "departamento",aData.distrito,aData.provincia,aData.departamento
-        $("#form_miembro").disable()
-        $("#miembro").show()
-        $("#nombre").val aData.persona_data.var_persona_nombres
-        $("#apellido").val aData.persona_data.var_persona_apellidos
-        $("#edad").val aData.persona_data.int_persona_edad
-        $("#estado_civil").val aData.persona_data.var_persona_estado
-        $("#sexo").val aData.persona_data.var_persona_sexo        
-        $("#fec_nac").val aData.fecnacimiento
-        $("#dni").val aData.persona_data.var_persona_dni
-        $("#ocupacion").val aData.persona_data.var_persona_ocupacion
-        $("#profesion").val aData.persona_data.var_persona_profesion
-        $(aData.telefono_data).each (index) ->
-          showtipotel = ""
-          if(this.int_telefono_tipo == 1)
-            showtipotel = "Celular"
-          else
-            showtipotel = "Fijo"
-          tel =
-            "numero": this.var_telefono_codigo + this.var_telefono
-            "tipo" : showtipotel
-            "btn_elim":""
-            "id":this.int_telefono_id
-            "tipo_val": this.int_telefono_tipo
-            "codigo": this.var_telefono_codigo
-            "tel": this.var_telefono
-          TelefonoTable.fnAddData tel
-        $("#direccion").val aData.direccion.var_direccion_descripcion
-        $("#referencia").val aData.direccion.var_direccion_referencia
-        $("#_lugar").val aData.persona_data.lugar_id
-        $("#fec_conversion").val aData.convertido
-        $("#email").val aData.persona_data.var_persona_email
-        $("#invitado").val aData.persona_data.var_persona_invitado
-
-    $(nRow).find('.edit_row').click (event) ->
-      event.preventDefault()
-      $("#idPersona").val aData.persona_data.int_persona_id
-      if("Visitante" == aData.nivel)
-        HideForms()
-        $("#visitante").show()
-        $("#btneditarv").show()
-        $("#nombrev").val aData.persona_data.var_persona_nombres
-        $("#apellidov").val aData.persona_data.var_persona_apellidos
-        $("#edadv").val aData.persona_data.int_persona_edad
-        $(aData.telefono_data).each (index) ->
-          showtipotel = ""
-          if(this.int_telefono_tipo == 1)
-            showtipotel = "Celular"
-          else
-            showtipotel = "Fijo"
-          tel =
-            "numero": this.var_telefono_codigo + this.var_telefono
-            "tipo" : showtipotel
-            "btn_elim":getActionButtons "001"
-            "id":this.int_telefono_id
-            "tipo_val": this.int_telefono_tipo
-            "codigo": this.var_telefono_codigo
-            "tel": this.var_telefono
-          TelefonoVTable.fnAddData tel        
-        $("#invitadov").val aData.persona_data.var_persona_invitado
-
-      else 
-        HideForms()
-        cargarUbigeo ubigeos, "distrito", "provincia", "departamento",aData.distrito,aData.provincia,aData.departamento
-        $("#miembro").show()
-        $("#btneditar_Miembro").show()
-        $("#nombre").val aData.persona_data.var_persona_nombres
-        $("#apellido").val aData.persona_data.var_persona_apellidos
-        $("#edad").val aData.persona_data.int_persona_edad
-        $("#estado_civil").val aData.persona_data.var_persona_estado
-        $("#sexo").val aData.persona_data.var_persona_sexo
-        $("#fec_nac").val aData.fecnacimiento
-        $("#dni").val aData.persona_data.var_persona_dni
-        $("#ocupacion").val aData.persona_data.var_persona_ocupacion
-        $("#profesion").val aData.persona_data.var_persona_profesion
-        $("#idpersona").val aData.persona_data.int_persona_id
-        $(aData.telefono_data).each (index) ->
-          showtipotel = ""
-          if(this.int_telefono_tipo == 1)
-            showtipotel = "Celular"
-          else
-            showtipotel = "Fijo"
-          tel =
-            "numero": this.var_telefono_codigo + this.var_telefono
-            "tipo" : showtipotel
-            "btn_elim":getActionButtons "001"
-            "id":this.int_telefono_id
-            "tipo_val": this.int_telefono_tipo
-            "codigo": this.var_telefono_codigo
-            "tel": this.var_telefono
-          TelefonoTable.fnAddData tel
-        $("#direccion").val aData.direccion.var_direccion_descripcion
-        $("#referencia").val aData.direccion.var_direccion_referencia
-        $("#_lugar").val aData.persona_data.lugar_id
-        $("#fec_conversion").val aData.convertido
-        $("#email").val aData.persona_data.var_persona_email
-        $("#invitado").val aData.persona_data.var_persona_invitado
+    Actions.RowCBFunction nRow, aData, iDisplayIndex
 
   FormatoPersonaTable = [   { "sWidth": "35%","mDataProp": "nombrecompleto"},
                             { "sWidth": "15%","mDataProp": "telefono"},
                             { "sWidth": "10%","mDataProp": "registro"},
                             { "sWidth": "10%","mDataProp": "convertido"},
-                            { "sWidth": "10%","mDataProp": "nivel"},
-                            { "sWidth": "20%","mDataProp": "var_persona_acciones"}
+                            { "sWidth": "10%","mDataProp": "nivel"}
                             ]
 
   PersonaTable = createDataTable "table_registrados", root.SourceTServicio, FormatoPersonaTable, null, PersonaRowCB

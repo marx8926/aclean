@@ -188,11 +188,10 @@ class GanarController < ApplicationController
 				tel = Telefono.where("persona_id" => id)
 
 				if persona != nil && dir!=nil and nivel!=nil and peticion!=nil
-					persona.destroy!
-					dir.destroy!
 					nivel.destroy!
 					peticion.destroy!
-
+					dir.destroy!
+					persona.destroy!
 					if tel != nil
 						tel.destroy_all!
 					end
@@ -201,7 +200,7 @@ class GanarController < ApplicationController
 				raise ActiveRecord::Rollback
 			end
 		end
-		render :json => { :resp => id}, :status => :ok
+		render :json => {:resp => "ok" } , :status => :ok
 
 	end
 
