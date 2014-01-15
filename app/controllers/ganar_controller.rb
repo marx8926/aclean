@@ -351,104 +351,89 @@ class GanarController < ApplicationController
 
 	def recuperar_personas_inicio
 
-		persona = Persona.all
-
-		todo = []
-
-		if persona.length > 0
-
-			t = {}
-			persona.each{ |x|
-        		t = {}
-				t['nombrecompleto'] = x[:var_persona_nombres]+" "+x[:var_persona_apellidos]
-				t['registro'] = x[:created_at].strftime("%d/%m/%Y")
-				t['persona_data'] = x
-
-				if x[:dat_persona_fecNacimiento].nil? == false
-					t['fecnacimiento'] = x[:dat_persona_fecNacimiento].strftime("%d/%m/%Y")
-				else
-					t['fecnacimiento'] = nil
-				end
-
-				if x[:dat_persona_fecregistro].nil? == false
-					t['convertido'] = x[:dat_persona_fecregistro].strftime("%d/%m/%Y")
-				else
-					t['convertido'] = nil
-				end
-
-				telefono = Telefono.joins(:persona).where("persona_id" => x[:int_persona_id])
-				nivel = NivelCrecimiento.joins(:persona).where({"persona_id" => x[:int_persona_id], "int_nivelcrecimiento_estadoactual" => 1 })
-
-				tel = ""
-
-				if telefono.length > 0
-					telefono.each{ |i|
-
-
-						temp = ( i[:var_telefono_codigo].nil? ? "" : i[:var_telefono_codigo] )+" "+ ( i[:var_telefono].nil? ? "" : i[:var_telefono] )
-						tel = tel + "<p>" + temp + "</p>"
-					}
-				end
-				
-				level = nil
-
-				nivel.each{ |i|
-
-					case i[:int_nivelcrecimiento_escala]
-					when 0
-						level = "Visitante"
-					when 1
-						level = "Miembro"
-					when 2
-						level = "Pastor Principal"
-					else
-						level = "Administrador"
-					end
-				}
-
-				#direccion
-				dir = Direccion.joins(:persona).find_by("persona_id" => x[:int_persona_id])
-				t['direccion'] = dir
-
-				distrito = nil
-				provincia = nil
-				departamento = nil
-
-				if dir.nil? == false
-				  distrito = dir.ubigeo.int_ubigeo_id
-				  prov = Ubigeo.where(int_ubigeo_id: dir.ubigeo.int_ubigeo_dependencia).take
-
-				  provincia = prov[:int_ubigeo_id]
-
-                  dep = Ubigeo.find(prov.int_ubigeo_dependencia)
-                  departamento = dep[:int_ubigeo_id]
-
-				end
-				t['distrito'] = distrito
-				t['provincia'] = provincia
-				t['departamento'] = departamento
-
-				t['var_persona_acciones']= '<a class="ver_row actions-icons" data-original-title="Ver" href="#"><img alt="ver" class="icons" src="/view.png"></a>
-				<a class="edit_row actions-icons" data-original-title="Editar" href="#"><img alt="edit" class="icons" src="http://d9i0z8gxqnxp1.cloudfront.net/img/edit-icon.png"></a>
-				<a class="delete-row actions-icons" data-original-title="Eliminar" href="#"><img alt="trash" src="http://d9i0z8gxqnxp1.cloudfront.net/img/trash-icon.png"></a>'
-				t['telefono'] = tel
-				t['telefono_data'] = telefono
-
-				t['nivel'] = level
-
-				#peticion
-				peticion = Peticion.joins(:persona).find_by("persona_id" => x[:int_persona_id])
-				t['peticion'] = peticion.var_peticion_motivooracion
-
-				todo.push(t)
-			}
-
-
-		end
-
-		render :json => { 'aaData' => todo }, :status => :ok
+		persona = ActiveRecord::Base.connection.execute("SELECT * FROM view_get_personas")		
+		render :json => { 'aaData' => persona }, :status => :ok
 	end
 
+	def recuperar_persona_id
+		persona = Persona.find(params[:id])
+		t = {}
+		t['registro'] = persona[:created_at].strftime("%d/%m/%Y")
+		t['persona_data'] = persona
+		if persona[:dat_persona_fecNacimiento].nil? == false
+			t['fecnacimiento'] = persona[:dat_persona_fecNacimiento].strftime("%d/%m/%Y")
+		else
+			t['fecnacimiento'] = nil
+		end
+
+		if persona[:dat_persona_fecregistro].nil? == false
+			t['convertido'] = persona[:dat_persona_fecregistro].strftime("%d/%m/%Y")
+		else
+			t['convertido'] = nil
+		end
+
+		telefono = Telefono.joins(:persona).where("persona_id" => persona[:int_persona_id])
+		nivel = NivelCrecimiento.joins(:persona).where({"persona_id" => persona[:int_persona_id], "int_nivelcrecimiento_estadoactual" => 1 })
+
+		tel = ""
+
+		if telefono.length > 0
+			telefono.each{ |i|
+
+
+				temp = ( i[:var_telefono_codigo].nil? ? "" : i[:var_telefono_codigo] )+" "+ ( i[:var_telefono].nil? ? "" : i[:var_telefono] )
+				tel = tel + "<p>" + temp + "</p>"
+			}
+		end
+		
+		level = nil
+
+		nivel.each{ |i|
+
+			case i[:int_nivelcrecimiento_escala]
+			when 0
+				level = "Visitante"
+			when 1
+				level = "Miembro"
+			when 2
+				level = "Pastor Principal"
+			else
+				level = "Administrador"
+			end
+		}
+
+		#direccion
+		dir = Direccion.joins(:persona).find_by("persona_id" => persona[:int_persona_id])
+		t['direccion'] = dir
+
+		distrito = nil
+		provincia = nil
+		departamento = nil
+
+		if dir.nil? == false
+		  distrito = dir.ubigeo.int_ubigeo_id
+		  prov = Ubigeo.where(int_ubigeo_id: dir.ubigeo.int_ubigeo_dependencia).take
+
+		  provincia = prov[:int_ubigeo_id]
+
+	      dep = Ubigeo.find(prov.int_ubigeo_dependencia)
+	      departamento = dep[:int_ubigeo_id]
+
+		end
+		t['distrito'] = distrito
+		t['provincia'] = provincia
+		t['departamento'] = departamento
+		t['telefono'] = tel
+		t['telefono_data'] = telefono
+
+		t['nivel'] = level
+
+		peticion = Peticion.joins(:persona).find_by("persona_id" => persona[:int_persona_id])
+		t['peticion'] = peticion.var_peticion_motivooracion
+
+		render :json => t, :status => :ok
+
+	end
 
 	def recuperar_personas_filtro
 		persona = Persona.where(dat_persona_fecregistro: (params[:inicio] .. params[:fin]) )
