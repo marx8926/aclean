@@ -33,7 +33,7 @@ class ConfiguracionController < ApplicationController
 			begin
 
 				user = User.create!(
-					:email => params[:usuario],
+					:email => params[:email],
 					:password => params[:password] ,
 					:var_usuario_nombre => params[:nombre],
 					:var_usuario_apellido => params[:apellido],
@@ -86,18 +86,7 @@ class ConfiguracionController < ApplicationController
 
 	def recuperar_usuario
 		usuarios = User.all
-		arrayusuarios = []
-		usuarios.each{ |u|
-			user = {}
-			user["id"] = u[:id]
-			user["email"] = u[:email]
-			user["var_usuario_nombre"] = u[:var_usuario_nombre]
-			user["var_usuario_apellido"] = u[:var_usuario_apellido]
-			user["var_usuario_documento"] = u[:var_usuario_documento]
-			user["acciones"] = u[:acciones]
-			arrayusuarios.push user
-		}
-		render :json => {:aaData => arrayusuarios} , :status => :ok
+		render :json => {:aaData => usuarios} , :status => :ok
 	end
 
 	def guardar_lugar

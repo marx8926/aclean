@@ -7,15 +7,11 @@ jQuery ->
   $(".wizard").bwizard({nextBtnText: "Siguiente &rarr;", backBtnText: "&larr; Anterior"})
 
   Actions = new DTActions
-    'conf' : '101',
-    'idtable': 'table_registrados',
-    'ViewFunction': (nRow, aData, iDisplayIndex) ->      
-      console.log aData
-
+    'conf' : '010'
+    'idtable': 'table_registrados'
     'EditFunction': (nRow, aData, iDisplayIndex) ->
-      console.log aData
-
-    'DropFunction': (nRow, aData, iDisplayIndex) ->      
+      $("#usuario").show()
+      $("#email").val("hola")
       console.log aData
 
   FormatoUsuariosTable = [   { "sWidth": "30%","mDataProp": "email"},
