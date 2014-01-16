@@ -43,7 +43,7 @@
                       %input#usuario.form-control{name: "usuario", type: "text", class:"validate[required,custom[email]]"}
                     %label.col-lg-2.col-sm-2.control-label Password
                     .col-lg-2.col-sm-2
-                      %input#password.form-control{name: "password", type: "password", class:"validate[required]"}
+                      %input#password.form-control{name: "password", type: "password", class:"validate[required,minSize[8]]"}
               .form-group
                 %label.col-lg-2.control-label{for: "nombre"} Nombre
                 .col-lg-10
@@ -55,7 +55,7 @@
                       %input#apellido.form-control{name: "apellido", type: "text", class:"validate[required]"}
                     %label.col-lg-2.col-sm-2.control-label N° Documento
                     .col-lg-2.col-sm-2
-                      %input#num_doc.form-control{name: "num_doc", type: "text", class:"validate[required]"}
+                      %input#num_doc.form-control{name: "num_doc", type: "text", class:"validate[required,minSize[8],maxSize[8]]"}
             %div
               .form-group
                 %label.col-lg-2.control-label Opciones
@@ -103,7 +103,6 @@
                   %th{style: "width:25%"} Email
                   %th{style: "width:35%"} Nombre
                   %th.hidden-phone{style: "width:15%"} Apellido
-                  %th.hidden-phone{style: "width:10%"} Acciones
               %tbody
             .clearfix
   / Row end

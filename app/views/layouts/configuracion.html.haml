@@ -32,7 +32,8 @@
     = stylesheet_link_tag "loader"
     = stylesheet_link_tag "successblock"
     = stylesheet_link_tag "jqueryvalidation/css/validationEngine.jquery.css" 
-    = stylesheet_link_tag "datepicker/css/datepicker.css"
+    = stylesheet_link_tag "datepicker/css/datepicker.css"    
+    = stylesheet_link_tag "datatables.actions.css"
   %body
     / Header start
     %header
@@ -151,32 +152,32 @@
     / Main Container end
 
     / Scripts
-    = javascript_include_tag "jquery.min.js"
-    = javascript_include_tag "bootstrap.js"
-    = javascript_include_tag "jquery-ui-1.8.23.custom.min.js"
-    / Easy pie charts 
-    = javascript_include_tag "jquery.easy-pie-chart.js"
-    / Sparkline JS
-    = javascript_include_tag "jquery.sparkline.js"
-    / Data tables
-    = javascript_include_tag "jquery.dataTables.js"
-    / Custom Js
-    = javascript_include_tag "custom-tables.js"
-    = javascript_include_tag "jquery.blockUI.js"
-    
-    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=true"
-    = javascript_include_tag "jqueryvalidation/languages/jquery.validationEngine-es.js"
-    = javascript_include_tag "jqueryvalidation/jquery.validationEngine.js"    
-    = javascript_include_tag "datepicker/js/bootstrap-datepicker.js"
-    = javascript_include_tag "util/datatable_plugins.js"
-    / custom Js
-    = javascript_include_tag "custom.js"
-    :javascript
-      urlES = "/dt_ES.txt"
-    = javascript_include_tag "util/functiongen.js"   
-    = javascript_include_tag :configuracion
-    
-    =yield :bloquejavascript
+  = javascript_include_tag "jquery.min.js"
+  = javascript_include_tag "bootstrap.js"
+  = javascript_include_tag "jquery-ui-1.8.23.custom.min.js"
+  / Easy pie charts 
+  = javascript_include_tag "jquery.easy-pie-chart.js"
+  / Sparkline JS
+  = javascript_include_tag "jquery.sparkline.js"
+  / Data tables
+  = javascript_include_tag "jquery.dataTables.js"
+  / Custom Js
+  = javascript_include_tag "custom-tables.js"
+  = javascript_include_tag "jquery.blockUI.js"
+  
+  = javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=true"
+  = javascript_include_tag "jqueryvalidation/languages/jquery.validationEngine-es.js"
+  = javascript_include_tag "jqueryvalidation/jquery.validationEngine.js"    
+  = javascript_include_tag "datepicker/js/bootstrap-datepicker.js"
+  = javascript_include_tag "util/datatable_plugins.js"    
+  = javascript_include_tag "datatables.actions.js"
+  = javascript_include_tag "custom.js"
+  :javascript
+    urlES = "/dt_ES.txt"
+  = javascript_include_tag "util/functiongen.js"   
+  = javascript_include_tag :configuracion
+  
+  =yield :bloquejavascript
 
 
 

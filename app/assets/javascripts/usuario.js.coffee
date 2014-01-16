@@ -6,24 +6,28 @@ jQuery ->
   
   $(".wizard").bwizard({nextBtnText: "Siguiente &rarr;", backBtnText: "&larr; Anterior"})
 
+  Actions = new DTActions
+    'conf' : '101',
+    'idtable': 'table_registrados',
+    'ViewFunction': (nRow, aData, iDisplayIndex) ->      
+      console.log aData
+
+    'EditFunction': (nRow, aData, iDisplayIndex) ->
+      console.log aData
+
+    'DropFunction': (nRow, aData, iDisplayIndex) ->      
+      console.log aData
+
   FormatoUsuariosTable = [   { "sWidth": "30%","mDataProp": "email"},
                               { "sWidth": "20%","mDataProp": "var_usuario_nombre"},
-                              { "sWidth": "30%","mDataProp": "var_usuario_apellido"},
-                              { "sWidth": "20%","mDataProp": "acciones"}
+                              { "sWidth": "30%","mDataProp": "var_usuario_apellido"}
                               ]
 
   UsuariosRowCB = (  nRow, aData, iDisplayIndex ) ->
-    index = $(UsuariosTable.fnGetData()).getIndexObj aData, 'id'
-    acciones = getActionButtons "000"
-    UsuariosTable.fnUpdate( acciones, index, 3 ); 
+    Actions.RowCBFunction nRow, aData, iDisplayIndex 
 
   UsuariosTable = createDataTable "table_registrados", root.SourceTUsuarios, FormatoUsuariosTable, null, UsuariosRowCB
 
-# Proceso para enviar metodo Post
-
-# 1. Preparar Datos
-
-  # Datos para enviar en formato JSON
   PrepararDatosU = ->
     root.DatosEnviar = $("#form_usuario").serialize()
       

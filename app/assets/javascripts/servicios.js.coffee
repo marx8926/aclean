@@ -7,6 +7,34 @@ jQuery ->
 
   $("#btnGuardarServicio").hide()
 
+  Actions = new DTActions
+    'conf' : '011',
+    'idtable': 'tablaservicios',
+    'EditFunction': (nRow, aData, iDisplayIndex) ->
+      $("#nombre").val aData.var_servicio_nombre
+      $("#tipo").val aData.int_servicio_tipo
+      $("#idservicio").val(aData.int_servicio_id)
+      HorarioTable.fnClearTable()
+      $(aData.turnos).each (index) ->
+        dia_desc = getDiaSemana this.int_turno_dia
+        horario =
+          "var_turno_dia_des": dia_desc
+          "int_turno_dia": this.int_turno_dia
+          "var_turno_horainicio" : this.var_turno_horainicio
+          "var_turno_horafin": this.var_turno_horafin
+          "btn_elim": getActionButtons "001"
+          "id": this.int_turno_id
+        HorarioTable.fnAddData horario
+      $("#servicio").show()
+      $("#nombre").focus()
+      $("#btnGuardarServicio").show()
+      $("#btnRegistrarServicio").hide()
+      $("#registrar").text("Guardar Cambios")
+
+    'DropFunction': (nRow, aData, iDisplayIndex) ->      
+      root.SelectToDrop = aData.int_servicio_id
+      DisplayBlockUISingle "dangermodal"
+
   HorarioTable = $('#horario').dataTable
     "aoColumns": [
       {"mDataProp": "var_turno_dia_des"},
@@ -28,34 +56,7 @@ jQuery ->
                               ]
 
   ServiciosRowCB = (  nRow, aData, iDisplayIndex ) ->
-    index = $(ServiciosTable.fnGetData()).getIndexObj aData, 'int_servicio_id'
-    acciones = getActionButtons "111"
-    ServiciosTable.fnUpdate( acciones, index, 3 ); 
-    $(nRow).find('.delete-row').click (event) ->
-      event.preventDefault()
-      root.SelectToDrop = aData.int_servicio_id
-      DisplayBlockUISingle "dangermodal"
-    $(nRow).find('.edit_row').click (event) ->
-      event.preventDefault()
-      $("#nombre").val aData.var_servicio_nombre
-      $("#tipo").val aData.int_servicio_tipo
-      $("#idservicio").val(aData.int_servicio_id)
-      HorarioTable.fnClearTable()
-      $(aData.turnos).each (index) ->
-        dia_desc = getDiaSemana this.int_turno_dia
-        horario =
-          "var_turno_dia_des": dia_desc
-          "int_turno_dia": this.int_turno_dia
-          "var_turno_horainicio" : this.var_turno_horainicio
-          "var_turno_horafin": this.var_turno_horafin
-          "btn_elim": getActionButtons "001"
-          "id": this.int_turno_id
-        HorarioTable.fnAddData horario
-      $("#servicio").show()
-      $("#nombre").focus()
-      $("#btnGuardarServicio").show()
-      $("#btnRegistrarServicio").hide()
-      $("#registrar").text("Guardar Cambios")
+    Actions.RowCBFunction nRow, aData, iDisplayIndex      
 
   ServiciosTable = createDataTable "tablaservicios", root.SourceTServicio, FormatoServiciosTable, null, ServiciosRowCB
       
