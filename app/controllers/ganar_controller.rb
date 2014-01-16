@@ -177,29 +177,14 @@ class GanarController < ApplicationController
 
 	end
 
-	def eliminar_miembro
+	def eliminar_persona
 		id = params[:id]
 		ActiveRecord::Base.transaction do
 			begin
 				persona = Persona.find(id)
-				dir = Direccion.find_by("persona_id" => id)
-				nivel = NivelCrecimiento.where("persona_id" => id)
-				peticion = Peticion.where("persona_id" => id)				
-				tel = Telefono.where("persona_id" => id)
-
-				if persona != nil && dir!=nil and nivel!=nil and peticion!=nil
-					nivel.destroy!
-					peticion.destroy!
-					dir.destroy!
-					persona.destroy!
-					if tel != nil
-						tel.destroy_all!
-					end
-				end
-			rescue Exception => e
-				raise ActiveRecord::Rollback
-			end
-		end
+				persona.update!(:var_persona_estado => 0)
+      end
+    end
 		render :json => {:resp => "ok" } , :status => :ok
 
 	end
@@ -341,12 +326,6 @@ class GanarController < ApplicationController
 		end
 
 		render :json => {:resp => "ok" } , :status => :ok
-
-
-	end
-
-	def eliminar_visita
-
 	end
 
 	def recuperar_personas_inicio
@@ -356,82 +335,10 @@ class GanarController < ApplicationController
 	end
 
 	def recuperar_persona_id
-		persona = Persona.find(params[:id])
-		t = {}
-		t['registro'] = persona[:created_at].strftime("%d/%m/%Y")
-		t['persona_data'] = persona
-		if persona[:dat_persona_fecNacimiento].nil? == false
-			t['fecnacimiento'] = persona[:dat_persona_fecNacimiento].strftime("%d/%m/%Y")
-		else
-			t['fecnacimiento'] = nil
-		end
-
-		if persona[:dat_persona_fecregistro].nil? == false
-			t['convertido'] = persona[:dat_persona_fecregistro].strftime("%d/%m/%Y")
-		else
-			t['convertido'] = nil
-		end
-
-		telefono = Telefono.joins(:persona).where("persona_id" => persona[:int_persona_id])
-		nivel = NivelCrecimiento.joins(:persona).where({"persona_id" => persona[:int_persona_id], "int_nivelcrecimiento_estadoactual" => 1 })
-
-		tel = ""
-
-		if telefono.length > 0
-			telefono.each{ |i|
-
-
-				temp = ( i[:var_telefono_codigo].nil? ? "" : i[:var_telefono_codigo] )+" "+ ( i[:var_telefono].nil? ? "" : i[:var_telefono] )
-				tel = tel + "<p>" + temp + "</p>"
-			}
-		end
-		
-		level = nil
-
-		nivel.each{ |i|
-
-			case i[:int_nivelcrecimiento_escala]
-			when 0
-				level = "Visitante"
-			when 1
-				level = "Miembro"
-			when 2
-				level = "Pastor Principal"
-			else
-				level = "Administrador"
-			end
-		}
-
-		#direccion
-		dir = Direccion.joins(:persona).find_by("persona_id" => persona[:int_persona_id])
-		t['direccion'] = dir
-
-		distrito = nil
-		provincia = nil
-		departamento = nil
-
-		if dir.nil? == false
-		  distrito = dir.ubigeo.int_ubigeo_id
-		  prov = Ubigeo.where(int_ubigeo_id: dir.ubigeo.int_ubigeo_dependencia).take
-
-		  provincia = prov[:int_ubigeo_id]
-
-	      dep = Ubigeo.find(prov.int_ubigeo_dependencia)
-	      departamento = dep[:int_ubigeo_id]
-
-		end
-		t['distrito'] = distrito
-		t['provincia'] = provincia
-		t['departamento'] = departamento
-		t['telefono'] = tel
-		t['telefono_data'] = telefono
-
-		t['nivel'] = level
-
-		peticion = Peticion.joins(:persona).find_by("persona_id" => persona[:int_persona_id])
-		t['peticion'] = peticion.var_peticion_motivooracion
-
-		render :json => t, :status => :ok
+		persona = ActiveRecord::Base.connection.execute("SELECT * FROM view_get_persona_completo where int_persona_id="+params[:id])[0]	
+		telefono = Telefono.joins(:persona).where("persona_id" => params[:id])
+		persona[:telefonos] = telefono
+		render :json => persona, :status => :ok
 
 	end
 

@@ -18,46 +18,64 @@ jQuery ->
     'conf' : '111',
     'idtable': 'table_registrados',
     'ViewFunction': (nRow, aData, iDisplayIndex) ->      
-      datos = getAjaxObject "recuperar_persona_id/"+aData.int_persona_id
-      if("Visitante" == datos.nivel)
+      persona = getAjaxObject "recuperar_persona_id/"+aData.int_persona_id
+      if(0 == persona.nivel)
         HideForms()
         $("#form_visita").disable()
         $("#visitante").show()
         $("#nombrev").focus()
       else 
         HideForms()
-        cargarUbigeo ubigeos, "distrito", "provincia", "departamento",datos.distrito,datos.provincia,datos.departamento
+        cargarUbigeo ubigeos, "distrito", "provincia", "departamento",persona.distrito,persona.provincia,persona.departamento
         $("#form_miembro").disable()
         $("#miembro").show()
         $("#nombre").focus();      
-      LoadMiembro datos
+      LoadMiembro persona
 
     'EditFunction': (nRow, aData, iDisplayIndex) ->
       $("#idPersona").val aData.int_persona_id
-      datos = getAjaxObject "recuperar_persona_id/"+aData.int_persona_id
-      if("Visitante" == datos.nivel)
+      persona = getAjaxObject "recuperar_persona_id/"+aData.int_persona_id
+      if("Visitante" == persona.nivel)
         HideForms()
         $("#visitante").show()
         $("#btneditarv").show()
         $("#nombrev").focus()
       else 
         HideForms()
-        cargarUbigeo ubigeos, "distrito", "provincia", "departamento",datos.distrito,datos.provincia,datos.departamento
+        cargarUbigeo ubigeos, "distrito", "provincia", "departamento",persona.distrito,persona.provincia,persona.departamento
         $("#miembro").show()
         $("#btneditar_Miembro").show()
         $("#nombre").focus();      
-      LoadMiembro datos
+      LoadMiembro persona
 
     'DropFunction': (nRow, aData, iDisplayIndex) ->
       root.SelectToDrop = aData.int_persona_id
       DisplayBlockUISingle "dangermodal"
 
-  LoadMiembro = (data) ->
-    if("Visitante" == data.nivel)
-      $("#nombrev").val data.persona_data.var_persona_nombres
-      $("#apellidov").val data.persona_data.var_persona_apellidos
-      $("#edadv").val data.persona_data.int_persona_edad
-      $(data.telefono_data).each (index) ->
+  LoadMiembro = (persona) ->
+    if(0 == persona.nivel)
+      $("#nombrev").val persona.var_persona_nombres
+      $("#apellidov").val persona.var_persona_apellidos
+      $("#edadv").val persona.int_persona_edad
+      $("#invitadov").val persona.var_persona_invitado
+    else
+      $("#nombre").val persona.var_persona_nombres
+      $("#apellido").val persona.var_persona_apellidos
+      $("#edad").val persona.int_persona_edad
+      $("#estado_civil").val persona.var_persona_estado
+      $("#sexo").val persona.var_persona_sexo
+      $("#fec_nac").val persona.fecnacimiento
+      $("#dni").val persona.var_persona_dni
+      $("#ocupacion").val persona.var_persona_ocupacion
+      $("#profesion").val persona.var_persona_profesion
+      $("#idpersona").val persona.int_persona_id
+      $("#direccion").val persona.direccion
+      $("#referencia").val persona.referencia
+      $("#_lugar").val persona.lugar_id
+      $("#fec_conversion").val persona.fecconvertido
+      $("#email").val persona.var_persona_email
+      $("#invitado").val persona.var_persona_invitado
+    $(persona.telefonos).each (index) ->
         showtipotel = ""
         if(this.int_telefono_tipo == 1)
           showtipotel = "Celular"
@@ -72,39 +90,6 @@ jQuery ->
           "codigo": this.var_telefono_codigo
           "tel": this.var_telefono
         TelefonoVTable.fnAddData tel        
-      $("#invitadov").val data.persona_data.var_persona_invitado
-    else
-      $("#nombre").val data.persona_data.var_persona_nombres
-      $("#apellido").val data.persona_data.var_persona_apellidos
-      $("#edad").val data.persona_data.int_persona_edad
-      $("#estado_civil").val data.persona_data.var_persona_estado
-      $("#sexo").val data.persona_data.var_persona_sexo
-      $("#fec_nac").val data.fecnacimiento
-      $("#dni").val data.persona_data.var_persona_dni
-      $("#ocupacion").val data.persona_data.var_persona_ocupacion
-      $("#profesion").val data.persona_data.var_persona_profesion
-      $("#idpersona").val data.persona_data.int_persona_id
-      $(data.telefono_data).each (index) ->
-        showtipotel = ""
-        if(this.int_telefono_tipo == 1)
-          showtipotel = "Celular"
-        else
-          showtipotel = "Fijo"
-        tel =
-          "numero": this.var_telefono_codigo + this.var_telefono
-          "tipo" : showtipotel
-          "btn_elim":getActionButtons "001"
-          "id":this.int_telefono_id
-          "tipo_val": this.int_telefono_tipo
-          "codigo": this.var_telefono_codigo
-          "tel": this.var_telefono
-        TelefonoTable.fnAddData tel
-      $("#direccion").val data.direccion.var_direccion_descripcion
-      $("#referencia").val data.direccion.var_direccion_referencia
-      $("#_lugar").val data.persona_data.lugar_id
-      $("#fec_conversion").val data.convertido
-      $("#email").val data.persona_data.var_persona_email
-      $("#invitado").val data.persona_data.var_persona_invitado
 
   PrepararDatosVisitante = ->
     root.DatosEnviarV =
@@ -243,7 +228,7 @@ jQuery ->
   $("#btnSiEliminar").click (event) ->
     event.preventDefault()
     DisplayBlockUI "loader"
-    enviar "persona_eliminar_miembro", {"id":root.SelectToDrop}, SuccessFunctionDropServicio, null
+    enviar "persona_eliminar_persona", {"id":root.SelectToDrop}, SuccessFunctionDropServicio, null
 
   $("#btnSiGuardar").click (event) ->
     event.preventDefault()    
