@@ -57,13 +57,13 @@ jQuery ->
   $("#btnRegistrar_Usuario").click (event) ->
     event.preventDefault()  
     if $("#form_usuario").validationEngine 'validate'
-      #enviar "/configuracion/guardar_usuario", $("#form_usuario").serialize(), SuccessFunctionU, null
+      enviar "/configuracion/guardar_usuario", $("#form_usuario").serialize(), SuccessFunctionU, null
       console.log "validado"
 
   $("#btnGuardar_Usuario").click (event) ->
     event.preventDefault()
     if $("#form_usuario").validationEngine 'validate'
-      #enviar "/configuracion/editar_usuario", $("#form_usuario").serialize(), SuccessFunctionU, null
+      enviar "/configuracion/editar_usuario", $("#form_usuario").serialize(), SuccessFunctionU, null
       console.log "validado"
 
   $("#form_usuario").validationEngine 'attach',{autoHidePrompt:true,autoHideDelay:3000}
