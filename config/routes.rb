@@ -35,8 +35,8 @@ Lean::Application.routes.draw do
   get "configuracion/usuario" => "configuracion#usuario"
   get "configuracion/recuperar_usuario" => "configuracion#recuperar_usuario"
   post "configuracion/guardar_usuario" => "configuracion#guardar_usuario"
-
-
+  get "configuracion/recuperar_menu_usuario/(:id)" => "configuracion#recuperar_menu_usuario"
+  post "configuracion/editar_usuario" => "configuracion#editar_usuario"
 
   get "configuracion/lugar" => "configuracion#lugar"
   get "configuracion/recuperar_lugar" => "configuracion#recuperar_lugar"

@@ -27,8 +27,14 @@ class ConfiguracionController < ApplicationController
 		
 	end
 
-	def guardar_usuario
+	# 1: persona
+	# 2: diezmo
+	# 3: ofrenda
+	# 4: asistencia
+	# 5: informacion
+	# 6: configuracion
 
+	def guardar_usuario
 		ActiveRecord::Base.transaction do
 			begin
 
@@ -45,32 +51,37 @@ class ConfiguracionController < ApplicationController
 						:user => user,
 						:menu => Menu.find_by(var_menu_nombre: "persona")
 						)
+				end
 
-				elsif params[:diezmos].nil? == false
+				if params[:diezmo].nil? == false
 					diezmo = UsuarioMenu.create!(
 						:user => user,
 						:menu => Menu.find_by(var_menu_nombre: "diezmo")
 						)
+				end
 
-				elsif params[:ofrendas].nil? == false 
+				if params[:ofrenda].nil? == false 
 					ofrenda = UsuarioMenu.create!(
 						:user => user,
 						:menu => Menu.find_by(var_menu_nombre: "ofrenda")
 						)
+				end
 
-				elsif params[:asistencia].nil? == false 
+				if params[:asistencia].nil? == false 
 					asistencia = UsuarioMenu.create!(
 						:user => user,
 						:menu => Menu.find_by(var_menu_nombre: "asistencia")
 						)
+				end
 
-				elsif params[:informacion].nil? == false
+				if params[:informacion].nil? == false
 					informacion = UsuarioMenu.create!(
 						:user => user,
 						:menu => Menu.find_by(var_menu_nombre: "informacion")
 						)
+				end
 
-				elsif params[:configuracion].nil? == false
+				if params[:configuracion].nil? == false
 					configuracion = UsuarioMenu.create!(
 						:user => user,
 						:menu => Menu.find_by(var_menu_nombre: "configuracion")
@@ -81,13 +92,83 @@ class ConfiguracionController < ApplicationController
 				raise ActiveRecord::Rollback
 			end
 		end
-		render :json => {:resp => "ok" }, :status => :ok
+		render :json => {:resp => params }, :status => :ok
 	end
 
 	def recuperar_usuario
 		usuarios = User.all
 		render :json => {:aaData => usuarios} , :status => :ok
 	end
+
+  def recuperar_menu_usuario
+    usuarios_menus = UsuarioMenu.where("user_id" => params[:id])
+    menus = []
+    usuarios_menus.each{ |x|
+    	menu = Menu.find(x[:menu_id])
+    	menus.push(menu)
+    }
+    render :json => menus , :status => :ok
+  end
+
+  def editar_usuario
+  	ActiveRecord::Base.transaction do
+			begin
+		  	user = User.lock.find(params[:id_usuario])
+		  	user.update!(
+		  				:email => params[:email],
+							:password => params[:password] ,
+							:var_usuario_nombre => params[:nombre],
+							:var_usuario_apellido => params[:apellido],
+							:var_usuario_documento => params[:num_doc])
+		  	UsuarioMenu.destroy_all("user_id" => params[:id_usuario])
+
+		  	if params[:persona].nil? == false
+					persona = UsuarioMenu.create!(
+						:user => user,
+						:menu => Menu.find_by(var_menu_nombre: "persona")
+						)
+				end
+
+				if params[:diezmo].nil? == false
+					diezmo = UsuarioMenu.create!(
+						:user => user,
+						:menu => Menu.find_by(var_menu_nombre: "diezmo")
+						)
+				end
+
+				if params[:ofrenda].nil? == false 
+					ofrenda = UsuarioMenu.create!(
+						:user => user,
+						:menu => Menu.find_by(var_menu_nombre: "ofrenda")
+						)
+				end
+
+				if params[:asistencia].nil? == false 
+					asistencia = UsuarioMenu.create!(
+						:user => user,
+						:menu => Menu.find_by(var_menu_nombre: "asistencia")
+						)
+				end
+
+				if params[:informacion].nil? == false
+					informacion = UsuarioMenu.create!(
+						:user => user,
+						:menu => Menu.find_by(var_menu_nombre: "informacion")
+						)
+				end
+
+				if params[:configuracion].nil? == false
+					configuracion = UsuarioMenu.create!(
+						:user => user,
+						:menu => Menu.find_by(var_menu_nombre: "configuracion")
+						)
+				end
+		  rescue
+				raise ActiveRecord::Rollback
+			end
+		end
+		render :json => {:resp => "ok" }, :status => :ok
+  end
 
 	def guardar_lugar
 
@@ -132,7 +213,7 @@ class ConfiguracionController < ApplicationController
 	def editar_lugar
 		form = params[:formulario]
 		lugar = Lugar.lock.find(form[:idlugar])
-		lugar.update(:var_lugar_descripcion => form[:descripcion])
+		lugar.update!(:var_lugar_descripcion => form[:descripcion])
 		render :json => {:resp => "ok" }, :status => :ok
 	end
 

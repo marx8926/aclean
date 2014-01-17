@@ -11,8 +11,18 @@ jQuery ->
     'idtable': 'table_registrados'
     'EditFunction': (nRow, aData, iDisplayIndex) ->
       $("#usuario").show()
-      $("#email").val("hola")
-      console.log aData
+      $("#btnGuardar_Usuario").show()
+      $("#btnRegistrar_Usuario").hide()
+      menus = getAjaxObject  "/configuracion/recuperar_menu_usuario/"+aData.id
+      $("form").reset()
+      $('input:checkbox').removeAttr 'checked' 
+      $("#id_usuario").val aData.id
+      $("#email").val aData.email
+      $("#nombre").val aData.var_usuario_nombre
+      $("#apellido").val aData.var_usuario_apellido
+      $("#documento").val aData.var_usuario_documento
+      $(menus).each (index) ->
+        $("#"+this.var_menu_nombre).attr "checked", true
 
   FormatoUsuariosTable = [   { "sWidth": "30%","mDataProp": "email"},
                               { "sWidth": "20%","mDataProp": "var_usuario_nombre"},
@@ -23,28 +33,37 @@ jQuery ->
     Actions.RowCBFunction nRow, aData, iDisplayIndex 
 
   UsuariosTable = createDataTable "table_registrados", root.SourceTUsuarios, FormatoUsuariosTable, null, UsuariosRowCB
-
-  PrepararDatosU = ->
-    root.DatosEnviar = $("#form_usuario").serialize()
       
   SuccessFunctionU = ( data ) ->
     UsuariosTable.fnReloadAjax root.SourceTUsuarios
-    $("#form_usuario").reset()
-    console.log(data)
+    ClearFunction()
+
+  ClearFunction = ->
+    $("#btnGuardar_Usuario").hide()
+    $("#btnRegistrar_Usuario").show()
+    $("form").reset()
+    $('input:checkbox').removeAttr 'checked' 
+    $("#usuario").hide()
 
   $(".btncancelarform").click (event) ->
     event.preventDefault()
-    $("form").reset()
-    $("#usuario").hide()
+    ClearFunction()
+    
 
   $("#registrar_usuario").click (event) ->
     event.preventDefault()
     $("#usuario").show()
 
-  $("#btnGuardar_Usuario").click (event) ->
+  $("#btnRegistrar_Usuario").click (event) ->
     event.preventDefault()  
     if $("#form_usuario").validationEngine 'validate'
-      PrepararDatosU()
-      enviar "/configuracion/guardar_usuario", root.DatosEnviar, SuccessFunctionU, null
+      #enviar "/configuracion/guardar_usuario", $("#form_usuario").serialize(), SuccessFunctionU, null
+      console.log "validado"
+
+  $("#btnGuardar_Usuario").click (event) ->
+    event.preventDefault()
+    if $("#form_usuario").validationEngine 'validate'
+      #enviar "/configuracion/editar_usuario", $("#form_usuario").serialize(), SuccessFunctionU, null
+      console.log "validado"
 
   $("#form_usuario").validationEngine 'attach',{autoHidePrompt:true,autoHideDelay:3000}

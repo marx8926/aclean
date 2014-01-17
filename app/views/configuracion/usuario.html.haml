@@ -29,6 +29,7 @@
           Registrar Usuario
       .widget-body
         = form_tag("" , {:method=>'post',:class=>'form-horizontal', :id => "form_usuario" , :name => "form_usuario"}) do
+          %input#id_usuario{type:"hidden", name:"id_usuario"}
           .wizard
             %ol
               %li Registrar
@@ -65,10 +66,10 @@
                       %input#persona{type: "checkbox", name: "persona"}/
                       Persona
                     %label.col-lg-2.col-sm-2.checkbox-inline
-                      %input#diezmos{type: "checkbox", name: "diezmos"}/
+                      %input#diezmo{type: "checkbox", name: "diezmo"}/
                       Diezmos
                     %label.col-lg-2.col-sm-2.checkbox-inline
-                      %input#ofrendas{type: "checkbox", name: "ofrendas"}/
+                      %input#ofrenda{type: "checkbox", name: "ofrenda"}/
                       Ofrendas
               .form-group
                 %label.col-lg-2.control-label Administrativas
@@ -85,7 +86,8 @@
                       Configuración
               .form-group
                 .col-lg-offset-2.col-lg-10
-                  %input#btnGuardar_Usuario.btn.btn-success{type: "button", value: "Guardar"}
+                  %input#btnRegistrar_Usuario.btn.btn-success{type: "button", value: "Registrar"}
+                  %input#btnGuardar_Usuario.btn.btn-success{type: "button", value: "Guardar", style: "display:none;"}
   / Row end
   / Row start
   .row
