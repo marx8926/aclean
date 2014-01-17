@@ -240,6 +240,9 @@
             Registrados
         .widget-body
           #dt_example.example_alt_pagination
+            %a.btn.btn-info{href:"/personacsv.xls", target:"_blank", style:"margin:5px 0;"} 
+              %span.fs1{"aria-hidden" => "true", "data-icon" => ""} 
+              Generar Excel
             %table#table_registrados.data-table.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
               %thead
                 %tr
@@ -250,8 +253,6 @@
               %tbody
 
             .clearfix
-  %a{href:"/personacsv.xls", target:"_blank"} Descargar Exel
-  %a#reload{href:"#"} reload
   #loader{style: "display:none"}
     = render "layouts/loader"
   #confirmmodal.panel.panel-info{style: "display:none"}

@@ -56,7 +56,7 @@
               %li
                 .summary
                   .user-pic
-                    %img{alt: "Slick Admin", src: "avatar-1.png"}/
+                    %img{alt: "Slick Admin", src: "/images/avatar-1.png"}/
                   .basic-details
                     %h4.no-margin Johnny
                     %h5.no-margin UX Designer
@@ -146,23 +146,9 @@
     / Main Container end
 
     / Scripts
-    = javascript_include_tag "jquery.min.js"
-    = javascript_include_tag "bootstrap.js"
-    = javascript_include_tag "jquery-ui-1.8.23.custom.min.js"
-    / Easy pie charts 
-    = javascript_include_tag "jquery.easy-pie-chart.js"
-    / Sparkline JS
-    = javascript_include_tag "jquery.sparkline.js"
-    / Data tables
-    = javascript_include_tag "jquery.dataTables.js"
-    / Custom Js
-    = javascript_include_tag "custom-tables.js"
-
-
-    = javascript_include_tag "jquery.blockUI.js"
     :javascript
       urlES = "dt_ES.txt"
-    = javascript_include_tag "util/functiongen.js"    
+    = javascript_include_tag :application  
     = javascript_include_tag "highcharts.js"
     = javascript_include_tag "exporting.js"
     = javascript_include_tag :informacion

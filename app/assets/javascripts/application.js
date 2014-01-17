@@ -10,21 +10,17 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require html5-trunk.js
-//= require wysiwyg/wysihtml5-0.3.0
 //= require jquery.min
 //= require bootstrap
 //= require jquery-ui-1.8.23.custom.min
-//= require flot/jquery.flot
-//= require	flot/jquery.flot.resize.min
-//= require flot/jquery.flot.tooltip
-//= require flot/jquery.flot.pie
-//= require flot/jquery.flot.selection
 //= require jquery.easy-pie-chart
-//= require tiny-scrollbar
 //= require jquery.sparkline
-//= require rating/jquery.raty
-//= require custom-index
-//= require custom.js
-//= require util/functiongen.js
+//= require jquery.dataTables
+//= require custom-tables
 //= require util/datatable_plugins.js
+//= require jquery.blockUI
+//= require jqueryvalidation/languages/jquery.validationEngine-es
+//= require jqueryvalidation/jquery.validationEngine
+//= require datepicker/js/bootstrap-datepicker
+//= require util/functiongen.js
+//= require custom.js
