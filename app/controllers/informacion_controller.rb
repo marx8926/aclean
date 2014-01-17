@@ -602,7 +602,7 @@ class InformacionController < ApplicationController
 
         ejey = "Asistencia"
         nombre_serie = "Iglesia"
-
+        # Para cuando mes y semana estan chequeados
         if form[:mes].nil? == false and form[:semana].nil? == false
             #mes y semana
             resultados = []
@@ -616,7 +616,7 @@ class InformacionController < ApplicationController
             subtitulos = [subtitulo, subtitulo, subtitulo, subtitulo]
             ejeys = [ ejey , ejey, ejey, ejey]
             
-
+            #Para cuando seleccionamos todas las semanas
             if form[:semana_lista] == "0"
                 
                 semanas.each{ |m|                   
@@ -627,7 +627,7 @@ class InformacionController < ApplicationController
                 }
                 data = individual_to_grupal(resultados, categorias )
                 titulo = "Asistencia General "+ anio + " Semanal"
-                              
+            #Para cuando escogimos un numero de semana                 
             else
                 num_semana = form[:semana_lista].to_i
                 semana = semanas[ num_semana - 1]
@@ -645,13 +645,13 @@ class InformacionController < ApplicationController
             pie = data_lineal_to_pie(data)
             resulto_pie = generar_json_pie(titulo, subtitulo, pie)
             result = [ result_general, resulto_pie, split[0], split[1], split[2], split[3] ]
-
+        #Para cuando SOLO mes esta chequeado
         elsif form[:mes].nil? == false and form[:semana].nil? == true
             
             #para todos los servicios
             resultados = []
-
-            if form[:mes_lista] == "0" # para todos los meses
+            #para cuando seleccionamos todos los meses
+            if form[:mes_lista] == "0"
                 
                 meses_lista = (0 .. 11).to_a           
                 
@@ -679,8 +679,8 @@ class InformacionController < ApplicationController
 
             end
 
-            titulos = [ "Asistencia "+ categorias[0] , "Asistencia "+ categorias[1] , "Asistencia "+ categorias[2],
-                "Asistencia "+ categorias[3]]
+            titulos = [ "Asistencia Mujeres J.", "Asistencia Hombres J.", "Asistencia Mujeres",
+                "Asistencia Hombres"]
             subtitulos = [subtitulo, subtitulo, subtitulo, subtitulo]
             ejeys = [ ejey , ejey, ejey, ejey]
             result_general = generar_json_column(titulo, subtitulo, ejey, categorias, data)
@@ -689,7 +689,7 @@ class InformacionController < ApplicationController
             resulto_pie = generar_json_pie(titulo, subtitulo, pie)
             result = [ result_general, resulto_pie, split[0], split[1], split[2], split[3] ] 
 
-
+        #Para cuando SOLO semana esta chequeado
         elsif form[:mes].nil? == true and form[:semana].nil? == false
             #solo semana
 
