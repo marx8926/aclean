@@ -40,14 +40,96 @@
         .row
           .col-md-12.col-sm-12
             .widget
-              .widget-body
-                #dash_general_lineas
+              .widget-header
+                .title
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Reporte de Asistencia Por Servicio
+              %table#table_asitencia_serv.data-table.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
+                %thead
+                  %tr
+                    %th SERVICIOS
+                    %th Fecha 1
+                    %th Fecha 2
+                    %th Fecha 3
+                    %th Total
+                %tbody
+                  %tr
+                    %th Culto Principal
+                    %td 100
+                    %td 200
+                    %td 300
+                    %td 600
+                  %tr
+                    %th Reu de Jóvenes
+                    %td 100
+                    %td 200
+                    %td 300
+                    %td 600
+                  %tr
+                    %th Reu de los Martes
+                    %td 100
+                    %td 200
+                    %td 300
+                    %td 600
+                  %tr
+                    %th Reu de los Lunes
+                    %td 100
+                    %td 200
+                    %td 300
+                    %td 600
+                  %tr
+                    %th Total
+                    %td 300
+                    %td 600
+                    %td 900
         .row
           .col-md-12.col-sm-12
             .widget
-              .widget-body
-                %button#btnImprimir.btn.btn-success{type: "button", name: "btnImprimir"}
-                  Imprimir
-                %button#btnReporte.btn.btn-success{type: "button", name: "btnReporte"}
-                  Reporte Excel
+              .widget-header
+                .title
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Reporte de Asistencia Por Categoria Por Servicio
+              %table#table_asitencia_cat_serv.data-table.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
+                %thead
+                  %tr
+                    %th{"colspan" => "2"} SERVICIOS/CATEGORÍA
+                    %th Fecha 1
+                    %th Fecha 2
+                    %th Fecha 3
+                %tbody
+                  %tr
+                    %th{"rowspan" => "5"} Culto Principal
+                    %th Mujeres Jóvenes
+                    %td 100
+                    %td 200
+                    %td 300
+                  %tr
+                    %th Hombres Jóvenes
+                    %td 100
+                    %td 200
+                    %td 300
+                  %tr
+                    %th Mujeres
+                    %td 100
+                    %td 200
+                    %td 300
+                  %tr
+                    %th Hombres
+                    %td 100
+                    %td 200
+                    %td 300
+                  %tr
+                    %th Total
+                    %td 300
+                    %td 600
+                    %td 900
+        .row
+          .col-md-12.col-sm-12
+            .widget
+              %button#btnImprimir.btn.btn-default{type: "button", name: "btnImprimir"}
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""} 
+                Imprimir
+              %button#btnReporte.btn.btn-success{type: "button", name: "btnReporte"}
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""} 
+                Reporte Excel
 
