@@ -40,13 +40,34 @@
         .row
           .col-md-12.col-sm-12
             .widget
-              .widget-body
-                #dash_general_lineas
+              .widget-header
+                .title
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
+                  Reporte de Diezmos General
+              %table#table_diezmo.data-table.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
+                %thead
+                  %tr
+                    %th Miembro
+                    %th Fecha
+                    %th Monto
+                    %th Petición
+                %tbody
+                  %tr
+                    %td Richard Oruna
+                    %td 21/01/2014
+                    %td 200
+                    %td LOL
+                  %tr
+                    %td 
+                    %th Total
+                    %td 600
+                    %td 
         .row
           .col-md-12.col-sm-12
             .widget
-              .widget-body
-                %button#btnImprimir.btn.btn-success{type: "button", name: "btnImprimir"}
-                  Imprimir
-                %button#btnReporte.btn.btn-success{type: "button", name: "btnReporte"}
-                  Reporte Excel
+              %button#btnImprimir.btn.btn-default{type: "button", name: "btnImprimir"}
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""} 
+                Imprimir
+              %button#btnReporte.btn.btn-success{type: "button", name: "btnReporte"}
+                %span.fs1{"aria-hidden" => "true", "data-icon" => ""} 
+                Reporte Excel
