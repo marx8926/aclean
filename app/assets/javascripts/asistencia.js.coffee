@@ -11,6 +11,12 @@ jQuery ->
   $(".data-table").dataTable sPaginationType: "full_numbers"
   count = 0
 
+  $("#fecha").datepicker
+    format:"dd/mm/yyyy"
+    beforeShowDay: (date) ->
+      day = date.getDay()
+      return [day == 1 || day == 4,""]
+
   CategoriaTable = $('#table_categoria_asistencia').dataTable
     "aoColumns": [{"mDataProp": "servicio"},{"mDataProp": "categoria"},{"mDataProp": "asistente"},{"mDataProp": "accion"}]
     "bPaginate": false
