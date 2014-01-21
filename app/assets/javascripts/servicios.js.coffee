@@ -46,7 +46,7 @@ jQuery ->
     event.preventDefault()
     $.unblockUI()
 
-  $("#cancelarGuardar").click (event) ->
+  $(".cancelarGuardar").click (event) ->
     event.preventDefault()
     $("#formServicio").reset()
     $("#servicio").hide()
