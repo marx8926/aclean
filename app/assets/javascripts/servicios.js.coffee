@@ -2,11 +2,6 @@ root = exports ? this
 root.SourceTServicio = "/configuracion/recuperar_servicio"
 root.SelectToDrop = null
 jQuery ->
-  count = 0;
-  $("#servicio").hide()
-
-  $("#btnGuardarServicio").hide()
-
   Actions = new DTActions
     'conf' : '011',
     'idtable': 'tablaservicios',

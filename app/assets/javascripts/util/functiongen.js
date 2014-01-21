@@ -56,6 +56,20 @@ function getActionButtons(conf){
   return actions;
 }
 
+function getConfOneDay(day)
+{
+	var conf = "";
+	for(var i = 0 ; i < 7 ; i++)
+	{
+		if(i===parseInt(day))
+			continue;
+		conf+=i
+		if(i!=6)
+			conf+=","
+	}
+	return conf;
+}
+
 function getDiaSemana(num){
   var dia;
   switch (parseInt(num)){

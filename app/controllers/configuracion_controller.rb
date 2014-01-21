@@ -247,7 +247,6 @@ class ConfiguracionController < ApplicationController
 			serv['int_servicio_id'] = x.int_servicio_id
 			serv['var_servicio_nombre'] = x.var_servicio_nombre
 			serv['int_servicio_tipo'] = x.int_servicio_tipo
-			serv['var_servicio_acciones'] = ""
 			if x.int_servicio_tipo == 1
 				serv['int_servicio_tipo_desc'] = "Culto General"
 			else
@@ -280,6 +279,10 @@ class ConfiguracionController < ApplicationController
 		render :json => { :aaData => arrayserv }, :status => :ok
 	end
 
+	def get_dia_servicio
+		turno = Turno.find_by("servicio_id" => params[:idservicio])
+		render :json => turno[:int_turno_dia], :status => :ok
+	end
 
 	def guardar_datos_generales
 

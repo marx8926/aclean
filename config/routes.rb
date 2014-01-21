@@ -31,6 +31,7 @@ Lean::Application.routes.draw do
   get "configuracion/recuperar_servicio" => "configuracion#recuperar_servicio"
   post "configuracion/editar_servicio" => "configuracion#editar_servicio"
   post "configuracion/drop_servicio" => "configuracion#drop_servicio"
+  get "configuracion/get_dia_servicio/(:idservicio)" => "configuracion#get_dia_servicio"
   
   get "configuracion/usuario" => "configuracion#usuario"
   get "configuracion/recuperar_usuario" => "configuracion#recuperar_usuario"

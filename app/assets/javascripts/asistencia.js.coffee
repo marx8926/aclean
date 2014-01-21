@@ -7,28 +7,41 @@ root.SourceTAsistencia = "/recuperar_asistencia"
 
 
 jQuery ->
-
-  $(".data-table").dataTable sPaginationType: "full_numbers"
   count = 0
 
-  $("#fecha").datepicker
-    format: "dd/mm/yyyy"
-    language: "es"
-    autoclose: true
-    todayHighlight: true
-    orientation: "top auto"    
-    daysOfWeekDisabled: "1,2,3"
+  MessageSucces = ->
+    setTimeout (->
+      $.unblockUI onUnblock: ->
+        $.growlUI "Operacion Exitosa"
 
-  $("#fecha").datepicker('remove')
-  $("#fecha").datepicker
-    format: "dd/mm/yyyy"
-    language: "es"
-    autoclose: true
-    todayHighlight: true
-    orientation: "top auto"    
-    daysOfWeekDisabled: "4,5,6"
+    ), 1000
 
-  console.log $("#fecha").datepicker()
+  PrepararDatosRegistrar = ->
+    root.DatosEnviar =
+      "formulario" : $("#form_asistencia").serializeObject()
+      "tabla" : CategoriaTable.fnGetData()
+
+  # Funcion de respuesta CORRECTA
+  # Los datos de respuesta se reciben en data
+  SuccessFunctionRegistrar = ( data ) ->
+    MessageSucces()
+    AsistenciaTable.fnReloadAjax root.SourceTAsistencia
+    $("form").reset()
+    CategoriaTable.fnClearTable()    
+    $("#regasistencia").hide()
+    console.log(data)
+
+  ReloadDatePicker = ->
+    $("#fecha").datepicker
+      format: "dd/mm/yyyy"
+      language: "es"
+      endDate: new Date()
+      autoclose: true
+      todayHighlight: true
+      orientation: "top auto"
+      daysOfWeekDisabled: getConfOneDay getAjaxObject "/configuracion/get_dia_servicio/"+$("#_servicio").val()
+
+  ReloadDatePicker()
 
   CategoriaTable = $('#table_categoria_asistencia').dataTable
     "aoColumns": [{"mDataProp": "servicio"},{"mDataProp": "categoria"},{"mDataProp": "asistente"},{"mDataProp": "accion"}]
@@ -53,6 +66,22 @@ jQuery ->
     CategoriaTable.fnAddData categoria
     count--
 
+  $("#_servicio").change (event) ->
+    event.preventDefault()
+    $("#fecha").val ""
+    $("#fecha").datepicker 'remove'
+    ReloadDatePicker()
+
+  $('#agregar').click (event) ->
+    event.preventDefault()
+    $("#regasistencia").show()
+
+  $(".cancelarGuardar").click (event) ->
+    event.preventDefault()
+    $("form").reset()
+    $("#regasistencia").hide()
+    CategoriaTable.fnClearTable
+
   AsistenciaFormato = [   { "sWidth": "35%","mDataProp": "servicio"},
                         { "sWidth": "15%","mDataProp": "fecha"},
                         { "sWidth": "25%","mDataProp": "categoria"},
@@ -61,35 +90,14 @@ jQuery ->
 
   AsistenciaTable = createDataTable "table_asistencia", root.SourceTAsistencia, AsistenciaFormato, null, null
   
-  MessageSucces = ->
-    setTimeout (->
-      $.unblockUI onUnblock: ->
-        $.growlUI "Operacion Exitosa"
-
-    ), 1000
-
-  PrepararDatosRegistrar = ->
-    root.DatosEnviar =
-      "formulario" : $("#form_asistencia").serializeObject()
-      "tabla" : CategoriaTable.fnGetData()
-
-  # Funcion de respuesta CORRECTA
-  # Los datos de respuesta se reciben en data
-  SuccessFunctionRegistrar = ( data ) ->
-    MessageSucces()
-    AsistenciaTable.fnReloadAjax root.SourceTAsistencia
-    $("form").reset()
-    CategoriaTable.fnClearTable()
-    console.log(data)
-
   # 2. Enviar Datos
   $("#btnGuardar_Asistencia").click (event) ->
     event.preventDefault()
     if CategoriaTable.fnSettings().fnRecordsTotal() > 0
-      PrepararDatosRegistrar()
-      console.log root.DatosEnviar
-      DisplayBlockUI "loader"
-      enviar "/asistencia_guardar", root.DatosEnviar, SuccessFunctionRegistrar, null
+      if $("form").validationEngine 'validate'
+        PrepararDatosRegistrar()
+        DisplayBlockUI "loader"
+        enviar "/asistencia_guardar", root.DatosEnviar, SuccessFunctionRegistrar, null
     else
       alert "Nesesita agregar datos a la Tabla"
 
