@@ -12,10 +12,23 @@ jQuery ->
   count = 0
 
   $("#fecha").datepicker
-    format:"dd/mm/yyyy"
-    beforeShowDay: (date) ->
-      day = date.getDay()
-      return [day == 1 || day == 4,""]
+    format: "dd/mm/yyyy"
+    language: "es"
+    autoclose: true
+    todayHighlight: true
+    orientation: "top auto"    
+    daysOfWeekDisabled: "1,2,3"
+
+  $("#fecha").datepicker('remove')
+  $("#fecha").datepicker
+    format: "dd/mm/yyyy"
+    language: "es"
+    autoclose: true
+    todayHighlight: true
+    orientation: "top auto"    
+    daysOfWeekDisabled: "4,5,6"
+
+  console.log $("#fecha").datepicker()
 
   CategoriaTable = $('#table_categoria_asistencia').dataTable
     "aoColumns": [{"mDataProp": "servicio"},{"mDataProp": "categoria"},{"mDataProp": "asistente"},{"mDataProp": "accion"}]
@@ -80,4 +93,4 @@ jQuery ->
     else
       alert "Nesesita agregar datos a la Tabla"
 
-  $("form").validationEngine 'attach',{autoHidePrompt:true,autoHideDelay:3000,promptPosition : "centerLeft", scroll: false}
+  $("form").validationEngine 'attach',{autoHidePrompt:true,autoHideDelay:3000,promptPosition : "topRight", scroll: false}

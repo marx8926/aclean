@@ -218,26 +218,20 @@ class ConfiguracionController < ApplicationController
 	end
 
 	def guardar_servicio
-		form = params[:formulario]
-		otherdata = params[:otherdata]
 		ActiveRecord::Base.transaction do
 			begin
-				servicio = Servicio.new({:var_servicio_nombre => form[:nombre], :int_servicio_tipo => form[:tipo]})	
+				servicio = Servicio.new({:var_servicio_nombre => params[:nombre], :int_servicio_tipo => params[:tipo]})	
 				servicio.save!
-				otherdata.each{ |x|
-					data = x.last
-					
-					turno = Turno.new({:var_turno_horainicio => data[:var_turno_horainicio],
-						:var_turno_horafin => data[:var_turno_horafin],
-					 	:int_turno_dia => data[:int_turno_dia], :servicio => servicio})
-					turno.save!
-				}
+				turno = Turno.new({:var_turno_horainicio => params[:hinicio],
+					:var_turno_horafin => params[:hfin],
+				 	:int_turno_dia => params[:dia], :servicio => servicio})
+				turno.save!
 			rescue
-        render :json => nil , :status => :internal_server_error
-				raise ActiveRecord::Rollback
+	        render :json => nil , :status => :internal_server_error
+					raise ActiveRecord::Rollback
 			end
 		end    	
-    	render :json => {:data => otherdata, :formulario => form[:nombre]}, :status => :ok			
+    	render :json => {:resp => "ok" }, :status => :ok			
 	end
 
 	def test
@@ -259,37 +253,27 @@ class ConfiguracionController < ApplicationController
 			else
 				serv['int_servicio_tipo_desc'] = "Culto Jovenes"
 			end
+			tshow= ""
+			turno = Turno.find_by("servicio_id" => x.int_servicio_id)
+			case turno[:int_turno_dia]
+			when 0
+				dia = "Domingo"
+			when 1
+				dia = "Lunes"
+			when 2
+				dia = "Martes"
+			when 3
+				dia = "Miercoles"
+			when 4
+				dia = "Jueves"
+			when 5
+				dia = "Viernes"
+			else
+				dia = "Sabado"
+  			end
 
-			if x != nil
-				tshow= ""
-				arrayturn = []
-				turnos = Turno.where("servicio_id" => x.int_servicio_id)
-				turnos.each{ |y|
-					case y[:int_turno_dia]
-					when 0
-						dia = "Domingo"
-					when 1
-						dia = "Lunes"
-					when 2
-						dia = "Martes"
-					when 3
-						dia = "Miercoles"
-					when 4
-						dia = "Jueves"
-					when 5
-						dia = "Viernes"
-					else
-						dia = "Sabado"
-          			end
-
-          			tshow = tshow + "<p>"+dia+" : "+y[:var_turno_horainicio]+" - "+ y[:var_turno_horafin]+" </p>"
-          			arrayturn.push y
-					
-				}
-
-
-			end
-			serv['turnos'] = arrayturn
+  			tshow = tshow + "<p>"+dia+" : "+turno[:var_turno_horainicio]+" - "+ turno[:var_turno_horafin]+" </p>"
+			serv['turno_data'] = turno
 			serv['turnoshow'] = tshow
 			arrayserv.push serv
 		}
@@ -304,12 +288,8 @@ class ConfiguracionController < ApplicationController
 
 		ActiveRecord::Base.transaction do
 			begin
-
 				n = Iglesia.count()
-
-
 				if n == 0
-
 					igle = Iglesia.new({
 					 :dat_iglesia_fecregistro => DateTime.now(),
 					 :dat_iglesia_feccreacion => params[:fec_creacion] ,
@@ -415,20 +395,19 @@ class ConfiguracionController < ApplicationController
 	end
 
 	def editar_servicio
-		form = params[:formulario]
-		otherdata = params[:otherdata]
-		servicio = Servicio.lock.find(form[:idservicio])
-		servicio.update(:var_servicio_nombre => form[:nombre], :int_servicio_tipo => form[:tipo])
-
-
-		#Turno.where(servicio_id: form[:idservicio])
-
-		otherdata.each{ |x|
-					data = x.last
-					turno = Turno.find_or_create_by!({:var_turno_horafin => data[:var_turno_horafin],
-						:var_turno_horainicio => data[:var_turno_horainicio], :int_turno_dia => data[:int_turno_dia], :servicio => servicio})
-					
-		}
+		ActiveRecord::Base.transaction do
+			begin
+				servicio = Servicio.lock.find(params[:idservicio])
+				servicio.update(:var_servicio_nombre => params[:nombre], :int_servicio_tipo => params[:tipo])		
+				Turno.destroy_all(servicio_id: params[:idservicio])
+				turno = Turno.new({:var_turno_horainicio => params[:hinicio],
+					:var_turno_horafin => params[:hfin],
+				 	:int_turno_dia => params[:dia], :servicio => servicio})
+				turno.save!	
+			rescue
+				raise ActiveRecord::Rollback
+			end
+		end
 		render :json => { :datos => params}, :status => :ok
 	end
 

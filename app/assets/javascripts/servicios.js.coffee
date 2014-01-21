@@ -13,18 +13,10 @@ jQuery ->
     'EditFunction': (nRow, aData, iDisplayIndex) ->
       $("#nombre").val aData.var_servicio_nombre
       $("#tipo").val aData.int_servicio_tipo
-      $("#idservicio").val(aData.int_servicio_id)
-      HorarioTable.fnClearTable()
-      $(aData.turnos).each (index) ->
-        dia_desc = getDiaSemana this.int_turno_dia
-        horario =
-          "var_turno_dia_des": dia_desc
-          "int_turno_dia": this.int_turno_dia
-          "var_turno_horainicio" : this.var_turno_horainicio
-          "var_turno_horafin": this.var_turno_horafin
-          "btn_elim": getActionButtons "001"
-          "id": this.int_turno_id
-        HorarioTable.fnAddData horario
+      $("#idservicio").val aData.int_servicio_id 
+      $("#hinicio").val aData.turno_data.var_turno_horainicio
+      $("#hfin").val aData.turno_data.var_turno_horafin
+      $("#dia").val aData.turno_data.int_turno_dia
       $("#servicio").show()
       $("#nombre").focus()
       $("#btnGuardarServicio").show()
@@ -35,43 +27,15 @@ jQuery ->
       root.SelectToDrop = aData.int_servicio_id
       DisplayBlockUISingle "dangermodal"
 
-  HorarioTable = $('#horario').dataTable
-    "aoColumns": [
-      {"mDataProp": "var_turno_dia_des"},
-      {"mDataProp": "var_turno_horainicio"},
-      {"mDataProp": "var_turno_horafin"},
-      {"mDataProp": "btn_elim"}]
-    "bPaginate": false
-    "sDom": "<r>t<'row-fluid'>"
-    "fnCreatedRow": (  nRow, aData, iDisplayIndex ) ->
-      $(nRow).find('.delete-row').click (event) ->
-        event.preventDefault()
-        index = $(HorarioTable.fnGetData()).getIndexObj aData, 'id'
-        HorarioTable.fnDeleteRow index
-
   FormatoServiciosTable = [   { "sWidth": "30%","mDataProp": "var_servicio_nombre"},
                               { "sWidth": "20%","mDataProp": "int_servicio_tipo_desc"},
-                              { "sWidth": "30%","mDataProp": "turnoshow"},
-                              { "sWidth": "20%","mDataProp": "var_servicio_acciones"}
+                              { "sWidth": "30%","mDataProp": "turnoshow"}
                               ]
 
   ServiciosRowCB = (  nRow, aData, iDisplayIndex ) ->
     Actions.RowCBFunction nRow, aData, iDisplayIndex      
 
   ServiciosTable = createDataTable "tablaservicios", root.SourceTServicio, FormatoServiciosTable, null, ServiciosRowCB
-      
-  $('#addhorario').click (event)->
-    event.preventDefault()
-    dia_desc = getDiaSemana $("#dia").val()
-    horario = 
-      "id":count
-      "var_turno_dia_des": dia_desc
-      "int_turno_dia":$("#dia").val()
-      "var_turno_horainicio" :$("#hora").val()
-      "var_turno_horafin" :$("#hora_fin").val()
-      "btn_elim":getActionButtons "001"
-    HorarioTable.fnAddData horario
-    count++
 
   $("#btnSiEliminar").click (event) ->
     event.preventDefault()
@@ -80,10 +44,8 @@ jQuery ->
 
   $("#btnSiGuardar").click (event) ->
     event.preventDefault()    
-    #Llamada a preparar Datps
-    PrepararDatos()
     DisplayBlockUI "loader"
-    enviar "/configuracion/editar_servicio", root.DatosEnviar, SuccessFunctionServicio, null
+    enviar "/configuracion/editar_servicio", $("#formServicio").serializeObject(), SuccessFunctionServicio, null
 
   $(".btnNo").click (event) ->
     event.preventDefault()
@@ -92,7 +54,6 @@ jQuery ->
   $("#cancelarGuardar").click (event) ->
     event.preventDefault()
     $("#formServicio").reset()
-    HorarioTable.fnClearTable()
     $("#servicio").hide()
     $("#btnGuardarServicio").hide()
     $("#btnRegistrarServicio").show()
@@ -108,10 +69,9 @@ jQuery ->
 # 1. Preparar Datos
 
   # Datos para enviar en formato JSON
-  PrepararDatos= ->
+  ###PrepararDatos= ->
     root.DatosEnviar =
-      "formulario" : $("#formServicio").serializeObject()
-      "otherdata" : HorarioTable.fnGetData()
+      "formulario" : $("#formServicio").serializeObject()###
 
   # Funcion de respuesta CORRECTA
   # Los datos de respuesta se reciben en data
@@ -121,8 +81,6 @@ jQuery ->
     ServiciosTable.fnReloadAjax root.SourceTServicio
     #resetear formulario
     $("#formServicio").reset()
-    #reniciar tabla
-    HorarioTable.fnClearTable()
     #mostrar datos de respuesta
     $("#btnGuardarServicio").hide()
     $("#btnRegistrarServicio").show()
@@ -131,22 +89,15 @@ jQuery ->
 
   $("#btnGuardarServicio").click (event) ->
     event.preventDefault()
-    if HorarioTable.fnSettings().fnRecordsTotal() > 0
-      DisplayBlockUISingle "confirmmodal"
-    else
-      alert "Falta agregar Horario"
+    DisplayBlockUISingle "confirmmodal"
 
 # 2. Enviar Datos
   $("#btnRegistrarServicio").click (event) ->
     event.preventDefault()
-    #Llamada a preparar Datps
-    if HorarioTable.fnSettings().fnRecordsTotal() > 0
-      PrepararDatos()
-      #Llamada a envio Post
-      DisplayBlockUI "loader"
-      enviar "/configuracion/guardar_servicio", root.DatosEnviar, SuccessFunctionServicio, null
-    else
-      alert "Falta agregar Horario"
+    #Llamada a envio Post
+    console.log $("#formServicio").serializeObject()
+    DisplayBlockUI "loader"
+    enviar "/configuracion/guardar_servicio", $("#formServicio").serializeObject(), SuccessFunctionServicio, null
 
 # Fin Proceso enviar Formulario
 

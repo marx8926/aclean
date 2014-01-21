@@ -31,7 +31,7 @@
                         %option{value: "2"} Culto Jovenes
                     %label.col-lg-2.control-label{for: "nombre"} Nombre
                     .col-lg-3
-                      %input#nombre.form-control{name: "nombre", type: "text",class:"validate[required,custom[onlyLetterNumber]]"}/
+                      %input#nombre.form-control{name: "nombre", type: "text",class:"validate[required,custom[onlyLetterNumberSp]]"}/
               .form-group
                 %label.col-lg-2.control-label{for: "dia"} Día
                 .col-lg-10
@@ -48,21 +48,10 @@
                         
                     %label.col-lg-2.control-label{for: "hora"} Hora Inicio
                     .col-lg-1
-                      %input#hora.form-control{type: "text"}
+                      %input#hinicio.form-control{type: "text", name:"hinicio"}
                     %label.col-lg-2.control-label{for: "hora"} Hora Fin
                     .col-lg-1
-                      %input#hora_fin.form-control{type: "text"}
-                    .col-lg-2
-                      %button#addhorario.btn.btn-default{type: "button"} +
-              #dt_example.example_alt_pagination.col-lg-7.col-lg-offset-2
-                %table#horario.table.table-condensed.table-striped.table-hover.table-bordered.pull-left
-                  %thead
-                    %tr
-                      %th{style: "width:33%"} Dia
-                      %th{style: "width:17%"} Inicio
-                      %th{style: "width:17%"} Fin
-                      %th{style: "width:33%"} Acciones
-                  %tbody
+                      %input#hfin.form-control{type: "text", name:"hfin"}
               .form-group
                 .col-lg-offset-2.col-lg-10
                   %button#cancelarGuardar.btn.btn-default{type: "button"} Cancelar
@@ -86,7 +75,6 @@
                   %th{style: "width:35%"} Servicio
                   %th.hidden-phone{style: "width:15%"} Tipo
                   %th.hidden-phone{style: "width:15%"} Hora
-                  %th.hidden-phone{style: "width:10%"} Acciones
               %tbody
 
             .clearfix
