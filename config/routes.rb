@@ -45,10 +45,11 @@ Lean::Application.routes.draw do
   post "configuracion/drop_lugar" => "configuracion#drop_lugar"
   post "configuracion/editar_lugar" => "configuracion#editar_lugar"
 
+  get "configuracion/categoria" => "configuracion#categoria"
+
   get "configuracion/datos_generales" => "configuracion#datos_generales"
   post "configuracion/guardar_datos_generales" => "configuracion#guardar_datos_generales"
   get "persona_servicio_complete" => "configuracion#personas_autocomplete"
-
 
   get "test" => "configuracion#test"
   get "asistencia" => "asistencia#index"
