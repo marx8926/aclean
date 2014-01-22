@@ -67,6 +67,15 @@
                 .widget-body
                   #dash_diezmo
 
-            
+- content_for :bloquecss do
+  = stylesheet_link_tag "smooth/jquery-ui-1.8.16.custom.css"
+  = stylesheet_link_tag "loader"
+  = stylesheet_link_tag "successblock"
+  = stylesheet_link_tag "jqueryvalidation/css/validationEngine.jquery.css"
 - content_for :bloquejavascript do
+  = javascript_include_tag "highcharts.js"
+  = javascript_include_tag "exporting.js"
+  = javascript_include_tag :informacion
   = javascript_include_tag :dash_diezmo
+  :javascript
+    $('##{$mactive} > span').addClass('current-arrow');

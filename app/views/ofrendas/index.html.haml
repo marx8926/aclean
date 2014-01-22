@@ -65,3 +65,13 @@
 
 #loader{style: "display:none"}
   = render "layouts/loader"
+- content_for :bloquecss do
+  = stylesheet_link_tag "datepicker/css/datepicker.css"
+  = stylesheet_link_tag "jqueryvalidation/css/validationEngine.jquery.css"    
+  = stylesheet_link_tag "loader"
+  = stylesheet_link_tag "successblock"
+- content_for :bloquejavascript do
+  = javascript_include_tag :application
+  = javascript_include_tag :ofrendas
+  :javascript
+    $('##{$mactive} > span').addClass('current-arrow');

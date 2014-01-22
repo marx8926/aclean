@@ -274,3 +274,23 @@
       %button.btnNo.btn.btn-default{type: "button"} No
       %button#btnSiEliminar.btn.btn-default{type: "button"} Si
   / Row end
+- content_for :bloquecss do
+  = stylesheet_link_tag "datepicker/css/datepicker.css"
+  = stylesheet_link_tag "jqueryvalidation/css/validationEngine.jquery.css"    
+  = stylesheet_link_tag "loader"
+  = stylesheet_link_tag "successblock"
+  = stylesheet_link_tag "datatables.actions.css"
+- content_for :bloquejavascript do
+  = javascript_include_tag "custom-tables.js"
+  / Editable Inputs 
+  = javascript_include_tag "wysiwyg/bootstrap-wysihtml5.js"
+  / Custom Js 
+  = javascript_include_tag "wizard/bwizard.js"
+  / custom Js
+  = javascript_include_tag "custom-forms.js"
+  = javascript_include_tag "jquery.blockUI.js"
+  = javascript_include_tag "util/datatable_plugins.js"
+  = javascript_include_tag "datatables.actions.js"  
+  = javascript_include_tag :ganar
+  :javascript
+    $('##{$mactive} > span').addClass('current-arrow');

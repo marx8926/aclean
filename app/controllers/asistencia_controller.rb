@@ -4,9 +4,11 @@ require "json"
 class AsistenciaController < ApplicationController
 
 	before_filter :authenticate_user!
+	layout 'base'
+	$mactive = 'masistencia'
 
 	def index
-		
+		@titulo = 'Asistencia'
 	end
 
 	def guardar

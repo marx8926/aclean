@@ -1,10 +1,10 @@
 !!!
 /[if lt IE 7]
-  <html class="lt-ie9 lt-ie8 lt-ie7" lang="es">
+  <html class="lt-ie9 lt-ie8 lt-ie7" lang="en">
 /[if IE 7]
-  <html class="lt-ie9 lt-ie8" lang="es">
+  <html class="lt-ie9 lt-ie8" lang="en">
 /[if IE 8]
-  <html class="lt-ie9" lang="es">
+  <html class="lt-ie9" lang="en">
 /
   [if gt IE 8]>
   <!
@@ -13,7 +13,7 @@
     <![endif]
   %head
     %meta{charset: "utf-8"}/
-    %title Reportes - AdminChurch
+    %title= @titulo + ' - Admin Church'
     %meta{content: "CLM Developers", name: "author"}/
     %meta{content: "width=device-width, initial-scale=1.0, user-scalable=no", name: "viewport"}/
     %meta{content: "Admin Church", name: "description"}/
@@ -25,13 +25,9 @@
     / bootstrap css
     = stylesheet_link_tag "bootstrap.css"
     / custom css
-    = stylesheet_link_tag "main"
-    = stylesheet_link_tag "datepicker/css/datepicker.css"
-    = stylesheet_link_tag "mapa/jquery-gmaps-lation-picker"
-    = stylesheet_link_tag "smooth/jquery-ui-1.8.16.custom"
-    = stylesheet_link_tag "loader"
-    = stylesheet_link_tag "successblock"
-    = stylesheet_link_tag "jqueryvalidation/css/validationEngine.jquery.css"
+    = stylesheet_link_tag "main.css"
+    =yield :bloquecss
+
   %body
     / Header start
     %header
@@ -76,32 +72,35 @@
     / Header end
     / Main Container start
     .main-container
-      / Main Container start
-    .main-container
       / Mian navigation start
       #mainnav
         %ul
-          %li
+          %li#mpersona
+            %span
             %a{href: persona_path}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Persona
-          %li
+          %li#mdiezmos
+            %span
             %a{href: diezmos_path}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Diezmos
-          %li
+          %li#mofrendas
+            %span
             %a{href: ofrendas_path}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Ofrendas
-          %li
+          %li#masistencia
+            %span
             %a{href: asistencia_path}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
               Asistencia
-          %li
+          %li#minformacion
+            %span
             %a{href: "#"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
@@ -115,7 +114,8 @@
                 %a{href: dashboard_ofrenda_path} Ofrendas
               %li
                 %a{href: dashboard_membresia_path} Miembros/Visitantes
-          %li
+          %li#mreportes
+            %span
             %a{href: "#"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
@@ -131,8 +131,8 @@
                 %a{href: reporte_membresia_path} Miembros/Visitantes
               %li
                 %a{href: reporte_servicios_path} Servicios
-          %li
-            %span.current-arrow
+          %li#mconfiguracion
+            %span
             %a{href: "#"}
               .icon
                 %span.fs1{"aria-hidden" => "true", "data-icon" => ""}
@@ -146,16 +146,12 @@
                 %a{href: configuracion_usuario_path} Usuarios
               %li
                 %a{href: configuracion_servicios_path} Servicios
+              %li
+                %a{href: configuracion_categoria_path} Categorías
       / Mian navigation end
-      = yield
-      / Dashboard wrapper end
-    / Main Container end
-
+    =yield
     / Scripts
     :javascript
       urlES = "/dt_ES.txt"
     = javascript_include_tag :application
-    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=true"
-    = javascript_include_tag :configuracion
-    
     =yield :bloquejavascript

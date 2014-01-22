@@ -1,6 +1,11 @@
+#encoding: utf-8
 class DiezmosController < ApplicationController
-	def index
 
+	layout 'base'
+	$mactive = 'mdiezmos'
+
+	def index
+		@titulo = 'Diezmos'
 	end
 
 	def guardar

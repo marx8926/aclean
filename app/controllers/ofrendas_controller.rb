@@ -5,9 +5,11 @@ class OfrendasController < ApplicationController
 
 	before_filter :authenticate_user!
 
-	def index
-		
+    layout 'base'
+    $mactive = 'mofrendas'
 
+	def index
+		@titulo = 'Ofrendas'
 	end
 
 	def guardar

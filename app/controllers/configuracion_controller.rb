@@ -1,11 +1,14 @@
+#encoding: utf-8
 require "date"
 
 class ConfiguracionController < ApplicationController
 
 	before_filter :authenticate_user!
+	layout 'base'
+	$mactive = 'mconfiguracion'
 
 	def datos_generales
-		
+		@titulo = 'Datos Generales - Configuración'
 		@igle = Iglesia.first
 		@pas = nil
 		if @igle.nil? == false
@@ -16,19 +19,19 @@ class ConfiguracionController < ApplicationController
 	end
 	
 	def servicios
-		
+		@titulo = 'Servicios - Configuración'
 	end
 
 	def lugar
-		
+		@titulo = 'Lugar - Configuración'		
 	end
 
 	def categoria
-		
+		@titulo = 'Categoría - Configuración'		
 	end
 
 	def usuario
-		
+		@titulo = 'Usuario - Configuración'		
 	end
 
 	# 1: persona

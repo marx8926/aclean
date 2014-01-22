@@ -70,5 +70,20 @@
         ¿Desea eliminar permanentemente el Lugar?
       %button.btnNo.btn.btn-default{type: "button"} No
       %button#btnSiEliminar.btn.btn-default{type: "button"} Si
+
+- content_for :bloquecss do
+  = stylesheet_link_tag "mapa/jquery-gmaps-lation-picker.css"
+  = stylesheet_link_tag "smooth/jquery-ui-1.8.16.custom.css"   
+  = stylesheet_link_tag "successblock"
+  = stylesheet_link_tag "loader"
+  = stylesheet_link_tag "successblock"
+  = stylesheet_link_tag "jqueryvalidation/css/validationEngine.jquery.css" 
+  = stylesheet_link_tag "datepicker/css/datepicker.css"    
+  = stylesheet_link_tag "datatables.actions.css"
 - content_for :bloquejavascript do
+  = javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=true"   
+  = javascript_include_tag "datatables.actions.js"
+  = javascript_include_tag :configuracion
   = javascript_include_tag :lugar
+  :javascript
+    $('##{$mactive} > span').addClass('current-arrow');

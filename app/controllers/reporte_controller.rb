@@ -1,18 +1,22 @@
 class ReporteController < ApplicationController
-	def diezmo
 
+    layout 'base'
+    $mactive = 'mreportes'
+
+	def diezmo
+        @titulo = 'Diezmo - Reportes'
     end
 
     def ofrenda
-
+        @titulo = 'Ofrenda - Reportes'
     end
 
     def membresia
-
+        @titulo = 'Miembros y Visitantes - Reportes'
     end
 
     def asistencia
-
+        @titulo = 'Asistencia - Reportes'
     end
 
     def asistenciareporte
@@ -23,6 +27,6 @@ class ReporteController < ApplicationController
     end
 
     def servicios
-
+        @titulo = 'Servicios - Reportes'
     end
 end

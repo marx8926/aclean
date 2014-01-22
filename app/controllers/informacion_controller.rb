@@ -1,3 +1,4 @@
+#encoding: utf-8
 require "date"
 require "json"
 
@@ -5,9 +6,11 @@ class InformacionController < ApplicationController
 
 	before_filter :authenticate_user!
 
+    layout 'base'
+    $mactive = 'minformacion'
+
 	def index
-
-
+        @titulo = 'Información'
 	end
 
 	def chart_miembro
@@ -164,7 +167,7 @@ class InformacionController < ApplicationController
 
 
     def diezmo
-
+        @titulo = 'Diezmo - Información'
     end
 
     def data_lineal_to_pie(data)
@@ -400,7 +403,7 @@ class InformacionController < ApplicationController
     end
 
     def ofrenda
-
+        @titulo = 'Ofrenda - Información'
     end
 
     def recuperar_data_ofrenda
@@ -472,14 +475,12 @@ class InformacionController < ApplicationController
 
     end
 
-    def 
-
     def membresia
-
+        @titulo = 'Miembros y Visitantes - Información'
     end
 
     def asistencia
-
+        @titulo = 'Asistencia - Información'
     end
 
     def recuperar_asistencia_filtro(ini, fin, servicio=0 )

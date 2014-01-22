@@ -53,7 +53,21 @@
           .col-md-12.col-sm-12
             .widget
               .widget-body
-                %button#btnImprimir.btn.btn-success{type: "button", name: "btnImprimir"}
-                  Imprimir
+                %button#btnImprimir.btn.btn-default{type: "button", name: "btnImprimir"}
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""} 
+                    Imprimir
                 %button#btnReporte.btn.btn-success{type: "button", name: "btnReporte"}
-                  Reporte Excel
+                  %span.fs1{"aria-hidden" => "true", "data-icon" => ""} 
+                    Reporte Excel
+- content_for :bloquecss do
+  = stylesheet_link_tag "datepicker/css/datepicker.css"
+  = stylesheet_link_tag "mapa/jquery-gmaps-lation-picker"
+  = stylesheet_link_tag "smooth/jquery-ui-1.8.16.custom"
+  = stylesheet_link_tag "loader"
+  = stylesheet_link_tag "successblock"
+  = stylesheet_link_tag "jqueryvalidation/css/validationEngine.jquery.css"
+- content_for :bloquejavascript do
+  = javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=true"
+  = javascript_include_tag :configuracion
+  :javascript
+    $('##{$mactive} > span').addClass('current-arrow');

@@ -5,8 +5,11 @@ class GanarController < ApplicationController
 
 	before_filter :authenticate_user!
 
-	def index
+	layout 'base'
+	$mactive = 'mpersona'
 
+	def index
+		@titulo = 'Persona'
 	end
 
 	def guardar_miembro
