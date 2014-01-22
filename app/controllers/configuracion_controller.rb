@@ -23,6 +23,10 @@ class ConfiguracionController < ApplicationController
 		
 	end
 
+	def categoria
+		
+	end
+
 	def usuario
 		
 	end

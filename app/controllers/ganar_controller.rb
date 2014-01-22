@@ -430,14 +430,9 @@ class GanarController < ApplicationController
 	end
 
 	def personacsv
-		@personas = ActiveRecord::Base.connection.execute("SELECT * FROM view_get_personas")		
-    respond_to do |format|
+		@personas = ActiveRecord::Base.connection.execute("SELECT * FROM view_get_personas")
+		respond_to do |format|
 			format.xls
-    end
-	end
-
-	def cargarbotones
-		
-		return botones
+    	end
 	end
 end

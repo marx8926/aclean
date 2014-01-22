@@ -76,6 +76,7 @@ Lean::Application.routes.draw do
   get "reporte_membresia" => "reporte#membresia"
   get "reporte_asistencia" => "reporte#asistencia"
   get "reporte_servicios" => "reporte#servicios"
+  get "asistenciaexcel/(:inicio)/(:fin)/(:nombre)" => "reporte#asistenciareporte"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
